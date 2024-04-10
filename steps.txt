@@ -1,0 +1,5 @@
+1. make a txt file for each tier of parts
+2. write code to choose a random number between 1 and 100
+  number chosen will determine which parts tier list to choose from
+  for stage 1, tier list will be rated
+2. write code to pick a random part from the list
