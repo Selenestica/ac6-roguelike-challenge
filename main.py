@@ -26,6 +26,7 @@ def main(stage = "1"):
     tier = "a"
   elif val <= min_maxs[4] and val > min_maxs[3]:
     tier = "s"
+    
   print(tier)
   
 main()
