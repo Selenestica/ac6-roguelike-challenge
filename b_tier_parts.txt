@@ -1,10 +1,94 @@
-b1
-b2
-b3
-b4
-b5
-b6
-b7
-b8
-b9
-b10
+R-Arm Unit: LR-037 HARRIS Linear Rifle
+R-Arm Unit: RD-025 SCUDDER Assault Rifle
+R-Arm Unit: DF-MG-02 CHANG-CHEN Machine Gun
+R-Arm Unit: MA-E-210 ETSUJIN Machine Gun
+R-Arm Unit: SG-027 ZIMMERMAN Shotgun
+R-Arm Unit: WR-0777 SWEET SIXTEEN Shotgun
+R-Arm Unit: HG-004 DUCKETT Handgun
+R-Arm Unit: MA-E-211 SAMPU Burst Handgun
+R-Arm Unit: MAJESTIC Bazooka
+R-Arm Unit: LITTLE GEM Bazooka
+R-Arm Unit: MA-T-223 KYORIKU Jamming Bomb Launcher
+R-Arm Unit: WS-1200 THERAPIST Stun Bomb Launcher
+R-Arm Unit: WB-0000 BAD COOK Flamethrower
+R-Arm Unit: VE-66LRA Laser Rifle
+R-Arm Unit: WUERGER/66E Laser Shotgun
+R-Arm Unit: IA-C01W1: NEBULA Plasma Rifle
+R-Arm Unit: HI-18: GU-A2 Pulse Gun
+R-Arm Unit: PFAU/66D Pulse Missile Launcher
+L-Arm Unit: DF-ET-09 TAI-YANG-SHOU Explosive Thrower
+L-Arm Unit: WB-0010 DOUBLE TROUBLE Chainsaw
+L-Arm Unit: VP-67EB Stun Baton
+L-Arm Unit: VE-67LLA Laser Lance
+L-Arm Unit: 44-143 HMMR Plasma Thrower
+L-Arm Unit: LR-037 HARRIS Linear Rifle
+L-Arm Unit: RD-025 SCUDDER Assault Rifle
+L-Arm Unit: DF-MG-02 CHANG-CHEN Machine Gun
+L-Arm Unit: MA-E-210 ETSUJIN Machine Gun
+L-Arm Unit: SG-027 ZIMMERMAN Shotgun
+L-Arm Unit: WR-0777 SWEET SIXTEEN Shotgun
+L-Arm Unit: HG-004 DUCKETT Handgun
+L-Arm Unit: MA-E-211 SAMPU Burst Handgun
+L-Arm Unit: MAJESTIC Bazooka
+L-Arm Unit: LITTLE GEM Bazooka
+L-Arm Unit: MA-T-223 KYORIKU Jamming Bomb Launcher
+L-Arm Unit: WS-1200 THERAPIST Stun Bomb Launcher
+L-Arm Unit: WB-0000 BAD COOK Flamethrower
+L-Arm Unit: VE-66LRA Laser Rifle
+L-Arm Unit: WUERGER/66E Laser Shotgun
+L-Arm Unit: IA-C01W1: NEBULA Plasma Rifle
+L-Arm Unit: HI-18: GU-A2 Pulse Gun
+L-Arm Unit: PFAU/66D Pulse Missile Launcher
+R-Back Unit: DF-GA-09 SHAO-WEI Gatling Cannon
+R-Back Unit: SB-033M MORLEY Spread Bazooka
+R-Back Unit: VE-60SNA Stun Needle Launcher
+R-Back Unit: VP-60LCD Diffuse Laser Cannon
+R-Back Unit: EULE/60D Pulse Shield Launcher
+R-Back Unit: BML-G2/P03MLT-06 Missile Launcher
+R-Back Unit: BML-G2/P17SPL-16 Split Missile Launcher
+R-Back Unit: BML-G1/P32DUO-03 Dual Missile Launcher
+R-Back Unit: BML-G3/P05ACT-02 Active Homing Missile Launcher
+R-Back Unit: 45-091 JVLN BETA Detonating Missile Launcher
+R-Back Unit: Vvc-706PM Plasma Missile Launcher
+R-Back Unit: VP-60LT Laser Turret
+L-Back Unit: SI-27: SU-R8 Pulse Shield
+L-Back Unit: DF-GA-09 SHAO-WEI Gatling Cannon
+L-Back Unit: SB-033M MORLEY Spread Bazooka
+L-Back Unit: VE-60SNA Stun Needle Launcher
+L-Back Unit: VP-60LCD Diffuse Laser Cannon
+L-Back Unit: EULE/60D Pulse Shield Launcher
+L-Back Unit: BML-G2/P03MLT-06 Missile Launcher
+L-Back Unit: BML-G2/P17SPL-16 Split Missile Launcher
+L-Back Unit: BML-G1/P32DUO-03 Dual Missile Launcher
+L-Back Unit: BML-G3/P05ACT-02 Active Homing Missile Launcher
+L-Back Unit: 45-091 JVLN BETA Detonating Missile Launcher
+L-Back Unit: Vvc-706PM Plasma Missile Launcher
+L-Back Unit: VP-60LT Laser Turret
+Head: AH-J-124 BASHO
+Head: HD-033M VERRILL
+Head: LAMMERGEIER/44F
+Head: VE-44A
+Core: AC-J-120 BASHO
+Core: LAMMERGEIER/40F
+Core: VE-40A
+Core: 07-061 MIND ALPHA
+Arms: AA-J-123 BASHO
+Arms: LAMMERGEIER/46F
+Arms: VE-46A
+Bipedal Legs: AL-J-121 BASHO
+Bipedal Legs: VE-42A
+Reverse Joint Legs: RC-2000 SPRING CHICKEN
+Reverse Joint Legs: 06-042 MIND BETA
+Tetrapod Legs: LG-033M VERRILL
+Tetrapod Legs: LAMMERGEIER/42F
+Tank Legs: EL-TL-11 FORTALEZA
+Booster: BST-G2/P06SPD
+Booster: FLUEGEL 21/Z
+Booster: BC-0600 12345
+Booster: BC-0400 MULE
+FCS: FCS-G2/P12SML
+FCS: VE-21A
+Generator: DF-GN-08 SAN-TAI
+Generator: VP-20C
+Generator: VE-20A
+Generator: IA-C01G: AORTA

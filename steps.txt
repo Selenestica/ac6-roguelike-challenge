@@ -1,5 +1,6 @@
-1. make a txt file for each tier of parts
-2. write code to choose a random number between 1 and 100
-  number chosen will determine which parts tier list to choose from
-  for stage 1, tier list will be rated
-2. write code to pick a random part from the list
+
+3. store chosen part in separate array, and remove chosen part from main array
+4. write code to reset the game. merge the chosen parts array with the main array
+
+5. rewrite code in JavaScript
+6. make a UI for the code

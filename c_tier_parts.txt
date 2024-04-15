@@ -1,10 +1,74 @@
-c1
-c2
-c3
-c4
-c5
-c6
-c7
-c8
-c9
-c10
+R-Arm Unit: MA-J-201 RANSETSU-AR Burst Assault Rifle
+R-Arm Unit: DF-GA-08 HU-BEN Gatling Gun
+R-Arm Unit: SG-026 HALDEMAN Shotgun
+R-Arm Unit: 44-141 JVLN ALPHA Detonating Bazooka
+R-Arm Unit: DF-GR-07 GOU-CHEN Grenade Launcher
+R-Arm Unit: IRIDIUM Grenade Launcher
+R-Arm Unit: MA-T-222 KYORAI Napalm Bomb Launcher
+R-Arm Unit: VP-66LR Laser Rifle
+R-Arm Unit: VP-66LS Laser Shotgun
+R-Arm Unit: VP-66LH Laser Handgun
+R-Arm Unit: Vvc-760PR Plasma Rifle
+R-Arm Unit: HI-16: GU-Q1 Pulse Gun
+R-Arm Unit: HML-G2/P19MLT-04 Missile Launcher
+L-Arm Unit: PB-033M ASHMEAD Pile Bunker
+L-Arm Unit: Vvc-770LB Laser Blade
+L-Arm Unit: MA-J-201 RANSETSU-AR Burst Assault Rifle
+L-Arm Unit: DF-GA-08 HU-BEN Gatling Gun
+L-Arm Unit: SG-026 HALDEMAN Shotgun
+L-Arm Unit: 44-141 JVLN ALPHA Detonating Bazooka
+L-Arm Unit: DF-GR-07 GOU-CHEN Grenade Launcher
+L-Arm Unit: IRIDIUM Grenade Launcher
+L-Arm Unit: MA-T-222 KYORAI Napalm Bomb Launcher
+L-Arm Unit: VP-66LR Laser Rifle
+L-Arm Unit: VP-66LS Laser Shotgun
+L-Arm Unit: VP-66LH Laser Handgun
+L-Arm Unit: Vvc-760PR Plasma Rifle
+L-Arm Unit: HI-16: GU-Q1 Pulse Gun
+L-Arm Unit: HML-G2/P19MLT-04 Missile Launcher
+R-Back Unit: SONGBIRDS Grenade Cannon
+R-Back Unit: VP-60LCS Laser Cannon
+R-Back Unit: BML-G2/P05MLT-10 Missile Launcher
+R-Back Unit: BML-G2/P16SPL-08 Split Missile Launcher
+R-Back Unit: BML-G1/P01VTC-04 Vertical Missile Launcher
+R-Back Unit: BML-G1/P03VTC-08 Vertical Missile Launcher
+R-Back Unit: BML-G3/P04ACT-01 Active Homing Missile Launcher
+R-Back Unit: Vvc-703PM Plasma Missile Launcher
+R-Back Unit: Vvc-70VPM Plasma Missile Launcher
+L-Back Unit: VP-61PS Pulse Shield
+L-Back Unit: VP-61PB Pulse Buckler
+L-Back Unit: SI-29: SU-TT/C Pulse Buckler
+L-Back Unit: SONGBIRDS Grenade Cannon
+L-Back Unit: VP-60LCS Laser Cannon
+L-Back Unit: BML-G2/P05MLT-10 Missile Launcher
+L-Back Unit: BML-G2/P16SPL-08 Split Missile Launcher
+L-Back Unit: BML-G1/P01VTC-04 Vertical Missile Launcher
+L-Back Unit: BML-G1/P03VTC-08 Vertical Missile Launcher
+L-Back Unit: BML-G3/P04ACT-01 Active Homing Missile Launcher
+L-Back Unit: Vvc-703PM Plasma Missile Launcher
+L-Back Unit: Vvc-70VPM Plasma Missile Launcher
+Head: KASUAR/44Z
+Head: HC-3000 WRECKER
+Head: EL-TH-10 FIRMEZA
+Core: CC-3000 WRECKER
+Core: EL-TC-10 FIRMEZA
+Arms: DF-AR-09 TIAN-LAO
+Arms: AC-3000 WRECKER
+Arms: EL-TA-10 FIRMEZA
+Arms: 04-101 MIND ALPHA
+Bipedal Legs: 2C-3000 WRECKER
+Bipedal Legs: EL-TL-10 FIRMEZA
+Bipedal Legs: 06-041 MIND ALPHA
+Reverse Joint Legs: KASUAR/42Z
+Tetrapod Legs: VP-424
+Tank Legs: LG-022T BORNEMISSZA
+Booster: AB-J-137 KIKAKU
+Booster: ALULA/21E
+Booster: BUERZEL/21D
+FCS: FCS-G2/P05
+FCS: FC-006 ABBOT
+FCS: FC-008 TALBOT
+Generator: AG-E-013 YABA
+Generator: DF-GN-06 MING-TANG
+Generator: VP-20S
+Generator: VP-20D

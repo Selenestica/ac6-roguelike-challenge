@@ -1,10 +1,38 @@
-s1
-s2
-s3
-s4
-s5
-s6
-s7
-s8
-s9
-s10
+R-Arm Unit: VP-66EG Stun Gun
+R-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle
+R-Arm Unit: IB-C03W1: WLT 011 Coral Rifle
+R-Arm Unit: 44-142 KRSV Multi Energy Rifle
+R-Arm Unit: WS-5000 APERITIF Siege Missile Launcher
+L-Arm Unit: Vvc-774LS Laser Slicer
+L-Arm Unit: IA-C01W7: ML-REDSHIFT Coral Oscillator
+L-Arm Unit: IB-C03W2: WLT 101 Coral Oscillator
+L-Arm Unit: VP-66EG Stun Gun
+L-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle
+L-Arm Unit: IB-C03W1: WLT 011 Coral Rifle
+L-Arm Unit: 44-142 KRSV Multi Energy Rifle
+L-Arm Unit: WS-5000 APERITIF Siege Missile Launcher
+R-Back Unit: VE-60LCA Laser Cannon
+R-Back Unit: KRANICH/60Z Pulse Cannon
+R-Back Unit: WR-0999 DELIVERY BOY Cluster Missile Launcher
+R-Back Unit: WS-5001 SOUP Scatter Missile Launcher
+R-Back Unit: EL-PW-01 TRUENO Needle Missile Launcher
+R-Back Unit: IB-C03W3: NGI 006 Coral Missile Launcher
+R-Back Unit: BO-044 HUXLEY Bullet Orbit
+L-Back Unit: VE-61PSA Pulse Scutum
+L-Back Unit: IB-C03W4: NGI 028 Coral Shield
+L-Back Unit: VE-60LCA Laser Cannon
+L-Back Unit: KRANICH/60Z Pulse Cannon
+L-Back Unit: WR-0999 DELIVERY BOY Cluster Missile Launcher
+L-Back Unit: WS-5001 SOUP Scatter Missile Launcher
+L-Back Unit: EL-PW-01 TRUENO Needle Missile Launcher
+L-Back Unit: IB-C03W3: NGI 006 Coral Missile Launcher
+L-Back Unit: BO-044 HUXLEY Bullet Orbit
+Head: HC-2000/BC SHADE EYE
+Head: HS-5000 APPETIZER
+Head: 20-082 MIND BETA
+Core: CS-5000 MAIN DISH
+Arms: AS-5000 SALAD
+Bipedal Legs: 2S-5000 DESSERT
+Booster: BC-0200 GRIDWALKER
+Booster: IB-C03B: NGI 001
+Generator: VE-20B
