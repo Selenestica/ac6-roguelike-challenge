@@ -1,4 +1,3 @@
-rewrite code in JavaScript
 store chosen part in separate array, and remove chosen part from main array
 write code to reset the game. merge the chosen parts array with the main array
 make a UI for the code

@@ -1,4 +1,4 @@
-const s_tier_parts = [
+export const s_tier_parts = [
     "R-Arm Unit: VP-66EG Stun Gun",
     "R-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle",
     "R-Arm Unit: IB-C03W1: WLT 011 Coral Rifle",
@@ -38,7 +38,7 @@ const s_tier_parts = [
     "Booster: IB-C03B: NGI 001",
     "Generator: VE-20B"
 ];
-const a_tier_parts = [
+export const a_tier_parts = [
     "R-Arm Unit: WR-0555 ATTACHE Heavy Machine Gun",
     "R-Arm Unit: EL-PW-00 VIENTO Needle Gun",
     "R-Arm Unit: DIZZY Grenade Launcher",
@@ -100,7 +100,7 @@ const a_tier_parts = [
     "Generator: VE-20C",
     "Generator: IB-C03G: NGI 000"
 ];
-const b_tier_parts = [
+export const b_tier_parts = [
     "R-Arm Unit: LR-037 HARRIS Linear Rifle",
     "R-Arm Unit: RD-025 SCUDDER Assault Rifle",
     "R-Arm Unit: DF-MG-02 CHANG-CHEN Machine Gun",
@@ -196,7 +196,7 @@ const b_tier_parts = [
     "Generator: VE-20A",
     "Generator: IA-C01G: AORTA"
 ];
-const c_tier_parts = [
+export const c_tier_parts = [
     "R-Arm Unit: MA-J-201 RANSETSU-AR Burst Assault Rifle",
     "R-Arm Unit: DF-GA-08 HU-BEN Gatling Gun",
     "R-Arm Unit: SG-026 HALDEMAN Shotgun",
@@ -272,7 +272,7 @@ const c_tier_parts = [
     "Generator: VP-20S",
     "Generator: VP-20D"
 ];
-const d_tier_parts = [
+export const d_tier_parts = [
     "R-Arm Unit: MA-J-200 RANSETSU-RF Burst Rifle",
     "R-Arm Unit: LR-036 CURTIS Linear Rifle",
     "R-Arm Unit: RF-024 TURNER Assault Rifle",
@@ -315,50 +315,3 @@ const d_tier_parts = [
     "FCS: FCS-G2/P10SLT",
     "Generator: DF-GN-02 LING-TAI"
 ];
-
-const stageMinMax = (stage) => {
-    if (stage === "1") {
-        return [35, 65, 85, 95, 100];
-    }
-    if (stage === "2") {
-        return [15, 50, 85, 95, 100];
-    }
-    if (stage === "3") {
-        return [5, 30, 70, 90, 100];
-    }
-    if (stage === "4") {
-        return [5, 25, 55, 85, 100];
-    }
-    if (stage === "5") {
-        return [5, 15, 45, 75, 100];
-    }
-};
-
-const getPartFromList = (list) => {
-    // choose random item from list
-};
-
-const main = (stage = "1") => {
-    let partsList;
-    const minMaxs = stageMinMax(stage);
-    const randomNumber = Math.random() * 100; // ex: 32.2456934305735 will choose 100?
-    if (randomNumber <= minMaxs[0]) {
-        partsList = d_tier_parts;
-    } else if (randomNumber <= minMaxs[1] && randomNumber > minMaxs[0]) {
-        partsList = c_tier_parts;
-    } else if (randomNumber <= minMaxs[2] && randomNumber > minMaxs[1]) {
-        partsList = b_tier_parts;
-    } else if (randomNumber <= minMaxs[3] && randomNumber > minMaxs[2]) {
-        partsList = a_tier_parts;
-    } else if (randomNumber <= minMaxs[4] && randomNumber > minMaxs[3]) {
-        partsList = s_tier_parts;
-    }
-};
-
-// def main(stage = "1"):
-//   get_part_from_list(parts_list)
-
-// def get_part_from_list(list):
-//   print(r.choice(list))
-
-main();
