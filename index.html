@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" type="text/css" href="./css/ruby.css" />
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="./assets/deliveryBoy.jpeg"
+        />
+        <meta
+            name="description"
+            content="Armored Core 6: The Roguelike Challenge"
+        />
+        <title>AC6 Roguelike Challenge</title>
+    </head>
+    <body>
+        <!-- MODAL -->
+        <div
+            class="modal fade"
+            id="imageModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="imageModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel"></h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="modalBody" class="modal-body"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN -->
+        <div class="container">
+            <div class="row d-flex justify-content-center mt-5">
+                <h1>Armored Core 6</h1>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <h4>Roguelike Challenge</h4>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="dropdown">
+                    <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        Stage
+                    </button>
+                    <div
+                        class="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                    >
+                        <a class="dropdown-item" id="stage1Select" href="#"
+                            >1</a
+                        >
+                        <a class="dropdown-item" id="stage1Select" href="#"
+                            >2</a
+                        >
+                        <a class="dropdown-item" id="stage1Select" href="#"
+                            >3</a
+                        >
+                        <a class="dropdown-item" id="stage1Select" href="#"
+                            >3</a
+                        >
+                        <a class="dropdown-item" id="stage1Select" href="#"
+                            >3</a
+                        >
+                    </div>
+                </div>
+            </div>
+            <button>ROLL</button>
+            <div
+                id="newPartList"
+                class="row d-flex justify-content-center"
+            ></div>
+        </div>
+    </body>
+
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+    ></script>
+    <script src="js/main.js"></script>
+</html>
