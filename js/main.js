@@ -1,4 +1,5 @@
 const partsListContainer = document.getElementById("parts-list-container");
+const stageMenuButton = document.getElementById("dropdownMenuButton");
 
 const stageMinMax = (stage) => {
     if (stage === "1") {
@@ -24,7 +25,7 @@ const getPartFromList = (list) => {
 
 const displayPart = (part) => {
     partsListContainer.innerHTML += `
-        <li>
+        <li class="list-group-item">
           ${part}
         </li>
     `;
@@ -55,4 +56,8 @@ const rollForPart = (stage = "1") => {
 
 const clearList = () => {
     partsListContainer.innerHTML = "";
+};
+
+const setStage = (stage) => {
+    stageMenuButton.innerHTML = `Stage ${stage}`;
 };

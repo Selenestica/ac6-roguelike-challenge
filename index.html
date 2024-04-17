@@ -23,33 +23,6 @@
         <title>AC6 Roguelike Challenge</title>
     </head>
     <body>
-        <!-- MODAL -->
-        <div
-            class="modal fade"
-            id="imageModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="imageModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="imageModalLabel"></h5>
-                        <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div id="modalBody" class="modal-body"></div>
-                </div>
-            </div>
-        </div>
-
         <!-- MAIN -->
         <div class="container">
             <div class="row d-flex justify-content-center mt-5">
@@ -68,25 +41,45 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        Stage
+                        Stage 1
                     </button>
                     <div
                         class="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                     >
-                        <a class="dropdown-item" id="stage1Select" href="#"
+                        <a
+                            class="dropdown-item"
+                            onclick="setStage('1')"
+                            id="stage1Select"
+                            href="#"
                             >1</a
                         >
-                        <a class="dropdown-item" id="stage2Select" href="#"
+                        <a
+                            class="dropdown-item"
+                            onclick="setStage('2')"
+                            id="stage2Select"
+                            href="#"
                             >2</a
                         >
-                        <a class="dropdown-item" id="stage3Select" href="#"
+                        <a
+                            class="dropdown-item"
+                            onclick="setStage('3')"
+                            id="stage3Select"
+                            href="#"
                             >3</a
                         >
-                        <a class="dropdown-item" id="stage4Select" href="#"
+                        <a
+                            class="dropdown-item"
+                            onclick="setStage('4')"
+                            id="stage4Select"
+                            href="#"
                             >4</a
                         >
-                        <a class="dropdown-item" id="stage5Select" href="#"
+                        <a
+                            class="dropdown-item"
+                            onclick="setStage('5')"
+                            id="stage5Select"
+                            href="#"
                             >5</a
                         >
                     </div>
@@ -114,7 +107,10 @@
                 <div class="col d-flex justify-content-end">
                     <div class="row d-flex justify-content-end">
                         <div class="row d-flex justify-content-center">
-                            <ul id="parts-list-container"></ul>
+                            <ul
+                                id="parts-list-container"
+                                class="list-group"
+                            ></ul>
                         </div>
                     </div>
                 </div>
