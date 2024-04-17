@@ -93,10 +93,31 @@
                 </div>
             </div>
             <div class="row d-flex justify-content-center mt-5">
-                <button onclick="rollForPart('1')">ROLL</button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="rollForPart('1')"
+                >
+                    ROLL
+                </button>
             </div>
-            <div class="row d-flex justify-content-center mt-5">
-                <ul id="parts-list-container"></ul>
+            <div class="row d-flex justify-content-end mt-5">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="clearList()"
+                >
+                    Clear
+                </button>
+            </div>
+            <div class="row d-flex justify-content-end">
+                <div class="col d-flex justify-content-end">
+                    <div class="row d-flex justify-content-end">
+                        <div class="row d-flex justify-content-center">
+                            <ul id="parts-list-container"></ul>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div
                 id="newPartList"

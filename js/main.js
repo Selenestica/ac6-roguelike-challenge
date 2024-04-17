@@ -52,3 +52,7 @@ const rollForPart = (stage = "1") => {
         displayPart(part);
     }
 };
+
+const clearList = () => {
+    partsListContainer.innerHTML = "";
+};
