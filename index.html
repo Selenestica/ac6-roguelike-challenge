@@ -10,7 +10,7 @@
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" type="text/css" href="./css/ruby.css" />
+        <link rel="stylesheet" type="text/css" href="./css/custom.css" />
         <link
             rel="shortcut icon"
             type="image/png"
@@ -84,15 +84,20 @@
                             >3</a
                         >
                         <a class="dropdown-item" id="stage4Select" href="#"
-                            >3</a
+                            >4</a
                         >
                         <a class="dropdown-item" id="stage5Select" href="#"
-                            >3</a
+                            >5</a
                         >
                     </div>
                 </div>
             </div>
-            <button onclick="main('1')">ROLL</button>
+            <div class="row d-flex justify-content-center mt-5">
+                <button onclick="rollForPart('1')">ROLL</button>
+            </div>
+            <div class="row d-flex justify-content-center mt-5">
+                <ul id="parts-list-container"></ul>
+            </div>
             <div
                 id="newPartList"
                 class="row d-flex justify-content-center"
@@ -115,5 +120,6 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"
     ></script>
-    <script src="./js/main.js"></script>
+    <script src="js/parts.js"></script>
+    <script src="js/main.js"></script>
 </html>

@@ -1,10 +1,4 @@
-import {
-    s_tier_parts,
-    a_tier_parts,
-    b_tier_parts,
-    c_tier_parts,
-    d_tier_parts
-} from "./parts";
+const partsListContainer = document.getElementById("parts-list-container");
 
 const stageMinMax = (stage) => {
     if (stage === "1") {
@@ -28,7 +22,15 @@ const getPartFromList = (list) => {
     return list[Math.floor(Math.random() * list.length)];
 };
 
-const main = (stage = "1") => {
+const displayPart = (part) => {
+    partsListContainer.innerHTML += `
+        <li>
+          ${part}
+        </li>
+    `;
+};
+
+const rollForPart = (stage = "1") => {
     let partsList;
     const minMaxs = stageMinMax(stage);
     const randomNumber = Math.floor(Math.random() * 100) + 1;
@@ -45,7 +47,8 @@ const main = (stage = "1") => {
     } else {
         console.log("error");
     }
-    const part = getPartFromList(partsList);
+    if (partsList) {
+        const part = getPartFromList(partsList);
+        displayPart(part);
+    }
 };
-
-main();
