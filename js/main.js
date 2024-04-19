@@ -53,12 +53,31 @@ const areAllPartsAcquired = () => {
 };
 
 // displays the part in the UI
-const displayPart = (part) => {
+const displayPart = (part, index) => {
     partsListContainer.innerHTML += `
         <li class="list-group-item">
-          ${part}
+            <div class="row">
+                <div class="justify-content-start d-flex col-9">
+                    ${part}
+                </div>  
+                <div class="justify-content-end d-flex col-3 align-items-center">
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        onclick="removePartFromDisplay('${part}')"
+                    >
+                        Delete
+                    </button>
+                </div>  
+            </div>
         </li>
     `;
+};
+
+const removePartFromDisplay = (part) => {
+    // remove part from UI
+    // add part back into it's tier list. might need to pass which tier list it belongs to to this func
+    console.log(part);
 };
 
 const rollForPart = () => {
