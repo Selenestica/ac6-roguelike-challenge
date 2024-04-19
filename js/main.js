@@ -127,6 +127,7 @@ const clearList = () => {
     rollButton.classList.remove("disabled");
 };
 
+// returns the selected stage
 const getStage = () => {
     return stageMenuButton.innerText.slice(-2).trim();
 };
