@@ -1,6 +1,12 @@
 const partsListContainer = document.getElementById("parts-list-container");
 const stageMenuButton = document.getElementById("dropdownMenuButton");
 
+let s_tier_parts = [...S_TIER_PARTS];
+let a_tier_parts = [...A_TIER_PARTS];
+let b_tier_parts = [...B_TIER_PARTS];
+let c_tier_parts = [...C_TIER_PARTS];
+let d_tier_parts = [...D_TIER_PARTS];
+
 const stageMinMax = (stage) => {
     if (stage === "1") {
         return [35, 65, 85, 95, 100];
@@ -20,7 +26,13 @@ const stageMinMax = (stage) => {
 };
 
 const getPartFromList = (list) => {
-    return list[Math.floor(Math.random() * list.length)];
+    const randomIndex = Math.floor(Math.random() * list.length);
+    return { part: list[randomIndex], index: randomIndex };
+};
+
+const removePartFromList = (list, index) => {
+    list.splice(index, 1);
+    console.log(list.length);
 };
 
 const displayPart = (part) => {
@@ -49,7 +61,9 @@ const rollForPart = (stage = "1") => {
         console.log("error");
     }
     if (partsList) {
-        const part = getPartFromList(partsList);
+        const partInfo = getPartFromList(partsList);
+        const { part, index } = partInfo;
+        removePartFromList(partsList, index);
         displayPart(part);
     }
 };

@@ -1,4 +1,4 @@
-const s_tier_parts = [
+const S_TIER_PARTS = [
     "R-Arm Unit: VP-66EG Stun Gun",
     "R-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle",
     "R-Arm Unit: IB-C03W1: WLT 011 Coral Rifle",
@@ -38,7 +38,7 @@ const s_tier_parts = [
     "Booster: IB-C03B: NGI 001",
     "Generator: VE-20B"
 ];
-const a_tier_parts = [
+const A_TIER_PARTS = [
     "R-Arm Unit: WR-0555 ATTACHE Heavy Machine Gun",
     "R-Arm Unit: EL-PW-00 VIENTO Needle Gun",
     "R-Arm Unit: DIZZY Grenade Launcher",
@@ -100,7 +100,7 @@ const a_tier_parts = [
     "Generator: VE-20C",
     "Generator: IB-C03G: NGI 000"
 ];
-const b_tier_parts = [
+const B_TIER_PARTS = [
     "R-Arm Unit: LR-037 HARRIS Linear Rifle",
     "R-Arm Unit: RD-025 SCUDDER Assault Rifle",
     "R-Arm Unit: DF-MG-02 CHANG-CHEN Machine Gun",
@@ -196,7 +196,7 @@ const b_tier_parts = [
     "Generator: VE-20A",
     "Generator: IA-C01G: AORTA"
 ];
-const c_tier_parts = [
+const C_TIER_PARTS = [
     "R-Arm Unit: MA-J-201 RANSETSU-AR Burst Assault Rifle",
     "R-Arm Unit: DF-GA-08 HU-BEN Gatling Gun",
     "R-Arm Unit: SG-026 HALDEMAN Shotgun",
@@ -272,7 +272,7 @@ const c_tier_parts = [
     "Generator: VP-20S",
     "Generator: VP-20D"
 ];
-const d_tier_parts = [
+const D_TIER_PARTS = [
     "R-Arm Unit: MA-J-200 RANSETSU-RF Burst Rifle",
     "R-Arm Unit: LR-036 CURTIS Linear Rifle",
     "R-Arm Unit: RF-024 TURNER Assault Rifle",
