@@ -61,7 +61,7 @@ const displayPart = (part) => {
     `;
 };
 
-const rollForPart = (stage = "1") => {
+const rollForPart = () => {
     // if there's no parts left, button is disabled, and clicking will do nothing
     if (rollButton.classList.contains("disabled")) {
         return;
@@ -69,8 +69,10 @@ const rollForPart = (stage = "1") => {
 
     // roll logic starts
     let partsList;
+    const stage = getStage();
     const minMaxs = stageMinMax(stage);
     const randomNumber = Math.floor(Math.random() * 100) + 1;
+
     if (randomNumber <= minMaxs[0] && d_tier_parts.length > 0) {
         partsList = d_tier_parts;
     } else if (
@@ -99,7 +101,7 @@ const rollForPart = (stage = "1") => {
         partsList = s_tier_parts;
     } else {
         // re-roll until we get a good number. this logic could probably be improved.
-        rollForPart(stage);
+        rollForPart();
         return;
     }
 
@@ -123,6 +125,10 @@ const clearList = () => {
     c_tier_parts = [...C_TIER_PARTS];
     d_tier_parts = [...D_TIER_PARTS];
     rollButton.classList.remove("disabled");
+};
+
+const getStage = () => {
+    return stageMenuButton.innerText.slice(-2).trim();
 };
 
 // set stage to affect chances of obtaining parts of different tiers
