@@ -272,7 +272,7 @@ const C_TIER_PARTS = [
     "Generator: VP-20S",
     "Generator: VP-20D"
 ];
-const D_TIER_PARTS = [
+const _TIER_PARTS = [
     "R-Arm Unit: MA-J-200 RANSETSU-RF Burst Rifle",
     "R-Arm Unit: LR-036 CURTIS Linear Rifle",
     "R-Arm Unit: RF-024 TURNER Assault Rifle",

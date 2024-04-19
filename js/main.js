@@ -1,5 +1,6 @@
 const partsListContainer = document.getElementById("parts-list-container");
 const stageMenuButton = document.getElementById("dropdownMenuButton");
+const rollButton = document.getElementById("rollButton");
 
 let s_tier_parts = [...S_TIER_PARTS];
 let a_tier_parts = [...A_TIER_PARTS];
@@ -32,7 +33,19 @@ const getPartFromList = (list) => {
 
 const removePartFromList = (list, index) => {
     list.splice(index, 1);
-    console.log(list.length);
+};
+
+const areAllPartsAcquired = () => {
+    if (
+        s_tier_parts.length === 0 &&
+        a_tier_parts.length === 0 &&
+        b_tier_parts.length === 0 &&
+        c_tier_parts.length === 0 &&
+        d_tier_parts.length === 0
+    ) {
+        return true;
+    }
+    return false;
 };
 
 const displayPart = (part) => {
@@ -44,27 +57,51 @@ const displayPart = (part) => {
 };
 
 const rollForPart = (stage = "1") => {
+    if (rollButton.classList.contains("disabled")) {
+        return;
+    }
     let partsList;
     const minMaxs = stageMinMax(stage);
     const randomNumber = Math.floor(Math.random() * 100) + 1;
-    if (randomNumber <= minMaxs[0]) {
+    if (randomNumber <= minMaxs[0] && d_tier_parts.length > 0) {
         partsList = d_tier_parts;
-    } else if (randomNumber <= minMaxs[1] && randomNumber > minMaxs[0]) {
+    } else if (
+        randomNumber <= minMaxs[1] &&
+        randomNumber > minMaxs[0] &&
+        c_tier_parts.length > 0
+    ) {
         partsList = c_tier_parts;
-    } else if (randomNumber <= minMaxs[2] && randomNumber > minMaxs[1]) {
+    } else if (
+        randomNumber <= minMaxs[2] &&
+        randomNumber > minMaxs[1] &&
+        b_tier_parts.length > 0
+    ) {
         partsList = b_tier_parts;
-    } else if (randomNumber <= minMaxs[3] && randomNumber > minMaxs[2]) {
+    } else if (
+        randomNumber <= minMaxs[3] &&
+        randomNumber > minMaxs[2] &&
+        a_tier_parts.length > 0
+    ) {
         partsList = a_tier_parts;
-    } else if (randomNumber <= minMaxs[4] && randomNumber > minMaxs[3]) {
+    } else if (
+        randomNumber <= minMaxs[4] &&
+        randomNumber > minMaxs[3] &&
+        s_tier_parts.length > 0
+    ) {
         partsList = s_tier_parts;
     } else {
-        console.log("error");
+        rollForPart(stage);
     }
     if (partsList) {
         const partInfo = getPartFromList(partsList);
         const { part, index } = partInfo;
         removePartFromList(partsList, index);
         displayPart(part);
+    }
+    const allPartsAcquired = areAllPartsAcquired();
+    if (allPartsAcquired) {
+        rollButton.classList.add("disabled");
+        return;
     }
 };
 
