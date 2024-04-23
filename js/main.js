@@ -8,6 +8,8 @@ let b_tier_parts = [...B_TIER_PARTS];
 let c_tier_parts = [...C_TIER_PARTS];
 let d_tier_parts = [...D_TIER_PARTS];
 
+let partCounter = 0;
+
 // returns tier list chances for given stage
 const stageMinMax = (stage) => {
     if (stage === "1") {
@@ -53,9 +55,10 @@ const areAllPartsAcquired = () => {
 };
 
 // displays the part in the UI
-const displayPart = (part, index) => {
+const displayPart = (part) => {
+    const id = "part" + partCounter;
     partsListContainer.innerHTML += `
-        <li class="list-group-item">
+        <li class="list-group-item" id="${id}">
             <div class="row">
                 <div class="justify-content-start d-flex col-9">
                     ${part}
@@ -64,7 +67,7 @@ const displayPart = (part, index) => {
                     <button
                         type="button"
                         class="btn btn-danger"
-                        onclick="removePartFromDisplay('${part}')"
+                        onclick="removePartFromDisplay('${part}', '${id}')"
                     >
                         Delete
                     </button>
@@ -74,10 +77,13 @@ const displayPart = (part, index) => {
     `;
 };
 
-const removePartFromDisplay = (part) => {
+// does the user even want this? why would we want to remove a part that we have acquired? just don't use the part...
+const removePartFromDisplay = (part, listId) => {
     // remove part from UI
     // add part back into it's tier list. might need to pass which tier list it belongs to to this func
-    console.log(part);
+    console.log(listId);
+    const listItem = document.getElementById(listId);
+    partsListContainer.removeChild(listItem);
 };
 
 const rollForPart = () => {
