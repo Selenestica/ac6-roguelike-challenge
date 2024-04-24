@@ -52,9 +52,11 @@ const areAllPartsAcquired = () => {
         c_tier_parts.length === 0 &&
         d_tier_parts.length === 0
     ) {
-        return true;
+        rollButton.classList.add("disabled");
+        return;
     }
-    return false;
+    rollButton.classList.remove("disabled");
+    return;
 };
 
 // displays the part in the UI
@@ -84,7 +86,21 @@ const removePartFromDisplay = (part, listId, tier) => {
     // add part back into it's tier list. might need to pass which tier list it belongs to to this func
     const listItem = document.getElementById(listId);
     partsListContainer.removeChild(listItem);
-    console.log(tier, part);
+    if (tier === "d") {
+        d_tier_parts.push(part);
+    } else if (tier === "c") {
+        c_tier_parts.push(part);
+    }
+    if (tier === "b") {
+        b_tier_parts.push(part);
+    }
+    if (tier === "a") {
+        a_tier_parts.push(part);
+    }
+    if (tier === "s") {
+        s_tier_parts.push(part);
+    }
+    areAllPartsAcquired();
 };
 
 const rollForPart = () => {
@@ -135,11 +151,7 @@ const rollForPart = () => {
     const { part, index } = partInfo;
     removePartFromList(partsListObj.list, index);
     displayPart(part, partsListObj.tier);
-    const allPartsAcquired = areAllPartsAcquired();
-    if (allPartsAcquired) {
-        rollButton.classList.add("disabled");
-        return;
-    }
+    areAllPartsAcquired();
 };
 
 // resets the parts list in the UI and the re-populates the parts lists
