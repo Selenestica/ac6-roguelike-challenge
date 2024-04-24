@@ -63,6 +63,7 @@ const displayPart = (part) => {
                 <div class="justify-content-start d-flex col-9">
                     ${part}
                 </div>  
+                <!-- unneeded feature
                 <div class="justify-content-end d-flex col-3 align-items-center">
                     <button
                         type="button"
@@ -72,19 +73,20 @@ const displayPart = (part) => {
                         Delete
                     </button>
                 </div>  
+                -->
             </div>
         </li>
     `;
 };
 
 // does the user even want this? why would we want to remove a part that we have acquired? just don't use the part...
-const removePartFromDisplay = (part, listId) => {
-    // remove part from UI
-    // add part back into it's tier list. might need to pass which tier list it belongs to to this func
-    console.log(listId);
-    const listItem = document.getElementById(listId);
-    partsListContainer.removeChild(listItem);
-};
+// const removePartFromDisplay = (part, listId) => {
+//     // remove part from UI
+//     // add part back into it's tier list. might need to pass which tier list it belongs to to this func
+//     console.log(listId);
+//     const listItem = document.getElementById(listId);
+//     partsListContainer.removeChild(listItem);
+// };
 
 const rollForPart = () => {
     // if there's no parts left, button is disabled, and clicking will do nothing

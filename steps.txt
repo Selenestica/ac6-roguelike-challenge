@@ -1,4 +1,2 @@
-store chosen part in separate array, and remove chosen part from main array
-write code to reset the game. merge the chosen parts array with the main array
 separate chosen parts by category (head, legs, etc)
-
+  - dynamically generate the accordion tabs wth JS
