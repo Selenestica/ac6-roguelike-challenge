@@ -32,7 +32,10 @@ const stageMinMax = (stage) => {
 // grab part from the given parts list and return the part and the index of it for easy removal from the list
 const getPartFromList = (list) => {
     const randomIndex = Math.floor(Math.random() * list.length);
-    return { part: list[randomIndex], index: randomIndex };
+    return {
+        part: list[randomIndex],
+        index: randomIndex
+    };
 };
 
 // removes the part from the list so we don't get duplicates because that's annoying
@@ -55,7 +58,8 @@ const areAllPartsAcquired = () => {
 };
 
 // displays the part in the UI
-const displayPart = (part) => {
+const displayPart = (part, tierList) => {
+    console.log(tierList);
     const id = "part" + partCounter;
     partsListContainer.innerHTML += `
         <li class="list-group-item" id="${id}">
@@ -63,30 +67,26 @@ const displayPart = (part) => {
                 <div class="justify-content-start d-flex col-9">
                     ${part}
                 </div>  
-                <!-- unneeded feature
                 <div class="justify-content-end d-flex col-3 align-items-center">
                     <button
                         type="button"
                         class="btn btn-danger"
-                        onclick="removePartFromDisplay('${part}', '${id}')"
+                        onclick="removePartFromDisplay('${part}', '${id}', '${tierList}')"
                     >
                         Delete
                     </button>
                 </div>  
-                -->
             </div>
         </li>
     `;
 };
 
-// does the user even want this? why would we want to remove a part that we have acquired? just don't use the part...
-// const removePartFromDisplay = (part, listId) => {
-//     // remove part from UI
-//     // add part back into it's tier list. might need to pass which tier list it belongs to to this func
-//     console.log(listId);
-//     const listItem = document.getElementById(listId);
-//     partsListContainer.removeChild(listItem);
-// };
+const removePartFromDisplay = (part, listId, tierList) => {
+    // add part back into it's tier list. might need to pass which tier list it belongs to to this func
+    const listItem = document.getElementById(listId);
+    partsListContainer.removeChild(listItem);
+    console.log(tierList);
+};
 
 const rollForPart = () => {
     // if there's no parts left, button is disabled, and clicking will do nothing
@@ -95,47 +95,47 @@ const rollForPart = () => {
     }
 
     // roll logic starts
-    let partsList;
+    let partsListObj;
     const stage = getStage();
     const minMaxs = stageMinMax(stage);
     const randomNumber = Math.floor(Math.random() * 100) + 1;
 
     if (randomNumber <= minMaxs[0] && d_tier_parts.length > 0) {
-        partsList = d_tier_parts;
+        partsListObj = { list: d_tier_parts };
     } else if (
         randomNumber <= minMaxs[1] &&
         randomNumber > minMaxs[0] &&
         c_tier_parts.length > 0
     ) {
-        partsList = c_tier_parts;
+        partsListObj = { list: c_tier_parts };
     } else if (
         randomNumber <= minMaxs[2] &&
         randomNumber > minMaxs[1] &&
         b_tier_parts.length > 0
     ) {
-        partsList = b_tier_parts;
+        partsListObj = { list: b_tier_parts };
     } else if (
         randomNumber <= minMaxs[3] &&
         randomNumber > minMaxs[2] &&
         a_tier_parts.length > 0
     ) {
-        partsList = a_tier_parts;
+        partsListObj = { list: a_tier_parts };
     } else if (
         randomNumber <= minMaxs[4] &&
         randomNumber > minMaxs[3] &&
         s_tier_parts.length > 0
     ) {
-        partsList = s_tier_parts;
+        partsListObj = { list: s_tier_parts };
     } else {
         // re-roll until we get a good number. this logic could probably be improved.
         rollForPart();
         return;
     }
 
-    const partInfo = getPartFromList(partsList);
+    const partInfo = getPartFromList(partsListObj.list);
     const { part, index } = partInfo;
-    removePartFromList(partsList, index);
-    displayPart(part);
+    removePartFromList(partsListObj.list, index);
+    displayPart(part, partsListObj.list);
     const allPartsAcquired = areAllPartsAcquired();
     if (allPartsAcquired) {
         rollButton.classList.add("disabled");

@@ -1,7 +1,7 @@
 const S_TIER_PARTS = [
-    "R-Arm Unit: VP-66EG Stun Gun"
-    // "R-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle",
-    // "R-Arm Unit: IB-C03W1: WLT 011 Coral Rifle",
+    "R-Arm Unit: VP-66EG Stun Gun",
+    "R-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle",
+    "R-Arm Unit: IB-C03W1: WLT 011 Coral Rifle"
     // "R-Arm Unit: 44-142 KRSV Multi Energy Rifle",
     // "R-Arm Unit: WS-5000 APERITIF Siege Missile Launcher",
     // "L-Arm Unit: Vvc-774LS Laser Slicer",
@@ -39,9 +39,9 @@ const S_TIER_PARTS = [
     // "Generator: VE-20B"
 ];
 const A_TIER_PARTS = [
-    "R-Arm Unit: WR-0555 ATTACHE Heavy Machine Gun"
-    // "R-Arm Unit: EL-PW-00 VIENTO Needle Gun",
-    // "R-Arm Unit: DIZZY Grenade Launcher",
+    "R-Arm Unit: WR-0555 ATTACHE Heavy Machine Gun",
+    "R-Arm Unit: EL-PW-00 VIENTO Needle Gun",
+    "R-Arm Unit: DIZZY Grenade Launcher"
     // "R-Arm Unit: VE-66LRB Laser Rifle",
     // "R-Arm Unit: HML-G3/P08SPL-06 Split Missile Launcher",
     // "L-Arm Unit: VP-67LD Laser Dagger",
@@ -101,9 +101,9 @@ const A_TIER_PARTS = [
     // "Generator: IB-C03G: NGI 000"
 ];
 const B_TIER_PARTS = [
-    "R-Arm Unit: LR-037 HARRIS Linear Rifle"
-    // "R-Arm Unit: RD-025 SCUDDER Assault Rifle",
-    // "R-Arm Unit: DF-MG-02 CHANG-CHEN Machine Gun",
+    "R-Arm Unit: LR-037 HARRIS Linear Rifle",
+    "R-Arm Unit: RD-025 SCUDDER Assault Rifle",
+    "R-Arm Unit: DF-MG-02 CHANG-CHEN Machine Gun"
     // "R-Arm Unit: MA-E-210 ETSUJIN Machine Gun",
     // "R-Arm Unit: SG-027 ZIMMERMAN Shotgun",
     // "R-Arm Unit: WR-0777 SWEET SIXTEEN Shotgun",
@@ -197,9 +197,9 @@ const B_TIER_PARTS = [
     // "Generator: IA-C01G: AORTA"
 ];
 const C_TIER_PARTS = [
-    "R-Arm Unit: MA-J-201 RANSETSU-AR Burst Assault Rifle"
-    // "R-Arm Unit: DF-GA-08 HU-BEN Gatling Gun",
-    // "R-Arm Unit: SG-026 HALDEMAN Shotgun",
+    "R-Arm Unit: MA-J-201 RANSETSU-AR Burst Assault Rifle",
+    "R-Arm Unit: DF-GA-08 HU-BEN Gatling Gun",
+    "R-Arm Unit: SG-026 HALDEMAN Shotgun"
     // "R-Arm Unit: 44-141 JVLN ALPHA Detonating Bazooka",
     // "R-Arm Unit: DF-GR-07 GOU-CHEN Grenade Launcher",
     // "R-Arm Unit: IRIDIUM Grenade Launcher",
@@ -273,9 +273,9 @@ const C_TIER_PARTS = [
     // "Generator: VP-20D"
 ];
 const D_TIER_PARTS = [
-    "R-Arm Unit: MA-J-200 RANSETSU-RF Burst Rifle"
-    // "R-Arm Unit: LR-036 CURTIS Linear Rifle",
-    // "R-Arm Unit: RF-024 TURNER Assault Rifle",
+    "R-Arm Unit: MA-J-200 RANSETSU-RF Burst Rifle",
+    "R-Arm Unit: LR-036 CURTIS Linear Rifle",
+    "R-Arm Unit: RF-024 TURNER Assault Rifle"
     // "R-Arm Unit: MG-014 LUDLOW Machine Gun",
     // "R-Arm Unit: HG-003 COQUILLETT Handgun",
     // "R-Arm Unit: DF-BA-06 XUAN-GE Bazooka",

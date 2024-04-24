@@ -1,2 +1,3 @@
 separate chosen parts by category (head, legs, etc)
   - dynamically generate the accordion tabs wth JS
+when removing parts in list, make sure the parts go pack to the master list so they can be rolled for again
