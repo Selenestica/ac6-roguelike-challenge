@@ -58,8 +58,7 @@ const areAllPartsAcquired = () => {
 };
 
 // displays the part in the UI
-const displayPart = (part, tierList) => {
-    console.log(tierList);
+const displayPart = (part, tier) => {
     const id = "part" + partCounter;
     partsListContainer.innerHTML += `
         <li class="list-group-item" id="${id}">
@@ -71,7 +70,7 @@ const displayPart = (part, tierList) => {
                     <button
                         type="button"
                         class="btn btn-danger"
-                        onclick="removePartFromDisplay('${part}', '${id}', '${tierList}')"
+                        onclick="removePartFromDisplay('${part}', '${id}', '${tier}')"
                     >
                         Delete
                     </button>
@@ -81,11 +80,11 @@ const displayPart = (part, tierList) => {
     `;
 };
 
-const removePartFromDisplay = (part, listId, tierList) => {
+const removePartFromDisplay = (part, listId, tier) => {
     // add part back into it's tier list. might need to pass which tier list it belongs to to this func
     const listItem = document.getElementById(listId);
     partsListContainer.removeChild(listItem);
-    console.log(tierList);
+    console.log(tier, part);
 };
 
 const rollForPart = () => {
@@ -101,31 +100,31 @@ const rollForPart = () => {
     const randomNumber = Math.floor(Math.random() * 100) + 1;
 
     if (randomNumber <= minMaxs[0] && d_tier_parts.length > 0) {
-        partsListObj = { list: d_tier_parts };
+        partsListObj = { list: d_tier_parts, tier: "d" };
     } else if (
         randomNumber <= minMaxs[1] &&
         randomNumber > minMaxs[0] &&
         c_tier_parts.length > 0
     ) {
-        partsListObj = { list: c_tier_parts };
+        partsListObj = { list: c_tier_parts, tier: "c" };
     } else if (
         randomNumber <= minMaxs[2] &&
         randomNumber > minMaxs[1] &&
         b_tier_parts.length > 0
     ) {
-        partsListObj = { list: b_tier_parts };
+        partsListObj = { list: b_tier_parts, tier: "b" };
     } else if (
         randomNumber <= minMaxs[3] &&
         randomNumber > minMaxs[2] &&
         a_tier_parts.length > 0
     ) {
-        partsListObj = { list: a_tier_parts };
+        partsListObj = { list: a_tier_parts, tier: "a" };
     } else if (
         randomNumber <= minMaxs[4] &&
         randomNumber > minMaxs[3] &&
         s_tier_parts.length > 0
     ) {
-        partsListObj = { list: s_tier_parts };
+        partsListObj = { list: s_tier_parts, tier: "s" };
     } else {
         // re-roll until we get a good number. this logic could probably be improved.
         rollForPart();
@@ -135,7 +134,7 @@ const rollForPart = () => {
     const partInfo = getPartFromList(partsListObj.list);
     const { part, index } = partInfo;
     removePartFromList(partsListObj.list, index);
-    displayPart(part, partsListObj.list);
+    displayPart(part, partsListObj.tier);
     const allPartsAcquired = areAllPartsAcquired();
     if (allPartsAcquired) {
         rollButton.classList.add("disabled");
