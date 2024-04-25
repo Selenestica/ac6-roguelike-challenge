@@ -61,6 +61,7 @@ const areAllPartsAcquired = () => {
 
 // displays the part in the UI
 const displayPart = (part, tier) => {
+    // displays part in recently obtained column
     const id = "part" + partCounter;
     partsListContainer.innerHTML += `
         <li class="list-group-item" id="${id}">
@@ -80,6 +81,12 @@ const displayPart = (part, tier) => {
             </div>
         </li>
     `;
+
+    // displays part in part category
+    // get substring of part name (0, 8)
+    // loop through partCategoriesArray. if substring contains partCategoriesArray[i]...
+    // const partAccordion = document.getElementById(partCategoriesArray[i])
+    // partAccordion.innerHTML += <div class="accordion-body">part</div>
 };
 
 const removePartFromDisplay = (part, listId, tier) => {

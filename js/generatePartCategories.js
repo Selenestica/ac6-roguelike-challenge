@@ -7,10 +7,10 @@ const partCategoriesArray = [
     "Core",
     "Arms",
     "Legs",
-    "R-Arm Unit",
-    "L-Arm Unit",
-    "R-Back Unit",
-    "L-Back Unit",
+    "R-Arm",
+    "L-Arm",
+    "R-Back",
+    "L-Back",
     "FCS",
     "Booster",
     "Generator"
@@ -20,7 +20,7 @@ const generatePartCategories = () => {
     for (let i = 0; i < partCategoriesArray.length; i++) {
         partCategoriesContainer.innerHTML += `
           <div class="accordion-item">
-            <h2 class="accordion-header" id="${partCategoriesArray[i]}">
+            <h2 class="accordion-header">
                 <button
                     class="accordion-button collapsed"
                     type="button"
@@ -34,16 +34,10 @@ const generatePartCategories = () => {
             </h2>
             <div
                 id="part${[i]}"
-                class="accordion-collapse collapse"
+                class="accordion-collapse collapse ${partCategoriesArray[i]}"
                 aria-labelledby="headingThree"
                 data-bs-parent="#accordionExample"
             >
-                <div class="accordion-body">
-                    <strong
-                        >This is the third item's accordion
-                        body.</strong
-                    >
-                </div>
             </div>
           </div>
         `;
