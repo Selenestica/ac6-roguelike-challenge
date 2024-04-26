@@ -34,7 +34,9 @@ const generatePartCategories = () => {
             </h2>
             <div
                 id="part${[i]}"
-                class="accordion-collapse collapse ${partCategoriesArray[i]}"
+                class="accordion-collapse collapse ${
+                    partCategoriesArray[i]
+                } partCategory"
                 aria-labelledby="headingThree"
                 data-bs-parent="#accordionExample"
             >

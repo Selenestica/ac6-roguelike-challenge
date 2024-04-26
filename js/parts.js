@@ -1,7 +1,7 @@
 const S_TIER_PARTS = [
     "R-Arm Unit: VP-66EG Stun Gun",
     "R-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle",
-    "R-Arm Unit: IB-C03W1: WLT 011 Coral Rifle"
+    "R-Arm Unit: IB-C03W1: WLT 011 Coral Rifle",
     // "R-Arm Unit: 44-142 KRSV Multi Energy Rifle",
     // "R-Arm Unit: WS-5000 APERITIF Siege Missile Launcher",
     // "L-Arm Unit: Vvc-774LS Laser Slicer",
@@ -36,7 +36,7 @@ const S_TIER_PARTS = [
     // "Bipedal Legs: 2S-5000 DESSERT",
     // "Booster: BC-0200 GRIDWALKER",
     // "Booster: IB-C03B: NGI 001",
-    // "Generator: VE-20B"
+    "Generator: VE-20B"
 ];
 const A_TIER_PARTS = [
     "R-Arm Unit: WR-0555 ATTACHE Heavy Machine Gun",

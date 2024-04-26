@@ -1,3 +1,2 @@
 separate chosen parts by category (head, legs, etc)
-  - dynamically generate the accordion tabs wth JS
-  - fix bug where part category accordion isn't the full length of the column
+  - add 'Hide' feature on parts in categories side? Or 'Delete' button?

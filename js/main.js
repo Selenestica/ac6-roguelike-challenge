@@ -1,6 +1,7 @@
 const partsListContainer = document.getElementById("parts-list-container");
 const stageMenuButton = document.getElementById("dropdownMenuButton");
 const rollButton = document.getElementById("rollButton");
+const partCategoryElements = document.getElementsByClassName("partCategory");
 
 let s_tier_parts = [...S_TIER_PARTS];
 let a_tier_parts = [...A_TIER_PARTS];
@@ -60,7 +61,7 @@ const areAllPartsAcquired = () => {
 };
 
 // displays the part in the UI
-const displayPart = (part, tier) => {
+const displayPartInObtainedSection = (part, tier) => {
     // displays part in recently obtained column
     const id = "part" + partCounter;
     partsListContainer.innerHTML += `
@@ -81,12 +82,20 @@ const displayPart = (part, tier) => {
             </div>
         </li>
     `;
+};
 
-    // displays part in part category
-    // get substring of part name (0, 8)
-    // loop through partCategoriesArray. if substring contains partCategoriesArray[i]...
-    // const partAccordion = document.getElementById(partCategoriesArray[i])
-    // partAccordion.innerHTML += <div class="accordion-body">part</div>
+const displayPartInCategory = (part, tier) => {
+    let partAccordion;
+    const partTypeSubstring = part.substr(0, 9);
+    for (let i = 0; i < partCategoriesArray.length; i++) {
+        if (partTypeSubstring.includes(partCategoriesArray[i])) {
+            console.log(partTypeSubstring, partCategoriesArray[i]);
+            partAccordion = document.getElementsByClassName(
+                partCategoriesArray[i]
+            )[0];
+            partAccordion.innerHTML += `<div class="accordion-body">${part}</div>`;
+        }
+    }
 };
 
 const removePartFromDisplay = (part, listId, tier) => {
@@ -157,12 +166,14 @@ const rollForPart = () => {
     const partInfo = getPartFromList(partsListObj.list);
     const { part, index } = partInfo;
     removePartFromList(partsListObj.list, index);
-    displayPart(part, partsListObj.tier);
+    displayPartInObtainedSection(part, partsListObj.tier);
+    displayPartInCategory(part, partsListObj.tier);
     areAllPartsAcquired();
 };
 
 // resets the parts list in the UI and the re-populates the parts lists
-const clearList = () => {
+const reset = () => {
+    // resets obtained parts list
     partsListContainer.innerHTML = "";
     s_tier_parts = [...S_TIER_PARTS];
     a_tier_parts = [...A_TIER_PARTS];
@@ -170,6 +181,11 @@ const clearList = () => {
     c_tier_parts = [...C_TIER_PARTS];
     d_tier_parts = [...D_TIER_PARTS];
     rollButton.classList.remove("disabled");
+
+    // reset parts in part categories
+    for (let i = 0; i < partCategoryElements.length; i++) {
+        partCategoryElements[i].innerHTML = "";
+    }
 };
 
 // returns the selected stage
