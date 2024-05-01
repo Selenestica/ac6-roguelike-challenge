@@ -102,9 +102,10 @@
                 <div class="col-6 d-flex justify-content-end my-5">
                     <div>
                         <button
-                            type="button"
                             class="btn btn-warning"
-                            onclick="reset()"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#resetModal"
                         >
                             Reset
                         </button>
@@ -123,6 +124,48 @@
                 id="newPartList"
                 class="row d-flex justify-content-center"
             ></div>
+        </div>
+
+        <!-- RESET MODAL -->
+        <div
+            class="modal fade"
+            id="resetModal"
+            tabindex="-1"
+            aria-labelledby="resetModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="resetModalLabel">
+                            Reset Run?
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-warning"
+                            data-bs-dismiss="modal"
+                            onclick="reset()"
+                        >
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 
