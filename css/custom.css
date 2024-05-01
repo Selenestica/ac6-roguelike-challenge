@@ -37,3 +37,7 @@ body {
 .outline-light {
     border: 0.5px solid white !important;
 }
+
+.bg-none {
+    background-color: rgba(0, 0, 0, 0) !important;
+}

@@ -19,21 +19,21 @@ const partCategoriesArray = [
 const generatePartCategories = () => {
     for (let i = 0; i < partCategoriesArray.length; i++) {
         partCategoriesContainer.innerHTML += `
-          <div class="accordion-item">
+          <div class="accordion-item bg-none">
             <h2 class="accordion-header">
                 <button
                     class="accordion-button collapsed text-light"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#part${[i]}"
+                    data-bs-target="#partCategory${[i]}"
                     aria-expanded="false"
-                    aria-controls="part${[i]}"
+                    aria-controls="partCategory${[i]}"
                 >
                     ${partCategoriesArray[i]}
                 </button>
             </h2>
             <div
-                id="part${[i]}"
+                id="partCategory${[i]}"
                 class="accordion-collapse collapse ${
                     partCategoriesArray[i]
                 } partCategory"

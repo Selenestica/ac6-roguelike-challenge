@@ -11,4 +11,5 @@ work on styling page
 add save feature
   - or, maybe have user download a txt file, which can be uploaded anywhere by anyone
 
-
+BUGS:
+  - toggling Head accordion will toggle obtained parts
