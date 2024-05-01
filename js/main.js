@@ -89,11 +89,11 @@ const displayPartInCategory = (part, tier) => {
     const partTypeSubstring = part.substr(0, 9);
     for (let i = 0; i < partCategoriesArray.length; i++) {
         if (partTypeSubstring.includes(partCategoriesArray[i])) {
-            console.log(partTypeSubstring, partCategoriesArray[i]);
             partAccordion = document.getElementsByClassName(
                 partCategoriesArray[i]
             )[0];
             partAccordion.innerHTML += `<div class="accordion-body">${part}</div>`;
+            break;
         }
     }
 };
