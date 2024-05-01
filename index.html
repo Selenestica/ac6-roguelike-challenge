@@ -43,52 +43,16 @@
                             class="btn btn-primary dropdown-toggle"
                             type="button"
                             id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
+                            data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
                             Stage 1
                         </button>
                         <div
-                            class="dropdown-menu"
+                            class="dropdown-menu bg-grey"
                             aria-labelledby="dropdownMenuButton"
-                        >
-                            <a
-                                class="dropdown-item"
-                                onclick="setStage('1')"
-                                id="stage1Select"
-                                href="#"
-                                >1</a
-                            >
-                            <a
-                                class="dropdown-item"
-                                onclick="setStage('2')"
-                                id="stage2Select"
-                                href="#"
-                                >2</a
-                            >
-                            <a
-                                class="dropdown-item"
-                                onclick="setStage('3')"
-                                id="stage3Select"
-                                href="#"
-                                >3</a
-                            >
-                            <a
-                                class="dropdown-item"
-                                onclick="setStage('4')"
-                                id="stage4Select"
-                                href="#"
-                                >4</a
-                            >
-                            <a
-                                class="dropdown-item"
-                                onclick="setStage('5')"
-                                id="stage5Select"
-                                href="#"
-                                >5</a
-                            >
-                        </div>
+                            id="stageOptionsContainer"
+                        ></div>
                     </div>
                     <button
                         id="rollButton"
@@ -177,7 +141,8 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"
     ></script>
-    <script src="js/parts.js"></script>
-    <script src="js/generatePartCategories.js"></script>
+    <script src="js/constants/parts.js"></script>
+    <script src="js/components/generateStages.js"></script>
+    <script src="js/components/generatePartCategories.js"></script>
     <script src="js/main.js"></script>
 </html>
