@@ -3,3 +3,6 @@ separate chosen parts by category (head, legs, etc)
   - add number of parts beside part category titles so user can see if there are parts there at a glance
 
 work on styling page
+
+bugs: 
+- stage select not working
