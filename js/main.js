@@ -65,9 +65,9 @@ const displayPartInObtainedSection = (part, tier) => {
     // displays part in recently obtained column
     const id = "part" + partCounter;
     partsListContainer.innerHTML += `
-        <li class="list-group-item" id="${id}">
+        <li class="list-group-item bg-default outline-light" id="${id}">
             <div class="row">
-                <div class="justify-content-start d-flex col-9">
+                <div class="justify-content-start d-flex col-9 text-light">
                     ${part}
                 </div>  
                 <div class="justify-content-end d-flex col-3 align-items-center">
