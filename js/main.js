@@ -92,7 +92,7 @@ const displayPartInCategory = (part, tier) => {
             partAccordion = document.getElementsByClassName(
                 partCategoriesArray[i]
             )[0];
-            partAccordion.innerHTML += `<div class="accordion-body">${part}</div>`;
+            partAccordion.innerHTML += `<div class="accordion-body text-light">${part}</div>`;
             break;
         }
     }
