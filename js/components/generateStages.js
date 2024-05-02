@@ -7,7 +7,7 @@ const generateStageOptions = () => {
         class="dropdown-item text-light"
         onclick="setStage('${i}')"
         id="stage${i}Select"
-        href=""
+        href="stage${i}"
       >
         ${i}
       </a>
