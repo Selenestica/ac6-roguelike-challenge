@@ -41,3 +41,7 @@ body {
 .bg-none {
     background-color: rgba(0, 0, 0, 0) !important;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}

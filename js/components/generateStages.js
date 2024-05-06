@@ -1,16 +1,23 @@
 const stageOptionsContainer = document.getElementById("stageOptionsContainer");
+const tooltipTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+);
+const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+});
 
 const generateStageOptions = () => {
     for (let i = 1; i < 6; i++) {
         stageOptionsContainer.innerHTML += `
-      <a
-        class="dropdown-item text-light"
+      <p
+        class="dropdown-item text-light cursor-pointer"
         onclick="setStage('${i}')"
         id="stage${i}Select"
-        href="stage${i}"
+        data-bs-toggle="tooltip"
+        data-bs-title="Default tooltip"
       >
         ${i}
-      </a>
+      </p>
       `;
     }
 };
