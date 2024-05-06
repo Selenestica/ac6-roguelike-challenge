@@ -9,7 +9,5 @@ work on styling page
 add save feature
   - have user download a txt file, which can be uploaded anywhere by anyone
 
-add a Credits modal (thanks to...)
-
 BUGS:
-  
+  - make part accordions only open one at a time (adjust data-bs-parent to match id)
