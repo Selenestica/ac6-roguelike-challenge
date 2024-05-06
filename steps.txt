@@ -1,17 +1,13 @@
 FEATURES:
-separate chosen parts by category (head, legs, etc)
-  - add 'Hide' feature on parts in categories side? Or 'Delete' button?
-  - add number of parts beside part category titles so user can see if there are parts there at a glance
-
 maybe turn app into complete step-by-step application?
 
 work on styling page
-  - change Delete buttons to trash can
+  - remove recent parts column
+  - when roll is clicked, show modal with picture and part name
+  - add number of parts beside part category titles so user can see if there are parts there at a glance
 
 add save feature
   - have user download a txt file, which can be uploaded anywhere by anyone
-
-add a rules modal
 
 add a Credits modal (thanks to...)
 
