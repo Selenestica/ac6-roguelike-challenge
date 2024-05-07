@@ -61,28 +61,28 @@ const areAllPartsAcquired = () => {
 };
 
 // displays the part in the UI
-const displayPartInObtainedSection = (part, tier) => {
-    // displays part in recently obtained column
-    const id = "part" + partCounter;
-    partsListContainer.innerHTML += `
-        <li class="list-group-item bg-default outline-light" id="${id}">
-            <div class="row">
-                <div class="justify-content-start d-flex col-9 text-light">
-                    ${part}
-                </div>  
-                <div class="justify-content-end d-flex col-3 align-items-center">
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        onclick="removePartFromDisplay('${part}', '${id}', '${tier}')"
-                    >
-                        Delete
-                    </button>
-                </div>  
-            </div>
-        </li>
-    `;
-};
+// const displayPartInObtainedSection = (part, tier) => {
+//     // displays part in recently obtained column
+//     const id = "part" + partCounter;
+//     partsListContainer.innerHTML += `
+//         <li class="list-group-item bg-default outline-light" id="${id}">
+//             <div class="row">
+//                 <div class="justify-content-start d-flex col-9 text-light">
+//                     ${part}
+//                 </div>
+//                 <div class="justify-content-end d-flex col-3 align-items-center">
+//                     <button
+//                         type="button"
+//                         class="btn btn-danger"
+//                         onclick="removePartFromDisplay('${part}', '${id}', '${tier}')"
+//                     >
+//                         Delete
+//                     </button>
+//                 </div>
+//             </div>
+//         </li>
+//     `;
+// };
 
 const displayPartInCategory = (part, tier) => {
     let partAccordion;
@@ -166,7 +166,7 @@ const rollForPart = () => {
     const partInfo = getPartFromList(partsListObj.list);
     const { part, index } = partInfo;
     removePartFromList(partsListObj.list, index);
-    displayPartInObtainedSection(part, partsListObj.tier);
+    // displayPartInObtainedSection(part, partsListObj.tier);
     displayPartInCategory(part, partsListObj.tier);
     areAllPartsAcquired();
 };
