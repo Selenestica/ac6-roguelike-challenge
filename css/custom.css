@@ -45,3 +45,23 @@ body {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.bg-d-tier {
+    background-color: #bfff7f;
+}
+
+.bg-c-tier {
+    background-color: #ffff7f;
+}
+
+.bg-b-tier {
+    background-color: #ffdf7f;
+}
+
+.bg-a-tier {
+    background-color: #ffbf7f;
+}
+
+.bg-s-tier {
+    background-color: #ff7f7f;
+}

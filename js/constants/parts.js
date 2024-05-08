@@ -13,7 +13,7 @@ const S_TIER_PARTS = [
     },
     {
         name: "R-Arm Unit: 44-142 KRSV Multi Energy Rifle",
-        img: "assets/images/44-142-krsv.png"
+        img: "assets/images/44-142 KRSV Multi Energy Rifle.png"
     },
     {
         name: "R-Arm Unit: WS-5000 APERITIF Siege Missile Launcher",
@@ -45,7 +45,7 @@ const S_TIER_PARTS = [
     },
     {
         name: "L-Arm Unit: 44-142 KRSV Multi Energy Rifle",
-        img: "assets/images/44-142-krsv.png"
+        img: "assets/images/44-142 KRSV Multi Energy Rifle.png"
     },
     {
         name: "L-Arm Unit: WS-5000 APERITIF Siege Missile Launcher",

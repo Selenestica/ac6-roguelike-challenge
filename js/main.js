@@ -3,6 +3,7 @@ const rollButton = document.getElementById("rollButton");
 const partCategoryElements = document.getElementsByClassName("partCategory");
 const newPartModalLabel = document.getElementById("newPartModalLabel");
 const newPartModalImg = document.getElementById("newPartModalImg");
+const tierBadge = document.getElementById("tierBadge");
 
 let s_tier_parts = [...S_TIER_PARTS];
 let a_tier_parts = [...A_TIER_PARTS];
@@ -77,7 +78,11 @@ const displayPartInCategory = (part) => {
 
 const populateNewPartModal = (part, tier) => {
     newPartModalLabel.innerText = part.name;
-    newPartModalImg.innerHTML = `<img src="./assets/images/${part.img}" />`;
+    newPartModalImg.innerHTML = `<img src="./${part.img}" />`;
+    tierBadge.innerText = tier.toUpperCase();
+    tierBadge.className = "";
+    tierBadge.classList.add("badge", "text-dark");
+    tierBadge.classList.add(`bg-${tier}-tier`);
 };
 
 const revertObtainedPart = (part, tier) => {
