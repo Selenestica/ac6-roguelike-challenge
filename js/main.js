@@ -2,6 +2,7 @@ const stageMenuButton = document.getElementById("dropdownMenuButton");
 const rollButton = document.getElementById("rollButton");
 const partCategoryElements = document.getElementsByClassName("partCategory");
 const newPartModalLabel = document.getElementById("newPartModalLabel");
+const newPartModalImg = document.getElementById("newPartModalImg");
 
 let s_tier_parts = [...S_TIER_PARTS];
 let a_tier_parts = [...A_TIER_PARTS];
@@ -76,6 +77,7 @@ const displayPartInCategory = (part) => {
 
 const populateNewPartModal = (part, tier) => {
     newPartModalLabel.innerText = part;
+    newPartModalImg.innerHTML = `<img src="./assets/images/2c-2000-crawler.png" />`;
 };
 
 const revertObtainedPart = (part, tier) => {
