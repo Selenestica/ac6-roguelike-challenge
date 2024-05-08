@@ -77,7 +77,7 @@ const displayPartInCategory = (part) => {
 
 const populateNewPartModal = (part, tier) => {
     newPartModalLabel.innerText = part.name;
-    newPartModalImg.innerHTML = `<img src="./assets/images/${part.img}" />`;
+    newPartModalImg.innerHTML = `<img src="./assets/images/armWeapons/R-Arm Unit: VP-66EG Stun Gun.png" />`;
 };
 
 const revertObtainedPart = (part, tier) => {
