@@ -63,20 +63,20 @@ const areAllPartsAcquired = () => {
 
 const displayPartInCategory = (part) => {
     let partAccordion;
-    const partTypeSubstring = part.substr(0, 9);
+    const partTypeSubstring = part.name.substr(0, 9);
     for (let i = 0; i < partCategoriesArray.length; i++) {
         if (partTypeSubstring.includes(partCategoriesArray[i])) {
             partAccordion = document.getElementsByClassName(
                 partCategoriesArray[i]
             )[0];
-            partAccordion.innerHTML += `<div class="accordion-body text-light bg-grey">${part}</div>`;
+            partAccordion.innerHTML += `<div class="accordion-body text-light bg-grey">${part.name}</div>`;
             break;
         }
     }
 };
 
 const populateNewPartModal = (part, tier) => {
-    newPartModalLabel.innerText = part;
+    newPartModalLabel.innerText = part.name;
     newPartModalImg.innerHTML = `<img src="./assets/images/${part.img}" />`;
 };
 
