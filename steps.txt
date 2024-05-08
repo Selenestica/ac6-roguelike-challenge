@@ -2,15 +2,10 @@ FEATURES:
 maybe turn app into complete step-by-step application?
 
 work on styling page
-  - when roll is clicked, show modal with picture and part name, and tier that part belongs to (maybe color icon for tier?)
-  - #INFO: 307 parts total. we have 223 images... hmm... so maybe double the amount of arm and back weapons, except for melee weapons, and subtract extension parts maybe
-  - #INFO 47 arm weapons, 40 back weapons
-  - #INFO 307 may not take into account the newest parts...
+  - when roll is clicked, show modal with picture, and tier that the part belongs to (maybe color icon for tier?)
   - add number of parts beside part category titles so user can see if there are parts there at a glance
 
 add save feature
   - have user download a txt file, which can be uploaded anywhere by anyone
 
 BUGS:
-
-18 + 49 + 66 + 32 + 29 = 194 - 13
