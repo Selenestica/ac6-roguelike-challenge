@@ -1,7 +1,7 @@
-const partsListContainer = document.getElementById("parts-list-container");
 const stageMenuButton = document.getElementById("dropdownMenuButton");
 const rollButton = document.getElementById("rollButton");
 const partCategoryElements = document.getElementsByClassName("partCategory");
+const newPartModalLabel = document.getElementById("newPartModalLabel");
 
 let s_tier_parts = [...S_TIER_PARTS];
 let a_tier_parts = [...A_TIER_PARTS];
@@ -60,31 +60,7 @@ const areAllPartsAcquired = () => {
     return;
 };
 
-// displays the part in the UI
-// const displayPartInObtainedSection = (part, tier) => {
-//     // displays part in recently obtained column
-//     const id = "part" + partCounter;
-//     partsListContainer.innerHTML += `
-//         <li class="list-group-item bg-default outline-light" id="${id}">
-//             <div class="row">
-//                 <div class="justify-content-start d-flex col-9 text-light">
-//                     ${part}
-//                 </div>
-//                 <div class="justify-content-end d-flex col-3 align-items-center">
-//                     <button
-//                         type="button"
-//                         class="btn btn-danger"
-//                         onclick="removePartFromDisplay('${part}', '${id}', '${tier}')"
-//                     >
-//                         Delete
-//                     </button>
-//                 </div>
-//             </div>
-//         </li>
-//     `;
-// };
-
-const displayPartInCategory = (part, tier) => {
+const displayPartInCategory = (part) => {
     let partAccordion;
     const partTypeSubstring = part.substr(0, 9);
     for (let i = 0; i < partCategoriesArray.length; i++) {
@@ -98,10 +74,13 @@ const displayPartInCategory = (part, tier) => {
     }
 };
 
-const removePartFromDisplay = (part, listId, tier) => {
-    // add part back into it's tier list. might need to pass which tier list it belongs to to this func
-    const listItem = document.getElementById(listId);
-    partsListContainer.removeChild(listItem);
+const populateNewPartModal = (part, tier) => {
+    newPartModalLabel.innerText = part;
+};
+
+const revertObtainedPart = (part, tier) => {
+    // add part back into it's tier list when user clicks revert
+    // will need to make sure the part is taken out of the part category
     if (tier === "d") {
         d_tier_parts.push(part);
     } else if (tier === "c") {
@@ -166,15 +145,14 @@ const rollForPart = () => {
     const partInfo = getPartFromList(partsListObj.list);
     const { part, index } = partInfo;
     removePartFromList(partsListObj.list, index);
-    // displayPartInObtainedSection(part, partsListObj.tier);
-    displayPartInCategory(part, partsListObj.tier);
+    populateNewPartModal(part, partsListObj.tier);
+    displayPartInCategory(part);
     areAllPartsAcquired();
 };
 
 // resets the parts list in the UI and the re-populates the parts lists
 const reset = () => {
     // resets obtained parts list
-    partsListContainer.innerHTML = "";
     s_tier_parts = [...S_TIER_PARTS];
     a_tier_parts = [...A_TIER_PARTS];
     b_tier_parts = [...B_TIER_PARTS];

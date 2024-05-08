@@ -38,7 +38,7 @@ const generatePartCategories = () => {
                     partCategoriesArray[i]
                 } partCategory"
                 aria-labelledby="headingThree"
-                data-bs-parent="#accordionExample"
+                data-bs-parent="#partCategoriesContainer"
             >
             </div>
           </div>
