@@ -5,7 +5,7 @@ const S_TIER_PARTS = [
     },
     {
         name: "R-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle",
-        img: "assets/images/ia-c01w6-nb-redshift.png"
+        img: "assets/images/IA-C01W6: NB-REDSHIFT Coral Rifle.png"
     },
     {
         name: "R-Arm Unit: IB-C03W1: WLT 011 Coral Rifle",
@@ -37,7 +37,7 @@ const S_TIER_PARTS = [
     },
     {
         name: "L-Arm Unit: IA-C01W6: NB-REDSHIFT Coral Rifle",
-        img: "assets/images/ia-c01w6-nb-redshift.png"
+        img: "assets/images/IA-C01W6: NB-REDSHIFT Coral Rifle.png"
     },
     {
         name: "L-Arm Unit: IB-C03W1: WLT 011 Coral Rifle",
@@ -136,7 +136,7 @@ const S_TIER_PARTS = [
         img: "assets/images/AS-5000 SALAD.png"
     },
     {
-        name: "Bipedal Legs: 2S-5000 DESSERT",
+        name: "Legs: 2S-5000 DESSERT",
         img: "assets/images/2S-5000 DESSERT.png"
     },
     {
@@ -335,22 +335,22 @@ const A_TIER_PARTS = [
         img: "assets/images/ib-c03a-hal-826.png"
     },
     {
-        name: "Bipedal Legs: LG-012 MELANDER C3",
+        name: "Legs: LG-012 MELANDER C3",
         img: "assets/images/lg-012-melander-c3.png"
     },
     {
-        name: "Bipedal Legs: EL-PL-00 ALBA",
+        name: "Legs: EL-PL-00 ALBA",
         img: "assets/images/el-pl-00-alba.png"
     },
     {
-        name: "Bipedal Legs: IA-C01L: EPHEMERA",
+        name: "Legs: IA-C01L: EPHEMERA",
         img: "assets/images/ia-c01l-ephemera.png"
     },
     {
-        name: "Bipedal Legs: IB-C03L: HAL 826",
+        name: "Legs: IB-C03L: HAL 826",
         img: "assets/images/ib-c03l-hal-826.png"
     },
-    { name: "Tank Legs: VE-42B", img: "assets/images/ve-42b.png" },
+    { name: "Legs: VE-42B", img: "assets/images/ve-42b.png" },
     {
         name: "Booster: IA-C01B: GILLS",
         img: "assets/images/ia-c01b-gills.png"
@@ -676,28 +676,28 @@ const B_TIER_PARTS = [
     },
     { name: "Arms: VE-46A", img: "assets/images/ve-46a.png" },
     {
-        name: "Bipedal Legs: AL-J-121 BASHO",
+        name: "Legs: AL-J-121 BASHO",
         img: "assets/images/al-j-121-basho.png"
     },
-    { name: "Bipedal Legs: VE-42A", img: "assets/images/ve-42a.png" },
+    { name: "Legs: VE-42A", img: "assets/images/ve-42a.png" },
     {
-        name: "Reverse Joint Legs: RC-2000 SPRING CHICKEN",
+        name: "Legs: RC-2000 SPRING CHICKEN",
         img: "assets/images/rc-2000-spring-chicken.png"
     },
     {
-        name: "Reverse Joint Legs: 06-042 MIND BETA",
+        name: "Legs: 06-042 MIND BETA",
         img: "assets/images/06-042-mind-beta.png"
     },
     {
-        name: "Tetrapod Legs: LG-033M VERRILL",
+        name: "Legs: LG-033M VERRILL",
         img: "assets/images/lg-033m-verrill.png"
     },
     {
-        name: "Tetrapod Legs: LAMMERGEIER/42F",
+        name: "Legs: LAMMERGEIER/42F",
         img: "assets/images/lammergeier-42f.png"
     },
     {
-        name: "Tank Legs: EL-TL-11 FORTALEZA",
+        name: "Legs: EL-TL-11 FORTALEZA",
         img: "assets/images/el-tl-11-fortaleza.png"
     },
     {
@@ -961,24 +961,24 @@ const C_TIER_PARTS = [
         img: "assets/images/04-101-mind-alpha.png"
     },
     {
-        name: "Bipedal Legs: 2C-3000 WRECKER",
+        name: "Legs: 2C-3000 WRECKER",
         img: "assets/images/2c-3000-wrecker.png"
     },
     {
-        name: "Bipedal Legs: EL-TL-10 FIRMEZA",
+        name: "Legs: EL-TL-10 FIRMEZA",
         img: "assets/images/el-tl-10-firmeza.png"
     },
     {
-        name: "Bipedal Legs: 06-041 MIND ALPHA",
+        name: "Legs: 06-041 MIND ALPHA",
         img: "assets/images/06-041-mind-alpha.png"
     },
     {
-        name: "Reverse Joint Legs: KASUAR/42Z",
+        name: "Legs: KASUAR/42Z",
         img: "assets/images/kasuar-42z.png"
     },
-    { name: "Tetrapod Legs: VP-424", img: "assets/images/vp-424.png" },
+    { name: "Legs: VP-424", img: "assets/images/vp-424.png" },
     {
-        name: "Tank Legs: LG-022T BORNEMISSZA",
+        name: "Legs: LG-022T BORNEMISSZA",
         img: "assets/images/lg-022t-bornemissza.png"
     },
     {
@@ -1130,20 +1130,20 @@ const D_TIER_PARTS = [
         img: "assets/images/ac-2000-tool-arm.png"
     },
     {
-        name: "Bipedal Legs: LG-011 MELANDER",
+        name: "Legs: LG-011 MELANDER",
         img: "assets/images/lg-011-melander.png"
     },
     {
-        name: "Bipedal Legs: DF-LG-08 TIAN-QIANG",
+        name: "Legs: DF-LG-08 TIAN-QIANG",
         img: "assets/images/df-lg08-tian-qiang.png"
     },
-    { name: "Bipedal Legs: VP-422", img: "assets/images/vp-422.png" },
+    { name: "Legs: VP-422", img: "assets/images/vp-422.png" },
     {
-        name: "Bipedal Legs: NACHTREIHER/42E",
+        name: "Legs: NACHTREIHER/42E",
         img: "assets/images/nachtreiher-42e.png"
     },
     {
-        name: "Bipedal Legs: 2C-2000 CRAWLER",
+        name: "Legs: 2C-2000 CRAWLER",
         img: "assets/images/2c-2000-crawler.png"
     },
     {
