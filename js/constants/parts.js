@@ -29,7 +29,7 @@ const S_TIER_PARTS = [
     },
     {
         name: "L-Arm Unit: IB-C03W2: WLT 101 Coral Oscillator",
-        img: "assets/images/ib-c03w2-wlt-101.png"
+        img: "assets/images/IB-C03W2: WLT 101 Coral Oscillator.png"
     },
     {
         name: "L-Arm Unit: VP-66EG Stun Gun",
@@ -165,7 +165,7 @@ const A_TIER_PARTS = [
     },
     {
         name: "R-Arm Unit: VE-66LRB Laser Rifle",
-        img: "assets/images/ve-66lrb.png"
+        img: "assets/images/VE-66LRB Laser Rifle.png"
     },
     {
         name: "R-Arm Unit: HML-G3/P08SPL-06 Split Missile Launcher",
@@ -193,7 +193,7 @@ const A_TIER_PARTS = [
     },
     {
         name: "L-Arm Unit: VE-66LRB Laser Rifle",
-        img: "assets/images/.png"
+        img: "assets/images/VE-66LRB Laser Rifle.png"
     },
     {
         name: "L-Arm Unit: HML-G3/P08SPL-06 Split Missile Launcher",
@@ -1156,23 +1156,3 @@ const D_TIER_PARTS = [
         img: "assets/images/df-gn-02-ling-tai.png"
     }
 ];
-
-// const makeListObjects = () => {
-//     const lists = [
-//         A_TIER_PARTS,
-//         S_TIER_PARTS,
-//         B_TIER_PARTS,
-//         C_TIER_PARTS,
-//         D_TIER_PARTS
-//     ];
-//     for (let i = 0; i < lists.length; i++) {
-//         let newList = [];
-//         for (let n = 0; n < lists[i].length; n++) {
-//             const obj = { name: lists[i][n], img: "" };
-//             newList.push(obj);
-//         }
-//         console.log(newList);
-//     }
-// };
-
-// makeListObjects();
