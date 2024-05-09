@@ -1,6 +1,9 @@
 const stageMenuButton = document.getElementById("dropdownMenuButton");
 const rollButton = document.getElementById("rollButton");
 const partCategoryElements = document.getElementsByClassName("partCategory");
+const partCategoryAccordionButton = document.getElementsByClassName(
+    "partCategoryAccordionButton"
+);
 const newPartModalLabel = document.getElementById("newPartModalLabel");
 const newPartModalImg = document.getElementById("newPartModalImg");
 const tierBadge = document.getElementById("tierBadge");
@@ -12,6 +15,8 @@ let c_tier_parts = [...C_TIER_PARTS];
 let d_tier_parts = [...D_TIER_PARTS];
 
 let partCounter = 0;
+
+let accordionsCollapsed = true;
 
 // returns tier list chances for given stage
 const stageMinMax = (stage) => {
@@ -96,23 +101,24 @@ const populateNewPartModal = (part, tier) => {
 };
 
 const revertObtainedPart = (part, tier) => {
+    console.log("hi");
     // add part back into it's tier list when user clicks revert
     // will need to make sure the part is taken out of the part category
-    if (tier === "d") {
-        d_tier_parts.push(part);
-    } else if (tier === "c") {
-        c_tier_parts.push(part);
-    }
-    if (tier === "b") {
-        b_tier_parts.push(part);
-    }
-    if (tier === "a") {
-        a_tier_parts.push(part);
-    }
-    if (tier === "s") {
-        s_tier_parts.push(part);
-    }
-    areAllPartsAcquired();
+    // if (tier === "d") {
+    //     d_tier_parts.push(part);
+    // } else if (tier === "c") {
+    //     c_tier_parts.push(part);
+    // }
+    // if (tier === "b") {
+    //     b_tier_parts.push(part);
+    // }
+    // if (tier === "a") {
+    //     a_tier_parts.push(part);
+    // }
+    // if (tier === "s") {
+    //     s_tier_parts.push(part);
+    // }
+    // areAllPartsAcquired();
 };
 
 const rollForPart = () => {
@@ -191,4 +197,27 @@ const getStage = () => {
 // set stage to affect chances of obtaining parts of different tiers
 const setStage = (stage) => {
     stageMenuButton.innerHTML = `Stage ${stage}`;
+};
+
+const togglePartsAccordions = () => {
+    if (accordionsCollapsed) {
+        for (let i = 0; i < partCategoryAccordionButton.length; i++) {
+            if (
+                partCategoryAccordionButton[i].classList.contains("collapsed")
+            ) {
+                partCategoryAccordionButton[i].classList.remove("collapsed");
+                partCategoryElements[i].classList.add("show");
+            }
+        }
+        accordionsCollapsed = false;
+        return;
+    }
+    for (let i = 0; i < partCategoryAccordionButton.length; i++) {
+        if (!partCategoryAccordionButton[i].classList.contains("collapsed")) {
+            partCategoryAccordionButton[i].classList.add("collapsed");
+            partCategoryElements[i].classList.remove("show");
+        }
+    }
+    accordionsCollapsed = true;
+    return;
 };

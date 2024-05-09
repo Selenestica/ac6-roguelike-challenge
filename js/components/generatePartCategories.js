@@ -22,7 +22,7 @@ const generatePartCategories = () => {
           <div class="accordion-item bg-none">
             <h2 class="accordion-header">
                 <button
-                    class="accordion-button collapsed text-light"
+                    class="accordion-button collapsed text-light partCategoryAccordionButton"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#partCategory${[i]}"
@@ -38,7 +38,6 @@ const generatePartCategories = () => {
                     partCategoriesArray[i]
                 } partCategory"
                 aria-labelledby="headingThree"
-                data-bs-parent="#partCategoriesContainer"
             >
             </div>
           </div>
