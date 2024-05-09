@@ -96,16 +96,6 @@
                     ></div>
                 </div>
             </div>
-            <div class="row d-flex justify-content-center">
-                <button
-                    class="btn btn-secondary"
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#creditsModal"
-                >
-                    Credit
-                </button>
-            </div>
         </div>
 
         <!-- NEW PART MODAL -->
@@ -165,12 +155,6 @@
                         <h5 class="modal-title text-light" id="resetModalLabel">
                             Reset Run?
                         </h5>
-                        <button
-                            type="button"
-                            class="btn-close text-light"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
                     </div>
                     <div class="modal-footer">
                         <button
@@ -201,18 +185,12 @@
             aria-labelledby="rulesModalLabel"
             aria-hidden="true"
         >
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content bg-grey">
                     <div class="modal-header">
                         <h5 class="modal-title text-light" id="rulesModalLabel">
                             Rules and Info
                         </h5>
-                        <button
-                            type="button"
-                            class="btn-close text-light"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
                     </div>
                     <div class="modal-body">
                         <div
@@ -234,11 +212,11 @@
                                 </h2>
                                 <div
                                     id="rulesAccordion"
-                                    class="accordion-collapse collapse"
+                                    class="accordion-collapse collapse p-3"
                                     aria-labelledby="Rules"
                                     data-bs-parent="#rulesAndInfoAccordion"
                                 >
-                                    <ul>
+                                    <ul class="modalAccordionList">
                                         <li class="text-white">
                                             Start a new playthrough with the
                                             JAILBREAK frame, the starter
@@ -308,11 +286,11 @@
                                 </h2>
                                 <div
                                     id="stagesAccordion"
-                                    class="accordion-collapse collapse"
+                                    class="accordion-collapse collapse p-3"
                                     aria-labelledby="Rules"
                                     data-bs-parent="#rulesAndInfoAccordion"
                                 >
-                                    <ul>
+                                    <ul class="modalAccordionList">
                                         <li class="text-white">
                                             <b>Stage 1: </b>Start your run here,
                                             and come back here after beating a
@@ -337,61 +315,50 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="accordion-item bg-none">
+                                <h2 class="accordion-header">
+                                    <button
+                                        class="accordion-button collapsed text-light"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#creditAccordion"
+                                        aria-expanded="false"
+                                        aria-controls="creditAccordion"
+                                    >
+                                        Credit
+                                    </button>
+                                </h2>
+                                <div
+                                    id="creditAccordion"
+                                    class="accordion-collapse collapse p-3"
+                                    aria-labelledby="Rules"
+                                    data-bs-parent="#rulesAndInfoAccordion"
+                                >
+                                    <ul class="modalAccordionList">
+                                        <li class="text-white">
+                                            u/PixelKatana for giving me
+                                            permission to use
+                                            <a
+                                                target="_blank"
+                                                href="https://docs.google.com/spreadsheets/d/1h2H2mr_NGOSqG_F9D8O78ChCtyE0NEmXi1RzF5E7Mnw/edit#gid=1523984323"
+                                                >their immaculately prepared
+                                                spreadsheets and rarity
+                                                tables</a
+                                            >, in which this app is based from
+                                        </li>
+                                        <li class="text-white">
+                                            u/Fynzmirs and u/Vamprah for their
+                                            contributions to the aforementioned
+                                            spreadsheet
+                                        </li>
+                                        <li class="text-white">
+                                            u/_b1ack0ut for the initial idea of
+                                            a roguelike-styled run
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                        >
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CREDITS MODAL -->
-        <div
-            class="modal fade"
-            id="creditsModal"
-            tabindex="-1"
-            aria-labelledby="creditsModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog">
-                <div class="modal-content bg-grey">
-                    <div class="modal-header">
-                        <h5
-                            class="modal-title text-light"
-                            id="creditsModalLabel"
-                        >
-                            Special Thanks to...
-                        </h5>
-                        <button
-                            type="button"
-                            class="btn-close text-light"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-                    </div>
-                    <div class="modal-body">
-                        <ul>
-                            <li class="text-white">
-                                u/PixelKatana for giving me permission to use
-                                their immaculately prepared spreadsheet, for
-                                reference and inspiration
-                            </li>
-                            <li class="text-white">
-                                u/Fynzmirs and u/Vamprah for their contributions
-                                to the aforementioned spreadsheet
-                            </li>
-                            <li class="text-white">
-                                u/_b1ack0ut for the initial idea of a
-                                roguelike-styled run
-                            </li>
-                        </ul>
                     </div>
                     <div class="modal-footer">
                         <button

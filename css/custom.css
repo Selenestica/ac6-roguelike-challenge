@@ -23,7 +23,7 @@ body {
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: grey;
+    background-color: rgb(71, 71, 71);
 }
 
 .bg-grey {
@@ -64,4 +64,13 @@ body {
 
 .bg-s-tier {
     background-color: #ff7f7f;
+}
+
+.modalAccordionList {
+    padding-left: 1rem;
+    margin-bottom: 0rem;
+}
+
+.accordionPartImgContainer {
+    height: 5rem;
 }

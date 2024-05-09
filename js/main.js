@@ -70,7 +70,17 @@ const displayPartInCategory = (part) => {
             partAccordion = document.getElementsByClassName(
                 partCategoriesArray[i]
             )[0];
-            partAccordion.innerHTML += `<div class="accordion-body text-light bg-grey">${part.name}</div>`;
+            partAccordion.innerHTML += `
+                <div class="accordion-body text-light">
+                    <div class="d-flex row justify-content-center">
+                        <div class="d-flex col-5 accordionPartImgContainer justify-content-end">
+                            <img class="img-fluid" src="${part.img}" />
+                        </div>
+                        <div class="d-flex col-6 text-light justify-content-start align-items-center">
+                            ${part.name}
+                        </div>
+                    </div>
+                </div>`;
             break;
         }
     }
