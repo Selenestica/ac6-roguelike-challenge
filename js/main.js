@@ -18,6 +18,8 @@ let partCounter = 0;
 
 let accordionsCollapsed = true;
 
+let currentPart = null;
+
 // returns tier list chances for given stage
 const stageMinMax = (stage) => {
     if (stage === "1") {
@@ -102,23 +104,6 @@ const populateNewPartModal = (part, tier) => {
 
 const revertObtainedPart = (part, tier) => {
     console.log("hi");
-    // add part back into it's tier list when user clicks revert
-    // will need to make sure the part is taken out of the part category
-    // if (tier === "d") {
-    //     d_tier_parts.push(part);
-    // } else if (tier === "c") {
-    //     c_tier_parts.push(part);
-    // }
-    // if (tier === "b") {
-    //     b_tier_parts.push(part);
-    // }
-    // if (tier === "a") {
-    //     a_tier_parts.push(part);
-    // }
-    // if (tier === "s") {
-    //     s_tier_parts.push(part);
-    // }
-    // areAllPartsAcquired();
 };
 
 const rollForPart = () => {
@@ -167,11 +152,23 @@ const rollForPart = () => {
 
     const partInfo = getPartFromList(partsListObj.list);
     const { part, index } = partInfo;
-    removePartFromList(partsListObj.list, index);
+    currentPart = {
+        list: partsListObj.list,
+        part,
+        index
+    };
     populateNewPartModal(part, partsListObj.tier);
+};
+
+const acceptPart = () => {
+    const { list, part, index } = currentPart;
+    removePartFromList(list, index);
     displayPartInCategory(part);
     areAllPartsAcquired();
+    currentPart = null;
 };
+// dont add part until modal is closed
+// unless revert button is pressed, in which case close the modal and dont add the part
 
 // resets the parts list in the UI and the re-populates the parts lists
 const reset = () => {
@@ -187,6 +184,9 @@ const reset = () => {
     for (let i = 0; i < partCategoryElements.length; i++) {
         partCategoryElements[i].innerHTML = "";
     }
+
+    // reset stage to 1
+    setStage("1");
 };
 
 // returns the selected stage

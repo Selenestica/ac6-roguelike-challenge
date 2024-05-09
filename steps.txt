@@ -4,7 +4,6 @@ maybe turn app into complete step-by-step application?
 work on styling page
   - add number of parts beside part category titles so user can see if there are parts there at a glance
   - add border to separate header, body, and footer of page
-  - revert button
 
 add save feature
   - have user download a txt file, which can be uploaded anywhere by anyone
