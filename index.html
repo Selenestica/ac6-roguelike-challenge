@@ -25,6 +25,11 @@
     </head>
     <body>
         <div class="container mb-5">
+            <div class="row d-flex justify-content-center">
+                <div
+                    class="col-sm-12 col-lg-8 d-flex justify-content-center"
+                ></div>
+            </div>
             <!-- HEADER -->
             <div class="row d-flex justify-content-center mt-4">
                 <div class="d-flex col justify-content-center">
@@ -48,57 +53,60 @@
             </div>
 
             <!-- MAIN BODY -->
-            <div class="row d-flex justify-content-between">
-                <div class="col-3 d-flex justify-content-start my-3">
-                    <div class="dropdown mx-2">
-                        <button
-                            class="btn btn-primary dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            Stage 1
-                        </button>
-                        <div
-                            class="dropdown-menu bg-grey"
-                            aria-labelledby="dropdownMenuButton"
-                            id="stageOptionsContainer"
-                        ></div>
+            <div class="row d-flex justify-content-center pt-3">
+                <div class="col-sm-12 col-md-10 col-lg-8">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-3 d-flex justify-content-start my-1">
+                            <div class="dropdown mx-2">
+                                <button
+                                    class="btn btn-primary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Stage 1
+                                </button>
+                                <div
+                                    class="dropdown-menu bg-grey"
+                                    aria-labelledby="dropdownMenuButton"
+                                    id="stageOptionsContainer"
+                                ></div>
+                            </div>
+                            <div>
+                                <button
+                                    id="rollButton"
+                                    type="button"
+                                    class="btn btn-success"
+                                    onclick="rollForPart()"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#newPartModal"
+                                >
+                                    ROLL
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end my-1">
+                            <div>
+                                <button
+                                    class="btn btn-warning"
+                                    type="button"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#resetModal"
+                                >
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <button
-                            id="rollButton"
-                            type="button"
-                            class="btn btn-success"
-                            onclick="rollForPart()"
-                            data-bs-toggle="modal"
-                            data-bs-target="#newPartModal"
-                        >
-                            ROLL
-                        </button>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-end my-3">
-                    <div>
-                        <button
-                            class="btn btn-warning"
-                            type="button"
-                            data-bs-toggle="modal"
-                            data-bs-target="#resetModal"
-                        >
-                            Reset
-                        </button>
-                    </div>
+                    <hr />
                 </div>
             </div>
 
-            <hr />
-
             <div class="mb-5 row d-flex justify-content-center">
-                <div class="col">
+                <div class="col-sm-12 col-md-10 col-lg-8">
                     <div class="row d-flex justify-content-center py-2">
-                        <div class="col-11 d-flex justify-content-end">
+                        <div class="col d-flex justify-content-end">
                             <button
                                 class="btn btn-secondary"
                                 onclick="togglePartsAccordions()"
@@ -108,7 +116,7 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-11 d-flex justify-content-center">
+                        <div class="col d-flex justify-content-center">
                             <div
                                 class="accordion accordion-flush"
                                 id="partCategoriesContainer"
