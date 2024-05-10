@@ -74,3 +74,7 @@ body {
 .accordionPartImgContainer {
     height: 4rem;
 }
+
+.dropdown-item:hover {
+    background-color: rgb(71, 71, 71);
+}
