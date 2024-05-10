@@ -7,6 +7,7 @@ const partCategoryAccordionButton = document.getElementsByClassName(
 const newPartModalLabel = document.getElementById("newPartModalLabel");
 const newPartModalImg = document.getElementById("newPartModalImg");
 const tierBadge = document.getElementById("tierBadge");
+const optionalCheckboxes = document.getElementsByClassName("optionalCheckbox");
 
 let s_tier_parts = [...S_TIER_PARTS];
 let a_tier_parts = [...A_TIER_PARTS];
@@ -185,6 +186,11 @@ const reset = () => {
 
     // reset stage to 1
     setStage("1");
+
+    // reset optional objective checklists
+    for (let n = 0; n < optionalCheckboxes.length; n++) {
+        optionalCheckboxes[n].checked = false;
+    }
 };
 
 // returns the selected stage

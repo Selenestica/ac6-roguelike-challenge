@@ -367,11 +367,116 @@
                                         class="accordion-button collapsed text-light"
                                         type="button"
                                         data-bs-toggle="collapse"
+                                        data-bs-target="#faqAccordion"
+                                        aria-expanded="false"
+                                        aria-controls="faqAccordion"
+                                    >
+                                        FAQs
+                                    </button>
+                                </h2>
+                                <div
+                                    id="faqAccordion"
+                                    class="accordion-collapse collapse p-3"
+                                    aria-labelledby="Rules"
+                                    data-bs-parent="#rulesAndInfoAccordion"
+                                >
+                                    <ul class="modalAccordionList">
+                                        <li class="text-white">
+                                            <b
+                                                >Q: What the hell is a Denoiser
+                                                or a Weevil?</b
+                                            >
+                                            <p>
+                                                A: Denoisers are the PCA mechs
+                                                found in Watchpoint Alpha and
+                                                Institute City. Weevils are the
+                                                bipedal C-Weapon MTs that always
+                                                appear alongside Helianthus
+                                                machines. (And in case you
+                                                missed that in-game, Helianthi
+                                                are the grinder wheels).
+                                            </p>
+                                        </li>
+                                        <li class="text-white">
+                                            <b
+                                                >Q: I'm in the middle of a
+                                                playthrough and don't want to
+                                                and/or can't be bothered to beat
+                                                an ending to start over. Can I
+                                                do this challenge through
+                                                mission replays?</b
+                                            >
+                                            <p>
+                                                A: Of course, just make sure to
+                                                keep track of the correct order
+                                                and availability of missions.
+                                            </p>
+                                        </li>
+                                        <li class="text-white">
+                                            <b
+                                                >Q: If I'm using mission replay,
+                                                can I still do "Escape" for an
+                                                extra Stage 5 part roll?</b
+                                            >
+                                            <p>
+                                                A: Knock yourself out,
+                                                masochist.
+                                            </p>
+                                        </li>
+                                        <li class="text-white">
+                                            <b
+                                                >Q: Why all the arbitrary bonus
+                                                pay requirements for
+                                                challenges?</b
+                                            >
+                                            <p>
+                                                A: It's the easiest way for you
+                                                to check how many enemies you've
+                                                killed during the mission - all
+                                                costs are calculated at 90% of
+                                                the maximum bonus payout, give
+                                                or take a few enemies that may
+                                                have been missed while testing.
+                                            </p>
+                                        </li>
+                                        <li class="text-white">
+                                            <b
+                                                >Q: Do I have to do all 3
+                                                endings one after another or can
+                                                I do one again if I want to
+                                                grind some better parts?</b
+                                            >
+                                            <p>
+                                                A: The run was made with the
+                                                idea that you should indeed do
+                                                the endings in succession and
+                                                not redo any missions.
+                                            </p>
+                                        </li>
+                                        <li class="text-white">
+                                            <b>
+                                                Q: Is restarting a mission fair
+                                                game?
+                                            </b>
+                                            <p>
+                                                A: Nope. Live with your mistakes
+                                                and/or die by your mistakes.
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="accordion-item bg-none">
+                                <h2 class="accordion-header">
+                                    <button
+                                        class="accordion-button collapsed text-light"
+                                        type="button"
+                                        data-bs-toggle="collapse"
                                         data-bs-target="#creditAccordion"
                                         aria-expanded="false"
                                         aria-controls="creditAccordion"
                                     >
-                                        Credit
+                                        Credits
                                     </button>
                                 </h2>
                                 <div
@@ -382,15 +487,20 @@
                                 >
                                     <ul class="modalAccordionList">
                                         <li class="text-white">
-                                            u/PixelKatana for giving me
-                                            permission to use
+                                            This app is basically
+                                            u/PixelKatana's immaculately
+                                            prepared spreadsheets condensed into
+                                            one webpage for convenience. Huge
+                                            thanks to them for essentially
+                                            letting me copy all of their work.
+                                            You can find their original
+                                            spreadsheets
                                             <a
                                                 target="_blank"
                                                 href="https://docs.google.com/spreadsheets/d/1h2H2mr_NGOSqG_F9D8O78ChCtyE0NEmXi1RzF5E7Mnw/edit#gid=1523984323"
-                                                >their immaculately prepared
-                                                spreadsheets and rarity
-                                                tables</a
-                                            >, in which this app is based off of
+                                            >
+                                                here</a
+                                            >
                                         </li>
                                         <li class="text-white">
                                             u/Fynzmirs and u/Vamprah for their
@@ -474,7 +584,7 @@
                                 >
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s1m1"
@@ -497,7 +607,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s1m2"
@@ -518,7 +628,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s1m3"
@@ -541,7 +651,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s1m4"
@@ -563,7 +673,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s1m5"
@@ -585,7 +695,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s1m6"
@@ -630,7 +740,7 @@
                                 >
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s2m1"
@@ -652,7 +762,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s2m2"
@@ -675,7 +785,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s2m3"
@@ -697,7 +807,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s2m4"
@@ -720,7 +830,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s2m5"
@@ -742,7 +852,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s2m6"
@@ -787,7 +897,7 @@
                                 >
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s3m1"
@@ -810,7 +920,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s3m2"
@@ -832,7 +942,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s3m3"
@@ -854,7 +964,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s3m4"
@@ -877,7 +987,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s3m5"
@@ -899,7 +1009,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s3m6"
@@ -944,7 +1054,7 @@
                                 >
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s4m1"
@@ -966,7 +1076,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s4m2"
@@ -988,7 +1098,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s4m3"
@@ -1011,7 +1121,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s4m4"
@@ -1034,7 +1144,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s4m5"
@@ -1057,7 +1167,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s4m6"
@@ -1103,7 +1213,7 @@
                                 >
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s5m1"
@@ -1126,7 +1236,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s5m2"
@@ -1150,7 +1260,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s5m3"
@@ -1173,7 +1283,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s5m4"
@@ -1194,7 +1304,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s5m5"
@@ -1215,7 +1325,7 @@
                                     </div>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
+                                            class="form-check-input optionalCheckbox"
                                             type="checkbox"
                                             value=""
                                             id="s5m6"
