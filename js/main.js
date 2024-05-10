@@ -167,8 +167,6 @@ const acceptPart = () => {
     areAllPartsAcquired();
     currentPart = null;
 };
-// dont add part until modal is closed
-// unless revert button is pressed, in which case close the modal and dont add the part
 
 // resets the parts list in the UI and the re-populates the parts lists
 const reset = () => {
