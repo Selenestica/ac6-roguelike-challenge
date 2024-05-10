@@ -1,6 +1,5 @@
 FEATURES:
   - add number of parts beside part category titles so user can see if there are parts there at a glance
   - have user download a txt file, which can be uploaded anywhere by anyone
-  - add FAQ in info modal
 
 BUGS:
