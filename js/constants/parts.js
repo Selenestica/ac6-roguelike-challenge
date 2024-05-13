@@ -1007,6 +1007,18 @@ const C_TIER_PARTS = [
 
 const D_TIER_PARTS = [
     {
+        name: "Booster: BST-G1/P10 ",
+        img: "assets/images/bst-g1-p10.png"
+    },
+    {
+        name: "Generator: AG-J-098 JOSO",
+        img: "assets/images/ag-j-098-joso.png"
+    },
+    {
+        name: "FCS: FCS-G1/P01",
+        img: "assets/images/fcs-g1-p01.png"
+    },
+    {
         name: "R-Arm Unit: MA-J-200 RANSETSU-RF Burst Rifle",
         img: "assets/images/ma-j-200-ransetsu-rf.png"
     },
