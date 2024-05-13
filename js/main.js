@@ -166,12 +166,13 @@ const acceptPart = () => {
     removePartFromList(list, index);
     displayPartInCategory(part);
     areAllPartsAcquired();
+    saveProgress(part, null, null);
     currentPart = null;
 };
 
 // resets the parts list in the UI and the re-populates the parts lists
 const reset = () => {
-    // resets obtained parts list
+    // resets parts lists
     s_tier_parts = [...S_TIER_PARTS];
     a_tier_parts = [...A_TIER_PARTS];
     b_tier_parts = [...B_TIER_PARTS];
@@ -201,6 +202,7 @@ const getStage = () => {
 // set stage to affect chances of obtaining parts of different tiers
 const setStage = (stage) => {
     stageMenuButton.innerHTML = `Stage ${stage}`;
+    saveProgress(null, stage, null);
 };
 
 const togglePartsAccordions = () => {
@@ -224,4 +226,23 @@ const togglePartsAccordions = () => {
     }
     accordionsCollapsed = true;
     return;
+};
+
+const saveProgress = (part, stage, challenge) => {
+    // save everything in localStorage here. will need to save
+    // - parts obtained
+    // - challenges completed
+    // - current stage
+    if (part) {
+        // save part
+        return;
+    }
+    if (stage) {
+        // save stage
+        return;
+    }
+    if (challenge) {
+        // save challenge
+        return;
+    }
 };
