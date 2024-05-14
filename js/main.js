@@ -11,7 +11,6 @@ const optionalCheckboxes = document.getElementsByClassName("optionalCheckbox");
 
 for (let z = 0; z < optionalCheckboxes.length; z++) {
     optionalCheckboxes[z].addEventListener("change", (e) => {
-        console.log(e);
         const challengeProgressObj = {
             elementId: e.srcElement.id,
             checked: e.target.checked
@@ -114,10 +113,6 @@ const populateNewPartModal = (part, tier) => {
     tierBadge.classList.add(`bg-${tier}-tier`);
 };
 
-const revertObtainedPart = (part, tier) => {
-    console.log("hi");
-};
-
 const rollForPart = () => {
     // if there's no parts left, button is disabled, and clicking will do nothing
     if (rollButton.classList.contains("disabled")) {
@@ -172,17 +167,22 @@ const rollForPart = () => {
     populateNewPartModal(part, partsListObj.tier);
 };
 
-const acceptPart = () => {
-    const { list, part, index } = currentPart;
+const acceptPart = (savedPart = null) => {
+    const valToUse = savedPart ? savedPart : currentPart;
+    const { list, part, index } = valToUse;
+    const partToSave = { ...valToUse };
     removePartFromList(list, index);
     displayPartInCategory(part);
     areAllPartsAcquired();
-    saveProgress(part, null, null);
+    !savedPart && saveProgress(partToSave, null, null);
     currentPart = null;
 };
 
 // resets the parts list in the UI and the re-populates the parts lists
 const reset = () => {
+    // remove save from localStorage
+    localStorage.removeItem("saveFile");
+
     // resets parts lists
     s_tier_parts = [...S_TIER_PARTS];
     a_tier_parts = [...A_TIER_PARTS];
@@ -240,18 +240,13 @@ const togglePartsAccordions = () => {
 };
 
 const saveProgress = (part, stage, challenge) => {
-    // save everything in localStorage here. will need to save
-    // - parts obtained
-    // - challenges completed
-    // - current stage
-    // - when toggling challenge, make sure ls is updated
     const storedSave = localStorage.getItem("saveFile");
     let newSave;
     if (!storedSave) {
         const initialSave = {
             parts: part ? [part] : [],
             stage: stage ?? "1",
-            challengesCompleted: challenge.checked ? [challenge.elementId] : []
+            challengesCompleted: challenge ? [challenge.elementId] : []
         };
         localStorage.setItem("saveFile", JSON.stringify(initialSave));
         return;
@@ -268,14 +263,38 @@ const saveProgress = (part, stage, challenge) => {
     if (challenge) {
         const { elementId, checked } = challenge;
         const oldChallengeList = [...saveFile.challengesCompleted];
-        if (oldChallengeList.includes(elementId) && !checked) {
+        if (!checked) {
             const challengeIndex = oldChallengeList.indexOf(elementId);
             oldChallengeList.splice(challengeIndex, 1);
-        }
-        if (!oldChallengeList.includes(elementId) && checked) {
+        } else {
             oldChallengeList.push(elementId);
         }
         newSave = { ...saveFile, challengesCompleted: oldChallengeList };
     }
     localStorage.setItem("saveFile", JSON.stringify(newSave));
 };
+
+const loadSavedProgress = () => {
+    const storedSave = localStorage.getItem("saveFile");
+    if (storedSave) {
+        const saveFile = JSON.parse(storedSave);
+
+        // set saved stage
+        setStage(saveFile.stage);
+
+        // populate completed challenges
+        for (let i = 0; i < saveFile.challengesCompleted.length; i++) {
+            const completedChallengeElement = document.getElementById(
+                saveFile.challengesCompleted[i]
+            );
+            completedChallengeElement.checked = true;
+        }
+
+        // loops through acceptParts. which populates and removes
+        for (let n = 0; n < saveFile.parts.length; n++) {
+            acceptPart(saveFile.parts[n]);
+        }
+    }
+};
+
+loadSavedProgress();
