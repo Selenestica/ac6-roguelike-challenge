@@ -251,7 +251,7 @@ const saveProgress = (part, stage, challenge) => {
         const initialSave = {
             parts: part ? [part] : [],
             stage: stage ?? "1",
-            challenges: challenge ? [challenge] : []
+            challengesCompleted: challenge.checked ? [challenge.elementId] : []
         };
         localStorage.setItem("saveFile", JSON.stringify(initialSave));
         return;
@@ -266,8 +266,16 @@ const saveProgress = (part, stage, challenge) => {
         newSave = { ...saveFile, stage };
     }
     if (challenge) {
-        console.log(challenge);
         const { elementId, checked } = challenge;
+        const oldChallengeList = [...saveFile.challengesCompleted];
+        if (oldChallengeList.includes(elementId) && !checked) {
+            const challengeIndex = oldChallengeList.indexOf(elementId);
+            oldChallengeList.splice(challengeIndex, 1);
+        }
+        if (!oldChallengeList.includes(elementId) && checked) {
+            oldChallengeList.push(elementId);
+        }
+        newSave = { ...saveFile, challengesCompleted: oldChallengeList };
     }
     localStorage.setItem("saveFile", JSON.stringify(newSave));
 };
