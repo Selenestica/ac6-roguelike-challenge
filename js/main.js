@@ -9,6 +9,17 @@ const newPartModalImg = document.getElementById("newPartModalImg");
 const tierBadge = document.getElementById("tierBadge");
 const optionalCheckboxes = document.getElementsByClassName("optionalCheckbox");
 
+for (let z = 0; z < optionalCheckboxes.length; z++) {
+    optionalCheckboxes[z].addEventListener("change", (e) => {
+        console.log(e);
+        const challengeProgressObj = {
+            elementId: e.srcElement.id,
+            checked: e.target.checked
+        };
+        saveProgress(null, null, challengeProgressObj);
+    });
+}
+
 let s_tier_parts = [...S_TIER_PARTS];
 let a_tier_parts = [...A_TIER_PARTS];
 let b_tier_parts = [...B_TIER_PARTS];
@@ -233,16 +244,30 @@ const saveProgress = (part, stage, challenge) => {
     // - parts obtained
     // - challenges completed
     // - current stage
-    if (part) {
-        // save part
+    // - when toggling challenge, make sure ls is updated
+    const storedSave = localStorage.getItem("saveFile");
+    let newSave;
+    if (!storedSave) {
+        const initialSave = {
+            parts: part ? [part] : [],
+            stage: stage ?? "1",
+            challenges: challenge ? [challenge] : []
+        };
+        localStorage.setItem("saveFile", JSON.stringify(initialSave));
         return;
+    }
+    const saveFile = JSON.parse(storedSave);
+    if (part) {
+        const oldPartsList = [...saveFile.parts];
+        oldPartsList.push(part);
+        newSave = { ...saveFile, parts: oldPartsList };
     }
     if (stage) {
-        // save stage
-        return;
+        newSave = { ...saveFile, stage };
     }
     if (challenge) {
-        // save challenge
-        return;
+        console.log(challenge);
+        const { elementId, checked } = challenge;
     }
+    localStorage.setItem("saveFile", JSON.stringify(newSave));
 };
