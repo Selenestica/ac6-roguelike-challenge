@@ -1,6 +1,8 @@
 FEATURES:
   - add number of parts beside part category titles so user can see if there are parts there at a glance
   - have user download a txt file, which can be uploaded anywhere by anyone
-
+    - maybe make this a json file, and the user will just be downloading the saveObject in localStorage
 
 BUGS:
+- when loading up a save, duplicate parts can be obtained
+  - can save parts lists in localStorage

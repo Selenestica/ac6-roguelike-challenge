@@ -246,16 +246,38 @@ const saveProgress = (part, stage, challenge) => {
         const initialSave = {
             parts: part ? [part] : [],
             stage: stage ?? "1",
-            challengesCompleted: challenge ? [challenge.elementId] : []
+            challengesCompleted: challenge ? [challenge.elementId] : [],
+            partsLists: [
+                { s: s_tier_parts },
+                { a: a_tier_parts },
+                { b: b_tier_parts },
+                { c: c_tier_parts },
+                { d: d_tier_parts }
+            ]
         };
         localStorage.setItem("saveFile", JSON.stringify(initialSave));
         return;
     }
     const saveFile = JSON.parse(storedSave);
     if (part) {
-        const oldPartsList = [...saveFile.parts];
-        oldPartsList.push(part);
-        newSave = { ...saveFile, parts: oldPartsList };
+        // save part
+        const oldObtainedPartsList = [...saveFile.parts];
+        oldObtainedPartsList.push(part);
+
+        // save parts lists
+        const updatedPartsLists = [
+            { s: s_tier_parts },
+            { a: a_tier_parts },
+            { b: b_tier_parts },
+            { c: c_tier_parts },
+            { d: d_tier_parts }
+        ];
+
+        newSave = {
+            ...saveFile,
+            parts: oldObtainedPartsList,
+            partsLists: updatedPartsLists
+        };
     }
     if (stage) {
         newSave = { ...saveFile, stage };
@@ -294,6 +316,13 @@ const loadSavedProgress = () => {
         for (let n = 0; n < saveFile.parts.length; n++) {
             acceptPart(saveFile.parts[n]);
         }
+
+        // sets parts lists
+        s_tier_parts = saveFile.partsLists.s;
+        a_tier_parts = saveFile.partsLists.a;
+        b_tier_parts = saveFile.partsLists.b;
+        c_tier_parts = saveFile.partsLists.c;
+        d_tier_parts = saveFile.partsLists.d;
     }
 };
 
