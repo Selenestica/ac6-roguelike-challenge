@@ -330,3 +330,9 @@ const loadSavedProgress = () => {
 };
 
 loadSavedProgress();
+
+const uploadSaveFile = () => {
+    // upload save file
+    // call reset function
+    // call loadSavedProgress function
+};
