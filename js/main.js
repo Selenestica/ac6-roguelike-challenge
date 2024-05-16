@@ -64,7 +64,7 @@ const removePartFromList = (list, index) => {
     list.splice(index, 1);
 };
 
-// check to see if player has obtained all parts. boolean
+// check to see if player has obtained all parts
 const areAllPartsAcquired = () => {
     if (
         s_tier_parts.length === 0 &&
@@ -167,13 +167,15 @@ const rollForPart = () => {
     populateNewPartModal(part, partsListObj.tier);
 };
 
+// this function handles accepting new parts as well as
+// as well as populating the obtained parts list from a save
 const acceptPart = (savedPart = null) => {
     const valToUse = savedPart ? savedPart : currentPart;
     const { list, part, index } = valToUse;
     const partToSave = { ...valToUse };
     removePartFromList(list, index);
     displayPartInCategory(part);
-    areAllPartsAcquired();
+    !savedPart && areAllPartsAcquired();
     !savedPart && saveProgress(partToSave, null, null);
     currentPart = null;
 };
@@ -247,13 +249,13 @@ const saveProgress = (part, stage, challenge) => {
             parts: part ? [part] : [],
             stage: stage ?? "1",
             challengesCompleted: challenge ? [challenge.elementId] : [],
-            partsLists: [
-                { s: s_tier_parts },
-                { a: a_tier_parts },
-                { b: b_tier_parts },
-                { c: c_tier_parts },
-                { d: d_tier_parts }
-            ]
+            partsLists: {
+                s: s_tier_parts,
+                a: a_tier_parts,
+                b: b_tier_parts,
+                c: c_tier_parts,
+                d: d_tier_parts
+            }
         };
         localStorage.setItem("saveFile", JSON.stringify(initialSave));
         return;
@@ -265,13 +267,13 @@ const saveProgress = (part, stage, challenge) => {
         oldObtainedPartsList.push(part);
 
         // save parts lists
-        const updatedPartsLists = [
-            { s: s_tier_parts },
-            { a: a_tier_parts },
-            { b: b_tier_parts },
-            { c: c_tier_parts },
-            { d: d_tier_parts }
-        ];
+        const updatedPartsLists = {
+            s: s_tier_parts,
+            a: a_tier_parts,
+            b: b_tier_parts,
+            c: c_tier_parts,
+            d: d_tier_parts
+        };
 
         newSave = {
             ...saveFile,
@@ -323,6 +325,7 @@ const loadSavedProgress = () => {
         b_tier_parts = saveFile.partsLists.b;
         c_tier_parts = saveFile.partsLists.c;
         d_tier_parts = saveFile.partsLists.d;
+        areAllPartsAcquired();
     }
 };
 
