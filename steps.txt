@@ -4,5 +4,3 @@ FEATURES:
     - maybe make this a json file, and the user will just be downloading the saveObject in localStorage
 
 BUGS:
-- when loading up a save, duplicate parts can be obtained
-  - can save parts lists in localStorage
