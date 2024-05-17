@@ -1,6 +1,5 @@
 FEATURES:
   - add number of parts beside part category titles so user can see if there are parts there at a glance
-  - have user download a txt file, which can be uploaded anywhere by anyone
-    - maybe make this a json file, and the user will just be downloading the saveObject in localStorage
+  - validate JSON file the best you can before allowing upload 
 
 BUGS:

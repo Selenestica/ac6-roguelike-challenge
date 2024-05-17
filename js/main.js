@@ -8,6 +8,10 @@ const newPartModalLabel = document.getElementById("newPartModalLabel");
 const newPartModalImg = document.getElementById("newPartModalImg");
 const tierBadge = document.getElementById("tierBadge");
 const optionalCheckboxes = document.getElementsByClassName("optionalCheckbox");
+const uploadSaveFileInputElement = document.getElementById(
+    "uploadSaveFileInput"
+);
+const uploadSaveFileButton = document.getElementById("uploadSaveFileButton");
 
 for (let z = 0; z < optionalCheckboxes.length; z++) {
     optionalCheckboxes[z].addEventListener("change", (e) => {
@@ -18,6 +22,25 @@ for (let z = 0; z < optionalCheckboxes.length; z++) {
         saveProgress(null, null, challengeProgressObj);
     });
 }
+
+let uploadedSaveFile = null;
+
+uploadSaveFileInputElement.addEventListener("change", (e) => {
+    const uploadedFile = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        const fileJSON = JSON.parse(event.target.result);
+        console.log(fileJSON);
+        // validate json and structure here
+        // if ok, enable upload button
+        uploadSaveFileButton.disabled = false;
+        uploadedSaveFile = event.target.result;
+    };
+    reader.onerror = (error) => {
+        console.log(error);
+    };
+    reader.readAsText(uploadedFile);
+});
 
 let s_tier_parts = [...S_TIER_PARTS];
 let a_tier_parts = [...A_TIER_PARTS];
@@ -173,10 +196,12 @@ const acceptPart = (savedPart = null) => {
     const valToUse = savedPart ? savedPart : currentPart;
     const { list, part, index } = valToUse;
     const partToSave = { ...valToUse };
-    removePartFromList(list, index);
     displayPartInCategory(part);
-    !savedPart && areAllPartsAcquired();
-    !savedPart && saveProgress(partToSave, null, null);
+    if (!savedPart) {
+        removePartFromList(list, index);
+        areAllPartsAcquired();
+        saveProgress(partToSave, null, null);
+    }
     currentPart = null;
 };
 
@@ -242,11 +267,20 @@ const togglePartsAccordions = () => {
 };
 
 const saveProgress = (part, stage, challenge) => {
+    let copiedPart = null;
+
+    // remove unneeded attributes from part obj
+    if (part) {
+        copiedPart = { ...part };
+        delete copiedPart.list;
+        delete copiedPart.index;
+    }
+
     const storedSave = localStorage.getItem("saveFile");
     let newSave;
     if (!storedSave) {
         const initialSave = {
-            parts: part ? [part] : [],
+            parts: part ? [copiedPart] : [],
             stage: stage ?? "1",
             challengesCompleted: challenge ? [challenge.elementId] : [],
             partsLists: {
@@ -264,7 +298,7 @@ const saveProgress = (part, stage, challenge) => {
     if (part) {
         // save part
         const oldObtainedPartsList = [...saveFile.parts];
-        oldObtainedPartsList.push(part);
+        oldObtainedPartsList.push(copiedPart);
 
         // save parts lists
         const updatedPartsLists = {
@@ -332,7 +366,7 @@ const loadSavedProgress = () => {
 loadSavedProgress();
 
 const uploadSaveFile = () => {
-    // upload save file
-    // call reset function
-    // call loadSavedProgress function
+    reset();
+    localStorage.setItem("saveFile", uploadedSaveFile);
+    loadSavedProgress();
 };
