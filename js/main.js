@@ -105,6 +105,7 @@ const areAllPartsAcquired = () => {
 
 const displayPartInCategory = (part) => {
     let partAccordion;
+    let partAccordionButton;
     const partTypeSubstring = part.name.substr(0, 9);
     for (let i = 0; i < partCategoriesArray.length; i++) {
         if (partTypeSubstring.includes(partCategoriesArray[i])) {
@@ -122,6 +123,14 @@ const displayPartInCategory = (part) => {
                         </div>
                     </div>
                 </div>`;
+            partAccordionButton = document.getElementById(
+                `${partCategoriesArray[i]}CategoryButton`
+            );
+            partAccordionButton.innerHTML = `
+                ${partCategoriesArray[i]}                         
+                <h5 class="my-0 mx-2">
+                    <span class="badge bg-primary">${partAccordion.childElementCount}</span>
+                </h5>`;
             break;
         }
     }
@@ -219,9 +228,8 @@ const reset = () => {
     rollButton.classList.remove("disabled");
 
     // reset parts in part categories
-    for (let i = 0; i < partCategoryElements.length; i++) {
-        partCategoryElements[i].innerHTML = "";
-    }
+    partCategoriesContainer.innerHTML = "";
+    generatePartCategories();
 
     // reset stage to 1
     setStage("1");

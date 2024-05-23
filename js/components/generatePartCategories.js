@@ -24,6 +24,7 @@ const generatePartCategories = () => {
                 <button
                     class="accordion-button collapsed text-light partCategoryAccordionButton"
                     type="button"
+                    id="${partCategoriesArray[i]}CategoryButton"
                     data-bs-toggle="collapse"
                     data-bs-target="#partCategory${[i]}"
                     aria-expanded="false"
