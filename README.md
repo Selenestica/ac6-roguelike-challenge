@@ -18,3 +18,6 @@ We welcome contributions to this project! Whether you're fixing bugs, adding new
 This project is built on the shoulders of giants. We're grateful to the creators of the assets we use,
 including but not limited to:
 
+- r/PixelKatana
+- The Armored Core Wiki (https://armoredcore.fandom.com/wiki)
+
