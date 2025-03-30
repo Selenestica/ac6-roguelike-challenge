@@ -2,5 +2,3 @@ FEATURES:
   - validate JSON file the best you can before allowing upload 
   - add google analytics to see how much traffic this app gets
   - add styling to parts in categories so they increase in size on hover
-
-BUGS:
