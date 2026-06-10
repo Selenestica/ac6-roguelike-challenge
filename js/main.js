@@ -1,16 +1,20 @@
-const stageMenuButton = document.getElementById('dropdownMenuButton');
-const rollButton = document.getElementById('rollButton');
-const partCategoryElements = document.getElementsByClassName('partCategory');
-const partCategoryAccordionButton = document.getElementsByClassName('partCategoryAccordionButton');
-const newPartModalLabel = document.getElementById('newPartModalLabel');
-const newPartModalImg = document.getElementById('newPartModalImg');
-const tierBadge = document.getElementById('tierBadge');
-const optionalCheckboxes = document.getElementsByClassName('optionalCheckbox');
-const uploadSaveFileInputElement = document.getElementById('uploadSaveFileInput');
-const uploadSaveFileButton = document.getElementById('uploadSaveFileButton');
+const stageMenuButton = document.getElementById("dropdownMenuButton");
+const rollButton = document.getElementById("rollButton");
+const partCategoryElements = document.getElementsByClassName("partCategory");
+const partCategoryAccordionButton = document.getElementsByClassName(
+  "partCategoryAccordionButton",
+);
+const newPartModalLabel = document.getElementById("newPartModalLabel");
+const newPartModalImg = document.getElementById("newPartModalImg");
+const tierBadge = document.getElementById("tierBadge");
+const optionalCheckboxes = document.getElementsByClassName("optionalCheckbox");
+const uploadSaveFileInputElement = document.getElementById(
+  "uploadSaveFileInput",
+);
+const uploadSaveFileButton = document.getElementById("uploadSaveFileButton");
 
 for (let z = 0; z < optionalCheckboxes.length; z++) {
-  optionalCheckboxes[z].addEventListener('change', (e) => {
+  optionalCheckboxes[z].addEventListener("change", (e) => {
     const challengeProgressObj = {
       elementId: e.srcElement.id,
       checked: e.target.checked,
@@ -21,7 +25,7 @@ for (let z = 0; z < optionalCheckboxes.length; z++) {
 
 let uploadedSaveFile = null;
 
-uploadSaveFileInputElement.addEventListener('change', (e) => {
+uploadSaveFileInputElement.addEventListener("change", (e) => {
   const uploadedFile = e.target.files[0];
   const reader = new FileReader();
   reader.onload = (event) => {
@@ -45,7 +49,6 @@ let c_tier_parts = [...C_TIER_PARTS];
 let d_tier_parts = [...D_TIER_PARTS];
 
 let partCounter = 0;
-let partAccordionRowCounter = 0;
 
 let accordionsCollapsed = true;
 
@@ -53,21 +56,11 @@ let currentPart = null;
 
 // returns tier list chances for given stage
 const stageMinMax = (stage) => {
-  if (stage === '1') {
-    return [35, 65, 85, 95, 100];
-  }
-  if (stage === '2') {
-    return [15, 50, 85, 95, 100];
-  }
-  if (stage === '3') {
-    return [5, 30, 70, 90, 100];
-  }
-  if (stage === '4') {
-    return [5, 25, 55, 85, 100];
-  }
-  if (stage === '5') {
-    return [5, 15, 45, 75, 100];
-  }
+  if (stage === "1") return [35, 30, 20, 10, 5];
+  if (stage === "2") return [15, 35, 35, 10, 5];
+  if (stage === "3") return [5, 25, 40, 20, 10];
+  if (stage === "4") return [5, 20, 30, 30, 15];
+  if (stage === "5") return [5, 10, 30, 30, 25];
 };
 
 // grab part from the given parts list and return the part and the index of it for easy removal from the list
@@ -93,24 +86,26 @@ const areAllPartsAcquired = () => {
     c_tier_parts.length === 0 &&
     d_tier_parts.length === 0
   ) {
-    rollButton.classList.add('disabled');
+    rollButton.classList.add("disabled");
     return;
   }
-  rollButton.classList.remove('disabled');
+  rollButton.classList.remove("disabled");
   return;
 };
 
 const displayPartInCategory = (part, tier) => {
+  partCounter++;
   const partImgEnd = part.img.substr(0, part.img.length - 4);
-  const partImgSubstring = partImgEnd.substr(partImgEnd.lastIndexOf('/') + 1);
+  const partImgSubstring = partImgEnd.substr(partImgEnd.lastIndexOf("/") + 1);
   const partRowID = partImgSubstring + partCounter;
-  partAccordionRowCounter++;
   let partAccordion;
   let partAccordionButton;
   const partTypeSubstring = part.name.substr(0, 9);
   for (let i = 0; i < partCategoriesArray.length; i++) {
     if (partTypeSubstring.includes(partCategoriesArray[i])) {
-      partAccordion = document.getElementsByClassName(partCategoriesArray[i])[0];
+      partAccordion = document.getElementsByClassName(
+        partCategoriesArray[i],
+      )[0];
       partAccordion.innerHTML += `
                 <div class="accordion-body text-light" id="${partRowID}">
                     <div class="d-flex row justify-content-center">
@@ -132,7 +127,9 @@ const displayPartInCategory = (part, tier) => {
                         </div>
                     </div>
                 </div>`;
-      partAccordionButton = document.getElementById(`${partCategoriesArray[i]}CategoryButton`);
+      partAccordionButton = document.getElementById(
+        `${partCategoriesArray[i]}CategoryButton`,
+      );
       partAccordionButton.innerHTML = `
                 ${partCategoriesArray[i]}                         
                 <h5 class="my-0 mx-2">
@@ -147,48 +144,33 @@ const populateNewPartModal = (part, tier) => {
   newPartModalLabel.innerText = part.name;
   newPartModalImg.innerHTML = `<img src="./${part.img}" />`;
   tierBadge.innerText = tier.toUpperCase();
-  tierBadge.className = '';
-  tierBadge.classList.add('badge', 'text-dark');
+  tierBadge.className = "";
+  tierBadge.classList.add("badge", "text-dark");
   tierBadge.classList.add(`bg-${tier}-tier`);
 };
 
 const rollForPart = () => {
-  // if there's no parts left, button is disabled, and clicking will do nothing
-  if (rollButton.classList.contains('disabled')) {
-    return;
-  }
+  if (rollButton.classList.contains("disabled")) return;
 
-  // roll logic starts
-  let partsListObj;
   const stage = getStage();
-  const minMaxs = stageMinMax(stage);
-  const randomNumber = Math.floor(Math.random() * 100) + 1;
+  const weights = stageMinMax(stage);
 
-  if (randomNumber <= minMaxs[0] && d_tier_parts.length > 0) {
-    partsListObj = { list: d_tier_parts, tier: 'd' };
-  } else if (randomNumber <= minMaxs[1] && randomNumber > minMaxs[0] && c_tier_parts.length > 0) {
-    partsListObj = { list: c_tier_parts, tier: 'c' };
-  } else if (randomNumber <= minMaxs[2] && randomNumber > minMaxs[1] && b_tier_parts.length > 0) {
-    partsListObj = { list: b_tier_parts, tier: 'b' };
-  } else if (randomNumber <= minMaxs[3] && randomNumber > minMaxs[2] && a_tier_parts.length > 0) {
-    partsListObj = { list: a_tier_parts, tier: 'a' };
-  } else if (randomNumber <= minMaxs[4] && randomNumber > minMaxs[3] && s_tier_parts.length > 0) {
-    partsListObj = { list: s_tier_parts, tier: 's' };
-  } else {
-    // re-roll until we get a good number. this logic could probably be improved.
-    rollForPart();
-    return;
-  }
+  const tierWeights = [
+    { list: d_tier_parts, tier: "d", weight: weights[0] },
+    { list: c_tier_parts, tier: "c", weight: weights[1] },
+    { list: b_tier_parts, tier: "b", weight: weights[2] },
+    { list: a_tier_parts, tier: "a", weight: weights[3] },
+    { list: s_tier_parts, tier: "s", weight: weights[4] },
+  ].filter((t) => t.list.length > 0);
 
-  const partInfo = getPartFromList(partsListObj.list);
-  const { part, index } = partInfo;
-  currentPart = {
-    list: partsListObj.list,
-    part,
-    index,
-    tier: partsListObj.tier,
-  };
-  populateNewPartModal(part, partsListObj.tier);
+  const totalWeight = tierWeights.reduce((sum, t) => sum + t.weight, 0);
+  let roll = Math.random() * totalWeight;
+
+  const chosen = tierWeights.find((t) => (roll -= t.weight) < 0);
+  const { part, index } = getPartFromList(chosen.list);
+
+  currentPart = { list: chosen.list, part, index, tier: chosen.tier };
+  populateNewPartModal(part, chosen.tier);
 };
 
 // this function handles accepting new parts as well as
@@ -212,7 +194,7 @@ const removePart = (partName, partImage, partTier, catButtBadge, rowID) => {
   const categoryButtonBadge = document.getElementById(catButtBadge);
   const badgeNumber = parseInt(categoryButtonBadge.innerHTML);
   if (badgeNumber === 1) {
-    categoryButtonBadge.innerHTML = '';
+    categoryButtonBadge.innerHTML = "";
   }
   if (badgeNumber > 1) {
     categoryButtonBadge.innerHTML = badgeNumber - 1;
@@ -227,19 +209,19 @@ const removePart = (partName, partImage, partTier, catButtBadge, rowID) => {
     img: partImage,
   };
   // add pack to pool
-  if (partTier === 's') {
+  if (partTier === "s") {
     s_tier_parts.push(partToRemove);
   }
-  if (partTier === 'a') {
+  if (partTier === "a") {
     a_tier_parts.push(partToRemove);
   }
-  if (partTier === 'b') {
+  if (partTier === "b") {
     b_tier_parts.push(partToRemove);
   }
-  if (partTier === 'c') {
+  if (partTier === "c") {
     c_tier_parts.push(partToRemove);
   }
-  if (partTier === 'd') {
+  if (partTier === "d") {
     d_tier_parts.push(partToRemove);
   }
 
@@ -250,7 +232,7 @@ const removePart = (partName, partImage, partTier, catButtBadge, rowID) => {
 // resets the parts list in the UI and the re-populates the parts lists
 const reset = () => {
   // remove save from localStorage
-  localStorage.removeItem('saveFile');
+  localStorage.removeItem("saveFile");
 
   // resets parts lists
   s_tier_parts = [...S_TIER_PARTS];
@@ -258,14 +240,14 @@ const reset = () => {
   b_tier_parts = [...B_TIER_PARTS];
   c_tier_parts = [...C_TIER_PARTS];
   d_tier_parts = [...D_TIER_PARTS];
-  rollButton.classList.remove('disabled');
+  rollButton.classList.remove("disabled");
 
   // reset parts in part categories
-  partCategoriesContainer.innerHTML = '';
+  partCategoriesContainer.innerHTML = "";
   generatePartCategories();
 
   // reset stage to 1
-  setStage('1');
+  setStage("1");
 
   // reset optional objective checklists
   for (let n = 0; n < optionalCheckboxes.length; n++) {
@@ -287,18 +269,18 @@ const setStage = (stage) => {
 const togglePartsAccordions = () => {
   if (accordionsCollapsed) {
     for (let i = 0; i < partCategoryAccordionButton.length; i++) {
-      if (partCategoryAccordionButton[i].classList.contains('collapsed')) {
-        partCategoryAccordionButton[i].classList.remove('collapsed');
-        partCategoryElements[i].classList.add('show');
+      if (partCategoryAccordionButton[i].classList.contains("collapsed")) {
+        partCategoryAccordionButton[i].classList.remove("collapsed");
+        partCategoryElements[i].classList.add("show");
       }
     }
     accordionsCollapsed = false;
     return;
   }
   for (let i = 0; i < partCategoryAccordionButton.length; i++) {
-    if (!partCategoryAccordionButton[i].classList.contains('collapsed')) {
-      partCategoryAccordionButton[i].classList.add('collapsed');
-      partCategoryElements[i].classList.remove('show');
+    if (!partCategoryAccordionButton[i].classList.contains("collapsed")) {
+      partCategoryAccordionButton[i].classList.add("collapsed");
+      partCategoryElements[i].classList.remove("show");
     }
   }
   accordionsCollapsed = true;
@@ -316,22 +298,15 @@ const saveProgress = (partAdd, partRemove, stage, challenge) => {
     delete copiedPart.tier;
   }
 
-  const storedSave = localStorage.getItem('saveFile');
+  const storedSave = localStorage.getItem("saveFile");
   let newSave;
   if (!storedSave) {
     const initialSave = {
       parts: partAdd ? [copiedPart] : [],
-      stage: stage ?? '1',
+      stage: stage ?? "1",
       challengesCompleted: challenge ? [challenge.elementId] : [],
-      partsLists: {
-        s: s_tier_parts,
-        a: a_tier_parts,
-        b: b_tier_parts,
-        c: c_tier_parts,
-        d: d_tier_parts,
-      },
     };
-    localStorage.setItem('saveFile', JSON.stringify(initialSave));
+    localStorage.setItem("saveFile", JSON.stringify(initialSave));
     return;
   }
   const saveFile = JSON.parse(storedSave);
@@ -340,19 +315,9 @@ const saveProgress = (partAdd, partRemove, stage, challenge) => {
     const oldObtainedPartsList = [...saveFile.parts];
     oldObtainedPartsList.push(copiedPart);
 
-    // save parts lists
-    const updatedPartsLists = {
-      s: s_tier_parts,
-      a: a_tier_parts,
-      b: b_tier_parts,
-      c: c_tier_parts,
-      d: d_tier_parts,
-    };
-
     newSave = {
       ...saveFile,
       parts: oldObtainedPartsList,
-      partsLists: updatedPartsLists,
     };
   }
   if (partRemove) {
@@ -362,18 +327,9 @@ const saveProgress = (partAdd, partRemove, stage, challenge) => {
     const updatedObtainedPartsList = oldObtainedPartsList.filter((part) => {
       return part.part.name !== partRemove.name;
     });
-    // save parts lists
-    const updatedPartsLists = {
-      s: s_tier_parts,
-      a: a_tier_parts,
-      b: b_tier_parts,
-      c: c_tier_parts,
-      d: d_tier_parts,
-    };
     newSave = {
       ...saveFile,
       parts: updatedObtainedPartsList,
-      partsLists: updatedPartsLists,
     };
     areAllPartsAcquired();
   }
@@ -391,34 +347,32 @@ const saveProgress = (partAdd, partRemove, stage, challenge) => {
     }
     newSave = { ...saveFile, challengesCompleted: oldChallengeList };
   }
-  localStorage.setItem('saveFile', JSON.stringify(newSave));
+  localStorage.setItem("saveFile", JSON.stringify(newSave));
 };
 
 const loadSavedProgress = () => {
-  const storedSave = localStorage.getItem('saveFile');
+  const storedSave = localStorage.getItem("saveFile");
   if (storedSave) {
     const saveFile = JSON.parse(storedSave);
 
-    // set saved stage
     setStage(saveFile.stage);
 
-    // populate completed challenges
     for (let i = 0; i < saveFile.challengesCompleted.length; i++) {
-      const completedChallengeElement = document.getElementById(saveFile.challengesCompleted[i]);
-      completedChallengeElement.checked = true;
+      document.getElementById(saveFile.challengesCompleted[i]).checked = true;
     }
 
-    // loops through acceptParts. which populates and removes
     for (let n = 0; n < saveFile.parts.length; n++) {
       acceptPart(saveFile.parts[n]);
     }
 
-    // sets parts lists
-    s_tier_parts = saveFile.partsLists.s;
-    a_tier_parts = saveFile.partsLists.a;
-    b_tier_parts = saveFile.partsLists.b;
-    c_tier_parts = saveFile.partsLists.c;
-    d_tier_parts = saveFile.partsLists.d;
+    // Derive remaining pools from the canonical lists minus obtained parts
+    const obtainedNames = new Set(saveFile.parts.map((p) => p.part.name));
+    s_tier_parts = S_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
+    a_tier_parts = A_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
+    b_tier_parts = B_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
+    c_tier_parts = C_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
+    d_tier_parts = D_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
+
     areAllPartsAcquired();
   }
 };
@@ -427,6 +381,6 @@ loadSavedProgress();
 
 const uploadSaveFile = () => {
   reset();
-  localStorage.setItem('saveFile', uploadedSaveFile);
+  localStorage.setItem("saveFile", uploadedSaveFile);
   loadSavedProgress();
 };
