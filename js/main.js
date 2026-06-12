@@ -42,20 +42,24 @@ uploadSaveFileInputElement.addEventListener("change", (e) => {
   reader.readAsText(uploadedFile);
 });
 
-let s_tier_parts = [...S_TIER_PARTS];
-let a_tier_parts = [...A_TIER_PARTS];
-let b_tier_parts = [...B_TIER_PARTS];
-let c_tier_parts = [...C_TIER_PARTS];
-let d_tier_parts = [...D_TIER_PARTS];
+// working parts pool — gets filtered as parts are obtained
+let parts = [...PARTS];
+
+// defines how individual categories are grouped for rolling purposes
+const CATEGORY_GROUPS = {
+  head: ["head"],
+  fcs: ["fcs"],
+  internals: ["core", "generator", "booster"],
+  arms_legs: ["arms", "legs"],
+  weapons: ["r-arm", "l-arm", "r-back", "l-back"],
+};
 
 let partCounter = 0;
-
 let accordionsCollapsed = true;
-
 let currentPart = null;
 
-// returns tier list chances for given stage
-const stageMinMax = (stage) => {
+// returns per-tier weights [d, c, b, a, s] for the given stage
+const stageWeights = (stage) => {
   if (stage === "1") return [35, 30, 20, 10, 5];
   if (stage === "2") return [15, 35, 35, 10, 5];
   if (stage === "3") return [5, 25, 40, 20, 10];
@@ -63,193 +67,145 @@ const stageMinMax = (stage) => {
   if (stage === "5") return [5, 10, 30, 30, 25];
 };
 
-// grab part from the given parts list and return the part and the index of it for easy removal from the list
-const getPartFromList = (list) => {
-  const randomIndex = Math.floor(Math.random() * list.length);
-  return {
-    part: list[randomIndex],
-    index: randomIndex,
-  };
-};
-
-// removes the part from the list so we don't get duplicates because that's annoying
-const removePartFromList = (list, index) => {
-  list.splice(index, 1);
-};
-
 // check to see if player has obtained all parts
 const areAllPartsAcquired = () => {
-  if (
-    s_tier_parts.length === 0 &&
-    a_tier_parts.length === 0 &&
-    b_tier_parts.length === 0 &&
-    c_tier_parts.length === 0 &&
-    d_tier_parts.length === 0
-  ) {
+  if (parts.length === 0) {
     rollButton.classList.add("disabled");
     return;
   }
   rollButton.classList.remove("disabled");
-  return;
 };
 
-const displayPartInCategory = (part, tier) => {
+const displayPartInCategory = (part) => {
   partCounter++;
-  const partImgEnd = part.img.substr(0, part.img.length - 4);
-  const partImgSubstring = partImgEnd.substr(partImgEnd.lastIndexOf("/") + 1);
-  const partRowID = partImgSubstring + partCounter;
-  let partAccordion;
-  let partAccordionButton;
-  const partTypeSubstring = part.name.substr(0, 9);
-  for (let i = 0; i < partCategoriesArray.length; i++) {
-    if (partTypeSubstring.includes(partCategoriesArray[i])) {
-      partAccordion = document.getElementsByClassName(
-        partCategoriesArray[i],
-      )[0];
-      partAccordion.innerHTML += `
-                <div class="accordion-body text-light" id="${partRowID}">
-                    <div class="d-flex row justify-content-center">
-                        <div class="d-flex col-4 accordionPartImgContainer justify-content-end">
-                            <img class="img-fluid" src="${part.img}" />
-                        </div>
-                        <div class="d-flex col-4 text-light justify-content-start align-items-center">
-                            ${part.name}
-                        </div>
-                        <div class="d-flex col-4 text-light justify-content-end align-items-center">
-                            <button
-                                id="removePartButton"
-                                type="button"
-                                class="btn btn-danger"
-                                onclick="removePart('${part.name}', '${part.img}', '${tier}', '${partCategoriesArray[i]}CategoryButtonBadge', '${partRowID}')"
-                            >
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>`;
-      partAccordionButton = document.getElementById(
-        `${partCategoriesArray[i]}CategoryButton`,
-      );
-      partAccordionButton.innerHTML = `
-                ${partCategoriesArray[i]}                         
-                <h5 class="my-0 mx-2">
-                    <span id="${partCategoriesArray[i]}CategoryButtonBadge" class="badge bg-primary">${partAccordion.childElementCount}</span>
-                </h5>`;
-      break;
-    }
-  }
+  const imgBase = part.img.replace(".webp", "");
+  const partRowID = imgBase + partCounter;
+
+  const partAccordion = document.getElementsByClassName(part.category)[0];
+  partAccordion.innerHTML += `
+    <div class="accordion-body text-light" id="${partRowID}">
+      <div class="d-flex row justify-content-center">
+        <div class="d-flex col-4 accordionPartImgContainer justify-content-end">
+          <img class="img-fluid" src="assets/images/${part.img}" />
+        </div>
+        <div class="d-flex col-4 text-light justify-content-start align-items-center">
+          ${part.name}
+        </div>
+        <div class="d-flex col-4 text-light justify-content-end align-items-center">
+          <button
+            type="button"
+            class="btn btn-danger"
+            onclick="removePart('${part.name}', '${part.img}', '${part.tier}', '${part.category}', '${partRowID}')"
+          >
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>`;
+
+  const partAccordionButton = document.getElementById(
+    `${part.category}CategoryButton`,
+  );
+  partAccordionButton.innerHTML = `
+    ${part.category.toUpperCase()}
+    <h5 class="my-0 mx-2">
+      <span id="${part.category}CategoryButtonBadge" class="badge bg-primary">${partAccordion.childElementCount}</span>
+    </h5>`;
 };
 
-const populateNewPartModal = (part, tier) => {
+const populateNewPartModal = (part) => {
   newPartModalLabel.innerText = part.name;
-  newPartModalImg.innerHTML = `<img src="./${part.img}" />`;
-  tierBadge.innerText = tier.toUpperCase();
+  newPartModalImg.innerHTML = `<img src="assets/images/${part.img}" />`;
+  tierBadge.innerText = part.tier.toUpperCase();
   tierBadge.className = "";
-  tierBadge.classList.add("badge", "text-dark");
-  tierBadge.classList.add(`bg-${tier}-tier`);
+  tierBadge.classList.add("badge", "text-dark", `bg-${part.tier}-tier`);
 };
 
 const rollForPart = () => {
   if (rollButton.classList.contains("disabled")) return;
 
   const stage = getStage();
-  const weights = stageMinMax(stage);
+  const weights = stageWeights(stage);
+  const tiers = ["d", "c", "b", "a", "s"];
 
-  const tierWeights = [
-    { list: d_tier_parts, tier: "d", weight: weights[0] },
-    { list: c_tier_parts, tier: "c", weight: weights[1] },
-    { list: b_tier_parts, tier: "b", weight: weights[2] },
-    { list: a_tier_parts, tier: "a", weight: weights[3] },
-    { list: s_tier_parts, tier: "s", weight: weights[4] },
-  ].filter((t) => t.list.length > 0);
+  // step 1: roll category — filter out exhausted groups and re-normalize
+  const categoryPool = Object.entries(CATEGORY_GROUPS)
+    .filter(([_, cats]) => parts.some((p) => cats.includes(p.category)))
+    .map(([group, cats]) => ({ group, cats }));
 
-  const totalWeight = tierWeights.reduce((sum, t) => sum + t.weight, 0);
-  let roll = Math.random() * totalWeight;
+  const categoryRoll = Math.random() * categoryPool.length;
+  const chosenGroup = categoryPool[Math.floor(categoryRoll)];
 
-  const chosen = tierWeights.find((t) => (roll -= t.weight) < 0);
-  const { part, index } = getPartFromList(chosen.list);
+  // parts available in this category group
+  const partsInGroup = parts.filter((p) =>
+    chosenGroup.cats.includes(p.category),
+  );
 
-  currentPart = { list: chosen.list, part, index, tier: chosen.tier };
-  populateNewPartModal(part, chosen.tier);
+  // step 2: roll tier — filter to tiers that have parts in this group, re-normalize weights
+  const tierPool = tiers
+    .map((tier, i) => ({ tier, weight: weights[i] }))
+    .filter(({ tier }) => partsInGroup.some((p) => p.tier === tier));
+
+  const totalWeight = tierPool.reduce((sum, t) => sum + t.weight, 0);
+  let tierRoll = Math.random() * totalWeight;
+  const chosenTier = tierPool.find((t) => (tierRoll -= t.weight) < 0).tier;
+
+  // step 3: pick a random part from the chosen category group + tier
+  const eligibleParts = partsInGroup.filter((p) => p.tier === chosenTier);
+  const randomIndex = Math.floor(Math.random() * eligibleParts.length);
+  const chosenPart = eligibleParts[randomIndex];
+
+  // find the index in the main parts array for removal later
+  const partsIndex = parts.indexOf(chosenPart);
+
+  currentPart = { part: chosenPart, index: partsIndex };
+  populateNewPartModal(chosenPart);
 };
 
-// this function handles accepting new parts as well as
-// populating the obtained parts list from a save
+// handles accepting new parts as well as populating the obtained parts list from a save
 const acceptPart = (savedPart = null) => {
-  const valToUse = savedPart ? savedPart : currentPart;
-  const { list, part, index, tier } = valToUse;
-  const partToSave = { ...valToUse };
-  displayPartInCategory(part, tier);
+  const partToUse = savedPart ? savedPart : currentPart.part;
+  displayPartInCategory(partToUse);
   if (!savedPart) {
-    removePartFromList(list, index);
+    parts.splice(currentPart.index, 1);
     areAllPartsAcquired();
-    saveProgress(partToSave, null, null, null);
+    saveProgress(partToUse, null, null, null);
   }
   currentPart = null;
 };
 
-// removes parts from the accordion
-// then adds the part back to the list
-const removePart = (partName, partImage, partTier, catButtBadge, rowID) => {
-  const categoryButtonBadge = document.getElementById(catButtBadge);
-  const badgeNumber = parseInt(categoryButtonBadge.innerHTML);
-  if (badgeNumber === 1) {
-    categoryButtonBadge.innerHTML = "";
-  }
-  if (badgeNumber > 1) {
-    categoryButtonBadge.innerHTML = badgeNumber - 1;
-  }
-  // remove part from the accordion
-  const partRow = document.getElementById(rowID);
-  partRow.remove();
+// removes part from the accordion and adds it back to the pool
+const removePart = (partName, partImg, partTier, partCategory, rowID) => {
+  const badgeEl = document.getElementById(`${partCategory}CategoryButtonBadge`);
+  const badgeNumber = parseInt(badgeEl.innerHTML);
+  badgeEl.innerHTML = badgeNumber > 1 ? badgeNumber - 1 : "";
 
-  // remove part from the obtained parts list, but add back in part pool
-  const partToRemove = {
-    name: partName,
-    img: partImage,
-  };
-  // add pack to pool
-  if (partTier === "s") {
-    s_tier_parts.push(partToRemove);
-  }
-  if (partTier === "a") {
-    a_tier_parts.push(partToRemove);
-  }
-  if (partTier === "b") {
-    b_tier_parts.push(partToRemove);
-  }
-  if (partTier === "c") {
-    c_tier_parts.push(partToRemove);
-  }
-  if (partTier === "d") {
-    d_tier_parts.push(partToRemove);
+  document.getElementById(rowID).remove();
+
+  // find the full part object from PARTS to add back to the pool
+  const partToRestore = PARTS.find(
+    (p) => p.name === partName && p.img === partImg,
+  );
+  if (partToRestore) {
+    parts.push(partToRestore);
   }
 
-  // remove part from the obtained parts list
-  saveProgress(null, partToRemove, null, null);
+  saveProgress(null, { name: partName, img: partImg }, null, null);
+  areAllPartsAcquired();
 };
 
-// resets the parts list in the UI and the re-populates the parts lists
+// resets everything back to initial state
 const reset = () => {
-  // remove save from localStorage
   localStorage.removeItem("saveFile");
 
-  // resets parts lists
-  s_tier_parts = [...S_TIER_PARTS];
-  a_tier_parts = [...A_TIER_PARTS];
-  b_tier_parts = [...B_TIER_PARTS];
-  c_tier_parts = [...C_TIER_PARTS];
-  d_tier_parts = [...D_TIER_PARTS];
+  parts = [...PARTS];
   rollButton.classList.remove("disabled");
 
-  // reset parts in part categories
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
 
-  // reset stage to 1
   setStage("1");
 
-  // reset optional objective checklists
   for (let n = 0; n < optionalCheckboxes.length; n++) {
     optionalCheckboxes[n].checked = false;
   }
@@ -260,7 +216,7 @@ const getStage = () => {
   return stageMenuButton.innerText.slice(-2).trim();
 };
 
-// set stage to affect chances of obtaining parts of different tiers
+// sets stage and saves
 const setStage = (stage) => {
   stageMenuButton.innerHTML = `Stage ${stage}`;
   saveProgress(null, null, stage, null);
@@ -284,69 +240,47 @@ const togglePartsAccordions = () => {
     }
   }
   accordionsCollapsed = true;
-  return;
 };
 
 const saveProgress = (partAdd, partRemove, stage, challenge) => {
-  let copiedPart = null;
-
-  // remove unneeded attributes from part obj
-  if (partAdd) {
-    copiedPart = { ...partAdd };
-    delete copiedPart.list;
-    delete copiedPart.index;
-    delete copiedPart.tier;
-  }
-
   const storedSave = localStorage.getItem("saveFile");
   let newSave;
+
   if (!storedSave) {
     const initialSave = {
-      parts: partAdd ? [copiedPart] : [],
+      parts: partAdd ? [partAdd] : [],
       stage: stage ?? "1",
       challengesCompleted: challenge ? [challenge.elementId] : [],
     };
     localStorage.setItem("saveFile", JSON.stringify(initialSave));
     return;
   }
-  const saveFile = JSON.parse(storedSave);
-  if (partAdd) {
-    // save part
-    const oldObtainedPartsList = [...saveFile.parts];
-    oldObtainedPartsList.push(copiedPart);
 
-    newSave = {
-      ...saveFile,
-      parts: oldObtainedPartsList,
-    };
+  const saveFile = JSON.parse(storedSave);
+
+  if (partAdd) {
+    newSave = { ...saveFile, parts: [...saveFile.parts, partAdd] };
   }
   if (partRemove) {
-    // remove part
-    // pobably need to loop through oldObtainedPartsList to find the part to remove
-    const oldObtainedPartsList = [...saveFile.parts];
-    const updatedObtainedPartsList = oldObtainedPartsList.filter((part) => {
-      return part.part.name !== partRemove.name;
-    });
-    newSave = {
-      ...saveFile,
-      parts: updatedObtainedPartsList,
-    };
-    areAllPartsAcquired();
+    const updatedParts = saveFile.parts.filter(
+      (p) => !(p.name === partRemove.name && p.img === partRemove.img),
+    );
+    newSave = { ...saveFile, parts: updatedParts };
   }
   if (stage) {
     newSave = { ...saveFile, stage };
   }
   if (challenge) {
     const { elementId, checked } = challenge;
-    const oldChallengeList = [...saveFile.challengesCompleted];
+    const oldList = [...saveFile.challengesCompleted];
     if (!checked) {
-      const challengeIndex = oldChallengeList.indexOf(elementId);
-      oldChallengeList.splice(challengeIndex, 1);
+      oldList.splice(oldList.indexOf(elementId), 1);
     } else {
-      oldChallengeList.push(elementId);
+      oldList.push(elementId);
     }
-    newSave = { ...saveFile, challengesCompleted: oldChallengeList };
+    newSave = { ...saveFile, challengesCompleted: oldList };
   }
+
   localStorage.setItem("saveFile", JSON.stringify(newSave));
 };
 
@@ -360,18 +294,16 @@ const loadSavedProgress = () => {
     for (let i = 0; i < saveFile.challengesCompleted.length; i++) {
       document.getElementById(saveFile.challengesCompleted[i]).checked = true;
     }
-
+    console.log(saveFile);
     for (let n = 0; n < saveFile.parts.length; n++) {
       acceptPart(saveFile.parts[n]);
     }
 
-    // Derive remaining pools from the canonical lists minus obtained parts
-    const obtainedNames = new Set(saveFile.parts.map((p) => p.part.name));
-    s_tier_parts = S_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
-    a_tier_parts = A_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
-    b_tier_parts = B_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
-    c_tier_parts = C_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
-    d_tier_parts = D_TIER_PARTS.filter((p) => !obtainedNames.has(p.name));
+    // derive remaining pool from PARTS minus already obtained parts
+    const obtainedKeys = new Set(
+      saveFile.parts.map((p) => p.name + "|" + p.img),
+    );
+    parts = PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
 
     areAllPartsAcquired();
   }

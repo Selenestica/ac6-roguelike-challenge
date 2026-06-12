@@ -1,30 +1,31 @@
 const partCategoriesContainer = document.getElementById(
-    "partCategoriesContainer"
+  "partCategoriesContainer",
 );
 
 const partCategoriesArray = [
-    "Head",
-    "Core",
-    "Arms",
-    "Legs",
-    "R-Arm",
-    "L-Arm",
-    "R-Back",
-    "L-Back",
-    "FCS",
-    "Booster",
-    "Generator"
+  "HEAD",
+  "CORE",
+  "ARMS",
+  "LEGS",
+  "R-ARM",
+  "L-ARM",
+  "R-BACK",
+  "L-BACK",
+  "FCS",
+  "BOOSTER",
+  "GENERATOR",
 ];
 
 const generatePartCategories = () => {
-    for (let i = 0; i < partCategoriesArray.length; i++) {
-        partCategoriesContainer.innerHTML += `
+  for (let i = 0; i < partCategoriesArray.length; i++) {
+    const lcCategoryName = partCategoriesArray[i].toLocaleLowerCase();
+    partCategoriesContainer.innerHTML += `
           <div class="accordion-item bg-none">
             <h2 class="accordion-header">
                 <button
                     class="accordion-button collapsed text-light partCategoryAccordionButton"
                     type="button"
-                    id="${partCategoriesArray[i]}CategoryButton"
+                    id="${lcCategoryName}CategoryButton"
                     data-bs-toggle="collapse"
                     data-bs-target="#partCategory${[i]}"
                     aria-expanded="false"
@@ -35,15 +36,13 @@ const generatePartCategories = () => {
             </h2>
             <div
                 id="partCategory${[i]}"
-                class="accordion-collapse collapse ${
-                    partCategoriesArray[i]
-                } partCategory"
+                class="accordion-collapse collapse ${lcCategoryName} partCategory"
                 aria-labelledby="headingThree"
             >
             </div>
           </div>
         `;
-    }
+  }
 };
 
 generatePartCategories();
