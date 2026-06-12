@@ -20,11 +20,11 @@ body {
 }
 
 .accordion-button.collapsed {
-  background-color: #151c24;
+  background-color: #212830;
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: #151c24;
+  background-color: #212830;
 }
 
 .bg-grey {
@@ -33,6 +33,11 @@ body {
 
 .accordion-collapse {
   background-color: #151c24;
+}
+
+.accordion-body {
+  border: 1px solid #212830;
+  border-top: none;
 }
 
 .outline-light {
