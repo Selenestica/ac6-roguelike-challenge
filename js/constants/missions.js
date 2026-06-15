@@ -1,7 +1,7 @@
 const MISSIONS = {
   firesOfRavenMissions: [
     // Chapter 1
-    { name: "Illegal Entry", challenge: null },
+    // { name: "Illegal Entry", challenge: null },
     {
       name: "Destroy Artillery Installations",
       challenge: "Complete the mission without using repair kits.",
@@ -430,7 +430,7 @@ const MISSIONS = {
         "Defeat all 3 Ghosts and destroy all parasite modules before the timer reaches 02:00.",
     }, // branch choice
   ],
-  aleaActaEstMissions: [
+  aleaIactaEstMissions: [
     // Chapter 1 - same as Fires of Raven
     { name: "Illegal Entry", challenge: null },
     {

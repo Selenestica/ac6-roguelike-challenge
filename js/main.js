@@ -12,18 +12,50 @@ const uploadSaveFileInputElement = document.getElementById(
   "uploadSaveFileInput",
 );
 const uploadSaveFileButton = document.getElementById("uploadSaveFileButton");
+const mainViewButtons = document.getElementsByClassName("mainViewButtons");
+const missionButtonsDiv = document.getElementById("missionButtonsDiv");
+const inventoryScreen = document.getElementById("inventoryScreen");
 
-for (let z = 0; z < optionalCheckboxes.length; z++) {
-  optionalCheckboxes[z].addEventListener("change", (e) => {
-    const challengeProgressObj = {
-      elementId: e.srcElement.id,
-      checked: e.target.checked,
-    };
-    saveProgress(null, null, null, challengeProgressObj);
-  });
-}
+// defines how individual categories are grouped for rolling purposes
+// subject to change
+const CATEGORY_GROUPS = {
+  head: ["head"],
+  fcs: ["fcs"],
+  internals: ["core", "generator", "booster"],
+  arms_legs: ["arms", "legs"],
+  weapons: ["r-arm", "l-arm", "r-back", "l-back"],
+};
+
+let currentEnding = "firesOfRavenMissions";
+let currentMission = 0;
 
 let uploadedSaveFile = null;
+
+let parts = [...PARTS];
+let ostChips = 0;
+let partCounter = 0;
+let accordionsCollapsed = true;
+let currentPart = null;
+let currentView = "missionViewButton";
+
+// toggles view between LOADOUT and SHOP
+for (let z = 0; z < mainViewButtons.length; z++) {
+  mainViewButtons[z].addEventListener("change", (e) => {
+    if (e.target.checked) {
+      currentView = e.srcElement.id;
+      if (e.srcElement.id === "missionViewButton") {
+        missionButtonsDiv.style.display = "flex";
+        missionViewScreen.classList.toggle("d-none", false);
+        inventoryScreen.classList.toggle("d-none", true);
+      }
+      if (e.srcElement.id === "inventoryButton") {
+        missionButtonsDiv.style.display = "none";
+        missionViewScreen.classList.toggle("d-none", true);
+        inventoryScreen.classList.toggle("d-none", false);
+      }
+    }
+  });
+}
 
 uploadSaveFileInputElement.addEventListener("change", (e) => {
   const uploadedFile = e.target.files[0];
@@ -42,22 +74,6 @@ uploadSaveFileInputElement.addEventListener("change", (e) => {
   reader.readAsText(uploadedFile);
 });
 
-// working parts pool — gets filtered as parts are obtained
-let parts = [...PARTS];
-
-// defines how individual categories are grouped for rolling purposes
-const CATEGORY_GROUPS = {
-  head: ["head"],
-  fcs: ["fcs"],
-  internals: ["core", "generator", "booster"],
-  arms_legs: ["arms", "legs"],
-  weapons: ["r-arm", "l-arm", "r-back", "l-back"],
-};
-
-let partCounter = 0;
-let accordionsCollapsed = true;
-let currentPart = null;
-
 // returns per-tier weights [d, c, b, a, s] for the given stage
 const stageWeights = (stage) => {
   if (stage === "1") return [35, 30, 20, 10, 5];
@@ -65,15 +81,6 @@ const stageWeights = (stage) => {
   if (stage === "3") return [5, 25, 40, 20, 10];
   if (stage === "4") return [5, 20, 30, 30, 15];
   if (stage === "5") return [5, 10, 30, 30, 25];
-};
-
-// check to see if player has obtained all parts
-const areAllPartsAcquired = () => {
-  if (parts.length === 0) {
-    rollButton.classList.add("disabled");
-    return;
-  }
-  rollButton.classList.remove("disabled");
 };
 
 const displayPartInCategory = (part) => {
@@ -122,7 +129,11 @@ const populateNewPartModal = (part) => {
 };
 
 const rollForPart = () => {
-  if (rollButton.classList.contains("disabled")) return;
+  if (parts.length === 0) {
+    // this will probably never happen. in fact i dont think its possible
+    console.log("no more parts to roll!");
+    return;
+  }
 
   const stage = getStage();
   const weights = stageWeights(stage);
@@ -168,7 +179,6 @@ const acceptPart = (savedPart = null) => {
   displayPartInCategory(partToUse);
   if (!savedPart) {
     parts.splice(currentPart.index, 1);
-    areAllPartsAcquired();
     saveProgress(partToUse, null, null, null);
   }
   currentPart = null;
@@ -191,35 +201,18 @@ const removePart = (partName, partImg, partTier, partCategory, rowID) => {
   }
 
   saveProgress(null, { name: partName, img: partImg }, null, null);
-  areAllPartsAcquired();
 };
 
 // resets everything back to initial state
 const reset = () => {
-  localStorage.removeItem("saveFile");
+  // we probably don't want to do this here, since we're going to roll over OST chips between each reset
+  // localStorage.removeItem("saveFile");
 
   parts = [...PARTS];
   rollButton.classList.remove("disabled");
 
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
-
-  setStage("1");
-
-  for (let n = 0; n < optionalCheckboxes.length; n++) {
-    optionalCheckboxes[n].checked = false;
-  }
-};
-
-// returns the selected stage
-const getStage = () => {
-  return stageMenuButton.innerText.slice(-2).trim();
-};
-
-// sets stage and saves
-const setStage = (stage) => {
-  stageMenuButton.innerHTML = `Stage ${stage}`;
-  saveProgress(null, null, stage, null);
 };
 
 const togglePartsAccordions = () => {
@@ -286,27 +279,33 @@ const saveProgress = (partAdd, partRemove, stage, challenge) => {
 
 const loadSavedProgress = () => {
   const storedSave = localStorage.getItem("saveFile");
+
+  // if we find save data
   if (storedSave) {
     const saveFile = JSON.parse(storedSave);
+    const { challengesCompleted, ending, mission } = saveFile;
 
-    setStage(saveFile.stage);
+    currentEnding = ending;
+    currentMission = mission;
 
-    for (let i = 0; i < saveFile.challengesCompleted.length; i++) {
-      document.getElementById(saveFile.challengesCompleted[i]).checked = true;
+    for (let i = 0; i < challengesCompleted.length; i++) {
+      document.getElementById(challengesCompleted[i]).checked = true;
     }
-    console.log(saveFile);
     for (let n = 0; n < saveFile.parts.length; n++) {
       acceptPart(saveFile.parts[n]);
     }
 
     // derive remaining pool from PARTS minus already obtained parts
-    const obtainedKeys = new Set(
-      saveFile.parts.map((p) => p.name + "|" + p.img),
-    );
+    const obtainedKeys = new Set(parts.map((p) => p.name + "|" + p.img));
     parts = PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
 
-    areAllPartsAcquired();
+    // when loading up, show the correct mission according to the save file
+    generateMissionScreen(ending, mission);
+    return;
   }
+
+  // if no save data found
+  generateMissionScreen(currentEnding, currentMission);
 };
 
 loadSavedProgress();

@@ -91,64 +91,84 @@
       <div class="row d-flex justify-content-center pt-3">
         <div class="col-sm-12 col-md-10 col-lg-8">
           <div class="row d-flex justify-content-between">
-            <div class="col d-flex justify-content-start my-1">
-              <div class="dropdown mx-1">
-                <button
-                  class="btn btn-primary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+            <div class="col-2 d-flex align-items-center justify-content-start">
+              <div class="btn-group" role="group">
+                <input
+                  type="radio"
+                  class="btn-check mainViewButtons"
+                  name="btnradio"
+                  id="missionViewButton"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary text-white"
+                  for="missionViewButton"
                 >
-                  Stage 1
-                </button>
-                <div
-                  class="dropdown-menu bg-grey"
-                  aria-labelledby="dropdownMenuButton"
-                  id="stageOptionsContainer"
-                ></div>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#optionalModal"
+                  <span id="missionButtonText">Mission</span>
+                  <span id="missionButtonIcon"
+                    ><i class="bi bi-list-ul"></i
+                  ></span>
+                </label>
+                <input
+                  type="radio"
+                  class="btn-check mainViewButtons"
+                  name="btnradio"
+                  id="inventoryButton"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary text-warning"
+                  for="inventoryButton"
                 >
-                  <i class="fa-solid fa-list-check"></i>
-                </button>
+                  <span id="inventoryButtonText">Loadout</span>
+                  <span id="inventoryButtonIcon"
+                    ><i class="bi bi-wrench-adjustable"></i
+                  ></span>
+                </label>
               </div>
-              <div class="mx-1">
+            </div>
+            <div
+              class="col-8 d-flex justify-content-center"
+              id="missionButtonsDiv"
+            >
+              <div class="btn-group my-2 mx-1" id="missionCompleteButtonDiv">
                 <button
-                  id="rollButton"
-                  type="button"
                   class="btn btn-success"
-                  onclick="rollForPart()"
-                  data-bs-toggle="modal"
-                  data-bs-target="#newPartModal"
-                >
-                  ROLL
-                </button>
-              </div>
-            </div>
-            <div class="col d-flex justify-content-end my-1">
-              <div>
-                <button
-                  class="btn btn-warning"
                   type="button"
                   data-bs-toggle="modal"
-                  data-bs-target="#resetModal"
+                  data-bs-target="#missionCompleteModal"
+                  id="missionCompleteButton"
                 >
-                  Reset
+                  <span id="missionCompleteButtonText"> Mission Complete </span>
+                  <span id="missionCompleteButtonIcon">
+                    <i class="bi bi-check-lg"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="btn-group my-2" id="missionFailedButtonDiv">
+                <button
+                  class="btn btn-danger"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#missionFailedModal"
+                  id="missionFailedButton"
+                >
+                  <span id="missionFailedButtonText"> Mission Failed </span>
+                  <span id="missionFailedButtonIcon">
+                    <i class="bi bi-x-lg"></i>
+                  </span>
                 </button>
               </div>
             </div>
+            <div class="col-2"></div>
           </div>
           <hr class="text-white" id="containerSeparatorLine" />
         </div>
       </div>
 
-      <div class="mb-5 row d-flex justify-content-center">
+      <!-- INVENTORY SCREEN -->
+      <div class="mb-5 row d-none justify-content-center" id="inventoryScreen">
         <div class="col-sm-12 col-md-10 col-lg-8">
           <div class="row d-flex justify-content-center py-1">
             <div class="col d-flex justify-content-end">
@@ -166,6 +186,55 @@
                 class="accordion accordion-flush"
                 id="partCategoriesContainer"
               ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CURRENT MISSION SCREEN -->
+      <div
+        class="mb-5 row d-flex justify-content-center"
+        id="missionViewScreen"
+      >
+        <div class="col-sm-12 col-md-10 col-lg-8">
+          <!-- Header -->
+          <div class="text-white text-center mb-1">
+            <small class="text-muted">FIRES OF RAVEN — CHAPTER 2</small>
+          </div>
+          <div class="text-white text-center mb-4">
+            <h4>Attack the Watchpoint</h4>
+          </div>
+
+          <!-- Optional Challenge Card -->
+          <div class="card bg-dark border-warning mb-3 p-3">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <small class="text-warning text-uppercase fw-bold"
+                  >Optional Challenge</small
+                >
+                <p class="text-white mb-0 mt-1">
+                  Complete the mission without resupplying.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rewards Card -->
+          <div class="card bg-dark border-secondary p-3">
+            <small class="text-secondary text-uppercase fw-bold mb-2 d-block"
+              >Rewards</small
+            >
+            <div class="d-flex justify-content-between text-white mb-2">
+              <span>Mission Complete</span>
+              <span class="text-success">+1 Roll</span>
+            </div>
+            <div class="d-flex justify-content-between text-white mb-2">
+              <span>Optional Challenge</span>
+              <span class="text-success">+1 Roll</span>
+            </div>
+            <div class="d-flex justify-content-between text-white">
+              <span>Chapter Complete</span>
+              <span class="text-info">+4 OST Chips</span>
             </div>
           </div>
         </div>
@@ -644,10 +713,11 @@
     crossorigin="anonymous"
   ></script>
   <script src="js/constants/parts.js"></script>
+  <script src="js/constants/missions.js"></script>
   <script src="js/constants/optionalChallenges.js"></script>
-  <script src="js/components/generateStages.js"></script>
   <script src="js/components/generatePartCategories.js"></script>
   <script src="js/components/generateOptionalChallenges.js"></script>
+  <script src="js/components/generateMissionScreen.js"></script>
   <script src="js/main.js"></script>
   <script src="js/downloadSaveFile.js"></script>
 </html>
