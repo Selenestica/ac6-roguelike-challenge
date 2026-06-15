@@ -13,8 +13,18 @@ const uploadSaveFileInputElement = document.getElementById(
 );
 const uploadSaveFileButton = document.getElementById("uploadSaveFileButton");
 const mainViewButtons = document.getElementsByClassName("mainViewButtons");
+const missionFailedButtonDiv = document.getElementById(
+  "missionFailedButtonDiv",
+);
+const missionCompleteButtonDiv = document.getElementById(
+  "missionCompleteButtonDiv",
+);
+const allAccordionsToggleButtonDiv = document.getElementById(
+  "allAccordionsToggleButtonDiv",
+);
 const missionButtonsDiv = document.getElementById("missionButtonsDiv");
 const inventoryScreen = document.getElementById("inventoryScreen");
+const newPartModal = document.getElementById("newPartModal");
 
 // defines how individual categories are grouped for rolling purposes
 // subject to change
@@ -38,7 +48,8 @@ let parts = [...PARTS];
 let ostChips = 0;
 let partCounter = 0;
 let accordionsCollapsed = true;
-let currentPart = null;
+let currentParts = [];
+let rolledParts = [];
 let currentView = "missionViewButton";
 
 // toggles view between LOADOUT and SHOP
@@ -50,11 +61,17 @@ for (let z = 0; z < mainViewButtons.length; z++) {
         missionButtonsDiv.style.display = "flex";
         missionViewScreen.classList.toggle("d-none", false);
         inventoryScreen.classList.toggle("d-none", true);
+        missionCompleteButtonDiv.classList.toggle("d-none", false);
+        missionFailedButtonDiv.classList.toggle("d-none", false);
+        allAccordionsToggleButtonDiv.classList.toggle("d-none", true);
       }
       if (e.srcElement.id === "inventoryButton") {
         missionButtonsDiv.style.display = "none";
         missionViewScreen.classList.toggle("d-none", true);
         inventoryScreen.classList.toggle("d-none", false);
+        missionCompleteButtonDiv.classList.toggle("d-none", true);
+        missionFailedButtonDiv.classList.toggle("d-none", true);
+        allAccordionsToggleButtonDiv.classList.toggle("d-none", false);
       }
     }
   });
@@ -77,13 +94,13 @@ uploadSaveFileInputElement.addEventListener("change", (e) => {
   reader.readAsText(uploadedFile);
 });
 
-// returns per-tier weights [d, c, b, a, s] for the given stage
-const stageWeights = (stage) => {
-  if (stage === "1") return [35, 30, 20, 10, 5];
-  if (stage === "2") return [15, 35, 35, 10, 5];
-  if (stage === "3") return [5, 25, 40, 20, 10];
-  if (stage === "4") return [5, 20, 30, 30, 15];
-  if (stage === "5") return [5, 10, 30, 30, 25];
+// returns per-tier weights [d, c, b, a, s] for the given chapter
+const chapterWeights = (chapter) => {
+  if (chapter === 1) return [35, 30, 20, 10, 5];
+  if (chapter === 2) return [15, 35, 35, 10, 5];
+  if (chapter === 3) return [5, 25, 40, 20, 10];
+  if (chapter === 4) return [5, 20, 30, 30, 15];
+  if (chapter === 5) return [5, 10, 30, 30, 25];
 };
 
 const displayPartInCategory = (part) => {
@@ -123,23 +140,43 @@ const displayPartInCategory = (part) => {
     </h5>`;
 };
 
-const populateNewPartModal = (part) => {
-  newPartModalLabel.innerText = part.name;
-  newPartModalImg.innerHTML = `<img src="assets/images/${part.img}" />`;
-  tierBadge.innerText = part.tier.toUpperCase();
-  tierBadge.className = "";
-  tierBadge.classList.add("badge", "text-dark", `bg-${part.tier}-tier`);
+const populateNewPartsModal = () => {
+  newPartModalBody.innerHTML = "";
+  for (let i = 0; i < currentParts.length; i++) {
+    const { part } = currentParts[i];
+    newPartModalBody.innerHTML += `
+      <div
+        class="card bg-dark border-secondary part-choice-card"
+        style="cursor: pointer; max-width: 200px;"
+        data-bs-dismiss="modal"
+        onclick="acceptPart(${i})"
+      >
+        <div class="card-body d-flex flex-column align-items-center gap-2">
+          <img class="img-fluid" src="assets/images/${part.img}" />
+          <p class="text-white text-center mb-0">${part.name}</p>
+          <small class="text-muted text-center">${part.category.toUpperCase()}</small>
+        </div>
+      </div>
+    `;
+  }
+  const modal = new bootstrap.Modal(newPartModal);
+  modal.show();
 };
 
-const rollForPart = () => {
+const rollForPart = (amount) => {
   if (parts.length === 0) {
     // this will probably never happen. in fact i dont think its possible
     console.log("no more parts to roll!");
     return;
   }
+  if (rolledParts.length > 0) {
+    currentParts = rolledParts;
+    populateNewPartsModal();
+    return;
+  }
 
-  const stage = getStage();
-  const weights = stageWeights(stage);
+  const { chapter } = MISSIONS[currentEnding][currentMission];
+  const weights = chapterWeights(chapter);
   const tiers = ["d", "c", "b", "a", "s"];
 
   // step 1: roll category — filter out exhausted groups and re-normalize
@@ -172,19 +209,31 @@ const rollForPart = () => {
   // find the index in the main parts array for removal later
   const partsIndex = parts.indexOf(chosenPart);
 
-  currentPart = { part: chosenPart, index: partsIndex };
-  populateNewPartModal(chosenPart);
+  currentParts.push({ part: chosenPart, index: partsIndex });
+
+  if (amount === 2 && currentParts.length < 2) {
+    // exclude the first rolled part from the pool for the second roll
+    parts = parts.filter((_, i) => i !== partsIndex);
+    rollForPart(amount - 1);
+    // restore the part to the pool since neither has been accepted yet
+    parts.splice(partsIndex, 0, chosenPart);
+    return;
+  }
+  rolledParts = [...currentParts];
+  saveProgress();
+  populateNewPartsModal();
 };
 
-// handles accepting new parts as well as populating the obtained parts list from a save
-const acceptPart = (savedPart = null) => {
-  const partToUse = savedPart ? savedPart : currentPart.part;
-  displayPartInCategory(partToUse);
-  if (!savedPart) {
-    parts.splice(currentPart.index, 1);
-    saveProgress(partToUse, null, null, null);
-  }
-  currentPart = null;
+const acceptPart = (chosenIndex) => {
+  const chosen = currentParts[chosenIndex];
+  console.log(chosen);
+  acquiredParts.push(chosen.part);
+  displayPartInCategory(chosen.part);
+  parts.splice(chosen.index, 1);
+
+  rolledParts = [];
+  currentParts = [];
+  saveProgress();
 };
 
 // removes part from the accordion and adds it back to the pool
@@ -250,6 +299,7 @@ const saveProgress = () => {
       currentMission,
       restarts,
       completedMissionsData,
+      rolledParts,
     };
     localStorage.setItem("ac6rlSaveData", JSON.stringify(initialSave));
     return;
@@ -263,13 +313,14 @@ const saveProgress = () => {
     acquiredParts,
     restarts,
     completedMissionsData,
+    rolledParts,
   };
 
   localStorage.setItem("ac6rlSaveData", JSON.stringify(updatedSaveObj));
 };
 
 const loadSavedProgress = () => {
-  const storedSave = localStorage.getItem("saveFile");
+  const storedSave = localStorage.getItem("ac6rlSaveData");
 
   // if we find save data
   if (storedSave) {
@@ -281,9 +332,10 @@ const loadSavedProgress = () => {
     ostChips = saveFile.ostChips;
     restarts = saveFile.restarts;
     completedMissionsData = saveFile.completedMissionsData;
+    rolledParts = saveFile.rolledParts;
 
     for (let n = 0; n < saveFile.acquiredParts.length; n++) {
-      acceptPart(saveFile.acquiredParts[n]);
+      displayPartInCategory(saveFile.acquiredParts[n]);
     }
 
     // derive remaining pool from PARTS minus already obtained parts
@@ -293,12 +345,14 @@ const loadSavedProgress = () => {
     parts = PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
 
     // when loading up, show the correct mission according to the save file
-    generateMissionScreen(ending, mission);
+    generateMissionScreen(currentEnding, currentMission);
+    genMissionCompleteModalContent(currentEnding, currentMission);
     return;
   }
 
   // if no save data found
   generateMissionScreen(currentEnding, currentMission);
+  genMissionCompleteModalContent(currentEnding, currentMission);
 };
 
 loadSavedProgress();

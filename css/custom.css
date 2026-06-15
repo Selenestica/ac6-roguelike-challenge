@@ -126,3 +126,9 @@ body {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
+
+.part-choice-card:hover {
+  border-color: white !important;
+  transform: translateY(-4px);
+  transition: all 0.15s ease;
+}

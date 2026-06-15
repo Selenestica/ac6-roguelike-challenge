@@ -147,7 +147,7 @@
                 </button>
               </div>
             </div>
-            <div class="col-2">
+            <div class="col-2 d-flex justify-content-end">
               <div class="btn-group my-2" id="missionFailedButtonDiv">
                 <button
                   class="btn btn-danger"
@@ -158,8 +158,19 @@
                 >
                   <span id="missionFailedButtonText"> Mission Failed </span>
                   <span id="missionFailedButtonIcon">
-                    <i class="bi bi-x-lg"></i>
+                    <i class="bi bi-arrow-repeat"></i>
                   </span>
+                </button>
+              </div>
+              <div
+                class="btn-group my-2 d-none"
+                id="allAccordionsToggleButtonDiv"
+              >
+                <button
+                  class="btn btn-secondary"
+                  onclick="togglePartsAccordions()"
+                >
+                  <i class="fa-solid fa-square-caret-up"></i>
                 </button>
               </div>
             </div>
@@ -171,16 +182,6 @@
       <!-- INVENTORY SCREEN -->
       <div class="mb-5 row d-none justify-content-center" id="inventoryScreen">
         <div class="col-sm-12 col-md-10 col-lg-8">
-          <div class="row d-flex justify-content-center py-1">
-            <div class="col d-flex justify-content-end">
-              <button
-                class="btn btn-secondary"
-                onclick="togglePartsAccordions()"
-              >
-                <i class="fa-solid fa-square-caret-up"></i>
-              </button>
-            </div>
-          </div>
           <div class="row d-flex justify-content-center">
             <div class="col d-flex justify-content-center">
               <div
@@ -196,47 +197,50 @@
       <div
         class="mb-5 row d-flex justify-content-center"
         id="missionViewScreen"
-      >
-        <div class="col-sm-12 col-md-10 col-lg-8">
-          <!-- Header -->
-          <div class="text-white text-center mb-1">
-            <small class="text-muted">FIRES OF RAVEN — CHAPTER 2</small>
-          </div>
-          <div class="text-white text-center mb-4">
-            <h4>Attack the Watchpoint</h4>
-          </div>
+      ></div>
+    </div>
 
-          <!-- Optional Challenge Card -->
-          <div class="card bg-dark border-warning mb-3 p-3">
-            <div class="d-flex justify-content-between align-items-start">
-              <div>
-                <small class="text-warning text-uppercase fw-bold"
-                  >Optional Challenge</small
-                >
-                <p class="text-white mb-0 mt-1">
-                  Complete the mission without resupplying.
-                </p>
-              </div>
-            </div>
+    <!-- MISSION COMPLETE MODAL -->
+    <div
+      class="modal fade"
+      id="missionCompleteModal"
+      tabindex="-1"
+      open="true"
+      aria-labelledby="missionCompleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light">Mission Complete</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-
-          <!-- Rewards Card -->
-          <div class="card bg-dark border-secondary p-3">
-            <small class="text-secondary text-uppercase fw-bold mb-2 d-block"
-              >Rewards</small
+          <div
+            class="modal-body row d-flex justify-content-center"
+            id="missionCompleteModalBody"
+          ></div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              onclick="rollForPart(1)"
             >
-            <div class="d-flex justify-content-between text-white mb-2">
-              <span>Mission Complete</span>
-              <span class="text-success">+1 Roll</span>
-            </div>
-            <div class="d-flex justify-content-between text-white mb-2">
-              <span>Optional Challenge</span>
-              <span class="text-success">+1 Roll</span>
-            </div>
-            <div class="d-flex justify-content-between text-white">
-              <span>Chapter Complete</span>
-              <span class="text-info">+4 OST Chips</span>
-            </div>
+              No
+            </button>
+            <button
+              type="button"
+              onclick="rollForPart(2)"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+            >
+              Yes
+            </button>
           </div>
         </div>
       </div>
@@ -249,38 +253,17 @@
       data-bs-keyboard="false"
       id="newPartModal"
       tabindex="-1"
-      aria-labelledby="newPartModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content bg-grey">
           <div class="modal-header">
-            <h5 class="modal-title text-light" id="newPartModalLabel"></h5>
-            <h5 class="my-0 mx-2">
-              <span id="tierBadge" class="badge text-dark"></span>
-            </h5>
+            <h5 class="modal-title text-light">Choose Your Part</h5>
           </div>
           <div
-            class="modal-body d-flex justify-content-center"
-            id="newPartModalImg"
+            class="modal-body d-flex justify-content-center gap-3 p-4"
+            id="newPartModalBody"
           ></div>
-          <div class="modal-footer d-flex justify-content-between">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-            >
-              Revert
-            </button>
-            <button
-              onclick="acceptPart()"
-              type="button"
-              class="btn btn-success"
-              data-bs-dismiss="modal"
-            >
-              Accept
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -686,10 +669,9 @@
   ></script>
   <script src="js/constants/parts.js"></script>
   <script src="js/constants/missions.js"></script>
-  <script src="js/constants/optionalChallenges.js"></script>
   <script src="js/components/generatePartCategories.js"></script>
-  <script src="js/components/generateOptionalChallenges.js"></script>
   <script src="js/components/generateMissionScreen.js"></script>
+  <script src="js/components/genMissionCompleteModalContent.js"></script>
   <script src="js/main.js"></script>
   <script src="js/downloadSaveFile.js"></script>
 </html>
