@@ -22,6 +22,8 @@ const missionCompleteButtonDiv = document.getElementById(
 const allAccordionsToggleButtonDiv = document.getElementById(
   "allAccordionsToggleButtonDiv",
 );
+const ostChipsDiv = document.getElementById("ostChipsDiv");
+const ostChipsText = document.getElementById("ostChipsText");
 const missionButtonsDiv = document.getElementById("missionButtonsDiv");
 const inventoryScreen = document.getElementById("inventoryScreen");
 const newPartModal = document.getElementById("newPartModal");
@@ -64,6 +66,7 @@ for (let z = 0; z < mainViewButtons.length; z++) {
         missionCompleteButtonDiv.classList.toggle("d-none", false);
         missionFailedButtonDiv.classList.toggle("d-none", false);
         allAccordionsToggleButtonDiv.classList.toggle("d-none", true);
+        ostChipsDiv.classList.toggle("d-none", true);
       }
       if (e.srcElement.id === "inventoryButton") {
         missionButtonsDiv.style.display = "none";
@@ -72,6 +75,7 @@ for (let z = 0; z < mainViewButtons.length; z++) {
         missionCompleteButtonDiv.classList.toggle("d-none", true);
         missionFailedButtonDiv.classList.toggle("d-none", true);
         allAccordionsToggleButtonDiv.classList.toggle("d-none", false);
+        ostChipsDiv.classList.toggle("d-none", false);
       }
     }
   });
@@ -224,12 +228,15 @@ const rollForPart = (amount) => {
   populateNewPartsModal();
 };
 
-const acceptPart = (chosenIndex) => {
+const acceptPart = async (chosenIndex) => {
   const chosen = currentParts[chosenIndex];
   console.log(chosen);
   acquiredParts.push(chosen.part);
   displayPartInCategory(chosen.part);
   parts.splice(chosen.index, 1);
+
+  await earnOSTChips();
+  await proceedToNextMission();
 
   rolledParts = [];
   currentParts = [];
@@ -253,6 +260,37 @@ const removePart = (partName, partImg, partTier, partCategory, rowID) => {
   }
 
   saveProgress(null, { name: partName, img: partImg }, null, null);
+};
+
+const earnOSTChips = () => {
+  if (MISSIONS[currentEnding][currentMission].ostChips) {
+    ostChips += MISSIONS[currentEnding][currentMission].ostChips;
+    ostChipsText.innerHTML = ostChips;
+  }
+};
+
+const proceedToNextMission = () => {
+  // check to see if this is last mission in ending array
+  // if so, set current ending to next ending and set currentMission to 0
+  // if not then currentMission++
+  if (currentMission < MISSIONS[currentEnding].length - 1) {
+    currentMission++;
+    return;
+  }
+
+  if (currentEnding === "firesOfRavenMissions") {
+    currentEnding = "liberatorOfRubiconMissions";
+  }
+  if (currentEnding === "liberatorOfRubiconMissions") {
+    currentEnding = "aleaIactaEstMissions";
+  }
+  currentMission = 0;
+  return;
+
+  if (currentEnding === "aleaIactaEstMissions") {
+    console.warn("YOU WON!");
+    return;
+  }
 };
 
 // resets everything back to initial state
