@@ -28,6 +28,9 @@ const CATEGORY_GROUPS = {
 
 let currentEnding = "firesOfRavenMissions";
 let currentMission = 0;
+let acquiredParts = [];
+let restarts = 0;
+let completedMissionsData = [];
 
 let uploadedSaveFile = null;
 
@@ -213,6 +216,7 @@ const reset = () => {
 
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
+  saveProgress();
 };
 
 const togglePartsAccordions = () => {
@@ -235,46 +239,33 @@ const togglePartsAccordions = () => {
   accordionsCollapsed = true;
 };
 
-const saveProgress = (partAdd, partRemove, stage, challenge) => {
+const saveProgress = () => {
   const storedSave = localStorage.getItem("saveFile");
-  let newSave;
 
   if (!storedSave) {
     const initialSave = {
-      parts: partAdd ? [partAdd] : [],
-      stage: stage ?? "1",
-      challengesCompleted: challenge ? [challenge.elementId] : [],
+      ostChips,
+      acquiredParts,
+      currentEnding,
+      currentMission,
+      restarts,
+      completedMissionsData,
     };
-    localStorage.setItem("saveFile", JSON.stringify(initialSave));
+    localStorage.setItem("ac6rlSaveData", JSON.stringify(initialSave));
     return;
   }
 
   const saveFile = JSON.parse(storedSave);
+  let updatedSaveObj = {
+    ostChips,
+    currentEnding,
+    currentMission,
+    acquiredParts,
+    restarts,
+    completedMissionsData,
+  };
 
-  if (partAdd) {
-    newSave = { ...saveFile, parts: [...saveFile.parts, partAdd] };
-  }
-  if (partRemove) {
-    const updatedParts = saveFile.parts.filter(
-      (p) => !(p.name === partRemove.name && p.img === partRemove.img),
-    );
-    newSave = { ...saveFile, parts: updatedParts };
-  }
-  if (stage) {
-    newSave = { ...saveFile, stage };
-  }
-  if (challenge) {
-    const { elementId, checked } = challenge;
-    const oldList = [...saveFile.challengesCompleted];
-    if (!checked) {
-      oldList.splice(oldList.indexOf(elementId), 1);
-    } else {
-      oldList.push(elementId);
-    }
-    newSave = { ...saveFile, challengesCompleted: oldList };
-  }
-
-  localStorage.setItem("saveFile", JSON.stringify(newSave));
+  localStorage.setItem("ac6rlSaveData", JSON.stringify(updatedSaveObj));
 };
 
 const loadSavedProgress = () => {
@@ -283,20 +274,22 @@ const loadSavedProgress = () => {
   // if we find save data
   if (storedSave) {
     const saveFile = JSON.parse(storedSave);
-    const { challengesCompleted, ending, mission } = saveFile;
 
-    currentEnding = ending;
-    currentMission = mission;
+    currentEnding = saveFile.currentEnding;
+    currentMission = saveFile.currentMission;
+    acquiredParts = saveFile.acquiredParts;
+    ostChips = saveFile.ostChips;
+    restarts = saveFile.restarts;
+    completedMissionsData = saveFile.completedMissionsData;
 
-    for (let i = 0; i < challengesCompleted.length; i++) {
-      document.getElementById(challengesCompleted[i]).checked = true;
-    }
-    for (let n = 0; n < saveFile.parts.length; n++) {
-      acceptPart(saveFile.parts[n]);
+    for (let n = 0; n < saveFile.acquiredParts.length; n++) {
+      acceptPart(saveFile.acquiredParts[n]);
     }
 
     // derive remaining pool from PARTS minus already obtained parts
-    const obtainedKeys = new Set(parts.map((p) => p.name + "|" + p.img));
+    const obtainedKeys = new Set(
+      acquiredParts.map((p) => p.name + "|" + p.img),
+    );
     parts = PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
 
     // when loading up, show the correct mission according to the save file
@@ -312,6 +305,6 @@ loadSavedProgress();
 
 const uploadSaveFile = () => {
   reset();
-  localStorage.setItem("saveFile", uploadedSaveFile);
+  localStorage.setItem("ac6rlSaveData", uploadedSaveFile);
   loadSavedProgress();
 };

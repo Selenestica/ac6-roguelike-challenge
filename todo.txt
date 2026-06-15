@@ -23,3 +23,14 @@ VERSION 2.0
     - OST chips rebalanced
     - begin a run with 1 random item of D-tier
     - item rarity drop is based off of chapters instead of stages (not sure if the original stages were the same thing or not)
+  - save data
+    - acquired parts
+    - current mission
+    - current ending
+    - ost chips
+    - restarts
+    - completedMissionsData
+      - ending
+      - mission
+      - started
+      - completed
