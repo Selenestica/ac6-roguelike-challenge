@@ -150,8 +150,8 @@
                 class="btn-group d-none my-2 mx-1 align-items-end"
                 id="ostChipsDiv"
               >
-                <span class="text-white"> OST Chips: </span
-                ><span class="text-white" id="ostChipsText"></span>
+                <span class="text-white mx-1"> OST Chips: </span
+                ><span class="text-warning" id="ostChipsText"></span>
               </div>
             </div>
             <div class="col-2 d-flex justify-content-end">
@@ -275,23 +275,30 @@
       </div>
     </div>
 
-    <!-- RESET MODAL -->
+    <!-- MISSION FAILED MODAL -->
     <div
       class="modal fade"
-      id="resetModal"
+      id="missionFailedModal"
       tabindex="-1"
-      aria-labelledby="resetModalLabel"
+      aria-labelledby="missionFailedModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog">
         <div class="modal-content bg-grey">
           <div class="modal-header">
-            <h5 class="modal-title text-light" id="resetModalLabel">
-              Reset Run
+            <h5 class="modal-title text-light" id="missionFailedModalLabel">
+              Mission Failed
             </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body text-white">
-            You will lose all parts and progress. Proceed?
+            You will keep your earned OST Chips, but lose all parts and story
+            progress. Proceed?
           </div>
           <div class="modal-footer d-flex justify-content-between">
             <button
@@ -299,11 +306,11 @@
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Close
+              Cancel
             </button>
             <button
               type="button"
-              class="btn btn-warning"
+              class="btn btn-danger"
               data-bs-dismiss="modal"
               onclick="reset()"
             >
@@ -328,6 +335,12 @@
             <h5 class="modal-title text-light" id="rulesModalLabel">
               Rules and Info
             </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <div class="accordion accordion-flush" id="rulesAndInfoAccordion">
@@ -356,11 +369,6 @@
                       starter internal components (BST-G1/P10 booster,
                       FCS-G1/P01 FCS, AG-J-098 JOSO generator), no OS tunings,
                       and no weapons
-                    </li>
-                    <li class="text-white my-2">
-                      For every mission completed, roll for a new part by
-                      clicking "ROLL", with the correct stage you are in
-                      selected from the dropdown
                     </li>
                     <li class="text-white my-2">
                       If you complete the optional objective for a mission, you
@@ -579,7 +587,7 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer d-flex justify-content-start">
             <button
               type="button"
               class="btn btn-secondary"
@@ -606,6 +614,12 @@
             <h5 class="modal-title text-light" id="upAndDownloadModalLabel">
               Upload/Download Save File
             </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">

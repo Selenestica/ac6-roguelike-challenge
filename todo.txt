@@ -3,14 +3,7 @@ FEATURES:
   - add google analytics to see how much traffic this app gets
   - add styling to parts in categories so they increase in size on hover
 
-VERSION 2.0
-  - page has 2 main screens (similar to Budget Blitz loadout/shop UIs)
-    - screen for current mission
-    - screen for parts
-  - UI for current mission
-    - optional challenge shown + reward for optional challenge
-    - reward for optional challenge = 2 reward options
-    - if optional challenge not completed = 1 reward option
+TODO
   - UI shows current OST chips earned
     - OST chips roll over between runs, so progress is made after a loss as long as at least the first chapter was completed
     - chapter 1 = 2 OST chips
@@ -24,14 +17,14 @@ VERSION 2.0
     - begin a run with 1 random item of D-tier
     - item rarity drop is based off of chapters instead of stages (not sure if the original stages were the same thing or not)
   - save data
-    - acquired parts
-    - current mission
-    - current ending
-    - ost chips
-    - restarts
     - completedMissionsData
       - ending
       - mission
       - started
       - completed
-    - rolledParts
+      - optional challenge completed
+  - implement saved data wipe (removes local storage to completely start fresh)
+
+BUGS
+  - weapons are not being rolled often enough
+  

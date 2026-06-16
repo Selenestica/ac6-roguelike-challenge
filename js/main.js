@@ -1,5 +1,3 @@
-const stageMenuButton = document.getElementById("dropdownMenuButton");
-const rollButton = document.getElementById("rollButton");
 const partCategoryElements = document.getElementsByClassName("partCategory");
 const partCategoryAccordionButton = document.getElementsByClassName(
   "partCategoryAccordionButton",
@@ -230,7 +228,6 @@ const rollForPart = (amount) => {
 
 const acceptPart = async (chosenIndex) => {
   const chosen = currentParts[chosenIndex];
-  console.log(chosen);
   acquiredParts.push(chosen.part);
   displayPartInCategory(chosen.part);
   parts.splice(chosen.index, 1);
@@ -263,8 +260,8 @@ const removePart = (partName, partImg, partTier, partCategory, rowID) => {
 };
 
 const earnOSTChips = () => {
-  if (MISSIONS[currentEnding][currentMission].ostChips) {
-    ostChips += MISSIONS[currentEnding][currentMission].ostChips;
+  if (MISSIONS[currentEnding][currentMission].ostChipReward) {
+    ostChips += MISSIONS[currentEnding][currentMission].ostChipReward;
     ostChipsText.innerHTML = ostChips;
   }
 };
@@ -275,6 +272,7 @@ const proceedToNextMission = () => {
   // if not then currentMission++
   if (currentMission < MISSIONS[currentEnding].length - 1) {
     currentMission++;
+    generateMissionScreen(currentEnding, currentMission);
     return;
   }
 
@@ -284,23 +282,27 @@ const proceedToNextMission = () => {
   if (currentEnding === "liberatorOfRubiconMissions") {
     currentEnding = "aleaIactaEstMissions";
   }
-  currentMission = 0;
-  return;
-
   if (currentEnding === "aleaIactaEstMissions") {
-    console.warn("YOU WON!");
+    generateMissionScreen(currentEnding, currentMission);
     return;
   }
+  currentMission = 0;
+  generateMissionScreen(currentEnding, currentMission);
+  return;
 };
 
-// resets everything back to initial state
+// restarts a run. OST chips are kept as well as restarts and missionData
 const reset = () => {
   // we probably don't want to do this here, since we're going to roll over OST chips between each reset
   // localStorage.removeItem("saveFile");
 
   parts = [...PARTS];
-  rollButton.classList.remove("disabled");
+  acquiredParts = [];
+  rolledParts = [];
+  currentEnding = "firesOfRavenMissions";
+  currentMission = 0;
 
+  generateMissionScreen(currentEnding, currentMission);
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
   saveProgress();
@@ -383,12 +385,14 @@ const loadSavedProgress = () => {
     parts = PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
 
     // when loading up, show the correct mission according to the save file
+    ostChipsText.innerHTML = ostChips;
     generateMissionScreen(currentEnding, currentMission);
     genMissionCompleteModalContent(currentEnding, currentMission);
     return;
   }
 
   // if no save data found
+  ostChipsText.innerHTML = ostChips;
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
 };
