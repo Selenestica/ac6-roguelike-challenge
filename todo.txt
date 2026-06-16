@@ -10,8 +10,40 @@ TODO
   - make sure uploading a save file works
   - make sure downloading a save file works
   - update info modal
+  - add hamburger menu that includes the following features
+    - parts viewer so players can see what parts are in what tiers
+    - stats page for players to see their stats
+      - missions completed
+      - missions failed
+      - optional challenges completed
+      - best run (their furthest mission)
+    - save data management (upload/download files)
+  - allow for multiple save files?
+
+REBALANCE
+  - pulse blade D > A
+  - stun gun S > C
+  - napalm bomb launcher C > D
+  - jamming bomb B > D
+  - stun bomb B > C 
+  - bad cook flamethrower B > D 
+  - etsujin B > S 
+  - scudder B > C
+  - harris B > S
+  - gills A > B
+  - BML-G1/P29CNT Container Missile Launcher A > D
+  - BML-G1/P07VTC-12 Vertical Missile Launcher A > C
+  - BML-G1/P20MLT-04 Missile Launcher D > B
+  - xuan ge D > B
+  - coquillet D > B
+  - ludlow D > B
+  - chainsaw B > C
+  - zimmerman B > S
+  - HALDEMAN C > A
+  - Coral Shield S > C
+  - Pulse Scutum S > C
+  - Coral Missile Launcher S > A
 
 BUGS
-  - restarting a run creates to missionData entries for the first mission
   - weapons are not being rolled often enough
   

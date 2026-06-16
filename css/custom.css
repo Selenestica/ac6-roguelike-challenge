@@ -87,7 +87,7 @@ body {
 .socialIcons {
   font-size: x-large;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 534px) {
   #missionButtonText,
   #inventoryButtonText,
   #missionCompleteButtonText,
@@ -102,7 +102,7 @@ body {
   }
 }
 
-@media only screen and (min-width: 1001px) {
+@media only screen and (min-width: 535px) {
   #missionButtonText,
   #missionCompleteButtonText,
   #missionFailedButtonText,
