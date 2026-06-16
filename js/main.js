@@ -25,6 +25,9 @@ const ostChipsText = document.getElementById("ostChipsText");
 const missionButtonsDiv = document.getElementById("missionButtonsDiv");
 const inventoryScreen = document.getElementById("inventoryScreen");
 const newPartModal = document.getElementById("newPartModal");
+const rulesModal = document.getElementById("rulesModal");
+const initialPartModal = document.getElementById("initialPartModal");
+const initialPartModalBody = document.getElementById("initialPartModalBody");
 
 // defines how individual categories are grouped for rolling purposes
 // subject to change
@@ -51,6 +54,24 @@ let accordionsCollapsed = true;
 let currentParts = [];
 let rolledParts = [];
 let currentView = "missionViewButton";
+
+// when the rules and info modal closes and you dont have saved data, roll for a random part
+rulesModal.addEventListener("hidden.bs.modal", async () => {
+  const saveData = await localStorage.getItem("ac6rlSaveData");
+  if (!saveData) {
+    rollInitialPart();
+  }
+});
+
+const rollInitialPart = async () => {
+  const initialPart = await rollOnce(null, true);
+  acquiredParts.push(initialPart.part);
+  displayPartInCategory(initialPart.part);
+  // show initial part modal here
+  await populateInitialPartModalBody(initialPart.part);
+
+  saveProgress();
+};
 
 // toggles view between LOADOUT and SHOP
 for (let z = 0; z < mainViewButtons.length; z++) {
@@ -120,15 +141,6 @@ const displayPartInCategory = (part) => {
         <div class="d-flex col-4 text-light justify-content-start align-items-center">
           ${part.name}
         </div>
-        <div class="d-flex col-4 text-light justify-content-end align-items-center">
-          <button
-            type="button"
-            class="btn btn-danger"
-            onclick="removePart('${part.name}', '${part.img}', '${part.tier}', '${part.category}', '${partRowID}')"
-          >
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </div>
       </div>
     </div>`;
 
@@ -142,10 +154,30 @@ const displayPartInCategory = (part) => {
     </h5>`;
 };
 
-const populateNewPartsModal = () => {
+const populateInitialPartModalBody = (part) => {
+  initialPartModalBody.innerHTML = "";
+  initialPartModalBody.innerHTML += `
+      <div
+        class="card bg-dark border-secondary part-choice-card"
+        style="max-width: 200px;"
+        data-bs-dismiss="modal"
+      >
+        <div class="card-body d-flex flex-column align-items-center gap-2">
+          <img class="img-fluid" src="assets/images/${part.img}" />
+          <p class="text-white text-center mb-0">${part.name}</p>
+          <small class="text-muted text-center">${part.category.toUpperCase()}</small>
+        </div>
+      </div>
+    `;
+  const modal = new bootstrap.Modal(initialPartModal);
+  modal.show();
+};
+
+const populateNewPartsModal = (optionalCompleted) => {
   newPartModalBody.innerHTML = "";
-  for (let i = 0; i < currentParts.length; i++) {
-    const { part } = currentParts[i];
+  const partsToShow = optionalCompleted ? currentParts : [currentParts[0]];
+  for (let i = 0; i < partsToShow.length; i++) {
+    const { part } = partsToShow[i];
     newPartModalBody.innerHTML += `
       <div
         class="card bg-dark border-secondary part-choice-card"
@@ -165,36 +197,29 @@ const populateNewPartsModal = () => {
   modal.show();
 };
 
-const rollForPart = (amount) => {
-  if (parts.length === 0) {
-    // this will probably never happen. in fact i dont think its possible
-    console.log("no more parts to roll!");
-    return;
-  }
-  if (rolledParts.length > 0) {
-    currentParts = rolledParts;
-    populateNewPartsModal();
-    return;
-  }
-
+const rollOnce = (excludeIndex = null, initial = null) => {
   const { chapter } = MISSIONS[currentEnding][currentMission];
   const weights = chapterWeights(chapter);
-  const tiers = ["d", "c", "b", "a", "s"];
+  let tiers = ["d", "c", "b", "a", "s"];
+  if (initial) {
+    tiers = ["d"];
+  }
 
-  // step 1: roll category — filter out exhausted groups and re-normalize
+  const availableParts =
+    excludeIndex !== null ? parts.filter((_, i) => i !== excludeIndex) : parts;
+
   const categoryPool = Object.entries(CATEGORY_GROUPS)
-    .filter(([_, cats]) => parts.some((p) => cats.includes(p.category)))
+    .filter(([_, cats]) =>
+      availableParts.some((p) => cats.includes(p.category)),
+    )
     .map(([group, cats]) => ({ group, cats }));
 
-  const categoryRoll = Math.random() * categoryPool.length;
-  const chosenGroup = categoryPool[Math.floor(categoryRoll)];
-
-  // parts available in this category group
-  const partsInGroup = parts.filter((p) =>
+  const chosenGroup =
+    categoryPool[Math.floor(Math.random() * categoryPool.length)];
+  const partsInGroup = availableParts.filter((p) =>
     chosenGroup.cats.includes(p.category),
   );
 
-  // step 2: roll tier — filter to tiers that have parts in this group, re-normalize weights
   const tierPool = tiers
     .map((tier, i) => ({ tier, weight: weights[i] }))
     .filter(({ tier }) => partsInGroup.some((p) => p.tier === tier));
@@ -203,27 +228,36 @@ const rollForPart = (amount) => {
   let tierRoll = Math.random() * totalWeight;
   const chosenTier = tierPool.find((t) => (tierRoll -= t.weight) < 0).tier;
 
-  // step 3: pick a random part from the chosen category group + tier
   const eligibleParts = partsInGroup.filter((p) => p.tier === chosenTier);
-  const randomIndex = Math.floor(Math.random() * eligibleParts.length);
-  const chosenPart = eligibleParts[randomIndex];
-
-  // find the index in the main parts array for removal later
+  const chosenPart =
+    eligibleParts[Math.floor(Math.random() * eligibleParts.length)];
   const partsIndex = parts.indexOf(chosenPart);
 
-  currentParts.push({ part: chosenPart, index: partsIndex });
+  return { part: chosenPart, index: partsIndex };
+};
 
-  if (amount === 2 && currentParts.length < 2) {
-    // exclude the first rolled part from the pool for the second roll
-    parts = parts.filter((_, i) => i !== partsIndex);
-    rollForPart(amount - 1);
-    // restore the part to the pool since neither has been accepted yet
-    parts.splice(partsIndex, 0, chosenPart);
+const rollForParts = (optionalCompleted) => {
+  if (parts.length === 0) {
+    console.log("no more parts to roll!");
     return;
   }
+
+  // if we already rolled this mission (e.g. player reloaded), just show the modal
+  if (rolledParts.length > 0) {
+    currentParts = rolledParts;
+    populateNewPartsModal(optionalCompleted);
+    return;
+  }
+
+  // always roll 2 parts
+  const first = rollOnce(null, null);
+  const second = rollOnce(first.index, null);
+
+  currentParts = [first, second];
   rolledParts = [...currentParts];
+
   saveProgress();
-  populateNewPartsModal();
+  populateNewPartsModal(optionalCompleted);
 };
 
 const acceptPart = async (chosenIndex) => {
@@ -238,25 +272,6 @@ const acceptPart = async (chosenIndex) => {
   rolledParts = [];
   currentParts = [];
   saveProgress();
-};
-
-// removes part from the accordion and adds it back to the pool
-const removePart = (partName, partImg, partTier, partCategory, rowID) => {
-  const badgeEl = document.getElementById(`${partCategory}CategoryButtonBadge`);
-  const badgeNumber = parseInt(badgeEl.innerHTML);
-  badgeEl.innerHTML = badgeNumber > 1 ? badgeNumber - 1 : "";
-
-  document.getElementById(rowID).remove();
-
-  // find the full part object from PARTS to add back to the pool
-  const partToRestore = PARTS.find(
-    (p) => p.name === partName && p.img === partImg,
-  );
-  if (partToRestore) {
-    parts.push(partToRestore);
-  }
-
-  saveProgress(null, { name: partName, img: partImg }, null, null);
 };
 
 const earnOSTChips = () => {
@@ -292,19 +307,21 @@ const proceedToNextMission = () => {
 };
 
 // restarts a run. OST chips are kept as well as restarts and missionData
-const reset = () => {
-  // we probably don't want to do this here, since we're going to roll over OST chips between each reset
-  // localStorage.removeItem("saveFile");
-
+const reset = async () => {
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
   currentEnding = "firesOfRavenMissions";
   currentMission = 0;
 
+  await rollInitialPart();
+
   generateMissionScreen(currentEnding, currentMission);
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
+  for (let n = 0; n < acquiredParts.length; n++) {
+    displayPartInCategory(acquiredParts[n]);
+  }
   saveProgress();
 };
 
@@ -392,15 +409,23 @@ const loadSavedProgress = () => {
   }
 
   // if no save data found
+  const modal = new bootstrap.Modal(rulesModal);
+  modal.show();
   ostChipsText.innerHTML = ostChips;
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
 };
 
-loadSavedProgress();
-
-const uploadSaveFile = () => {
-  reset();
+const uploadSaveFile = async () => {
+  // remove old save file just to be safe
+  await deleteSaveData();
   localStorage.setItem("ac6rlSaveData", uploadedSaveFile);
   loadSavedProgress();
 };
+
+const deleteSaveData = () => {
+  localStorage.removeItem("ac6rlSaveData");
+  window.location.reload();
+};
+
+loadSavedProgress();

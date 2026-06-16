@@ -4,17 +4,8 @@ FEATURES:
   - add styling to parts in categories so they increase in size on hover
 
 TODO
-  - UI shows current OST chips earned
-    - OST chips roll over between runs, so progress is made after a loss as long as at least the first chapter was completed
-    - chapter 1 = 2 OST chips
-    - chapter 2 = 4 OST chips
-    - chapter 3 = 6 OST chips
-    - chapter 4 = 8 OST chips
-    - chapter 5 = 10 OST chips
   - rebalance
     - item (rarity) tiers rebalanced
-    - OST chips rebalanced
-    - begin a run with 1 random item of D-tier
     - item rarity drop is based off of chapters instead of stages (not sure if the original stages were the same thing or not)
   - save data
     - completedMissionsData
@@ -23,7 +14,9 @@ TODO
       - started
       - completed
       - optional challenge completed
-  - implement saved data wipe (removes local storage to completely start fresh)
+  - make sure uploading a save file works
+  - make sure downloading a save file works
+  - update info modal
 
 BUGS
   - weapons are not being rolled often enough

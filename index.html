@@ -236,13 +236,13 @@
               type="button"
               class="btn btn-danger"
               data-bs-dismiss="modal"
-              onclick="rollForPart(1)"
+              onclick="rollForParts(false)"
             >
               No
             </button>
             <button
               type="button"
-              onclick="rollForPart(2)"
+              onclick="rollForParts(true)"
               class="btn btn-success"
               data-bs-dismiss="modal"
             >
@@ -271,6 +271,50 @@
             class="modal-body d-flex justify-content-center gap-3 p-4"
             id="newPartModalBody"
           ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INITIAL PART MODAL -->
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      id="initialPartModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light">Starter Part</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="modal-body d-flex justify-content-center gap-3 p-4"
+            id="initialPartModalBody"
+          ></div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Thanks, I guess?
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Ok, awesome!
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -333,7 +377,7 @@
         <div class="modal-content bg-grey">
           <div class="modal-header">
             <h5 class="modal-title text-light" id="rulesModalLabel">
-              Rules and Info
+              The Armored Core 6 Roguelike Challenge
             </h5>
             <button
               type="button"
@@ -354,12 +398,12 @@
                     aria-expanded="false"
                     aria-controls="rulesAccordion"
                   >
-                    Rules
+                    Overview
                   </button>
                 </h2>
                 <div
                   id="rulesAccordion"
-                  class="accordion-collapse collapse p-3"
+                  class="accordion-collapse collapse show p-3"
                   aria-labelledby="Rules"
                   data-bs-parent="#rulesAndInfoAccordion"
                 >
@@ -369,25 +413,20 @@
                       starter internal components (BST-G1/P10 booster,
                       FCS-G1/P01 FCS, AG-J-098 JOSO generator), no OS tunings,
                       and no weapons
+                      <br />
+                      <b class="text-warning"
+                        >A free random part is given to you when you start, or
+                        have to restart, a run</b
+                      >
                     </li>
                     <li class="text-white my-2">
                       If you complete the optional objective for a mission, you
                       may roll for an additional part
                     </li>
                     <li class="text-white my-2">
-                      For every two missions completed, you may select an OS
-                      tuning of your choice. Your OS tuning will persist after
-                      every run, allowing you to progress in power over time.
-                      However, after a mission failure, you cannot add OS
-                      tunings until you have progressed past the point of your
-                      longest run. i.e. If you have not completed the mission
-                      "Ocean Crossing", you cannot add OS tunings on your
-                      subsequent runs until after you have completed the mission
-                      "Ocean Crossing"
-                    </li>
-                    <li class="text-white my-2">
                       If you fail a mission for any reason, the run is over.
-                      Press the "RESET" button to restart your run
+                      Press the "RESET" button to restart your run. You will,
+                      however, get to keep your OST Chips earned during your run
                     </li>
                     <li class="text-white my-2">
                       Due to the fact that the Stun Needle is de facto a
@@ -395,55 +434,6 @@
                       it for this mission (R-Back Unit variant, as in the base
                       game) even if you haven't acquired it through random
                       rewards
-                    </li>
-                    <li class="text-white my-2">
-                      You do not need to do the "Illegal Entry" mission
-                    </li>
-                    <li class="text-white my-2">
-                      Completing the mission "Escape" is not necessary if you
-                      are using the mission replay feature. If you do complete
-                      this mission (using mission replay or otherwise) you may
-                      role for another part
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="accordion-item bg-none">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed text-light"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#stagesAccordion"
-                    aria-expanded="false"
-                    aria-controls="stagesAccordion"
-                  >
-                    Stages
-                  </button>
-                </h2>
-                <div
-                  id="stagesAccordion"
-                  class="accordion-collapse collapse p-3"
-                  aria-labelledby="Rules"
-                  data-bs-parent="#rulesAndInfoAccordion"
-                >
-                  <ul class="modalAccordionList">
-                    <li class="text-white">
-                      <b>Stage 1: </b>Start your run here, and come back here
-                      after beating a final boss
-                    </li>
-                    <li class="text-white">
-                      <b>Stage 2: </b>Complete "Operation Wallclimber"
-                    </li>
-                    <li class="text-white">
-                      <b>Stage 3: </b>Complete "Steal the Survey Data"
-                    </li>
-                    <li class="text-white">
-                      <b>Stage 4: </b>Complete "Attack the Old Spaceport"
-                    </li>
-                    <li class="text-white">
-                      <b>Stage 5: </b>Complete "Underground Exploration - Depth
-                      3"
                     </li>
                   </ul>
                 </div>
@@ -476,49 +466,6 @@
                         that always appear alongside Helianthus machines. (And
                         in case you missed that in-game, Helianthi are the
                         grinder wheels).
-                      </p>
-                    </li>
-                    <li class="text-white">
-                      <b
-                        >Q: I'm in the middle of a playthrough and don't want to
-                        and/or can't be bothered to beat an ending to start
-                        over. Can I do this challenge through mission
-                        replays?</b
-                      >
-                      <p>
-                        A: Of course, just make sure to keep track of the
-                        correct order and availability of missions.
-                      </p>
-                    </li>
-                    <li class="text-white">
-                      <b
-                        >Q: If I'm using mission replay, can I still do "Escape"
-                        for an extra Stage 5 part roll?</b
-                      >
-                      <p>A: Knock yourself out, masochist.</p>
-                    </li>
-                    <li class="text-white">
-                      <b
-                        >Q: Why all the arbitrary bonus pay requirements for
-                        challenges?</b
-                      >
-                      <p>
-                        A: It's the easiest way for you to check how many
-                        enemies you've killed during the mission - all costs are
-                        calculated at 90% of the maximum bonus payout, give or
-                        take a few enemies that may have been missed while
-                        testing.
-                      </p>
-                    </li>
-                    <li class="text-white">
-                      <b
-                        >Q: Do I have to do all 3 endings one after another or
-                        can I do one again if I want to grind some better
-                        parts?</b
-                      >
-                      <p>
-                        A: The run was made with the idea that you should indeed
-                        do the endings in succession and not redo any missions.
                       </p>
                     </li>
                     <li class="text-white">
@@ -636,6 +583,36 @@
                   Please note that this will overwrite your current run.
                 </li>
               </ul>
+
+              <hr class="text-white" />
+              <div class="accordion accordion-flush" id="deleteDataAccordion">
+                <div class="accordion-item bg-none">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed text-danger"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#deleteAccordion"
+                      aria-expanded="false"
+                      aria-controls="deleteAccordion"
+                    >
+                      Delete Save Data
+                    </button>
+                  </h2>
+                  <div
+                    id="deleteAccordion"
+                    class="accordion-collapse collapse p-3"
+                    aria-labelledby="Delete Save Data"
+                    data-bs-parent="#deleteDataAccordion"
+                  >
+                    <button class="btn btn-danger" onclick="deleteSaveData()">
+                      DELETE SAVE DATA
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr class="text-white" />
+
               <input
                 class="form-control"
                 type="file"
