@@ -43,7 +43,7 @@ let currentEnding = "firesOfRavenMissions";
 let currentMission = 0;
 let acquiredParts = [];
 let restarts = 0;
-let completedMissionsData = [];
+let missionsData = [];
 
 let uploadedSaveFile = null;
 
@@ -59,18 +59,20 @@ let currentView = "missionViewButton";
 rulesModal.addEventListener("hidden.bs.modal", async () => {
   const saveData = await localStorage.getItem("ac6rlSaveData");
   if (!saveData) {
-    rollInitialPart();
+    await updateMissionsData(true, null, null);
+    rollInitialPart(true);
   }
 });
 
-const rollInitialPart = async () => {
+const rollInitialPart = async (needToSave = null) => {
   const initialPart = await rollOnce(null, true);
   acquiredParts.push(initialPart.part);
   displayPartInCategory(initialPart.part);
   // show initial part modal here
   await populateInitialPartModalBody(initialPart.part);
-
-  saveProgress();
+  if (needToSave) {
+    saveProgress();
+  }
 };
 
 // toggles view between LOADOUT and SHOP
@@ -261,11 +263,28 @@ const rollForParts = (optionalCompleted) => {
 };
 
 const acceptPart = async (chosenIndex) => {
+  let challengeCompleted = true;
+  if (currentParts.length < 2) {
+    challengeCompleted = false;
+  }
   const chosen = currentParts[chosenIndex];
   acquiredParts.push(chosen.part);
   displayPartInCategory(chosen.part);
   parts.splice(chosen.index, 1);
 
+  // missionData is an array of arrays to save LS space
+  // each mission is saved like
+  // [
+  //  ending (1, 2, or 3),
+  //  mission (just the mission number),
+  //  started (timestamp),
+  //  completed (timestamp, or false. false means they failed the mission. timestamp means they succeeded),
+  //  optional challenge completed (boolean)
+  // ]
+  // started timestamp is entered when page loads for the first time if no save data
+  // the rest is filled out right here, along with the started timestamp for the next mission entry
+
+  await updateMissionsData(false, true, challengeCompleted);
   await earnOSTChips();
   await proceedToNextMission();
 
@@ -279,6 +298,34 @@ const earnOSTChips = () => {
     ostChips += MISSIONS[currentEnding][currentMission].ostChipReward;
     ostChipsText.innerHTML = ostChips;
   }
+};
+
+const updateMissionsData = (
+  isStart,
+  completed = null,
+  challengeCompleted = null,
+) => {
+  const ts = Math.floor(Date.now() / 1000); // timestamp in seconds
+  let endingID = 1;
+  if (currentEnding === "liberatorOfRubiconMissions") {
+    endingID = 2;
+  }
+  if (currentEnding === "aleaIactaEstMissions") {
+    endingID = 3;
+  }
+  // for the very first entry
+  if (isStart) {
+    missionsData.push([endingID, currentMission, ts]);
+    return;
+  }
+
+  // update the last entry in the array with the completed and optional challenge completed fields
+  let latestEntry = missionsData.at(-1);
+  latestEntry.push(completed ? ts : false);
+  latestEntry.push(challengeCompleted);
+
+  // create a new entry in the array with the first three fields
+  missionsData.push([endingID, currentMission, ts]);
 };
 
 const proceedToNextMission = () => {
@@ -308,20 +355,21 @@ const proceedToNextMission = () => {
 
 // restarts a run. OST chips are kept as well as restarts and missionData
 const reset = async () => {
+  // first, update missionsData
+  await updateMissionsData(false, false, false);
+
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
   currentEnding = "firesOfRavenMissions";
   currentMission = 0;
 
-  await rollInitialPart();
-
-  generateMissionScreen(currentEnding, currentMission);
   partCategoriesContainer.innerHTML = "";
+
   generatePartCategories();
-  for (let n = 0; n < acquiredParts.length; n++) {
-    displayPartInCategory(acquiredParts[n]);
-  }
+  await rollInitialPart(false);
+  generateMissionScreen(currentEnding, currentMission);
+
   saveProgress();
 };
 
@@ -355,7 +403,7 @@ const saveProgress = () => {
       currentEnding,
       currentMission,
       restarts,
-      completedMissionsData,
+      missionsData,
       rolledParts,
     };
     localStorage.setItem("ac6rlSaveData", JSON.stringify(initialSave));
@@ -369,7 +417,7 @@ const saveProgress = () => {
     currentMission,
     acquiredParts,
     restarts,
-    completedMissionsData,
+    missionsData,
     rolledParts,
   };
 
@@ -388,7 +436,7 @@ const loadSavedProgress = () => {
     acquiredParts = saveFile.acquiredParts;
     ostChips = saveFile.ostChips;
     restarts = saveFile.restarts;
-    completedMissionsData = saveFile.completedMissionsData;
+    missionsData = saveFile.missionsData;
     rolledParts = saveFile.rolledParts;
 
     for (let n = 0; n < saveFile.acquiredParts.length; n++) {

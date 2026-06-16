@@ -7,17 +7,11 @@ TODO
   - rebalance
     - item (rarity) tiers rebalanced
     - item rarity drop is based off of chapters instead of stages (not sure if the original stages were the same thing or not)
-  - save data
-    - completedMissionsData
-      - ending
-      - mission
-      - started
-      - completed
-      - optional challenge completed
   - make sure uploading a save file works
   - make sure downloading a save file works
   - update info modal
 
 BUGS
+  - restarting a run creates to missionData entries for the first mission
   - weapons are not being rolled often enough
   
