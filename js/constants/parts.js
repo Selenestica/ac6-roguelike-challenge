@@ -2,7 +2,7 @@ const PARTS = [
   {
     name: "VP-66EG Stun Gun",
     img: "VP-66EG Stun Gun.webp",
-    tier: "s",
+    tier: "c",
     category: "r-arm",
   },
   {
@@ -50,7 +50,7 @@ const PARTS = [
   {
     name: "VP-66EG Stun Gun",
     img: "VP-66EG Stun Gun.webp",
-    tier: "s",
+    tier: "c",
     category: "l-arm",
   },
   {
@@ -86,13 +86,13 @@ const PARTS = [
   {
     name: "KRANICH/60Z Pulse Cannon",
     img: "kranich-60z.webp",
-    tier: "s",
+    tier: "c",
     category: "r-back",
   },
   {
     name: "WR-0999 DELIVERY BOY Cluster Missile Launcher",
     img: "WR-0999 DELIVERY BOY Cluster Missile Launcher.webp",
-    tier: "s",
+    tier: "d",
     category: "r-back",
   },
   {
@@ -110,7 +110,7 @@ const PARTS = [
   {
     name: "IB-C03W3: NGI 006 Coral Missile Launcher",
     img: "IB-C03W3 NGI 006 Coral Missile Launcher.webp",
-    tier: "s",
+    tier: "a",
     category: "r-back",
   },
   {
@@ -122,13 +122,13 @@ const PARTS = [
   {
     name: "VE-61PSA Pulse Scutum",
     img: "ve-61psa.webp",
-    tier: "s",
+    tier: "c",
     category: "l-back",
   },
   {
     name: "IB-C03W4: NGI 028 Coral Shield",
     img: "IB-C03W4 NGI 028 Coral Shield.webp",
-    tier: "s",
+    tier: "c",
     category: "l-back",
   },
   {
@@ -140,13 +140,13 @@ const PARTS = [
   {
     name: "KRANICH/60Z Pulse Cannon",
     img: "kranich-60z.webp",
-    tier: "s",
+    tier: "c",
     category: "l-back",
   },
   {
     name: "WR-0999 DELIVERY BOY Cluster Missile Launcher",
     img: "WR-0999 DELIVERY BOY Cluster Missile Launcher.webp",
-    tier: "s",
+    tier: "d",
     category: "l-back",
   },
   {
@@ -164,7 +164,7 @@ const PARTS = [
   {
     name: "IB-C03W3: NGI 006 Coral Missile Launcher",
     img: "IB-C03W3 NGI 006 Coral Missile Launcher.webp",
-    tier: "s",
+    tier: "a",
     category: "l-back",
   },
   {
@@ -333,13 +333,13 @@ const PARTS = [
   {
     name: "BML-G1/P07VTC-12 Vertical Missile Launcher",
     img: "bml-g1-p07vtc-12.webp",
-    tier: "a",
+    tier: "c",
     category: "r-back",
   },
   {
     name: "BML-G1/P29CNT Container Missile Launcher",
     img: "bml-g1-p29cnt.webp",
-    tier: "a",
+    tier: "d",
     category: "r-back",
   },
   {
@@ -393,13 +393,13 @@ const PARTS = [
   {
     name: "BML-G1/P07VTC-12 Vertical Missile Launcher",
     img: "bml-g1-p07vtc-12.webp",
-    tier: "a",
+    tier: "c",
     category: "l-back",
   },
   {
     name: "BML-G1/P29CNT Container Missile Launcher",
     img: "bml-g1-p29cnt.webp",
-    tier: "a",
+    tier: "d",
     category: "l-back",
   },
   {
@@ -523,7 +523,7 @@ const PARTS = [
   {
     name: "IA-C01B: GILLS",
     img: "ia-c01b-gills.webp",
-    tier: "a",
+    tier: "b",
     category: "booster",
   },
   { name: "VE-21B", img: "ve-21b.webp", tier: "a", category: "fcs" },
@@ -555,13 +555,13 @@ const PARTS = [
   {
     name: "LR-037 HARRIS Linear Rifle",
     img: "lr-037-harris.webp",
-    tier: "b",
+    tier: "s",
     category: "r-arm",
   },
   {
     name: "RD-025 SCUDDER Assault Rifle",
     img: "rf-025-scudder.webp",
-    tier: "b",
+    tier: "d",
     category: "r-arm",
   },
   {
@@ -573,13 +573,13 @@ const PARTS = [
   {
     name: "MA-E-210 ETSUJIN Machine Gun",
     img: "ma-e-210-etsujin.webp",
-    tier: "b",
+    tier: "s",
     category: "r-arm",
   },
   {
     name: "SG-027 ZIMMERMAN Shotgun",
     img: "sg-027-zimmerman.webp",
-    tier: "b",
+    tier: "s",
     category: "r-arm",
   },
   {
@@ -609,25 +609,25 @@ const PARTS = [
   {
     name: "LITTLE GEM Bazooka",
     img: "little-gem.webp",
-    tier: "b",
+    tier: "d",
     category: "r-arm",
   },
   {
     name: "MA-T-223 KYORIKU Jamming Bomb Launcher",
     img: "ma-t-223-kyoriku.webp",
-    tier: "b",
+    tier: "d",
     category: "r-arm",
   },
   {
     name: "WS-1200 THERAPIST Stun Bomb Launcher",
     img: "ws-1200-therapist.webp",
-    tier: "b",
+    tier: "d",
     category: "r-arm",
   },
   {
     name: "WB-0000 BAD COOK Flamethrower",
     img: "wb-0000-bad-cook.webp",
-    tier: "b",
+    tier: "d",
     category: "r-arm",
   },
   {
@@ -693,13 +693,13 @@ const PARTS = [
   {
     name: "LR-037 HARRIS Linear Rifle",
     img: "lr-037-harris.webp",
-    tier: "b",
+    tier: "s",
     category: "l-arm",
   },
   {
     name: "RD-025 SCUDDER Assault Rifle",
     img: "rf-025-scudder.webp",
-    tier: "b",
+    tier: "d",
     category: "l-arm",
   },
   {
@@ -711,13 +711,13 @@ const PARTS = [
   {
     name: "MA-E-210 ETSUJIN Machine Gun",
     img: "ma-e-210-etsujin.webp",
-    tier: "b",
+    tier: "s",
     category: "l-arm",
   },
   {
     name: "SG-027 ZIMMERMAN Shotgun",
     img: "sg-027-zimmerman.webp",
-    tier: "b",
+    tier: "s",
     category: "l-arm",
   },
   {
@@ -747,25 +747,25 @@ const PARTS = [
   {
     name: "LITTLE GEM Bazooka",
     img: "little-gem.webp",
-    tier: "b",
+    tier: "d",
     category: "l-arm",
   },
   {
     name: "MA-T-223 KYORIKU Jamming Bomb Launcher",
     img: "ma-t-223-kyoriku.webp",
-    tier: "b",
+    tier: "d",
     category: "l-arm",
   },
   {
     name: "WS-1200 THERAPIST Stun Bomb Launcher",
     img: "ws-1200-therapist.webp",
-    tier: "b",
+    tier: "d",
     category: "l-arm",
   },
   {
     name: "WB-0000 BAD COOK Flamethrower",
     img: "wb-0000-bad-cook.webp",
-    tier: "b",
+    tier: "d",
     category: "l-arm",
   },
   {
@@ -1090,19 +1090,19 @@ const PARTS = [
   {
     name: "DF-GA-08 HU-BEN Gatling Gun",
     img: "df-ga-08-hu-ben.webp",
-    tier: "c",
+    tier: "s",
     category: "r-arm",
   },
   {
     name: "SG-026 HALDEMAN Shotgun",
     img: "sg-026-haldeman.webp",
-    tier: "c",
+    tier: "a",
     category: "r-arm",
   },
   {
     name: "44-141 JVLN ALPHA Detonating Bazooka",
     img: "44-141-jvln-alpha.webp",
-    tier: "c",
+    tier: "a",
     category: "r-arm",
   },
   {
@@ -1120,7 +1120,7 @@ const PARTS = [
   {
     name: "MA-T-222 KYORAI Napalm Bomb Launcher",
     img: "ma-t-223-kyoriku.webp",
-    tier: "c",
+    tier: "d",
     category: "r-arm",
   },
   {
@@ -1162,7 +1162,7 @@ const PARTS = [
   {
     name: "PB-033M ASHMEAD Pile Bunker",
     img: "pb-033m-ashmead.webp",
-    tier: "c",
+    tier: "s",
     category: "l-arm",
   },
   {
@@ -1180,19 +1180,19 @@ const PARTS = [
   {
     name: "DF-GA-08 HU-BEN Gatling Gun",
     img: "df-ga-08-hu-ben.webp",
-    tier: "c",
+    tier: "s",
     category: "l-arm",
   },
   {
     name: "SG-026 HALDEMAN Shotgun",
     img: "sg-026-haldeman.webp",
-    tier: "c",
+    tier: "a",
     category: "l-arm",
   },
   {
     name: "44-141 JVLN ALPHA Detonating Bazooka",
     img: "44-141-jvln-alpha.webp",
-    tier: "c",
+    tier: "a",
     category: "l-arm",
   },
   {
@@ -1210,7 +1210,7 @@ const PARTS = [
   {
     name: "MA-T-222 KYORAI Napalm Bomb Launcher",
     img: "ma-t-223-kyoriku.webp",
-    tier: "c",
+    tier: "d",
     category: "l-arm",
   },
   {
@@ -1252,7 +1252,7 @@ const PARTS = [
   {
     name: "SONGBIRDS Grenade Cannon",
     img: "songbirds.webp",
-    tier: "c",
+    tier: "s",
     category: "r-back",
   },
   {
@@ -1294,7 +1294,7 @@ const PARTS = [
   {
     name: "Vvc-703PM Plasma Missile Launcher",
     img: "vvc-703pm.webp",
-    tier: "c",
+    tier: "s",
     category: "r-back",
   },
   {
@@ -1324,7 +1324,7 @@ const PARTS = [
   {
     name: "SONGBIRDS Grenade Cannon",
     img: "songbirds.webp",
-    tier: "c",
+    tier: "s",
     category: "l-back",
   },
   {
@@ -1366,7 +1366,7 @@ const PARTS = [
   {
     name: "Vvc-703PM Plasma Missile Launcher",
     img: "vvc-703pm.webp",
-    tier: "c",
+    tier: "s",
     category: "l-back",
   },
   {
@@ -1490,19 +1490,19 @@ const PARTS = [
   },
   { name: "VP-20S", img: "vp-20s.webp", tier: "c", category: "generator" },
   { name: "VP-20D", img: "vp-20d.webp", tier: "c", category: "generator" },
-  {
-    name: "BST-G1/P10",
-    img: "bst-g1-p10.webp",
-    tier: "d",
-    category: "booster",
-  },
-  {
-    name: "AG-J-098 JOSO",
-    img: "ag-j-098-joso.webp",
-    tier: "d",
-    category: "generator",
-  },
-  { name: "FCS-G1/P01", img: "fcs-g1-p01.webp", tier: "d", category: "fcs" },
+  // {
+  //   name: "BST-G1/P10",
+  //   img: "bst-g1-p10.webp",
+  //   tier: "d",
+  //   category: "booster",
+  // },
+  // {
+  //   name: "AG-J-098 JOSO",
+  //   img: "ag-j-098-joso.webp",
+  //   tier: "d",
+  //   category: "generator",
+  // },
+  // { name: "FCS-G1/P01", img: "fcs-g1-p01.webp", tier: "d", category: "fcs" },
   {
     name: "MA-J-200 RANSETSU-RF Burst Rifle",
     img: "ma-j-200-ransetsu-rf.webp",
@@ -1524,25 +1524,25 @@ const PARTS = [
   {
     name: "MG-014 LUDLOW Machine Gun",
     img: "mg-014-ludlow.webp",
-    tier: "d",
+    tier: "a",
     category: "r-arm",
   },
   {
     name: "HG-003 COQUILLETT Handgun",
     img: "hg-003-coquillett.webp",
-    tier: "d",
+    tier: "b",
     category: "r-arm",
   },
   {
     name: "DF-BA-06 XUAN-GE Bazooka",
     img: "df-ba-06-xuan-ge.webp",
-    tier: "d",
+    tier: "b",
     category: "r-arm",
   },
   {
     name: "HI-32 BU/TT-A Pulse Blade",
     img: "hi-32-bu-tt-a.webp",
-    tier: "d",
+    tier: "a",
     category: "l-arm",
   },
   {
@@ -1566,25 +1566,25 @@ const PARTS = [
   {
     name: "MG-014 LUDLOW Machine Gun",
     img: "mg-014-ludlow.webp",
-    tier: "d",
+    tier: "a",
     category: "l-arm",
   },
   {
     name: "HG-003 COQUILLETT Handgun",
     img: "hg-003-coquillett.webp",
-    tier: "d",
+    tier: "b",
     category: "l-arm",
   },
   {
     name: "DF-BA-06 XUAN-GE Bazooka",
     img: "df-ba-06-xuan-ge.webp",
-    tier: "d",
+    tier: "b",
     category: "l-arm",
   },
   {
     name: "BML-G1/P20MLT-04 Missile Launcher",
     img: "bml-g1-p20mlt-04.webp",
-    tier: "d",
+    tier: "b",
     category: "r-back",
   },
   {
@@ -1602,7 +1602,7 @@ const PARTS = [
   {
     name: "BML-G1/P20MLT-04 Missile Launcher",
     img: "bml-g1-p20mlt-04.webp",
-    tier: "d",
+    tier: "b",
     category: "l-back",
   },
   {

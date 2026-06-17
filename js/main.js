@@ -335,22 +335,29 @@ const proceedToNextMission = () => {
   if (currentMission < MISSIONS[currentEnding].length - 1) {
     currentMission++;
     generateMissionScreen(currentEnding, currentMission);
+    genMissionCompleteModalContent(currentEnding, currentMission);
     return;
   }
 
   if (currentEnding === "firesOfRavenMissions") {
     currentEnding = "liberatorOfRubiconMissions";
+    currentMission = 0;
+    generateMissionScreen(currentEnding, currentMission);
+    genMissionCompleteModalContent(currentEnding, currentMission);
+    return;
   }
   if (currentEnding === "liberatorOfRubiconMissions") {
     currentEnding = "aleaIactaEstMissions";
+    currentMission = 0;
+    generateMissionScreen(currentEnding, currentMission);
+    genMissionCompleteModalContent(currentEnding, currentMission);
+    return;
   }
   if (currentEnding === "aleaIactaEstMissions") {
     generateMissionScreen(currentEnding, currentMission);
+    genMissionCompleteModalContent(currentEnding, currentMission);
     return;
   }
-  currentMission = 0;
-  generateMissionScreen(currentEnding, currentMission);
-  return;
 };
 
 // restarts a run. OST chips are kept as well as restarts and missionData
@@ -369,6 +376,7 @@ const reset = async () => {
   generatePartCategories();
   await rollInitialPart(false);
   generateMissionScreen(currentEnding, currentMission);
+  genMissionCompleteModalContent(currentEnding, currentMission);
 
   saveProgress();
 };

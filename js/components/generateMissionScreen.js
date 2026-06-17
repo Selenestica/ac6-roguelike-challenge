@@ -8,6 +8,7 @@ const getEndingFullName = (ending) => {
 
 const generateMissionScreen = (ending, mission) => {
   const endingName = getEndingFullName(ending);
+  console.log(ending, mission);
   const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
   missionViewScreen.innerHTML = "";
 
@@ -100,7 +101,7 @@ const generateMissionScreen = (ending, mission) => {
             ${
               ostChipReward &&
               `<div class="d-flex justify-content-between text-white">
-                  <span>Chapter Complete</span>
+                  <span>${ostChipReward > 1 ? "Chapter Complete" : "Mid-Chapter Reward"}</span>
                   <span class="text-info">+${ostChipReward} OST Chips</span>
                 </div>`
             }

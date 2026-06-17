@@ -394,16 +394,52 @@
                     class="accordion-button collapsed text-light"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#rulesAccordion"
+                    data-bs-target="#overviewAccordion"
                     aria-expanded="false"
-                    aria-controls="rulesAccordion"
+                    aria-controls="overviewAccordion"
                   >
                     Overview
                   </button>
                 </h2>
                 <div
-                  id="rulesAccordion"
+                  id="overviewAccordion"
                   class="accordion-collapse collapse show p-3"
+                  aria-labelledby="Rules"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <p class="text-white">
+                    The Armored Core 6 Roguelike Challange is for pilots who
+                    really want to spice up their PvE experience with roguelike
+                    elements!
+                  </p>
+                  <p class="text-white">
+                    This challenge is a journey that takes you through all three
+                    endings, starting with Fires of Raven, then Liberator of
+                    Rubicon, and finally Alea Iacta Est.
+                  </p>
+                  <p class="text-white">
+                    The idea is that you will be forced to use crazy PvE
+                    loadouts that you have never used before, possibly learn
+                    something, and most importantly, have fun!
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#rulesAccordion"
+                    aria-expanded="false"
+                    aria-controls="rulesAccordion"
+                  >
+                    Rules
+                  </button>
+                </h2>
+                <div
+                  id="rulesAccordion"
+                  class="accordion-collapse collapse p-3"
                   aria-labelledby="Rules"
                   data-bs-parent="#rulesAndInfoAccordion"
                 >
@@ -420,22 +456,96 @@
                       >
                     </li>
                     <li class="text-white my-2">
-                      If you complete the optional objective for a mission, you
-                      may roll for an additional part
-                    </li>
-                    <li class="text-white my-2">
                       If you fail a mission for any reason, the run is over.
-                      Press the "RESET" button to restart your run. You will,
-                      however, get to keep your OST Chips earned during your run
-                    </li>
-                    <li class="text-white my-2">
-                      Due to the fact that the Stun Needle is de facto a
-                      mandatory weapon for "Destroy the Ice Worm", you may use
-                      it for this mission (R-Back Unit variant, as in the base
-                      game) even if you haven't acquired it through random
-                      rewards
+                      Press the "Mission Failed" button to restart your run. You
+                      will, however, get to keep your OST Chips earned during
+                      your run
                     </li>
                   </ul>
+                </div>
+              </div>
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#progressionAccordion"
+                    aria-expanded="false"
+                    aria-controls="progressionAccordion"
+                  >
+                    Progression
+                  </button>
+                </h2>
+                <div
+                  id="progressionAccordion"
+                  class="accordion-collapse collapse p-3"
+                  aria-labelledby="Rules"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <p class="text-white">
+                    You must complete the mission shown on screen in order to
+                    progress (you can use the Replay Mission feature in-game).
+                  </p>
+                  <p class="text-white">
+                    If you complete the mission, press the "Mission Complete"
+                    button (green checkmark on mobile), and follow the prompts.
+                  </p>
+                  <p class="text-white">
+                    Every mission has an optional objective, which you can
+                    complete for an extra part roll (you can still only choose 1
+                    part, but options are good).
+                  </p>
+                  <p class="text-white">
+                    Completing a chapter rewards you with OST Chips, with the
+                    later chapters awarding more chips. For longer chapters,
+                    there are mid-chapter chip rewards as well. OST Chips
+                    persist in your inventory even if you fail a run, making
+                    your subsequent runs easier.
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#saveDataInfoAccordion"
+                    aria-expanded="false"
+                    aria-controls="saveDataInfoAccordion"
+                  >
+                    Saving Your Progress
+                  </button>
+                </h2>
+                <div
+                  id="saveDataInfoAccordion"
+                  class="accordion-collapse collapse p-3"
+                  aria-labelledby="Saving Your Progress"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <p class="text-white">
+                    Your progress is automatically saved for you whenever you
+                    accept a part reward. The save data is stored in your
+                    browser's local storage, so feel free to close out of the
+                    website. As long as you use the same browser, you will have
+                    your progress.
+                  </p>
+                  <p class="text-white">
+                    Note that clearing your browser cache and cookies may also
+                    delete our save data.
+                    <b
+                      >It's a good idea to periodically download your save
+                      data.</b
+                    >
+                    You can download (and upload) save data by clicking the
+                    button in the upper right and following the prompts there.
+                  </p>
+                  <p class="text-white">
+                    If you want to transfer your save to another device or
+                    browser, simply download your save data and upload it to the
+                    new platform.
+                  </p>
                 </div>
               </div>
               <div class="accordion-item bg-none">
@@ -458,6 +568,22 @@
                   data-bs-parent="#rulesAndInfoAccordion"
                 >
                   <ul class="modalAccordionList">
+                    <li class="text-white my-2">
+                      <b>Q: What about the "Destroy the Ice Worm" mission?</b>
+                      <p>
+                        You may use the Stun Needle launcher for this mission
+                        (R-Back Unit variant, as in the base game) even if you
+                        haven't acquired it through random rewards
+                      </p>
+                    </li>
+                    <li class="text-white my-2">
+                      <b>Q: What about [ALT] missions?</b>
+                      <p>
+                        The mission tab will tell you if you need to do the
+                        [ALT] version of a mission by saying [ALT] in the
+                        mission title
+                      </p>
+                    </li>
                     <li class="text-white">
                       <b>Q: What the hell is a Denoiser or a Weevil?</b>
                       <p>
@@ -465,7 +591,7 @@
                         and Institute City. Weevils are the bipedal C-Weapon MTs
                         that always appear alongside Helianthus machines. (And
                         in case you missed that in-game, Helianthi are the
-                        grinder wheels).
+                        grinder wheels)
                       </p>
                     </li>
                     <li class="text-white">
