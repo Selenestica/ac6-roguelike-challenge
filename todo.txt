@@ -12,12 +12,18 @@ TODO
       - optional challenges completed
       - best run (their furthest mission)
     - save data management (upload/download files)
-  - completion file
   - put cap on OST Chips (197?)
+  - challenge complete screen
+    - disable Mission Complete button
+    - turn Mission Failed button into Reset button. modal to prompt to delete save data and start over
+    - get missions completed only for successful run
+    - show total missions undertaken also
+    - show number of restarts (missions failed)
 
 POTENTIAL FEATURES
   - instead of a free random part every restart, choose between part or 1 OST Chip
   - allow for multiple save files?
 
 BUGS
+  - set uploadedSaveFile to null when save data management modal closes
   

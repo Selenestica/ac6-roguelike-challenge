@@ -6,15 +6,32 @@ const getEndingFullName = (ending) => {
   if (ending === "aleaIactaEstMissions") return "Alea Iacta Est";
 };
 
-const generateMissionScreen = (ending, mission) => {
+const getChallengeCompleteStats = (data) => {
+  const { acquiredParts, restarts, missionsData, ostChips } = data;
+  let challengesCompleted = 0;
+  for (let i = 0; i < missionsData.length; i++) {
+    if (missionsData[i][4]) {
+      challengesCompleted++;
+    }
+  }
+  return { acquiredParts, challengesCompleted, ostChips, restarts };
+};
+
+const generateMissionScreen = async (ending, mission) => {
   const endingName = getEndingFullName(ending);
   const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
   missionViewScreen.innerHTML = "";
 
   if (
-    currentEnding === "aleaIactaEst" &&
+    currentEnding === "aleaIactaEstMissions" &&
     mission >= MISSIONS[currentEnding].length - 1
   ) {
+    const saveData = await localStorage.getItem("ac6rlSaveData");
+    if (!saveData) return;
+
+    const { acquiredParts, challengesCompleted, ostChips, restarts } =
+      getChallengeCompleteStats(JSON.parse(saveData));
+
     missionViewScreen.innerHTML = `
       <div class="col-sm-12 col-md-10 col-lg-8 text-center">
 
@@ -36,15 +53,15 @@ const generateMissionScreen = (ending, mission) => {
           <small class="text-secondary text-uppercase fw-bold mb-3 d-block">Run Summary</small>
           <div class="d-flex justify-content-between text-white mb-2">
             <span>Parts Obtained</span>
-            <span class="text-success">{partsObtained}</span>
+            <span class="text-success">${acquiredParts.length}</span>
           </div>
           <div class="d-flex justify-content-between text-white mb-2">
             <span>Optional Challenges Completed</span>
-            <span class="text-success">{challengesCompleted}</span>
+            <span class="text-success">${challengesCompleted}</span>
           </div>
           <div class="d-flex justify-content-between text-white">
             <span>OST Chips Earned</span>
-            <span class="text-info">{ostChipsEarned}</span>
+            <span class="text-info">${ostChips}</span>
           </div>
         </div>
 
@@ -59,6 +76,7 @@ const generateMissionScreen = (ending, mission) => {
 
       </div>
     `;
+    return;
   }
   missionViewScreen.innerHTML = `
         <div class="col-sm-12 col-md-10 col-lg-8">

@@ -353,9 +353,14 @@ const proceedToNextMission = () => {
     genMissionCompleteModalContent(currentEnding, currentMission);
     return;
   }
-  if (currentEnding === "aleaIactaEstMissions") {
+  if (
+    currentEnding === "aleaIactaEstMissions" &&
+    currentMission >= MISSIONS[currentEnding].length - 1
+  ) {
     generateMissionScreen(currentEnding, currentMission);
-    genMissionCompleteModalContent(currentEnding, currentMission);
+
+    // hide mission complete button
+    // change mission failed button to Reset button
     return;
   }
 };
@@ -370,6 +375,7 @@ const reset = async () => {
   rolledParts = [];
   currentEnding = "firesOfRavenMissions";
   currentMission = 0;
+  restarts++;
 
   partCategoriesContainer.innerHTML = "";
 
