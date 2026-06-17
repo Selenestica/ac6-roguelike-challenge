@@ -8,7 +8,6 @@ const getEndingFullName = (ending) => {
 
 const generateMissionScreen = (ending, mission) => {
   const endingName = getEndingFullName(ending);
-  console.log(ending, mission);
   const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
   missionViewScreen.innerHTML = "";
 

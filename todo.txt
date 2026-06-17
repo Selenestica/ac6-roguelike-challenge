@@ -4,9 +4,6 @@ FEATURES:
   - add styling to parts in categories so they increase in size on hover
 
 TODO
-  - make sure uploading a save file works
-  - make sure downloading a save file works
-  - update info modal
   - add hamburger menu that includes the following features
     - parts viewer so players can see what parts are in what tiers
     - stats page for players to see their stats
@@ -16,6 +13,7 @@ TODO
       - best run (their furthest mission)
     - save data management (upload/download files)
   - completion file
+  - put cap on OST Chips (197?)
 
 POTENTIAL FEATURES
   - instead of a free random part every restart, choose between part or 1 OST Chip
