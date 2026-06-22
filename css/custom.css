@@ -132,3 +132,17 @@ body {
   transform: translateY(-4px);
   transition: all 0.15s ease;
 }
+
+#initialPartModal {
+  z-index: 1050;
+}
+
+#initialPartModal + .modal-backdrop {
+  z-index: 1049;
+}
+
+.trophy-lg {
+  width: 100px;
+  height: 100px;
+  font-size: 3rem;
+}

@@ -66,13 +66,13 @@ rulesModal.addEventListener("hidden.bs.modal", async () => {
 
 const rollInitialPart = async (needToSave = null) => {
   const initialPart = await rollOnce(null, true);
+  if (needToSave) {
+    saveProgress();
+  }
   acquiredParts.push(initialPart.part);
   displayPartInCategory(initialPart.part);
   // show initial part modal here
   await populateInitialPartModalBody(initialPart.part);
-  if (needToSave) {
-    saveProgress();
-  }
 };
 
 // toggles view between LOADOUT and SHOP
@@ -239,6 +239,13 @@ const rollOnce = (excludeIndex = null, initial = null) => {
 };
 
 const rollForParts = (optionalCompleted) => {
+  // if its the last mission of the ending, they dont need a part reward
+  if (mission >= MISSIONS[currentEnding].length - 1) {
+    showEndingFinishedModal(optionalCompleted);
+    return;
+  }
+
+  // this is pretty much impossible to achieve, but better safe than sorry
   if (parts.length === 0) {
     console.log("no more parts to roll!");
     return;
@@ -363,6 +370,18 @@ const proceedToNextMission = () => {
     // change mission failed button to Reset button
     return;
   }
+};
+
+const showEndingFinishedModal = async (optionalCompleted) => {
+  // so we need to go ahead and give the player their rewards in case the browser refreshs or something happens
+  if (optionalCompleted) {
+    ostChips += 4;
+  }
+  rollInitialPart(true);
+
+  await genEndingCompleteModalContent(optionalCompleted);
+  const modal = new bootstrap.Modal(endingCompleteModal);
+  modal.show();
 };
 
 // restarts a run. OST chips are kept as well as restarts and missionData

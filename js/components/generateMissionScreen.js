@@ -22,6 +22,13 @@ const generateMissionScreen = async (ending, mission) => {
   const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
   missionViewScreen.innerHTML = "";
 
+  // if on the final mission of an ending, show the proper reward for the optional challenge
+  let isFinalMissionInEnding = false;
+  if (mission >= MISSIONS[currentEnding].length - 1) {
+    isFinalMissionInEnding = true;
+  }
+
+  // when all three endings are complete
   if (
     currentEnding === "aleaIactaEstMissions" &&
     mission >= MISSIONS[currentEnding].length - 1
@@ -78,6 +85,7 @@ const generateMissionScreen = async (ending, mission) => {
     `;
     return;
   }
+  // for every other mission screen
   missionViewScreen.innerHTML = `
         <div class="col-sm-12 col-md-10 col-lg-8">
           <!-- Header -->
@@ -113,7 +121,7 @@ const generateMissionScreen = async (ending, mission) => {
             </div>
             <div class="d-flex justify-content-between text-white mb-2">
               <span>Optional Challenge</span>
-              <span class="text-success">+1 Roll</span>
+              <span class="text-${isFinalMissionInEnding ? "info" : "success"}">${isFinalMissionInEnding ? "+5 OST Chips" : "+1 Roll"}</span>
             </div>
             ${
               ostChipReward &&
