@@ -90,19 +90,6 @@ upAndDownloadModal.addEventListener("hidden.bs.modal", () => {
 });
 
 endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
-  // dont reset anything when the player completes the very last mission
-  if (
-    currentMission === MISSIONS[currentEnding].length - 1 &&
-    currentEnding === "aleaIactEstMissions"
-  ) {
-    currentMission = MISSIONS[currentEnding].length;
-    disableMissionButtons();
-    generateMissionScreen(currentEnding, currentMission);
-    saveProgress();
-    return;
-  }
-
-  // open the starter part modal, reset acquired parts
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
@@ -112,7 +99,18 @@ endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
   generatePartCategories();
   await proceedToNextMission();
 
-  // CHANGE BACK TO TRUE AFTER TESTING
+  // final mission of final timeline
+  if (
+    currentMission === MISSIONS[currentEnding].length &&
+    currentEnding === "aleaIactaEstMissions"
+  ) {
+    currentMission = MISSIONS[currentEnding].length;
+    disableMissionButtons();
+    generateMissionScreen(currentEnding, currentMission);
+    saveProgress();
+    return;
+  }
+
   rollInitialPart(true);
 });
 
@@ -403,7 +401,6 @@ const proceedToNextMission = () => {
       // Set mission to one past the last mission to trigger the completion screen
       currentMission = MISSIONS[currentEnding].length;
       generateMissionScreen(currentEnding, currentMission);
-      genMissionCompleteModalContent(currentEnding, currentMission);
       return;
     }
   }

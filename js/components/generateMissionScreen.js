@@ -32,15 +32,15 @@ const generateMissionScreen = async (ending, mission) => {
         <!-- Title -->
         <div class="mb-4">
           <small class="text-muted text-uppercase tracking-wide">Challenge Complete</small>
-          <p class="text-muted">All three endings achieved.</p>
+          <p class="text-muted">All three endings reached.</p>
         </div>
 
         <!-- Stats summary -->
         <div class="card bg-dark border-secondary p-3 mb-4">
           <small class="text-secondary text-uppercase fw-bold mb-3 d-block">Run Summary</small>
           <div class="d-flex justify-content-between text-white mb-2">
-            <span>Parts Obtained</span>
-            <span class="text-success">${acquiredParts.length}</span>
+            <span>Restarts</span>
+            <span class="text-success">${restarts}</span>
           </div>
           <div class="d-flex justify-content-between text-white mb-2">
             <span>Optional Challenges Completed</span>

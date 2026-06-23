@@ -1,10 +1,6 @@
 FEATURES:
   - validate JSON file the best you can before allowing upload 
   - add google analytics to see how much traffic this app gets
-  - add styling to parts in categories so they increase in size on hover
-  - every ending is a checkpoint. if you beat an ending, you lose all parts (still keeping OST chips)
-    - if you fail a mission on LOR or AIE ending, you start at the beginning of that timeline (instead of restarting all the way back to FOR timeline)
-    - badges earned in top left corner for endings completed (SVG repo icons will probably do nicely)
 
 TODO
   - add hamburger menu that includes the following features
@@ -19,10 +15,14 @@ TODO
     - get missions completed only for successful run
     - show total missions undertaken also
     - show number of restarts (missions failed)
+    - X timeline stats:
+      - missions completed
+      - challenges completed
+      - missions failed
 
 POTENTIAL FEATURES
   - instead of a free random part every restart, choose between part or 1 OST Chip
   - allow for multiple save files?
 
 BUGS
-  - ok well now no boosters or generators are being chosen
+  - final parts obtained count isnt cumulative across all three timelines
