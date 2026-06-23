@@ -117,18 +117,19 @@ const generateMissionScreen = async (ending, mission) => {
             >
             <div class="d-flex justify-content-between text-white mb-2">
               <span>Mission Complete</span>
-              <span class="text-success">+1 Roll</span>
+              <span class="text-${isFinalMissionInEnding ? "info" : "success"}">${isFinalMissionInEnding ? "+10 OST Chips" : "+1 Roll"}</span>
             </div>
             <div class="d-flex justify-content-between text-white mb-2">
               <span>Optional Challenge</span>
               <span class="text-${isFinalMissionInEnding ? "info" : "success"}">${isFinalMissionInEnding ? "+5 OST Chips" : "+1 Roll"}</span>
             </div>
             ${
-              ostChipReward &&
-              `<div class="d-flex justify-content-between text-white">
+              ostChipReward && !isFinalMissionInEnding
+                ? `<div class="d-flex justify-content-between text-white">
                   <span>${ostChipReward > 1 ? "Chapter Complete" : "Mid-Chapter Reward"}</span>
                   <span class="text-info">+${ostChipReward} OST Chips</span>
                 </div>`
+                : null
             }
           </div>
         </div>

@@ -44,6 +44,11 @@ let currentMission = 0;
 let acquiredParts = [];
 let restarts = 0;
 let missionsData = [];
+let badgesEarned = {
+  for: null,
+  lor: null,
+  aie: null,
+};
 
 let uploadedSaveFile = null;
 
@@ -64,15 +69,29 @@ rulesModal.addEventListener("hidden.bs.modal", async () => {
   }
 });
 
+endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
+  // open the starter part modal, reset acquired parts
+  parts = [...PARTS];
+  acquiredParts = [];
+  rolledParts = [];
+
+  partCategoriesContainer.innerHTML = "";
+
+  generatePartCategories();
+  await proceedToNextMission();
+
+  rollInitialPart(true);
+});
+
 const rollInitialPart = async (needToSave = null) => {
   const initialPart = await rollOnce(null, true);
-  if (needToSave) {
-    saveProgress();
-  }
   acquiredParts.push(initialPart.part);
   displayPartInCategory(initialPart.part);
   // show initial part modal here
   await populateInitialPartModalBody(initialPart.part);
+  if (needToSave) {
+    saveProgress();
+  }
 };
 
 // toggles view between LOADOUT and SHOP
@@ -240,7 +259,7 @@ const rollOnce = (excludeIndex = null, initial = null) => {
 
 const rollForParts = (optionalCompleted) => {
   // if its the last mission of the ending, they dont need a part reward
-  if (mission >= MISSIONS[currentEnding].length - 1) {
+  if (currentMission >= MISSIONS[currentEnding].length - 1) {
     showEndingFinishedModal(optionalCompleted);
     return;
   }
@@ -279,18 +298,6 @@ const acceptPart = async (chosenIndex) => {
   displayPartInCategory(chosen.part);
   parts.splice(chosen.index, 1);
 
-  // missionData is an array of arrays to save LS space
-  // each mission is saved like
-  // [
-  //  ending (1, 2, or 3),
-  //  mission (just the mission number),
-  //  started (timestamp),
-  //  completed (timestamp, or false. false means they failed the mission. timestamp means they succeeded),
-  //  optional challenge completed (boolean)
-  // ]
-  // started timestamp is entered when page loads for the first time if no save data
-  // the rest is filled out right here, along with the started timestamp for the next mission entry
-
   await updateMissionsData(false, true, challengeCompleted);
   await earnOSTChips();
   await proceedToNextMission();
@@ -320,6 +327,7 @@ const updateMissionsData = (
   if (currentEnding === "aleaIactaEstMissions") {
     endingID = 3;
   }
+
   // for the very first entry
   if (isStart) {
     missionsData.push([endingID, currentMission, ts]);
@@ -373,13 +381,38 @@ const proceedToNextMission = () => {
 };
 
 const showEndingFinishedModal = async (optionalCompleted) => {
-  // so we need to go ahead and give the player their rewards in case the browser refreshs or something happens
-  if (optionalCompleted) {
-    ostChips += 4;
-  }
-  rollInitialPart(true);
+  // 10 ostChips for completing the final mission
+  ostChips += 10;
 
-  await genEndingCompleteModalContent(optionalCompleted);
+  // give the player more OST Chips here if optional completed
+  if (optionalCompleted) {
+    ostChips += 5;
+  }
+
+  // player earned the badge for this ending. go ahead and add it to the badgesEarned state
+  const ts = Date.now();
+  const dateEarned = new Date(ts).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  if (currentEnding === "firesOfRavenMissions") {
+    badgesEarned = { ...badgesEarned, for: dateEarned };
+  }
+  if (currentEnding === "liberatorOfRubiconMissions") {
+    badgesEarned = { ...badgesEarned, lor: dateEarned };
+  }
+  if (currentEnding === "aleaIactaEstMissions") {
+    badgesEarned = { ...badgesEarned, aie: dateEarned };
+  }
+  genBadgesShelfContent(badgesEarned);
+
+  await updateMissionsData(false, true, optionalCompleted);
+  await genEndingCompleteModalContent(
+    optionalCompleted,
+    currentEnding,
+    currentMission,
+  );
   const modal = new bootstrap.Modal(endingCompleteModal);
   modal.show();
 };
@@ -438,6 +471,7 @@ const saveProgress = () => {
       restarts,
       missionsData,
       rolledParts,
+      badgesEarned,
     };
     localStorage.setItem("ac6rlSaveData", JSON.stringify(initialSave));
     return;
@@ -452,6 +486,7 @@ const saveProgress = () => {
     restarts,
     missionsData,
     rolledParts,
+    badgesEarned,
   };
 
   localStorage.setItem("ac6rlSaveData", JSON.stringify(updatedSaveObj));
@@ -471,6 +506,7 @@ const loadSavedProgress = () => {
     restarts = saveFile.restarts;
     missionsData = saveFile.missionsData;
     rolledParts = saveFile.rolledParts;
+    badgesEarned = saveFile.badgesEarned;
 
     for (let n = 0; n < saveFile.acquiredParts.length; n++) {
       displayPartInCategory(saveFile.acquiredParts[n]);
@@ -484,6 +520,7 @@ const loadSavedProgress = () => {
 
     // when loading up, show the correct mission according to the save file
     ostChipsText.innerHTML = ostChips;
+    genBadgesShelfContent(badgesEarned);
     generateMissionScreen(currentEnding, currentMission);
     genMissionCompleteModalContent(currentEnding, currentMission);
     return;
@@ -493,6 +530,7 @@ const loadSavedProgress = () => {
   const modal = new bootstrap.Modal(rulesModal);
   modal.show();
   ostChipsText.innerHTML = ostChips;
+  genBadgesShelfContent(badgesEarned);
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
 };

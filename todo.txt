@@ -7,6 +7,8 @@ FEATURES:
     - badges earned in top left corner for endings completed (SVG repo icons will probably do nicely)
 
 TODO
+  - buttons and badges on page header to not exceed the width of the main content
+  - WEAPONS ROLLS TO HAVE SLIGHTLY MORE WEIGHT
   - add hamburger menu that includes the following features
     - parts viewer so players can see what parts are in what tiers
     - stats page for players to see their stats

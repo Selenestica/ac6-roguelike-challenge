@@ -12,50 +12,50 @@ const getNextEndingName = (ending) => {
   return null; // Alea Iacta Est is the last ending
 };
 
-const genEndingCompleteModalContent = (ending, dateEarned) => {
+const genEndingCompleteModalContent = (optionalCompleted, ending, mission) => {
+  const ts = Date.now();
+  const dateEarned = new Date(ts).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
   const endingName = getEndingFullName(ending);
-  const trophyClass = {
-    firesOfRavenMissions: "trophy-raven",
-    liberatorOfRubiconMissions: "trophy-liberator",
-    aleaIactaEstMissions: "trophy-alea",
-  }[ending];
-  const trophyIcon = {
-    firesOfRavenMissions: "bi-fire",
-    liberatorOfRubiconMissions: "bi-flag",
-    aleaIactaEstMissions: "bi-dice-5",
-  }[ending];
+  let trophyIconPath = "assets/icons/for.svg";
+  if (ending === "liberatorOfRubiconMissions") {
+    trophyIconPath = "assets/icons/lor.svg";
+  }
+  if (ending === "aleaIactaEstMissions") {
+    trophyIconPath = "assets/icons/aie.svg";
+  }
 
-  endingCompleteHeaderText = `${endingName} Complete!`;
+  endingCompleteHeaderText.innerHTML = `${endingName} Complete!`;
 
-  endingCompleteModalBody = `
+  endingCompleteModalBody.innerHTML = `
     <div class="d-flex flex-column align-items-center gap-4">
 
       <!-- Trophy badge -->
-      <div class="trophy trophy-earned trophy-lg ${trophyClass}">
-        <i class="bi ${trophyIcon}"></i>
+      <div class="trophy-lg">
+        <img class="img-fluid" src="${trophyIconPath}" />
       </div>
       <div class="text-center">
         <h5 class="text-white">${endingName}</h5>
-        <small class="text-muted">Earned ${dateEarned}</small>
+        <small class="text-muted">Earned: ${dateEarned}</small>
       </div>
-
-      <!-- Divider -->
-      <hr class="w-100 border-secondary" />
 
       <!-- What's next -->
       <div class="card bg-dark border-secondary w-100 p-3">
         <small class="text-secondary text-uppercase fw-bold mb-3 d-block">What's Next</small>
-        <div class="d-flex justify-content-between text-white mb-2">
-          <span>Parts</span>
-          <span class="text-danger">Reset</span>
+        <div class="d-flex text-white mb-2">
+          Your parts will be 
+          <span class="text-danger mx-1">reset</span>
         </div>
-        <div class="d-flex justify-content-between text-white mb-2">
-          <span>OST Chips</span>
-          <span class="text-success">Kept</span>
+        <div class="d-flex text-white mb-2">
+          Your OST Chips will be
+          <span class="text-success mx-1">retained</span>
         </div>
-        <div class="d-flex justify-content-between text-white">
-          <span>Next Ending</span>
-          <span class="text-info">${getNextEndingName(ending)}</span>
+        <div class="d-flex text-white">
+          <span>Next Ending:</span>
+          <span class="text-info mx-1">${getNextEndingName(ending)}</span>
         </div>
       </div>
 
