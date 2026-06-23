@@ -7,8 +7,6 @@ FEATURES:
     - badges earned in top left corner for endings completed (SVG repo icons will probably do nicely)
 
 TODO
-  - buttons and badges on page header to not exceed the width of the main content
-  - WEAPONS ROLLS TO HAVE SLIGHTLY MORE WEIGHT
   - add hamburger menu that includes the following features
     - parts viewer so players can see what parts are in what tiers
     - stats page for players to see their stats
@@ -16,10 +14,7 @@ TODO
       - missions failed
       - optional challenges completed
       - best run (their furthest mission)
-    - save data management (upload/download files)
-  - put cap on OST Chips (197?)
   - challenge complete screen
-    - disable Mission Complete button
     - turn Mission Failed button into Reset button. modal to prompt to delete save data and start over
     - get missions completed only for successful run
     - show total missions undertaken also
@@ -29,8 +24,5 @@ POTENTIAL FEATURES
   - instead of a free random part every restart, choose between part or 1 OST Chip
   - allow for multiple save files?
 
-
 BUGS
-  - set uploadedSaveFile to null when save data management modal closes
-    - maybe add a button that clear the uploadedSaveFile state?
-  
+  - ok well now no boosters or generators are being chosen

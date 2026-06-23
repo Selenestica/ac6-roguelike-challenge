@@ -30,15 +30,26 @@ const newPartModal = document.getElementById("newPartModal");
 const rulesModal = document.getElementById("rulesModal");
 const initialPartModal = document.getElementById("initialPartModal");
 const initialPartModalBody = document.getElementById("initialPartModalBody");
+const upAndDownloadModal = document.getElementById("upAndDownloadModal");
 
 // defines how individual categories are grouped for rolling purposes
 // subject to change
 const CATEGORY_GROUPS = {
   head: ["head"],
   fcs: ["fcs"],
-  internals: ["core", "generator", "booster"],
+  core: ["core"],
+  internals: ["generator", "booster"],
   arms_legs: ["arms", "legs"],
   weapons: ["r-arm", "l-arm", "r-back", "l-back"],
+};
+
+const CATEGORY_WEIGHTS = {
+  head: 1,
+  fcs: 1,
+  internals: 1,
+  core: 1,
+  arms_legs: 1,
+  weapons: 3,
 };
 
 let currentEnding = "firesOfRavenMissions";
@@ -72,9 +83,18 @@ rulesModal.addEventListener("hidden.bs.modal", async () => {
   }
 });
 
+upAndDownloadModal.addEventListener("hidden.bs.modal", () => {
+  uploadSaveFileInputElement.value = "";
+  uploadSaveFileButton.disabled = true;
+  uploadedSaveFile = null;
+});
+
 endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
   // dont reset anything when the player completes the very last mission
-  if (currentMission === MISSIONS[currentEnding].length - 1) {
+  if (
+    currentMission === MISSIONS[currentEnding].length - 1 &&
+    currentEnding === "aleaIactEstMissions"
+  ) {
     currentMission = MISSIONS[currentEnding].length;
     disableMissionButtons();
     generateMissionScreen(currentEnding, currentMission);
@@ -93,7 +113,7 @@ endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
   await proceedToNextMission();
 
   // CHANGE BACK TO TRUE AFTER TESTING
-  rollInitialPart(false);
+  rollInitialPart(true);
 });
 
 const rollInitialPart = async (needToSave = null) => {
@@ -242,14 +262,20 @@ const rollOnce = (excludeIndex = null, initial = null) => {
   const availableParts =
     excludeIndex !== null ? parts.filter((_, i) => i !== excludeIndex) : parts;
 
+  // weighted category pool — filter out exhausted groups and apply weights
   const categoryPool = Object.entries(CATEGORY_GROUPS)
     .filter(([_, cats]) =>
       availableParts.some((p) => cats.includes(p.category)),
     )
-    .map(([group, cats]) => ({ group, cats }));
+    .map(([group, cats]) => ({ group, cats, weight: CATEGORY_WEIGHTS[group] }));
 
-  const chosenGroup =
-    categoryPool[Math.floor(Math.random() * categoryPool.length)];
+  const totalCategoryWeight = categoryPool.reduce(
+    (sum, c) => sum + c.weight,
+    0,
+  );
+  let categoryRoll = Math.random() * totalCategoryWeight;
+  const chosenGroup = categoryPool.find((c) => (categoryRoll -= c.weight) < 0);
+
   const partsInGroup = availableParts.filter((p) =>
     chosenGroup.cats.includes(p.category),
   );
@@ -396,6 +422,8 @@ const showEndingFinishedModal = async (optionalCompleted) => {
   if (optionalCompleted) {
     ostChips += 5;
   }
+
+  ostChipsText.innerHTML = ostChips;
 
   if (currentEnding === "aleaIactaEstMissions") {
     isFinalEndingComplete = true;

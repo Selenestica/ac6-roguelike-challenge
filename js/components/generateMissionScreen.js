@@ -65,7 +65,6 @@ const generateMissionScreen = async (ending, mission) => {
     `;
     return;
   }
-
   const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
   const endingName = getEndingFullName(ending);
 

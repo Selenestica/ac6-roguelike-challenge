@@ -10,7 +10,7 @@ const genBadgesShelfContent = (badges) => {
                 data-bs-placement="top"
                 title="${value ? value : "Not earned yet"}"
             >
-                <img class="img-fluid ${!value && "blankBadge"}" src="assets/icons/${key}.svg" />
+                <img class="img-fluid ${!value && "blankBadge"}" src="assets/icons/${value ? key : "polygon"}.svg" />
             </div> 
         `;
   }
