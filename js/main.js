@@ -425,7 +425,6 @@ const reset = async () => {
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
-  currentEnding = "firesOfRavenMissions";
   currentMission = 0;
   restarts++;
 
