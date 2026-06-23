@@ -20,6 +20,8 @@ const missionCompleteButtonDiv = document.getElementById(
 const allAccordionsToggleButtonDiv = document.getElementById(
   "allAccordionsToggleButtonDiv",
 );
+const missionCompleteButton = document.getElementById("missionCompleteButton");
+const missionFailedButton = document.getElementById("missionFailedButton");
 const ostChipsDiv = document.getElementById("ostChipsDiv");
 const ostChipsText = document.getElementById("ostChipsText");
 const missionButtonsDiv = document.getElementById("missionButtonsDiv");
@@ -59,6 +61,7 @@ let accordionsCollapsed = true;
 let currentParts = [];
 let rolledParts = [];
 let currentView = "missionViewButton";
+let isFinalEndingComplete = false;
 
 // when the rules and info modal closes and you dont have saved data, roll for a random part
 rulesModal.addEventListener("hidden.bs.modal", async () => {
@@ -70,6 +73,15 @@ rulesModal.addEventListener("hidden.bs.modal", async () => {
 });
 
 endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
+  // dont reset anything when the player completes the very last mission
+  if (currentMission === MISSIONS[currentEnding].length - 1) {
+    currentMission = MISSIONS[currentEnding].length;
+    disableMissionButtons();
+    generateMissionScreen(currentEnding, currentMission);
+    saveProgress();
+    return;
+  }
+
   // open the starter part modal, reset acquired parts
   parts = [...PARTS];
   acquiredParts = [];
@@ -80,7 +92,8 @@ endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
   generatePartCategories();
   await proceedToNextMission();
 
-  rollInitialPart(true);
+  // CHANGE BACK TO TRUE AFTER TESTING
+  rollInitialPart(false);
 });
 
 const rollInitialPart = async (needToSave = null) => {
@@ -344,40 +357,35 @@ const updateMissionsData = (
 };
 
 const proceedToNextMission = () => {
-  // check to see if this is last mission in ending array
-  // if so, set current ending to next ending and set currentMission to 0
-  // if not then currentMission++
-  if (currentMission < MISSIONS[currentEnding].length - 1) {
-    currentMission++;
-    generateMissionScreen(currentEnding, currentMission);
-    genMissionCompleteModalContent(currentEnding, currentMission);
-    return;
+  // If we're on the last mission of an ending
+  if (currentMission >= MISSIONS[currentEnding].length - 1) {
+    // Move to the next ending or show completion
+    if (currentEnding === "firesOfRavenMissions") {
+      currentEnding = "liberatorOfRubiconMissions";
+      currentMission = 0;
+      generateMissionScreen(currentEnding, currentMission);
+      genMissionCompleteModalContent(currentEnding, currentMission);
+      return;
+    } else if (currentEnding === "liberatorOfRubiconMissions") {
+      currentEnding = "aleaIactaEstMissions";
+      currentMission = 0;
+      generateMissionScreen(currentEnding, currentMission);
+      genMissionCompleteModalContent(currentEnding, currentMission);
+      return;
+    } else if (currentEnding === "aleaIactaEstMissions") {
+      // We've completed all endings - show the final summary
+      // Set mission to one past the last mission to trigger the completion screen
+      currentMission = MISSIONS[currentEnding].length;
+      generateMissionScreen(currentEnding, currentMission);
+      genMissionCompleteModalContent(currentEnding, currentMission);
+      return;
+    }
   }
 
-  if (currentEnding === "firesOfRavenMissions") {
-    currentEnding = "liberatorOfRubiconMissions";
-    currentMission = 0;
-    generateMissionScreen(currentEnding, currentMission);
-    genMissionCompleteModalContent(currentEnding, currentMission);
-    return;
-  }
-  if (currentEnding === "liberatorOfRubiconMissions") {
-    currentEnding = "aleaIactaEstMissions";
-    currentMission = 0;
-    generateMissionScreen(currentEnding, currentMission);
-    genMissionCompleteModalContent(currentEnding, currentMission);
-    return;
-  }
-  if (
-    currentEnding === "aleaIactaEstMissions" &&
-    currentMission >= MISSIONS[currentEnding].length - 1
-  ) {
-    generateMissionScreen(currentEnding, currentMission);
-
-    // hide mission complete button
-    // change mission failed button to Reset button
-    return;
-  }
+  // Regular mission progression
+  currentMission++;
+  generateMissionScreen(currentEnding, currentMission);
+  genMissionCompleteModalContent(currentEnding, currentMission);
 };
 
 const showEndingFinishedModal = async (optionalCompleted) => {
@@ -387,6 +395,10 @@ const showEndingFinishedModal = async (optionalCompleted) => {
   // give the player more OST Chips here if optional completed
   if (optionalCompleted) {
     ostChips += 5;
+  }
+
+  if (currentEnding === "aleaIactaEstMissions") {
+    isFinalEndingComplete = true;
   }
 
   // player earned the badge for this ending. go ahead and add it to the badgesEarned state
@@ -517,10 +529,16 @@ const loadSavedProgress = () => {
     );
     parts = PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
 
-    // when loading up, show the correct mission according to the save file
     ostChipsText.innerHTML = ostChips;
     genBadgesShelfContent(badgesEarned);
     generateMissionScreen(currentEnding, currentMission);
+
+    // disable mission complete and mission failed buttons and dont trigger genMissionCompleteModalContent if challenge completed
+    if (currentMission > MISSIONS[currentEnding].length - 1) {
+      disableMissionButtons();
+      return;
+    }
+
     genMissionCompleteModalContent(currentEnding, currentMission);
     return;
   }
@@ -532,6 +550,11 @@ const loadSavedProgress = () => {
   genBadgesShelfContent(badgesEarned);
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
+};
+
+const disableMissionButtons = () => {
+  missionFailedButton.disabled = true;
+  missionCompleteButton.disabled = true;
 };
 
 const uploadSaveFile = async () => {

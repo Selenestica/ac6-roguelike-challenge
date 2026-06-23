@@ -18,22 +18,9 @@ const getChallengeCompleteStats = (data) => {
 };
 
 const generateMissionScreen = async (ending, mission) => {
-  const endingName = getEndingFullName(ending);
-  const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
-  missionViewScreen.innerHTML = "";
-
-  // if on the final mission of an ending, show the proper reward for the optional challenge
-  let isFinalMissionInEnding = false;
-  if (mission >= MISSIONS[currentEnding].length - 1) {
-    isFinalMissionInEnding = true;
-  }
-
-  // when all three endings are complete
-  if (
-    currentEnding === "aleaIactaEstMissions" &&
-    mission >= MISSIONS[currentEnding].length - 1
-  ) {
-    const saveData = await localStorage.getItem("ac6rlSaveData");
+  // check for completion screen first before anything else
+  if (ending === "aleaIactaEstMissions" && mission >= MISSIONS[ending].length) {
+    const saveData = localStorage.getItem("ac6rlSaveData");
     if (!saveData) return;
 
     const { acquiredParts, challengesCompleted, ostChips, restarts } =
@@ -46,13 +33,6 @@ const generateMissionScreen = async (ending, mission) => {
         <div class="mb-4">
           <small class="text-muted text-uppercase tracking-wide">Challenge Complete</small>
           <p class="text-muted">All three endings achieved.</p>
-        </div>
-
-        <!-- Ending badges -->
-        <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
-          <span class="badge fs-6 px-3 py-2 bg-danger">✓ Fires of Raven</span>
-          <span class="badge fs-6 px-3 py-2 bg-primary">✓ Liberator of Rubicon</span>
-          <span class="badge fs-6 px-3 py-2 bg-warning text-dark">✓ Alea Iacta Est</span>
         </div>
 
         <!-- Stats summary -->
@@ -85,7 +65,16 @@ const generateMissionScreen = async (ending, mission) => {
     `;
     return;
   }
-  // for every other mission screen
+
+  const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
+  const endingName = getEndingFullName(ending);
+
+  // if on the final mission of an ending, show the proper reward for the optional challenge
+  let isFinalMissionInEnding = false;
+  if (mission >= MISSIONS[currentEnding].length - 1) {
+    isFinalMissionInEnding = true;
+  }
+
   missionViewScreen.innerHTML = `
         <div class="col-sm-12 col-md-10 col-lg-8">
           <!-- Header -->

@@ -43,21 +43,27 @@ const genEndingCompleteModalContent = (optionalCompleted, ending, mission) => {
       </div>
 
       <!-- What's next -->
-      <div class="card bg-dark border-secondary w-100 p-3">
-        <small class="text-secondary text-uppercase fw-bold mb-3 d-block">What's Next</small>
-        <div class="d-flex text-white mb-2">
-          Your parts will be 
-          <span class="text-danger mx-1">reset</span>
-        </div>
-        <div class="d-flex text-white mb-2">
-          Your OST Chips will be
-          <span class="text-success mx-1">retained</span>
-        </div>
-        <div class="d-flex text-white">
-          <span>Next Ending:</span>
-          <span class="text-info mx-1">${getNextEndingName(ending)}</span>
-        </div>
-      </div>
+      ${
+        getNextEndingName(ending)
+          ? `
+          <div class="card bg-dark border-secondary w-100 p-3">
+            <small class="text-secondary text-uppercase fw-bold mb-3 d-block">What's Next</small>
+            <div class="d-flex text-white mb-2">
+              Your parts will be 
+              <span class="text-danger mx-1">reset</span>
+            </div>
+            <div class="d-flex text-white mb-2">
+              Your OST Chips will be
+              <span class="text-success mx-1">retained</span>
+            </div>
+            <div class="d-flex text-white">
+              <span>Next Ending:</span>
+              <span class="text-info mx-1">${getNextEndingName(ending)}</span>
+            </div>
+          </div>
+        `
+          : ""
+      }
 
     </div>
   `;

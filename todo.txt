@@ -32,4 +32,5 @@ POTENTIAL FEATURES
 
 BUGS
   - set uploadedSaveFile to null when save data management modal closes
+    - maybe add a button that clear the uploadedSaveFile state?
   
