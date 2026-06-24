@@ -98,7 +98,7 @@ const PARTS = [
   {
     name: "WS-5001 SOUP Scatter Missile Launcher",
     img: "WS-5001 SOUP Scatter Missile Launcher.webp",
-    tier: "s",
+    tier: "b",
     category: "r-back",
   },
   {
@@ -152,7 +152,7 @@ const PARTS = [
   {
     name: "WS-5001 SOUP Scatter Missile Launcher",
     img: "WS-5001 SOUP Scatter Missile Launcher.webp",
-    tier: "s",
+    tier: "b",
     category: "l-back",
   },
   {
@@ -315,25 +315,25 @@ const PARTS = [
   {
     name: "IA-C01W3: AURORA Light Wave Cannon",
     img: "ia-c01w3-aurora.webp",
-    tier: "a",
+    tier: "b",
     category: "r-back",
   },
   {
     name: "BML-G2/P19SPL-12 Split Missile Launcher",
     img: "bml-g2-p19spl-12.webp",
-    tier: "a",
+    tier: "c",
     category: "r-back",
   },
   {
     name: "BML-G2/P08DUO-03 Dual Missile Launcher",
     img: "bml-g2-p08duo-03.webp",
-    tier: "a",
+    tier: "b",
     category: "r-back",
   },
   {
     name: "BML-G1/P07VTC-12 Vertical Missile Launcher",
     img: "bml-g1-p07vtc-12.webp",
-    tier: "c",
+    tier: "d",
     category: "r-back",
   },
   {
@@ -375,25 +375,25 @@ const PARTS = [
   {
     name: "IA-C01W3: AURORA Light Wave Cannon",
     img: "ia-c01w3-aurora.webp",
-    tier: "a",
+    tier: "b",
     category: "l-back",
   },
   {
     name: "BML-G2/P19SPL-12 Split Missile Launcher",
     img: "bml-g2-p19spl-12.webp",
-    tier: "a",
+    tier: "c",
     category: "l-back",
   },
   {
     name: "BML-G2/P08DUO-03 Dual Missile Launcher",
     img: "bml-g2-p08duo-03.webp",
-    tier: "a",
+    tier: "b",
     category: "l-back",
   },
   {
     name: "BML-G1/P07VTC-12 Vertical Missile Launcher",
     img: "bml-g1-p07vtc-12.webp",
-    tier: "c",
+    tier: "d",
     category: "l-back",
   },
   {
@@ -1282,7 +1282,7 @@ const PARTS = [
   {
     name: "BML-G1/P03VTC-08 Vertical Missile Launcher",
     img: "bml-g1-p03vtc-08.webp",
-    tier: "c",
+    tier: "d",
     category: "r-back",
   },
   {
@@ -1300,7 +1300,7 @@ const PARTS = [
   {
     name: "Vvc-706VPM Plasma Missile Launcher",
     img: "vvc-706pm.webp",
-    tier: "c",
+    tier: "a",
     category: "r-back",
   },
   {
@@ -1318,7 +1318,7 @@ const PARTS = [
   {
     name: "SI-29: SU-TT/C Pulse Buckler",
     img: "si-29-su-tt-c.webp",
-    tier: "c",
+    tier: "d",
     category: "l-back",
   },
   {
@@ -1354,7 +1354,7 @@ const PARTS = [
   {
     name: "BML-G1/P03VTC-08 Vertical Missile Launcher",
     img: "bml-g1-p03vtc-08.webp",
-    tier: "c",
+    tier: "d",
     category: "l-back",
   },
   {
@@ -1372,7 +1372,7 @@ const PARTS = [
   {
     name: "Vvc-706VPM Plasma Missile Launcher",
     img: "vvc-706pm.webp",
-    tier: "c",
+    tier: "a",
     category: "l-back",
   },
   { name: "KASUAR/44Z", img: "kasuar-44z.webp", tier: "c", category: "head" },
@@ -1512,7 +1512,7 @@ const PARTS = [
   {
     name: "LR-036 CURTIS Linear Rifle",
     img: "lr-036-curtis.webp",
-    tier: "d",
+    tier: "a",
     category: "r-arm",
   },
   {
@@ -1554,7 +1554,7 @@ const PARTS = [
   {
     name: "LR-036 CURTIS Linear Rifle",
     img: "lr-036-curtis.webp",
-    tier: "d",
+    tier: "a",
     category: "l-arm",
   },
   {

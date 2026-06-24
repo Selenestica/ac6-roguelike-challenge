@@ -115,7 +115,7 @@ endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
 });
 
 const rollInitialPart = async (needToSave = null) => {
-  const initialPart = await rollOnce(null, true);
+  const initialPart = await rollOnce(null, null, true, "weapons");
   acquiredParts.push(initialPart.part);
   displayPartInCategory(initialPart.part);
   // show initial part modal here
@@ -257,7 +257,12 @@ const populateNewPartsModal = (optionalCompleted) => {
   modal.show();
 };
 
-const rollOnce = (firstIndex = null, secondIndex = null, initial = null) => {
+const rollOnce = (
+  firstIndex = null,
+  secondIndex = null,
+  initial = null,
+  forcedCategory = null,
+) => {
   const { chapter } = MISSIONS[currentEnding][currentMission];
   const weights = chapterWeights(chapter);
   let tiers = ["d", "c", "b", "a", "s"];
@@ -269,19 +274,29 @@ const rollOnce = (firstIndex = null, secondIndex = null, initial = null) => {
     (_, i) => i !== firstIndex && i !== secondIndex,
   );
 
-  // weighted category pool — filter out exhausted groups and apply weights
-  const categoryPool = Object.entries(CATEGORY_GROUPS)
-    .filter(([_, cats]) =>
-      availableParts.some((p) => cats.includes(p.category)),
-    )
-    .map(([group, cats]) => ({ group, cats, weight: CATEGORY_WEIGHTS[group] }));
-
-  const totalCategoryWeight = categoryPool.reduce(
-    (sum, c) => sum + c.weight,
-    0,
-  );
-  let categoryRoll = Math.random() * totalCategoryWeight;
-  const chosenGroup = categoryPool.find((c) => (categoryRoll -= c.weight) < 0);
+  let chosenGroup;
+  if (forcedCategory) {
+    chosenGroup = {
+      group: forcedCategory,
+      cats: CATEGORY_GROUPS[forcedCategory],
+    };
+  } else {
+    const categoryPool = Object.entries(CATEGORY_GROUPS)
+      .filter(([_, cats]) =>
+        availableParts.some((p) => cats.includes(p.category)),
+      )
+      .map(([group, cats]) => ({
+        group,
+        cats,
+        weight: CATEGORY_WEIGHTS[group],
+      }));
+    const totalCategoryWeight = categoryPool.reduce(
+      (sum, c) => sum + c.weight,
+      0,
+    );
+    let categoryRoll = Math.random() * totalCategoryWeight;
+    chosenGroup = categoryPool.find((c) => (categoryRoll -= c.weight) < 0);
+  }
 
   const partsInGroup = availableParts.filter((p) =>
     chosenGroup.cats.includes(p.category),
