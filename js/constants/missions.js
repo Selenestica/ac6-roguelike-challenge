@@ -107,8 +107,7 @@ const MISSIONS = {
     },
     {
       name: "Tunnel Sabotage",
-      challenge:
-        "Defeat the LC during the escape sequence and complete the mission without using repair kits.",
+      challenge: "Defeat the LC during the escape sequence.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -140,7 +139,7 @@ const MISSIONS = {
     {
       name: "Attack the Old Spaceport",
       challenge:
-        "Defeat all 6 stationed LCs and complete the mission without resupplying.",
+        "Defeat all 6 stationed LCs and don't let Rusty be defeated in combat.",
       chapter: 3,
       ostChipReward: 1, // since this is a long chapter, give a reward for completing the halfwayish point
     },
@@ -152,7 +151,7 @@ const MISSIONS = {
     },
     {
       name: "Defend the Old Spaceport",
-      challenge: "Complete the mission without using repair kits.",
+      challenge: "Complete the mission without using more than one repair kit.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -174,22 +173,19 @@ const MISSIONS = {
     // chapter 4
     {
       name: "Underground Exploration - Depth 1",
-      challenge:
-        "Defeat all 3 sniper Denoisers and complete the mission without using repair kits.",
+      challenge: "Complete the mission without using repair kits.",
       chapter: 4,
       ostChipReward: null,
     },
     {
       name: "Underground Exploration - Depth 2",
-      challenge:
-        "Defeat all 8 Denoisers in the final control room AFTER turning the power back on.",
+      challenge: "Complete the mission without resupplying more than once.",
       chapter: 4,
       ostChipReward: null,
     },
     {
       name: "Underground Exploration - Depth 3",
-      challenge:
-        "Destroy all 12 laser cannons and escape from the reactor before the timer reaches 01:00.",
+      challenge: "Escape from the reactor before the timer reaches 01:00.",
       chapter: 4,
       ostChipReward: null,
     },
@@ -237,7 +233,7 @@ const MISSIONS = {
     {
       name: "Breach the Kármán Line",
       challenge:
-        "Don't stop Assault Boosting until you destroy the interceptor fleet and complete the mission without using more than one repair kit.",
+        "Don't use any repair kits until the interceptor fleet is destroyed.",
       chapter: 5,
       ostChipReward: null,
     },
@@ -384,7 +380,7 @@ const MISSIONS = {
     {
       name: "Attack the Old Spaceport",
       challenge:
-        "Defeat all 6 stationed LCs and complete the mission without resupplying.",
+        "Defeat all 6 stationed LCs and don't let Rusty be defeated in combat.",
       chapter: 3,
       ostChipReward: 1, // mid chapter reward
     },
@@ -418,22 +414,19 @@ const MISSIONS = {
     // chapter 4
     {
       name: "Underground Exploration - Depth 1",
-      challenge:
-        "Defeat all 3 sniper Denoisers and complete the mission without using repair kits.",
+      challenge: "Complete the mission without using repair kits.",
       chapter: 4,
       ostChipReward: null,
     },
     {
       name: "Underground Exploration - Depth 2",
-      challenge:
-        "Defeat all 8 Denoisers in the final control room AFTER turning the power back on.",
+      challenge: "Complete the mission without resupplying more than once.",
       chapter: 4,
       ostChipReward: null,
     },
     {
       name: "Underground Exploration - Depth 3",
-      challenge:
-        "Destroy all 12 laser cannons and escape from the reactor before the timer reaches 01:00.",
+      challenge: "Escape from the reactor before the timer reaches 01:00.",
       chapter: 4,
       ostChipReward: null,
     },
@@ -479,7 +472,8 @@ const MISSIONS = {
     },
     {
       name: "Destroy the Drive Block",
-      challenge: "Complete the mission without resupplying.",
+      challenge:
+        "Destroy the Tetrapod MT and the Smart Cleaner without using any repair kits.",
       chapter: 5,
       ostChipReward: null,
     },
@@ -627,7 +621,7 @@ const MISSIONS = {
     {
       name: "Attack the Old Spaceport",
       challenge:
-        "Defeat all 6 stationed LCs and complete the mission without resupplying.",
+        "Defeat all 6 stationed LCs and don't let Rusty be defeated in combat.",
       chapter: 3,
       ostChipReward: 1, // mid chapter reward
     },
@@ -660,8 +654,7 @@ const MISSIONS = {
     // chapter 4
     {
       name: "Underground Exploration - Depth 1",
-      challenge:
-        "Defeat all 3 sniper Denoisers and complete the mission without using repair kits.",
+      challenge: "Complete the mission without using repair kits.",
       chapter: 4,
       ostChipReward: null,
     },
@@ -674,8 +667,7 @@ const MISSIONS = {
     },
     {
       name: "Underground Exploration - Depth 3",
-      challenge:
-        "Destroy all 12 laser cannons and escape from the reactor before the timer reaches 01:00.",
+      challenge: "Escape from the reactor before the timer reaches 01:00.",
       chapter: 4,
       ostChipReward: null,
     },
