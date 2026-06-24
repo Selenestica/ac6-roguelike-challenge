@@ -228,28 +228,36 @@ const populateInitialPartModalBody = (part) => {
 const populateNewPartsModal = (optionalCompleted) => {
   newPartModalBody.innerHTML = "";
   const partsToShow = optionalCompleted ? currentParts : [currentParts[0]];
+
+  let cardsHTML = "";
   for (let i = 0; i < partsToShow.length; i++) {
     const { part } = partsToShow[i];
-    newPartModalBody.innerHTML += `
-      <div
-        class="card bg-dark border-secondary part-choice-card"
-        style="cursor: pointer; max-width: 200px;"
-        data-bs-dismiss="modal"
-        onclick="acceptPart(${i})"
-      >
-        <div class="card-body d-flex flex-column align-items-center gap-2">
-          <img class="img-fluid" src="assets/images/${part.img}" />
-          <p class="text-white text-center mb-0">${part.name}</p>
-          <small class="text-muted text-center">${part.category.toUpperCase()}</small>
+    cardsHTML += `
+      <div class="col-6 col-md-auto d-flex justify-content-center">
+        <div
+          class="card bg-dark border-secondary part-choice-card"
+          style="cursor: pointer; width: 180px;"
+          data-bs-dismiss="modal"
+          onclick="acceptPart(${i})"
+        >
+          <div class="card-body d-flex flex-column align-items-center gap-2">
+            <span class="badge text-dark bg-${part.tier}-tier">${part.tier.toUpperCase()}</span>
+            <img class="img-fluid" src="assets/images/${part.img}" />
+            <p class="text-white text-center mb-0">${part.name}</p>
+            <small class="text-muted text-center">${part.category.toUpperCase()}</small>
+          </div>
         </div>
       </div>
     `;
   }
+
+  newPartModalBody.innerHTML = `<div class="row justify-content-center g-3">${cardsHTML}</div>`;
+
   const modal = new bootstrap.Modal(newPartModal);
   modal.show();
 };
 
-const rollOnce = (excludeIndex = null, initial = null) => {
+const rollOnce = (firstIndex = null, secondIndex = null, initial = null) => {
   const { chapter } = MISSIONS[currentEnding][currentMission];
   const weights = chapterWeights(chapter);
   let tiers = ["d", "c", "b", "a", "s"];
@@ -257,8 +265,9 @@ const rollOnce = (excludeIndex = null, initial = null) => {
     tiers = ["d"];
   }
 
-  const availableParts =
-    excludeIndex !== null ? parts.filter((_, i) => i !== excludeIndex) : parts;
+  const availableParts = parts.filter(
+    (_, i) => i !== firstIndex && i !== secondIndex,
+  );
 
   // weighted category pool — filter out exhausted groups and apply weights
   const categoryPool = Object.entries(CATEGORY_GROUPS)
@@ -314,11 +323,12 @@ const rollForParts = (optionalCompleted) => {
     return;
   }
 
-  // always roll 2 parts
-  const first = rollOnce(null, null);
-  const second = rollOnce(first.index, null);
+  // always roll 3 parts
+  const first = rollOnce(null, null, null);
+  const second = rollOnce(first.index, null, null);
+  const third = rollOnce(first.index, second.index, null);
 
-  currentParts = [first, second];
+  currentParts = [first, second, third];
   rolledParts = [...currentParts];
 
   saveProgress();

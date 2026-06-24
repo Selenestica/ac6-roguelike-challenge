@@ -109,7 +109,7 @@ const generateMissionScreen = async (ending, mission) => {
             </div>
             <div class="d-flex justify-content-between text-white mb-2">
               <span>Optional Challenge</span>
-              <span class="text-${isFinalMissionInEnding ? "info" : "success"}">${isFinalMissionInEnding ? "+5 OST Chips" : "+1 Roll"}</span>
+              <span class="text-${isFinalMissionInEnding ? "info" : "success"}">${isFinalMissionInEnding ? "+5 OST Chips" : "+2 Rolls"}</span>
             </div>
             ${
               ostChipReward && !isFinalMissionInEnding
