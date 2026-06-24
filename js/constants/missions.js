@@ -119,8 +119,7 @@ const MISSIONS = {
     },
     {
       name: "Survey the Uninhabited Floating City",
-      challenge:
-        "Complete the mission without using more than one repair kit and without using the defense drones.",
+      challenge: "Complete the mission without using the defense drones.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -361,7 +360,7 @@ const MISSIONS = {
     },
     {
       name: "Survey the Uninhabited Floating City",
-      challenge: "Complete the mission without using more than one repair kit.",
+      challenge: "Complete the mission without using the defense drones.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -601,8 +600,7 @@ const MISSIONS = {
     },
     {
       name: "Survey the Uninhabited Floating City [ALT]",
-      challenge:
-        "Complete the mission without using more than one repair kit and without using the defense drones.",
+      challenge: "Complete the mission without using more than one repair kit.",
       chapter: 3,
       ostChipReward: null,
     },

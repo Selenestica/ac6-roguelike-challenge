@@ -212,13 +212,13 @@ const PARTS = [
   {
     name: "BC-0200 GRIDWALKER",
     img: "BC-0200 GRIDWALKER.webp",
-    tier: "s",
+    tier: "c",
     category: "booster",
   },
   {
     name: "IB-C03B: NGI 001",
     img: "IB-C03B NGI 001.webp",
-    tier: "s",
+    tier: "b",
     category: "booster",
   },
   { name: "VE-20B", img: "ve-20b.webp", tier: "s", category: "generator" },
@@ -1045,7 +1045,7 @@ const PARTS = [
   {
     name: "FLUEGEL 21/Z",
     img: "fluegel-21z.webp",
-    tier: "b",
+    tier: "a",
     category: "booster",
   },
   {
@@ -1057,7 +1057,7 @@ const PARTS = [
   {
     name: "BC-0400 MULE",
     img: "bc-0400-mule.webp",
-    tier: "b",
+    tier: "c",
     category: "booster",
   },
   {
@@ -1456,11 +1456,11 @@ const PARTS = [
     tier: "c",
     category: "booster",
   },
-  { name: "ALULA/21E", img: "alula-21e.webp", tier: "c", category: "booster" },
+  { name: "ALULA/21E", img: "alula-21e.webp", tier: "s", category: "booster" },
   {
     name: "BUERZEL/21D",
     img: "buerzel-21d.webp",
-    tier: "c",
+    tier: "b",
     category: "booster",
   },
   { name: "FCS-G2/P05", img: "fcs-g2-p05.webp", tier: "c", category: "fcs" },
