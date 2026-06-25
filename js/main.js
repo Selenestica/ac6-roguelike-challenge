@@ -351,14 +351,18 @@ const rollForParts = (optionalCompleted) => {
 };
 
 const acceptPart = async (chosenIndex) => {
-  let challengeCompleted = true;
-  if (currentParts.length < 2) {
-    challengeCompleted = false;
-  }
+  let challengeCompleted = currentParts.length > 1;
   const chosen = currentParts[chosenIndex];
   acquiredParts.push(chosen.part);
   displayPartInCategory(chosen.part);
-  parts.splice(chosen.index, 1);
+
+  // remove by identity instead of index
+  const partIndex = parts.findIndex(
+    (p) => p.name === chosen.part.name && p.category === chosen.part.category,
+  );
+  if (partIndex !== -1) {
+    parts.splice(partIndex, 1);
+  }
 
   await updateMissionsData(false, true, challengeCompleted);
   await earnOSTChips();
