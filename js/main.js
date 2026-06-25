@@ -624,3 +624,4 @@ const deleteSaveData = () => {
 };
 
 loadSavedProgress();
+genPartsGalleryModalContent();

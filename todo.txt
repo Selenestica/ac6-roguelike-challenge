@@ -1,10 +1,8 @@
 FEATURES:
   - validate JSON file the best you can before allowing upload 
-  - add google analytics to see how much traffic this app gets
 
 TODO
   - add hamburger menu that includes the following features
-    - parts viewer so players can see what parts are in what tiers
     - stats page for players to see their stats
       - missions completed
       - missions failed

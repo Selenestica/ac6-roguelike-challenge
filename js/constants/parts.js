@@ -1276,7 +1276,7 @@ const PARTS = [
   {
     name: "BML-G1/P01VTC-04 Vertical Missile Launcher",
     img: "bml-g1-p01vtc-04.webp",
-    tier: "c",
+    tier: "d",
     category: "r-back",
   },
   {
@@ -1348,7 +1348,7 @@ const PARTS = [
   {
     name: "BML-G1/P01VTC-04 Vertical Missile Launcher",
     img: "bml-g1-p01vtc-04.webp",
-    tier: "c",
+    tier: "d",
     category: "l-back",
   },
   {
