@@ -188,7 +188,7 @@ const displayPartInCategory = (part) => {
     <div class="accordion-body text-light" id="${partRowID}">
       <div class="d-flex row justify-content-center">
         <div class="d-flex col-4 accordionPartImgContainer justify-content-end">
-          <img class="img-fluid" src="assets/images/${part.img}" />
+          <img class="img-fluid" src="../assets/images/${part.img}" />
         </div>
         <div class="d-flex col-4 text-light justify-content-start align-items-center">
           ${part.name}
@@ -215,7 +215,7 @@ const populateInitialPartModalBody = (part) => {
         data-bs-dismiss="modal"
       >
         <div class="card-body d-flex flex-column align-items-center gap-2">
-          <img class="img-fluid" src="assets/images/${part.img}" />
+          <img class="img-fluid" src="../assets/images/${part.img}" />
           <p class="text-white text-center mb-0">${part.name}</p>
           <small class="text-muted text-center">${part.category.toUpperCase()}</small>
         </div>
@@ -242,7 +242,7 @@ const populateNewPartsModal = (optionalCompleted) => {
         >
           <div class="card-body d-flex flex-column align-items-center gap-2">
             <span class="badge text-dark bg-${part.tier}-tier">${part.tier.toUpperCase()}</span>
-            <img class="img-fluid" src="assets/images/${part.img}" />
+            <img class="img-fluid" src="../assets/images/${part.img}" />
             <p class="text-white text-center mb-0">${part.name}</p>
             <small class="text-muted text-center">${part.category.toUpperCase()}</small>
           </div>

@@ -2,6 +2,8 @@ FEATURES:
   - validate JSON file the best you can before allowing upload 
 
 TODO
+  - MAIN SPLASH SCREEN
+  - RANDOMIZER
   - add hamburger menu that includes the following features
     - stats page for players to see their stats
       - missions completed

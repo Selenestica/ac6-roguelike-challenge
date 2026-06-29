@@ -26,7 +26,7 @@ const genPartsGalleryCard = (part) => {
   return `
     <div class="card d-flex col-3 col-md-2 col-lg-1 mx-1 mb-2 bg-dark border-secondary align-items-center p-1" style="position: relative;">
       <img
-        src="assets/images/${part.img}"
+        src="../assets/images/${part.img}"
         class="img-fluid"
         alt="${part.name}"
       />

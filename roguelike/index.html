@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1LRWM5XFHH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-1LRWM5XFHH");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/custom.css" />
+    <link
+      rel="shortcut icon"
+      type="image/webp"
+      href="../assets/images/hc-2000-bc-shade-eye.webp"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <meta
+      name="description"
+      content="Armored Core 6: The Roguelike Challenge"
+    />
+    <title>AC6 Roguelike Challenge</title>
+  </head>
+
+  <body>
+    <div class="container mb-5">
+      <!-- HEADER -->
+      <div class="row d-flex justify-content-center mt-2">
+        <div class="col-sm-12 col-md-10 col-lg-8">
+          <div class="row d-flex justify-content-center">
+            <div class="col-4 d-flex" id="badgesShelfDiv"></div>
+            <div class="d-flex col-4 justify-content-center">
+              <a target="_blank" href="https://discord.gg/JFWyQ8q93C">
+                <i class="socialIcons bi bi-discord"></i>
+              </a>
+              <a
+                class="mx-2"
+                target="_blank"
+                href="https://github.com/Selenestica/ac6-roguelike-challenge"
+              >
+                <i class="socialIcons bi bi-github"></i>
+              </a>
+              <a target="_blank" href="https://buymeacoffee.com/breakfasttaco">
+                <i class="socialIcons bi bi-cup-hot"></i>
+              </a>
+            </div>
+            <div class="col-4">
+              <div class="d-flex justify-content-end">
+                <button
+                  class="btn btn-primary mx-1"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#partsGalleryModal"
+                >
+                  <i class="bi bi-table"></i>
+                </button>
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#upAndDownloadModal"
+                >
+                  <i class="bi bi-save text-light"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="d-flex col justify-content-center">
+          <h1 class="text-light">Armored Core 6</h1>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="d-flex col justify-content-center align-items-center">
+          <h4
+            data-bs-toggle="modal"
+            data-bs-target="#rulesModal"
+            class="text-light mb-0 mx-2 cursor-pointer"
+          >
+            Roguelike Challenge<i
+              class="bi bi-info-circle mediumFontSize mx-1"
+            ></i>
+          </h4>
+        </div>
+      </div>
+
+      <!-- MAIN BODY -->
+      <div class="row d-flex justify-content-center pt-3">
+        <div class="col-sm-12 col-md-10 col-lg-8">
+          <div class="row d-flex justify-content-between">
+            <div class="col-4 d-flex align-items-center justify-content-start">
+              <div class="btn-group" role="group">
+                <input
+                  type="radio"
+                  class="btn-check mainViewButtons"
+                  name="btnradio"
+                  id="missionViewButton"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary text-white"
+                  for="missionViewButton"
+                >
+                  <span id="missionButtonText">Mission</span>
+                  <span id="missionButtonIcon"
+                    ><i class="bi bi-list-ul"></i
+                  ></span>
+                </label>
+                <input
+                  type="radio"
+                  class="btn-check mainViewButtons"
+                  name="btnradio"
+                  id="inventoryButton"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary text-white"
+                  for="inventoryButton"
+                >
+                  <span id="inventoryButtonText">Garage</span>
+                  <span id="inventoryButtonIcon"
+                    ><i class="bi bi-wrench-adjustable"></i
+                  ></span>
+                </label>
+              </div>
+            </div>
+            <div
+              class="col-4 d-flex justify-content-center"
+              id="missionButtonsDiv"
+            >
+              <div class="btn-group my-2 mx-1" id="missionCompleteButtonDiv">
+                <button
+                  class="btn btn-success"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#missionCompleteModal"
+                  id="missionCompleteButton"
+                >
+                  <span id="missionCompleteButtonText"> Mission Complete </span>
+                  <span id="missionCompleteButtonIcon">
+                    <i class="bi bi-check-lg"></i>
+                  </span>
+                </button>
+              </div>
+              <div
+                class="btn-group d-none my-2 mx-1 align-items-end"
+                id="ostChipsDiv"
+              >
+                <span class="text-white mx-1"> OST Chips: </span
+                ><span class="text-info" id="ostChipsText"></span>
+              </div>
+            </div>
+            <div class="col-4 d-flex justify-content-end">
+              <div class="btn-group my-2" id="missionFailedButtonDiv">
+                <button
+                  class="btn btn-danger"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#missionFailedModal"
+                  id="missionFailedButton"
+                >
+                  <span id="missionFailedButtonText"> Mission Failed </span>
+                  <span id="missionFailedButtonIcon">
+                    <i class="bi bi-arrow-repeat"></i>
+                  </span>
+                </button>
+              </div>
+              <div
+                class="btn-group my-2 d-none"
+                id="allAccordionsToggleButtonDiv"
+              >
+                <button
+                  class="btn btn-secondary"
+                  onclick="togglePartsAccordions()"
+                >
+                  <i class="fa-solid fa-square-caret-up"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <hr class="text-white" id="containerSeparatorLine" />
+        </div>
+      </div>
+
+      <!-- INVENTORY SCREEN -->
+      <div class="mb-5 row d-none justify-content-center" id="inventoryScreen">
+        <div class="col-sm-12 col-md-10 col-lg-8">
+          <div class="row d-flex justify-content-center">
+            <div class="col d-flex justify-content-center">
+              <div
+                class="accordion accordion-flush"
+                id="partCategoriesContainer"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CURRENT MISSION SCREEN -->
+      <div
+        class="mb-5 row d-flex justify-content-center"
+        id="missionViewScreen"
+      ></div>
+    </div>
+
+    <!-- MISSION COMPLETE MODAL -->
+    <div
+      class="modal fade"
+      id="missionCompleteModal"
+      tabindex="-1"
+      open="true"
+      aria-labelledby="missionCompleteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light">Mission Complete</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="modal-body row d-flex justify-content-center"
+            id="missionCompleteModalBody"
+          ></div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              onclick="rollForParts(false)"
+            >
+              No
+            </button>
+            <button
+              type="button"
+              onclick="rollForParts(true)"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW PART MODAL -->
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      id="newPartModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light">Choose Your Part</h5>
+          </div>
+          <div
+            class="modal-body d-flex justify-content-center gap-3 p-4"
+            id="newPartModalBody"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INITIAL PART MODAL -->
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      id="initialPartModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light">Starter Part</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="modal-body d-flex justify-content-center gap-3 p-4"
+            id="initialPartModalBody"
+          ></div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Thanks, I guess?
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Ok, awesome!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENDING COMPLETE MODAL -->
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      id="endingCompleteModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5
+              class="modal-title text-light"
+              id="endingCompleteHeaderText"
+            ></h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="modal-body d-flex justify-content-center gap-3 p-4"
+            id="endingCompleteModalBody"
+          ></div>
+          <div class="modal-footer d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-dismiss="modal"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MISSION FAILED MODAL -->
+    <div
+      class="modal fade"
+      id="missionFailedModal"
+      tabindex="-1"
+      aria-labelledby="missionFailedModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light" id="missionFailedModalLabel">
+              Mission Failed
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-white">
+            You will keep your earned OST Chips, lose all earned parts, and
+            restart the story at the beginning of the current timeline. Proceed?
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              onclick="reset()"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RULES AND INFO MODAL -->
+    <div
+      class="modal fade"
+      id="rulesModal"
+      tabindex="-1"
+      aria-labelledby="rulesModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light" id="rulesModalLabel">
+              The Armored Core 6 Roguelike Challenge
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="accordion accordion-flush" id="rulesAndInfoAccordion">
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#overviewAccordion"
+                    aria-expanded="false"
+                    aria-controls="overviewAccordion"
+                  >
+                    Overview
+                  </button>
+                </h2>
+                <div
+                  id="overviewAccordion"
+                  class="accordion-collapse collapse show p-3"
+                  aria-labelledby="Rules"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <p class="text-white">
+                    The Armored Core 6 Roguelike Challenge is for pilots who
+                    really want to spice up their PvE experience with roguelike
+                    elements!
+                  </p>
+                  <p class="text-white">
+                    This challenge is a journey that takes you through all three
+                    timelines, starting with Fires of Raven, then Liberator of
+                    Rubicon, and finally Alea Iacta Est.
+                  </p>
+                  <p class="text-white">
+                    The idea is that you will be forced to use crazy PvE
+                    loadouts that you have never used before, possibly learn
+                    something, and most importantly, have fun!
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#rulesAccordion"
+                    aria-expanded="false"
+                    aria-controls="rulesAccordion"
+                  >
+                    Rules
+                  </button>
+                </h2>
+                <div
+                  id="rulesAccordion"
+                  class="accordion-collapse collapse p-3"
+                  aria-labelledby="Rules"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <ul class="modalAccordionList">
+                    <li class="text-white my-2">
+                      Start a new playthrough with the JAILBREAK frame, the
+                      starter internal components (BST-G1/P10 booster,
+                      FCS-G1/P01 FCS, AG-J-098 JOSO generator), no OS tunings,
+                      and no weapons.
+                    </li>
+                    <li class="text-white my-2">
+                      If you fail a mission for any reason, the run is over.
+                      Press the "Mission Failed" button to restart your run. You
+                      will keep your OST Chips earned during your run, but lose
+                      all of your earned parts and you will restart at the first
+                      mission of your current timeline.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#progressionAccordion"
+                    aria-expanded="false"
+                    aria-controls="progressionAccordion"
+                  >
+                    Progression
+                  </button>
+                </h2>
+                <div
+                  id="progressionAccordion"
+                  class="accordion-collapse collapse p-3"
+                  aria-labelledby="Rules"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <p class="text-white">
+                    You must complete the mission shown on screen in order to
+                    progress (you can use the Replay Mission feature in-game).
+                  </p>
+                  <p class="text-white">
+                    If you complete the mission, press the "Mission Complete"
+                    button (green checkmark on mobile), and follow the prompts.
+                  </p>
+                  <p class="text-white">
+                    Every mission has an optional objective, which you can
+                    complete for an extra part roll (you can still only choose 1
+                    part, but options are good).
+                  </p>
+                  <p class="text-white">
+                    Completing a chapter rewards you with OST Chips, with the
+                    later chapters awarding more chips. For longer chapters,
+                    there are mid-chapter chip rewards as well. OST Chips
+                    persist in your inventory even if you fail a run, making
+                    your subsequent runs easier.
+                  </p>
+                  <p class="text-white">
+                    Completing a timeline (Fires of Raven, Liberator of Rubicon,
+                    Alea Iacta Est) rewards you with OST Chips, a badge, and
+                    resets your parts.
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#saveDataInfoAccordion"
+                    aria-expanded="false"
+                    aria-controls="saveDataInfoAccordion"
+                  >
+                    Saving Your Progress
+                  </button>
+                </h2>
+                <div
+                  id="saveDataInfoAccordion"
+                  class="accordion-collapse collapse p-3"
+                  aria-labelledby="Saving Your Progress"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <p class="text-white">
+                    Your progress is automatically saved for you whenever you
+                    complete a mission. The save data is stored in your
+                    browser's local storage, so feel free to close out of the
+                    website. As long as you use the same browser, you will have
+                    your progress.
+                  </p>
+                  <p class="text-white">
+                    Note that clearing your browser cache and cookies may also
+                    delete our save data.
+                    <b
+                      >It's a good idea to periodically download your save
+                      data.</b
+                    >
+                    You can download (and upload) save data by clicking the
+                    button in the upper right and following the prompts there.
+                  </p>
+                  <p class="text-white">
+                    If you want to transfer your save to another device or
+                    browser, simply download your save data and upload it to the
+                    new platform.
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faqAccordion"
+                    aria-expanded="false"
+                    aria-controls="faqAccordion"
+                  >
+                    FAQs
+                  </button>
+                </h2>
+                <div
+                  id="faqAccordion"
+                  class="accordion-collapse collapse p-3"
+                  aria-labelledby="Rules"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <ul class="modalAccordionList">
+                    <li class="text-white my-2">
+                      <b>Q: What about the "Destroy the Ice Worm" mission?</b>
+                      <p>
+                        You may use the Stun Needle launcher for this mission
+                        (R-Back Unit variant, as in the base game) even if you
+                        haven't acquired it through random rewards
+                      </p>
+                    </li>
+                    <li class="text-white my-2">
+                      <b>Q: What about [ALT] missions?</b>
+                      <p>
+                        The mission tab will tell you if you need to do the
+                        [ALT] version of a mission by saying [ALT] in the
+                        mission title
+                      </p>
+                    </li>
+                    <li class="text-white my-2">
+                      <b
+                        >Q: I made it to Liberator of Rubicon/Alea Iacta Est
+                        timeline. If I fail a mission now, will I have to start
+                        over from Fires of Raven?</b
+                      >
+                      <p>
+                        No. You will start at the first mission of your current
+                        timeline.
+                      </p>
+                    </li>
+                    <li class="text-white">
+                      <b>Q: What the hell is a Denoiser or a Weevil?</b>
+                      <p>
+                        A: Denoisers are the PCA mechs found in Watchpoint Alpha
+                        and Institute City. Weevils are the bipedal C-Weapon MTs
+                        that always appear alongside Helianthus machines. (And
+                        in case you missed that in-game, Helianthi are the
+                        grinder wheels)
+                      </p>
+                    </li>
+                    <li class="text-white">
+                      <b> Q: Is restarting a mission fair game? </b>
+                      <p>
+                        A: Nope. Live with your mistakes and/or die by your
+                        mistakes.
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-light"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#creditAccordion"
+                    aria-expanded="false"
+                    aria-controls="creditAccordion"
+                  >
+                    Credits
+                  </button>
+                </h2>
+                <div
+                  id="creditAccordion"
+                  class="accordion-collapse collapse p-3"
+                  aria-labelledby="Rules"
+                  data-bs-parent="#rulesAndInfoAccordion"
+                >
+                  <ul class="modalAccordionList">
+                    <li class="text-white">
+                      This app is basically u/PixelKatana's immaculately
+                      prepared spreadsheets condensed into one webpage for
+                      convenience. Huge thanks to them for essentially letting
+                      me copy all of their work. You can find their original
+                      spreadsheets
+                      <a
+                        target="_blank"
+                        href="https://docs.google.com/spreadsheets/d/1h2H2mr_NGOSqG_F9D8O78ChCtyE0NEmXi1RzF5E7Mnw/edit#gid=1523984323"
+                      >
+                        here</a
+                      >
+                    </li>
+                    <li class="text-white">
+                      u/Fynzmirs and u/Vamprah for their contributions to the
+                      aforementioned spreadsheet
+                    </li>
+                    <li class="text-white">
+                      u/_b1ack0ut for the initial idea of a roguelike-styled run
+                    </li>
+                    <li class="text-white">
+                      Would you like to contribute? If you're code savvy, I
+                      could use some help with colors and fonts, as well as
+                      upcoming features. Feel free to email me at
+                      joebenwilson.dev@gmail.com with any feedback/suggestions,
+                      or submit a PR on
+                      <a
+                        href="https://github.com/Selenestica/ac6-roguelike-challenge"
+                        >GitHub</a
+                      >.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-start">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTS GALLERY MODAL -->
+    <div
+      class="modal fade"
+      id="partsGalleryModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light">Parts Gallery</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="partsGalleryModalBody">
+            <div class="accordion" id="partsGalleryAccordion">
+              <!-- generated by JS -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPLOAD/DOWNLOAD MODAL -->
+    <div
+      class="modal fade"
+      id="upAndDownloadModal"
+      tabindex="-1"
+      aria-labelledby="upAndDownloadModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light" id="upAndDownloadModalLabel">
+              Save Data Management
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <ul>
+                <li class="text-white">
+                  To download your current progress, press "Download". A ".json"
+                  file will be saved on your computer called
+                  "ac6-rlc-save-file.json". You can use this file to continue
+                  runs across devices, or pass along to other pilots.
+                </li>
+                <li class="text-white">
+                  You can upload save files using the input below. Once your
+                  save file is validated you can press the "Upload" button.
+                  Please note that this will overwrite your current run.
+                </li>
+              </ul>
+
+              <hr class="text-white" />
+              <div class="accordion accordion-flush" id="deleteDataAccordion">
+                <div class="accordion-item bg-none">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button collapsed text-danger"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#deleteAccordion"
+                      aria-expanded="false"
+                      aria-controls="deleteAccordion"
+                    >
+                      Delete Save Data
+                    </button>
+                  </h2>
+                  <div
+                    id="deleteAccordion"
+                    class="accordion-collapse collapse p-3"
+                    aria-labelledby="Delete Save Data"
+                    data-bs-parent="#deleteDataAccordion"
+                  >
+                    <button class="btn btn-danger" onclick="deleteSaveData()">
+                      DELETE SAVE DATA
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr class="text-white" />
+
+              <input
+                class="form-control"
+                type="file"
+                id="uploadSaveFileInput"
+                accept=".json"
+              />
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <div>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+            <div>
+              <button
+                disabled
+                type="button"
+                class="btn btn-warning"
+                onclick="uploadSaveFile()"
+                data-bs-dismiss="modal"
+                id="uploadSaveFileButton"
+              >
+                Upload
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="downloadSaveFile()"
+              >
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://kit.fontawesome.com/a018c01272.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="../js/constants/parts.js"></script>
+  <script src="../js/constants/missions.js"></script>
+  <script src="../js/components/generatePartCategories.js"></script>
+  <script src="../js/components/generateMissionScreen.js"></script>
+  <script src="../js/components/genMissionCompleteModalContent.js"></script>
+  <script src="../js/components/genEndingCompleteModalContent.js"></script>
+  <script src="../js/components/genBadgesShelfContent.js"></script>
+  <script src="../js/components/genPartsGalleryModalContent.js"></script>
+  <script src="../js/roguelike/main.js"></script>
+  <script src="../js/utils/downloadSaveFile.js"></script>
+</html>
