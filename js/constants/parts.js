@@ -1479,13 +1479,13 @@ const PARTS = [
   {
     name: "AG-E-013 YABA",
     img: "ag-e-013-yaba.webp",
-    tier: "c",
+    tier: "a",
     category: "generator",
   },
   {
     name: "DF-GN-06 MING-TANG",
     img: "df-gn-06-ming-tai.webp",
-    tier: "c",
+    tier: "a",
     category: "generator",
   },
   { name: "VP-20S", img: "vp-20s.webp", tier: "c", category: "generator" },
