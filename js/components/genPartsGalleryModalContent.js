@@ -22,6 +22,7 @@ const sortByTier = (list) => {
   });
 };
 
+// adding a comment to hopefully push the latest change
 const genPartsGalleryCard = (part) => {
   return `
     <div class="card d-flex col-3 col-md-2 mx-1 mb-2 bg-dark border-secondary align-items-center p-1" style="position: relative;">
