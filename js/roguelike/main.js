@@ -31,6 +31,8 @@ const rulesModal = document.getElementById("rulesModal");
 const initialPartModal = document.getElementById("initialPartModal");
 const initialPartModalBody = document.getElementById("initialPartModalBody");
 const upAndDownloadModal = document.getElementById("upAndDownloadModal");
+const addPartToast = document.getElementById("addPartToast");
+const addPartToastBody = document.getElementById("addPartToastBody");
 
 // defines how individual categories are grouped for rolling purposes
 // subject to change
@@ -112,6 +114,50 @@ endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
   }
 
   rollInitialPart(true);
+});
+
+const showAddPartToast = (partName) => {
+  addPartToastBody.innerText = `${partName} added to Garage`;
+  const toast = new bootstrap.Toast(addPartToast, { delay: 2500 });
+  toast.show();
+};
+
+const addPartManually = (partName, partCategory) => {
+  const partToAdd = PARTS.find(
+    (p) => p.name === partName && p.category === partCategory,
+  );
+  if (!partToAdd) return;
+
+  const alreadyAcquired = acquiredParts.some(
+    (p) => p.name === partName && p.category === partCategory,
+  );
+  if (alreadyAcquired) {
+    addPartToastBody.innerText = `${partName} is already in your garage.`;
+    const toast = new bootstrap.Toast(addPartToast, { delay: 2000 });
+    toast.show();
+    return;
+  }
+
+  const partWithFlag = { ...partToAdd, manuallyAdded: true };
+  acquiredParts.push(partWithFlag);
+  displayPartInCategory(partWithFlag);
+
+  const partIndex = parts.findIndex(
+    (p) => p.name === partName && p.category === partCategory,
+  );
+  if (partIndex !== -1) {
+    parts.splice(partIndex, 1);
+  }
+
+  saveProgress();
+  showAddPartToast(partName);
+};
+
+partsGalleryAccordion.addEventListener("click", (e) => {
+  const button = e.target.closest(".addPartButton");
+  if (!button) return;
+
+  addPartManually(button.dataset.partName, button.dataset.partCategory);
 });
 
 const rollInitialPart = async (needToSave = null) => {

@@ -881,7 +881,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <h5 class="text-white mb-2">Difficulty</h5>
+            <!-- <h5 class="text-white mb-2">Difficulty</h5>
             <p
               class="text-muted small mb-3"
               id="difficultyLockedText"
@@ -895,7 +895,7 @@
               role="group"
               id="difficultyButtonGroup"
             >
-              <!-- <input
+              <input
                 type="radio"
                 class="btn-check"
                 name="difficulty"
@@ -904,7 +904,7 @@
               />
               <label class="btn btn-outline-success" for="difficultyEasy"
                 >Easy</label
-              > -->
+              >
 
               <input
                 type="radio"
@@ -928,9 +928,9 @@
               <label class="btn btn-outline-danger" for="difficultyHard"
                 >Hard</label
               >
-            </div>
+            </div> -->
 
-            <div
+            <!-- <div
               class="card bg-dark border-secondary p-3"
               id="difficultyDescriptionCard"
             >
@@ -945,7 +945,7 @@
                 <span>OST Chip Rewards</span>
                 <span class="text-info" id="difficultyChipsText">Standard</span>
               </div>
-            </div>
+            </div> -->
             <h5 class="text-white mb-2 my-3">Parts Gallery</h5>
             <div class="accordion" id="partsGalleryAccordion"></div>
           </div>
@@ -958,6 +958,30 @@
               Close
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div
+      class="toast-container position-fixed bottom-0 end-0 p-3"
+      style="z-index: 1080"
+    >
+      <div
+        id="addPartToast"
+        class="toast align-items-center text-white bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body" id="addPartToastBody">Part added</div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
         </div>
       </div>
     </div>

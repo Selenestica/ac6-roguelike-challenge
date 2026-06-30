@@ -37,8 +37,10 @@ const genPartsGalleryCard = (part) => {
         ${part.tier.toUpperCase()}
       </span>
       <span
-        class="badge bg-success cursor-pointer"
+        class="badge bg-success cursor-pointer addPartButton"
         style="position: absolute; bottom: 4px; right: 4px;"
+        data-part-name="${part.name}"
+        data-part-category="${part.category}"
       >
         +
       </span>
