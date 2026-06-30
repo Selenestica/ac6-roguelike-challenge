@@ -1,15 +1,15 @@
-FEATURES:
-  - validate JSON file the best you can before allowing upload 
+RANDOMIZER
+  TODO
+    - option to let left and right arm weapons to roll as back weapons
+    - option to save options configuration (kind of works, but reloading the site gets categories out of order)
+    - option to set part rarity (previously stages)
 
-TODO
-  - MAIN SPLASH SCREEN
-  - RANDOMIZER
-  - add hamburger menu that includes the following features
-    - stats page for players to see their stats
-      - missions completed
-      - missions failed
-      - optional challenges completed
-      - best run (their furthest mission)
+ROGUELIKE
+  - stats page for players to see their stats
+    - missions completed
+    - missions failed
+    - optional challenges completed
+    - best run (their furthest mission)
   - challenge complete screen
     - turn Mission Failed button into Reset button. modal to prompt to delete save data and start over
     - get missions completed only for successful run
@@ -19,10 +19,16 @@ TODO
       - missions completed
       - challenges completed
       - missions failed
+  - multiple save files?
 
-POTENTIAL FEATURES
-  - instead of a free random part every restart, choose between part or 1 OST Chip
-  - allow for multiple save files?
+PAGE IDEAS
+  - TIER LIST MAKER
+  - LOADOUT BUILDER
+  - BUDGET BLITZ equivalent
+    - credits awarded for mission rank (S, A, B, C, D)
+  - SPECIAL OPS equivalent
+    - random loadout every few missions? 
+
 
 BUGS
   - final parts obtained count isnt cumulative across all three timelines
