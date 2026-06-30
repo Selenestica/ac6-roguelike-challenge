@@ -957,13 +957,13 @@ const PARTS = [
   {
     name: "HD-033M VERRILL",
     img: "hd-033m-verrill.webp",
-    tier: "b",
+    tier: "s",
     category: "head",
   },
   {
     name: "LAMMERGEIER/44F",
     img: "lammergeier-44f.webp",
-    tier: "b",
+    tier: "c",
     category: "head",
   },
   { name: "VE-44A", img: "ve-44a.webp", tier: "b", category: "head" },
@@ -1620,7 +1620,7 @@ const PARTS = [
   {
     name: "DF-HD-08 TIAN-QIANG",
     img: "df-hd-08-tian-qiang.webp",
-    tier: "d",
+    tier: "c",
     category: "head",
   },
   { name: "VP-44S", img: "vp-44s.webp", tier: "d", category: "head" },
