@@ -25,6 +25,10 @@ ROGUELIKE
   - ability to change rules before run starts (saveProgress fires)
   - reroll tokens?
   - optional rule: "sacrifice X parts to continue run" (higher part cost in later stages)
+  - add C tier weapons to initial part roll
+
+  BUGS:
+    - initial part roll doesnt get removed from the main loot pool
 
 PAGE IDEAS
   - TIER LIST MAKER

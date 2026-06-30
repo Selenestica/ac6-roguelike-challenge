@@ -313,7 +313,7 @@ const rollOnce = (
   const weights = chapterWeights(chapter);
   let tiers = ["d", "c", "b", "a", "s"];
   if (initial) {
-    tiers = ["d"];
+    tiers = ["d", "c"];
   }
 
   const availableParts = parts.filter(

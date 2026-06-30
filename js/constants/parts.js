@@ -669,13 +669,13 @@ const PARTS = [
   {
     name: "WB-0010 DOUBLE TROUBLE Chainsaw",
     img: "wb-0010-double-trouble.webp",
-    tier: "b",
+    tier: "c",
     category: "l-arm",
   },
   {
     name: "VP-67EB Stun Baton",
     img: "vp-67eb.webp",
-    tier: "b",
+    tier: "c",
     category: "l-arm",
   },
   {
