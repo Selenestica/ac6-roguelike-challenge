@@ -157,3 +157,8 @@ body {
 .blankBadge {
   opacity: 10%;
 }
+
+#gallery_head {
+  padding-left: 0px;
+  padding-right: 0px;
+}

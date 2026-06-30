@@ -218,7 +218,7 @@ const PARTS = [
   {
     name: "IB-C03B: NGI 001",
     img: "IB-C03B NGI 001.webp",
-    tier: "b",
+    tier: "a",
     category: "booster",
   },
   { name: "VE-20B", img: "ve-20b.webp", tier: "s", category: "generator" },
@@ -1057,7 +1057,7 @@ const PARTS = [
   {
     name: "BC-0400 MULE",
     img: "bc-0400-mule.webp",
-    tier: "c",
+    tier: "d",
     category: "booster",
   },
   {
@@ -1714,7 +1714,7 @@ const PARTS = [
   {
     name: "BST-G2/P04",
     img: "bst-g2-p04.webp",
-    tier: "d",
+    tier: "c",
     category: "booster",
   },
   {

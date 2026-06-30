@@ -24,7 +24,7 @@ const sortByTier = (list) => {
 
 const genPartsGalleryCard = (part) => {
   return `
-    <div class="card d-flex col-3 col-md-2 col-lg-1 mx-1 mb-2 bg-dark border-secondary align-items-center p-1" style="position: relative;">
+    <div class="card d-flex col-3 col-md-2 mx-1 mb-2 bg-dark border-secondary align-items-center p-1" style="position: relative;">
       <img
         src="../assets/images/${part.img}"
         class="img-fluid"
@@ -36,7 +36,13 @@ const genPartsGalleryCard = (part) => {
       >
         ${part.tier.toUpperCase()}
       </span>
-      <div class="p-1 text-center">
+      <span
+        class="badge bg-success cursor-pointer"
+        style="position: absolute; bottom: 4px; right: 4px;"
+      >
+        +
+      </span>
+      <div class="p-1 text-start">
         <p class="text-white mb-0" style="font-size: 0.65rem;">${part.name}</p>
       </div>
     </div>

@@ -20,6 +20,13 @@ ROGUELIKE
       - challenges completed
       - missions failed
   - multiple save files?
+  - hard mode
+    - only get parts if challenge completed
+  - ability to change rules before run starts (saveProgress fires)
+  - button to skip drops
+  - button to manually add parts from gallery to Garage
+  - reroll tokens?
+  - optional rule: "sacrifice X parts to continue run" (higher part cost in later stages)
 
 PAGE IDEAS
   - TIER LIST MAKER
