@@ -6,6 +6,18 @@ const PARTS = [
     category: "r-arm",
   },
   {
+    name: "VVC-70VPM",
+    img: "vvc-70vmp.webp",
+    tier: "c",
+    category: "r-back",
+  },
+  {
+    name: "VVC-70VPM",
+    img: "vvc-70vmp.webp",
+    tier: "c",
+    category: "l-back",
+  },
+  {
     name: "IA-C01W6: NB-REDSHIFT Coral Rifle",
     img: "IA-C01W6 NB-REDSHIFT Coral Rifle.webp",
     tier: "s",
@@ -859,12 +871,6 @@ const PARTS = [
     category: "r-back",
   },
   {
-    name: "Vvc-706PM Plasma Missile Launcher",
-    img: "vvc-706pm.webp",
-    tier: "b",
-    category: "r-back",
-  },
-  {
     name: "VP-60LT Laser Turret",
     img: "vp-60lt.webp",
     tier: "b",
@@ -933,12 +939,6 @@ const PARTS = [
   {
     name: "45-091 JVLN BETA Detonating Missile Launcher",
     img: "45-091-jvln-beta.webp",
-    tier: "b",
-    category: "l-back",
-  },
-  {
-    name: "Vvc-706PM Plasma Missile Launcher",
-    img: "vvc-706pm.webp",
     tier: "b",
     category: "l-back",
   },
@@ -1262,7 +1262,7 @@ const PARTS = [
     category: "r-back",
   },
   {
-    name: "BML-G2/P05MLT-10 Missile Launcher",
+    name: "MLT-10 Missile Launcher",
     img: "bml-g2-p05mlt-10.webp",
     tier: "c",
     category: "r-back",
@@ -1294,7 +1294,7 @@ const PARTS = [
   {
     name: "Vvc-703PM Plasma Missile Launcher",
     img: "vvc-703pm.webp",
-    tier: "s",
+    tier: "a",
     category: "r-back",
   },
   {
@@ -1366,7 +1366,7 @@ const PARTS = [
   {
     name: "Vvc-703PM Plasma Missile Launcher",
     img: "vvc-703pm.webp",
-    tier: "s",
+    tier: "a",
     category: "l-back",
   },
   {

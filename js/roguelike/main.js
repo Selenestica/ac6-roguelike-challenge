@@ -308,6 +308,7 @@ const rollOnce = (
   secondIndex = null,
   initial = null,
   forcedCategory = null,
+  excludedGroups = [],
 ) => {
   const { chapter } = MISSIONS[currentEnding][currentMission];
   const weights = chapterWeights(chapter);
@@ -328,14 +329,17 @@ const rollOnce = (
     };
   } else {
     const categoryPool = Object.entries(CATEGORY_GROUPS)
-      .filter(([_, cats]) =>
-        availableParts.some((p) => cats.includes(p.category)),
+      .filter(
+        ([group, cats]) =>
+          !excludedGroups.includes(group) &&
+          availableParts.some((p) => cats.includes(p.category)),
       )
       .map(([group, cats]) => ({
         group,
         cats,
         weight: CATEGORY_WEIGHTS[group],
       }));
+
     const totalCategoryWeight = categoryPool.reduce(
       (sum, c) => sum + c.weight,
       0,
@@ -359,38 +363,42 @@ const rollOnce = (
   const eligibleParts = partsInGroup.filter((p) => p.tier === chosenTier);
   const chosenPart =
     eligibleParts[Math.floor(Math.random() * eligibleParts.length)];
-  const partsIndex = parts.indexOf(chosenPart);
 
-  return { part: chosenPart, index: partsIndex };
+  return {
+    part: chosenPart,
+    index: parts.indexOf(chosenPart),
+    group: chosenGroup.group,
+  };
 };
 
 const rollForParts = (optionalCompleted) => {
-  // if its the last mission of the ending, they dont need a part reward
   if (currentMission >= MISSIONS[currentEnding].length - 1) {
     showEndingFinishedModal(optionalCompleted);
     return;
   }
-
-  // this is pretty much impossible to achieve, but better safe than sorry
   if (parts.length === 0) {
     console.log("no more parts to roll!");
     return;
   }
-
-  // if we already rolled this mission (e.g. player reloaded), just show the modal
   if (rolledParts.length > 0) {
     currentParts = rolledParts;
     populateNewPartsModal(optionalCompleted);
     return;
   }
 
-  // always roll 3 parts
-  const first = rollOnce(null, null, null);
-  const second = rollOnce(first.index, null, null);
-  const third = rollOnce(first.index, second.index, null);
+  const usedGroups = [];
+  const first = rollOnce(null, null, null, null, usedGroups);
+  usedGroups.push(first.group);
+  const second = rollOnce(first.index, null, null, null, usedGroups);
+  usedGroups.push(second.group);
+  const third = rollOnce(first.index, second.index, null, null, usedGroups);
 
   currentParts = [first, second, third];
   rolledParts = [...currentParts];
+
+  [first.index, second.index, third.index]
+    .sort((a, b) => b - a)
+    .forEach((i) => parts.splice(i, 1));
 
   saveProgress();
   populateNewPartsModal(optionalCompleted);

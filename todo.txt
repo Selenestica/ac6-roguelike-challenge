@@ -1,3 +1,6 @@
+SPLASHPAGE
+  - add ac6 advanced garage github link matteosal.github.io 
+
 RANDOMIZER
   TODO
     - option to let left and right arm weapons to roll as back weapons
@@ -25,7 +28,7 @@ ROGUELIKE
   - ability to change rules before run starts (saveProgress fires)
   - reroll tokens?
   - optional rule: "sacrifice X parts to continue run" (higher part cost in later stages)
-  - add C tier weapons to initial part roll
+  - optional rule: guaranteed to roll a part category that you dont have anything in until mission 12 (or end of chapter 1?)
 
   BUGS:
     - initial part roll doesnt get removed from the main loot pool
@@ -37,7 +40,6 @@ PAGE IDEAS
     - credits awarded for mission rank (S, A, B, C, D)
   - SPECIAL OPS equivalent
     - random loadout every few missions? 
-
 
 BUGS
   - final parts obtained count isnt cumulative across all three timelines
