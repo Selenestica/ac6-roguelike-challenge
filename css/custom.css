@@ -162,3 +162,9 @@ body {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+.part-card:hover {
+  border-color: white !important;
+  transform: translateY(-3px);
+  transition: all 0.15s ease;
+}

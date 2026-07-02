@@ -224,6 +224,38 @@ const chapterWeights = (chapter) => {
   if (chapter === 5) return [5, 10, 30, 30, 25];
 };
 
+const removePart = (partName, partImg, partCategory, rowID) => {
+  // remove from the UI
+  document.getElementById(rowID).remove();
+
+  // update the badge count
+  const badgeEl = document.getElementById(`${partCategory}CategoryButtonBadge`);
+  if (badgeEl) {
+    const badgeNumber = parseInt(badgeEl.innerHTML);
+    badgeEl.innerHTML = badgeNumber > 1 ? badgeNumber - 1 : "";
+  }
+
+  // remove from acquiredParts
+  const acquiredIndex = acquiredParts.findIndex(
+    (p) =>
+      p.name === partName && p.img === partImg && p.category === partCategory,
+  );
+  if (acquiredIndex !== -1) {
+    acquiredParts.splice(acquiredIndex, 1);
+  }
+
+  // add back to the rollable pool
+  const originalPart = PARTS.find(
+    (p) =>
+      p.name === partName && p.img === partImg && p.category === partCategory,
+  );
+  if (originalPart) {
+    parts.push(originalPart);
+  }
+
+  saveProgress();
+};
+
 const displayPartInCategory = (part) => {
   partCounter++;
   const imgBase = part.img.replace(".webp", "");
@@ -232,12 +264,21 @@ const displayPartInCategory = (part) => {
   const partAccordion = document.getElementsByClassName(part.category)[0];
   partAccordion.innerHTML += `
     <div class="accordion-body text-light" id="${partRowID}">
-      <div class="d-flex row justify-content-center">
+      <div class="d-flex row justify-content-center align-items-center">
         <div class="d-flex col-4 accordionPartImgContainer justify-content-end">
           <img class="img-fluid" src="../assets/images/${part.img}" />
         </div>
         <div class="d-flex col-4 text-light justify-content-start align-items-center">
           ${part.name}
+        </div>
+        <div class="d-flex col-4 text-light justify-content-end align-items-center">
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            onclick="removePart('${part.name}', '${part.img}', '${part.category}', '${partRowID}')"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
         </div>
       </div>
     </div>`;

@@ -1,9 +1,7 @@
 SPLASHPAGE
-  - add ac6 advanced garage github link matteosal.github.io 
 
 RANDOMIZER
   TODO
-    - option to let left and right arm weapons to roll as back weapons
     - option to save options configuration (kind of works, but reloading the site gets categories out of order)
     - option to set part rarity (previously stages)
 

@@ -2,6 +2,7 @@ const rolledPartsContainer = document.getElementById("rolledPartsContainer");
 const categoryChecklistContainer = document.getElementById(
   "categoryChecklistContainer",
 );
+const armAsBackCheck = document.getElementById("armAsBackCheck");
 
 const ALL_CATEGORIES = [
   "l-arm",
@@ -24,6 +25,20 @@ const TIER_COLORS = {
   c: "#2980B9",
   d: "#7F8C8D",
 };
+
+rolledPartsContainer.addEventListener("click", (e) => {
+  const card = e.target.closest(".part-card");
+  if (!card) return;
+  rerollSinglePart(card);
+});
+
+let allowArmAsBack = JSON.parse(localStorage.getItem("ac6ArmAsBack") ?? "true");
+armAsBackCheck.checked = allowArmAsBack;
+
+armAsBackCheck.addEventListener("change", (e) => {
+  allowArmAsBack = e.target.checked;
+  localStorage.setItem("ac6ArmAsBack", JSON.stringify(allowArmAsBack));
+});
 
 // load checked categories from localStorage or default to all checked
 let checkedCategories = new Set(
@@ -71,17 +86,68 @@ const genCategoryChecklist = () => {
   });
 };
 
-const genPartCard = (part) => {
+const rerollSinglePart = (card) => {
+  const slotCategory = card.dataset.category; // the slot being filled (e.g. r-back)
+
+  let pool = PARTS.filter((p) => p.category === slotCategory).map((p) => ({
+    part: p,
+    displayCategory: null,
+  }));
+
+  if (allowArmAsBack) {
+    if (slotCategory === "r-back") {
+      const rArmParts = PARTS.filter((p) => p.category === "r-arm").map(
+        (p) => ({ part: p, displayCategory: "r-back" }),
+      );
+      pool = [...pool, ...rArmParts];
+    }
+    if (slotCategory === "l-back") {
+      const lArmParts = PARTS.filter((p) => p.category === "l-arm").map(
+        (p) => ({ part: p, displayCategory: "l-back" }),
+      );
+      pool = [...pool, ...lArmParts];
+    }
+  }
+
+  if (pool.length === 0) return;
+
+  const { part, displayCategory } =
+    pool[Math.floor(Math.random() * pool.length)];
+
+  // replace just this card's content
+  const categoryLabel = displayCategory
+    ? `${displayCategory.toUpperCase()}`
+    : part.category.toUpperCase();
+
+  card.dataset.originalCategory = part.category;
+  card.querySelector("img").src = `../assets/images/${part.img}`;
+  card.querySelector("img").alt = part.name;
+  card.querySelector("p").innerText = part.name;
+  card.querySelector("small").innerHTML = categoryLabel;
+};
+
+const genPartCard = (part, displayCategory = null) => {
+  const categoryLabel = displayCategory
+    ? `${displayCategory.toUpperCase()}`
+    : part.category.toUpperCase();
+
   return `
-    <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center mb-3">
-      <div class="card bg-dark border-secondary text-center p-2" style="width: 160px; position: relative;">
+    <div
+      class="col-6 col-md-4 col-lg-3 d-flex justify-content-center mb-3"
+    >
+      <div
+        class="card bg-dark border-secondary text-center p-2 part-card"
+        style="width: 160px; position: relative; cursor: pointer;"
+        data-category="${displayCategory ?? part.category}"
+        data-original-category="${part.category}"
+      >
         <img
           class="img-fluid mb-2"
           src="../assets/images/${part.img}"
           alt="${part.name}"
         />
         <p class="text-white mb-1" style="font-size: 0.75rem;">${part.name}</p>
-        <small class="text-muted text-uppercase">${part.category}</small>
+        <small class="text-muted text-uppercase">${categoryLabel}</small>
       </div>
     </div>
   `;
@@ -96,11 +162,30 @@ const rollParts = () => {
   rolledPartsContainer.innerHTML = "";
 
   checkedCategories.forEach((category) => {
-    const partsInCategory = PARTS.filter((p) => p.category === category);
-    if (partsInCategory.length === 0) return;
-    const randomPart =
-      partsInCategory[Math.floor(Math.random() * partsInCategory.length)];
-    rolledPartsContainer.innerHTML += genPartCard(randomPart);
+    let pool = PARTS.filter((p) => p.category === category).map((p) => ({
+      part: p,
+      displayCategory: null,
+    }));
+
+    if (allowArmAsBack) {
+      if (category === "r-back") {
+        const rArmParts = PARTS.filter((p) => p.category === "r-arm").map(
+          (p) => ({ part: p, displayCategory: "r-back" }),
+        );
+        pool = [...pool, ...rArmParts];
+      }
+      if (category === "l-back") {
+        const lArmParts = PARTS.filter((p) => p.category === "l-arm").map(
+          (p) => ({ part: p, displayCategory: "l-back" }),
+        );
+        pool = [...pool, ...lArmParts];
+      }
+    }
+
+    if (pool.length === 0) return;
+    const { part, displayCategory } =
+      pool[Math.floor(Math.random() * pool.length)];
+    rolledPartsContainer.innerHTML += genPartCard(part, displayCategory);
   });
 };
 
