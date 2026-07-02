@@ -18,7 +18,17 @@ const tierCustomizationModal = document.getElementById(
 const deleteTierButton = document.getElementById("deleteTierButton");
 const tierListContainer = document.getElementById("tierListContainer");
 
-let OGpartsList = [...PARTS];
+// deduplicate parts by name — keeps first occurrence, removes same-named parts in other slots
+const deduplicateParts = (parts) => {
+  const seen = new Set();
+  return parts.filter((p) => {
+    if (seen.has(p.name)) return false;
+    seen.add(p.name);
+    return true;
+  });
+};
+
+let OGpartsList = deduplicateParts([...PARTS]);
 let newParts = [...OGpartsList];
 
 let customizingTier = null;
@@ -261,9 +271,16 @@ const setupCardEvents = (card) => {
 
 const generateItemCard = (part) => {
   const card = document.createElement("div");
-  card.dataset.type = part.category;
+  let partCategory = part.category;
+  if (part.category === "l-arm" || part.category === "r-arm") {
+    partCategory = "weapons";
+  }
+  if (part.category === "r-back" || part.category === "l-back") {
+    partCategory = "back";
+  }
+  card.dataset.type = partCategory;
   card.id = part.name;
-  card.className = `card tierItem pcItemCards ${part.category}`;
+  card.className = `card tierItem pcItemCards ${partCategory}`;
   card.style.width = itemsSize;
   card.innerHTML = `
     <img
