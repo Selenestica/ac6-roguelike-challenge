@@ -19,11 +19,11 @@ const genSplashPageCards = (type) => {
         internalName: "randomizer",
         icon: "dice",
       },
-      // {
-      //   displayName: "Tier List Maker",
-      //   internalName: "tiermaker",
-      //   icon: "list",
-      // },
+      {
+        displayName: "Tier List Maker",
+        internalName: "tiermaker",
+        icon: "list",
+      },
       // {
       //   displayName: "Armor Lab",
       //   internalName: "armorlab",

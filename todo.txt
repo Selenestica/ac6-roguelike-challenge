@@ -29,8 +29,11 @@ ROGUELIKE
 
   BUGS:
 
+TIER MAKER
+  BUGS: 
+  - starter parts dont show up
+
 PAGE IDEAS
-  - TIER LIST MAKER
   - BUDGET BLITZ equivalent
     - credits awarded for mission rank (S, A, B, C, D)
   - SPECIAL OPS equivalent
