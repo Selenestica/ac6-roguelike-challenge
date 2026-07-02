@@ -377,9 +377,12 @@ const rollOnce = (
   let tiers = ["d", "c", "b", "a", "s"];
   if (initial) tiers = ["d", "c"];
 
-  const availableParts = parts.filter(
-    (_, i) => i !== firstIndex && i !== secondIndex,
-  );
+  const availableParts = parts.filter((p, i) => {
+    if (i === firstIndex || i === secondIndex) return false;
+    return !acquiredParts.some(
+      (a) => a.name === p.name && a.category === p.category,
+    );
+  });
 
   let partsInGroup;
 
@@ -497,7 +500,7 @@ const acceptPart = async (chosenIndex) => {
   displayPartInCategory(chosen.part);
 
   // remove by identity instead of index
-  const partIndex = parts.findIndex(
+  const partIndex = await parts.findIndex(
     (p) => p.name === chosen.part.name && p.category === chosen.part.category,
   );
   if (partIndex !== -1) {
@@ -697,7 +700,7 @@ const saveProgress = () => {
   localStorage.setItem("ac6rlSaveData", JSON.stringify(updatedSaveObj));
 };
 
-const loadSavedProgress = () => {
+const loadSavedProgress = async () => {
   const storedSave = localStorage.getItem("ac6rlSaveData");
 
   // if we find save data
@@ -721,7 +724,7 @@ const loadSavedProgress = () => {
     const obtainedKeys = new Set(
       acquiredParts.map((p) => p.name + "|" + p.img),
     );
-    parts = PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
+    parts = await PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
 
     ostChipsText.innerHTML = ostChips;
     genBadgesShelfContent(badgesEarned);
