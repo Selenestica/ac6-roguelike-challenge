@@ -233,7 +233,7 @@ const PARTS = [
     tier: "a",
     category: "booster",
   },
-  { name: "VE-20B", img: "ve-20b.webp", tier: "s", category: "generator" },
+  { name: "VE-20B", img: "ve-20b.webp", tier: "a", category: "generator" },
   {
     name: "WR-0555 ATTACHE Heavy Machine Gun",
     img: "WR-0555 ATTACHE Heavy Machine Gun.webp",
@@ -557,7 +557,7 @@ const PARTS = [
     tier: "a",
     category: "generator",
   },
-  { name: "VE-20C", img: "ve-20c.webp", tier: "a", category: "generator" },
+  { name: "VE-20C", img: "ve-20c.webp", tier: "b", category: "generator" },
   {
     name: "IB-C03G: NGI 000",
     img: "ib-c03g-ngi-000.webp",
@@ -1078,7 +1078,7 @@ const PARTS = [
   {
     name: "IA-C01G: AORTA",
     img: "ia-c01g-aorta.webp",
-    tier: "b",
+    tier: "c",
     category: "generator",
   },
   {
@@ -1488,8 +1488,8 @@ const PARTS = [
     tier: "a",
     category: "generator",
   },
-  { name: "VP-20S", img: "vp-20s.webp", tier: "c", category: "generator" },
-  { name: "VP-20D", img: "vp-20d.webp", tier: "c", category: "generator" },
+  { name: "VP-20S", img: "vp-20s.webp", tier: "s", category: "generator" },
+  { name: "VP-20D", img: "vp-20d.webp", tier: "b", category: "generator" },
   // {
   //   name: "BST-G1/P10",
   //   img: "bst-g1-p10.webp",

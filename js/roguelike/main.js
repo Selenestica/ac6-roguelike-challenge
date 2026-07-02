@@ -45,6 +45,20 @@ const CATEGORY_GROUPS = {
   weapons: ["r-arm", "l-arm", "r-back", "l-back"],
 };
 
+const ALL_PART_CATEGORIES = [
+  "head",
+  "core",
+  "arms",
+  "legs",
+  "booster",
+  "fcs",
+  "generator",
+  "r-arm",
+  "l-arm",
+  "r-back",
+  "l-back",
+];
+
 const CATEGORY_WEIGHTS = {
   head: 1,
   fcs: 1,
@@ -224,6 +238,12 @@ const chapterWeights = (chapter) => {
   if (chapter === 5) return [5, 10, 30, 30, 25];
 };
 
+const getEmptyCategories = () => {
+  return ALL_PART_CATEGORIES.filter((category) => {
+    return !acquiredParts.some((p) => p.category === category);
+  });
+};
+
 const removePart = (partName, partImg, partCategory, rowID) => {
   // remove from the UI
   document.getElementById(rowID).remove();
@@ -350,24 +370,28 @@ const rollOnce = (
   initial = null,
   forcedCategory = null,
   excludedGroups = [],
+  forcedSpecificCategory = null,
 ) => {
   const { chapter } = MISSIONS[currentEnding][currentMission];
   const weights = chapterWeights(chapter);
   let tiers = ["d", "c", "b", "a", "s"];
-  if (initial) {
-    tiers = ["d", "c"];
-  }
+  if (initial) tiers = ["d", "c"];
 
   const availableParts = parts.filter(
     (_, i) => i !== firstIndex && i !== secondIndex,
   );
 
-  let chosenGroup;
-  if (forcedCategory) {
-    chosenGroup = {
-      group: forcedCategory,
-      cats: CATEGORY_GROUPS[forcedCategory],
-    };
+  let partsInGroup;
+
+  if (forcedSpecificCategory) {
+    // filter to just this exact category
+    partsInGroup = availableParts.filter(
+      (p) => p.category === forcedSpecificCategory,
+    );
+  } else if (forcedCategory) {
+    partsInGroup = availableParts.filter((p) =>
+      CATEGORY_GROUPS[forcedCategory].includes(p.category),
+    );
   } else {
     const categoryPool = Object.entries(CATEGORY_GROUPS)
       .filter(
@@ -386,12 +410,13 @@ const rollOnce = (
       0,
     );
     let categoryRoll = Math.random() * totalCategoryWeight;
-    chosenGroup = categoryPool.find((c) => (categoryRoll -= c.weight) < 0);
+    const chosenGroup = categoryPool.find(
+      (c) => (categoryRoll -= c.weight) < 0,
+    );
+    partsInGroup = availableParts.filter((p) =>
+      chosenGroup.cats.includes(p.category),
+    );
   }
-
-  const partsInGroup = availableParts.filter((p) =>
-    chosenGroup.cats.includes(p.category),
-  );
 
   const tierPool = tiers
     .map((tier, i) => ({ tier, weight: weights[i] }))
@@ -408,7 +433,11 @@ const rollOnce = (
   return {
     part: chosenPart,
     index: parts.indexOf(chosenPart),
-    group: chosenGroup.group,
+    group: forcedSpecificCategory
+      ? Object.entries(CATEGORY_GROUPS).find(([_, cats]) =>
+          cats.includes(forcedSpecificCategory),
+        )?.[0]
+      : forcedCategory,
   };
 };
 
@@ -427,8 +456,24 @@ const rollForParts = (optionalCompleted) => {
     return;
   }
 
+  const { chapter } = MISSIONS[currentEnding][currentMission];
   const usedGroups = [];
-  const first = rollOnce(null, null, null, null, usedGroups);
+  let first;
+
+  // for chapter 1, force the first roll into an empty specific category if possible
+  if (chapter === 1) {
+    const emptyCategories = getEmptyCategories();
+    if (emptyCategories.length > 0) {
+      const randomEmptyCategory =
+        emptyCategories[Math.floor(Math.random() * emptyCategories.length)];
+      first = rollOnce(null, null, null, null, usedGroups, randomEmptyCategory);
+    } else {
+      first = rollOnce(null, null, null, null, usedGroups);
+    }
+  } else {
+    first = rollOnce(null, null, null, null, usedGroups);
+  }
+
   usedGroups.push(first.group);
   const second = rollOnce(first.index, null, null, null, usedGroups);
   usedGroups.push(second.group);
