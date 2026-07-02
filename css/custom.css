@@ -168,3 +168,107 @@ body {
   transform: translateY(-3px);
   transition: all 0.15s ease;
 }
+
+.pcItemCards {
+  background-color: #212830;
+  padding: 0rem;
+}
+
+.pcItemCards > div {
+  text-align: center;
+}
+
+.pcItemCards:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+  z-index: 1;
+  border: 1px solid yellow;
+}
+
+.pcItemCardText {
+  font-size: 0.75rem;
+}
+
+.itemNameContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.itemNameContainer > p {
+  margin-bottom: 0rem !important;
+}
+
+.scrollableTierColorsList {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+#tierListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tier {
+  display: flex;
+  align-items: center;
+  background: #151c24;
+  padding: 5px;
+  border: 2px solid #3c434d;
+  min-height: 60px;
+}
+
+.tierLabelButton {
+  width: 50px;
+  margin-right: 5px;
+  text-align: center;
+  background-color: #151c24 !important;
+}
+
+.tierLabel {
+  width: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.tierSubLabel {
+  font-size: x-small;
+}
+
+.tierCategories {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  min-height: 40px;
+  border-left: 2px dashed #3c434d;
+  padding-left: 5px;
+}
+
+.tierItem {
+  cursor: grab;
+  user-select: none;
+  width: 80px;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+
+#tierButtonPreview {
+  background-color: #151c24 !important;
+}
+
+#looseItemsContainer {
+  margin-top: 2px;
+  background: #151c24;
+  padding: 2px;
+  border: 2px solid #3c434d;
+}
+
+.addTierButtonDivs {
+  display: flex;
+  flex-direction: column;
+}
+
+.addTierButtons {
+  padding: 3px;
+}

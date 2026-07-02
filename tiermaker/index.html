@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-1LRWM5XFHH"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-1LRWM5XFHH");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" type="text/css" href="../css/custom.css" />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="../assets/images/vifreud.webp"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <meta
+      name="description"
+      content="Create your own tier lists for Armored Core 6 in an ad-free and open source environment!"
+    />
+    <title>Armored Core 6 Tier List Maker</title>
+  </head>
+
+  <body>
+    <div class="container mb-5">
+      <div class="row d-flex justify-content-center mt-2">
+        <div class="d-flex col-4 justify-content-start px-0">
+          <a href="../index.html">
+            <button class="btn text-light text-start py-0" type="button">
+              <i class="bi bi-arrow-left"></i>
+              Main Menu
+            </button>
+          </a>
+        </div>
+        <div class="d-flex col-4 justify-content-center">
+          <a target="_blank" href="https://discord.gg/JFWyQ8q93C">
+            <i class="socialIcons bi bi-discord"></i>
+          </a>
+          <a
+            class="mx-2"
+            target="_blank"
+            href="https://github.com/Selenestica/ac6-roguelike-challenge"
+          >
+            <i class="socialIcons bi bi-github"></i>
+          </a>
+          <a target="_blank" href="https://buymeacoffee.com/breakfasttaco">
+            <i class="socialIcons bi bi-cup-hot"></i>
+          </a>
+        </div>
+        <div class="col-4 px-2">
+          <div class="d-flex justify-content-end">
+            <button
+              class="btn btn-primary mx-1"
+              onclick="genTierMakerSaveDataManagementInfo()"
+              type="button"
+            >
+              <i class="bi bi-save text-light"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center mt-2">
+        <div class="d-flex col justify-content-center">
+          <h2 class="text-light my-0 d-flex align-items-center cursorPointer">
+            AC6 Tier List Maker
+          </h2>
+        </div>
+      </div>
+
+      <div class="row my-2 justify-content-center">
+        <div
+          class="col-2 d-flex align-items-center justify-content-start"
+        ></div>
+        <div class="col-8 d-flex justify-content-center" id="bbShopFilterDiv">
+          <div
+            class="btn-group"
+            role="group"
+            aria-label="Basic outlined example"
+          >
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-outline-primary dropdown-toggle no-caret"
+                style="padding: 4px 8px"
+                data-bs-toggle="dropdown"
+              >
+                <span class="text-white responsiveText">Size</span>
+                <span class="responsiveIcon"
+                  ><img
+                    src="../assets/icons/item-size.svg"
+                    style="width: 1.5rem"
+                    class="img-fluid"
+                /></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    onclick="changeItemSize('40px')"
+                    href="#"
+                    >Extra Small</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    onclick="changeItemSize('60px')"
+                    href="#"
+                    >Small</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    onclick="changeItemSize('80px')"
+                    href="#"
+                    >Medium</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    onclick="changeItemSize('100px')"
+                    href="#"
+                    >Large</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    onclick="changeItemSize('120px')"
+                    href="#"
+                    >Extra Large</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                onclick="toggleItemNameText()"
+              >
+                <span class="text-white responsiveText">Text</span>
+                <span class="text-white responsiveIcon"
+                  ><i class="bi bi-fonts"></i
+                ></span>
+              </button>
+            </div>
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-outline-primary dropdown-toggle no-caret"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span class="text-white responsiveText">Type</span>
+                <span class="text-white responsiveIcon"
+                  ><i class="bi bi-list-task"></i
+                ></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="weaponsFilterDropdownItem"
+                    onclick="filterByType('weapons')"
+                    href="#"
+                    >Arm Weapons</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="backFilterDropdownItem"
+                    onclick="filterByType('back')"
+                    href="#"
+                    >Back Weapons</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="headFilterDropdownItem"
+                    onclick="filterByType('head')"
+                    href="#"
+                    >Head</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="coreFilterDropdownItem"
+                    onclick="filterByType('core')"
+                    href="#"
+                    >Core</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="armsFilterDropdownItem"
+                    onclick="filterByType('arms')"
+                    href="#"
+                    >Arms</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="legsFilterDropdownItem"
+                    onclick="filterByType('legs')"
+                    href="#"
+                    >Legs</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="fcsFilterDropdownItem"
+                    onclick="filterByType('fcs')"
+                    href="#"
+                    >FCS</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="generatorFilterDropdownItem"
+                    onclick="filterByType('generator')"
+                    href="#"
+                    >Generator</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    id="boosterFilterDropdownItem"
+                    onclick="filterByType('booster')"
+                    href="#"
+                    >Booster</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <button
+              onclick="resetItemFilters()"
+              class="btn btn-primary"
+              style="padding: 4px 8px"
+              type="button"
+            >
+              <span class="responsiveText"> Reset </span>
+              <span class="responsiveIcon"
+                ><img
+                  src="../assets/icons/clearFilter.svg"
+                  style="width: 1.5rem"
+                  class="img-fluid"
+              /></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-2 justify-content-end d-flex align-items-center">
+          <button
+            class="btn btn-warning"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#restartModal"
+          >
+            <i class="bi bi-arrow-repeat"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- TIER LIST CONTAINER -->
+      <div id="tierListContainer"></div>
+
+      <!-- LOOSE ITEMS CONTAINER -->
+      <div
+        class="row d-flex justify-content-center"
+        id="looseItemsContainer"
+        ondragover="allowDrop(event)"
+        ondrop="drop(event)"
+      >
+        >
+      </div>
+
+      <!-- RESTART MODAL -->
+      <div
+        class="modal fade"
+        id="restartModal"
+        tabindex="-1"
+        open="true"
+        aria-labelledby="restartModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content bg-grey">
+            <div class="modal-header">
+              <h5 class="modal-title text-light" id="">Restart Tier List</h5>
+            </div>
+            <div class="modal-body row d-flex justify-content-center">
+              <p class="text-white">
+                When you restart your list, your current list will be saved.
+                <br />
+                <br />
+                Restart?
+              </p>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onclick="saveDataAndRestart()"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Save and Restart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIER CUSTOMIZATION MODAL -->
+      <div
+        class="modal fade"
+        id="tierCustomizationModal"
+        tabindex="-1"
+        open="true"
+        aria-labelledby="tierCustomizationModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content bg-grey">
+            <div class="modal-header">
+              <h5 class="modal-title text-light" id="">Customize Tier</h5>
+            </div>
+            <div class="modal-body row d-flex justify-content-center">
+              <div id="tierPreview" class="tier my-3">
+                <button
+                  id="tierButtonPreview"
+                  class="btn tierLabelButton btn-outline-primary"
+                >
+                  <div>
+                    <span
+                      id="tierButtonPreviewLabel"
+                      class="tierLabel text-white"
+                    ></span>
+                  </div>
+                  <div>
+                    <span
+                      id="tierButtonPreviewSubLabel"
+                      class="text-white tierSubLabel"
+                    ></span>
+                  </div>
+                </button>
+                <div class="tierCategories"></div>
+              </div>
+              <div class="my-1">
+                <button
+                  type="button"
+                  class="btn btn-primary dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span class="text-white">Change Color</span>
+                </button>
+                <ul
+                  id="tierColorsList"
+                  class="dropdown-menu scrollableTierColorsList"
+                ></ul>
+              </div>
+              <div class="my-1">
+                <label class="form-check-label text-white" for="labelNameInput">
+                  Tier Name (3 characters max)
+                </label>
+                <input
+                  id="labelNameInput"
+                  type="text"
+                  class="form-control w-50"
+                  maxlength="3"
+                  placeholder=""
+                  aria-label=""
+                />
+              </div>
+              <div class="my-1">
+                <label
+                  class="form-check-label text-white"
+                  for="subLabelNameInput"
+                >
+                  Subtext (20 characters max)
+                </label>
+                <input
+                  id="subLabelNameInput"
+                  type="text"
+                  class="form-control w-50"
+                  maxlength="20"
+                  placeholder=""
+                  aria-label=""
+                />
+              </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+              <div>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button
+                  id="deleteTierButton"
+                  type="button"
+                  class="btn d-none btn-danger mx-1"
+                  onclick="deleteTier()"
+                >
+                  Delete
+                </button>
+              </div>
+              <button
+                type="button"
+                onclick="saveTierCustomization()"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLAVOR AND INSTRUCTIONS MODAL -->
+      <div
+        class="modal fade"
+        id="flavorAndInstructionsModal"
+        tabindex="-1"
+        open="true"
+        aria-labelledby="flavorAndInstructionsModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content bg-grey">
+            <div class="modal-header">
+              <h5 class="modal-title text-light">Tier List Maker</h5>
+            </div>
+            <div class="modal-body row d-flex justify-content-center">
+              <div class="accordion" id="infoAccordion">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button
+                      class="accordion-button text-white collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseSeven"
+                      aria-expanded="false"
+                      aria-controls="collapseSeven"
+                    >
+                      FAQs
+                    </button>
+                  </h2>
+                  <div
+                    id="collapseSeven"
+                    class="accordion-collapse collapse show"
+                    data-bs-parent="#infoAccordion"
+                  >
+                    <div class="accordion-body">
+                      <ul class="modalAccordionList">
+                        <li class="text-white">
+                          <b
+                            >Q: I made a tier list a while back, but now it's
+                            gone. What happened?</b
+                          >
+                          <p>
+                            A: Significant changes have been made to the page as
+                            of 8 January 2026, adding new features.
+                            Unfortunately, this meant that I had to change the
+                            way data is saved, and your old data may have been
+                            lost. Please feel free to reach out to me on Discord
+                            and I will try to recover your old data!
+                          </p>
+                        </li>
+                        <li class="text-white">
+                          <b>Q: Can I save my tier list?</b>
+                          <p>
+                            A: Yes! Your lists, like everything else on this
+                            site, is saved in your browsers local storage. You
+                            can even have multiple lists saved and switch
+                            between them any time.
+                          </p>
+                        </li>
+                        <li class="text-white">
+                          <b>Q: Can I share my tier list with others?</b>
+                          <p>
+                            A: Yes! Simply click the download button next to the
+                            save file that you want to share. This will download
+                            a text file that others can upload in their app.
+                          </p>
+                        </li>
+                        <li class="text-white">
+                          <b>Q: Why don't you run ads on this site?</b>
+                          <p>
+                            A: The intention behind making this site was to
+                            provide maximum value to Helldivers everywhere. The
+                            majority of my code is browser-based, and I only pay
+                            out-of-pocket for the domain, build time, and
+                            hosting (I use AWS). Costs are relatively small, but
+                            if you would like to reward me for my efforts, feel
+                            free to buy me a coffee using the link at the top of
+                            the page!
+                          </p>
+                        </li>
+                        <li class="text-white">
+                          <b>Q: Can I contribute with time instead of money?</b>
+                          <p>
+                            A: Please! Feel free to join the discord and hit me
+                            up if you have any ideas/suggestions, or run into
+                            any bugs. If you're a coder, I can definitely use
+                            your help with upcoming features.
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAVE DATA MANAGEMENT MODAL -->
+      <div
+        class="modal fade"
+        id="tierMakerSaveDataManagementModal"
+        tabindex="-1"
+        open="true"
+        aria-labelledby="tierMakerSaveDataManagementModalLabel"
+        aria-hidden="true"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+      >
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+          <div class="modal-content bg-grey">
+            <div class="modal-header">
+              <h5 class="modal-title text-light" id="">Save Data Management</h5>
+            </div>
+            <div
+              class="modal-body row d-flex justify-content-center"
+              id="tierMakerSaveDataManagementModalBody"
+            >
+              <p class="text-white">
+                Switch your active save file here, delete save files, or upload
+                save files.
+                <br />
+                Select an entry below and press 'Apply' to load a different save
+                file.
+                <br />
+                <br />
+                NOTE: You can't delete your current save file.
+              </p>
+              <div class="mb-3 d-flex row">
+                <div class="col-9">
+                  <input
+                    class="form-control"
+                    type="file"
+                    id="saveDataUploadInput"
+                  />
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    onclick="uploadSaveFile()"
+                    class="btn btn-success"
+                    id="uploadSaveFileButton"
+                    disabled
+                  >
+                    Upload
+                  </button>
+                </div>
+              </div>
+              <div
+                id="tierMakerSaveDataManagementModalSavesList"
+                class="btn-group-vertical"
+                role="group"
+                aria-label="Basic radio toggle button group"
+              ></div>
+            </div>
+            <div class="modal-footer row justify-content-between">
+              <div class="d-flex col justify-content-start">
+                <button
+                  type="button"
+                  onclick="clearTierMakerSaveDataManagementModal()"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+              <div
+                id="saveDataModalFunctionsDiv"
+                class="d-flex col justify-content-end"
+              >
+                <button
+                  type="button"
+                  onclick="clearSaveDataAndRestart()"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Delete ALL
+                </button>
+                <button
+                  type="button"
+                  onclick="deleteSavedGameData()"
+                  class="btn btn-danger mx-2"
+                  data-bs-dismiss="modal"
+                >
+                  Delete
+                </button>
+                <button
+                  type="button"
+                  onclick="applySavedGameData()"
+                  class="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
+
+  <script src="../js/constants/parts.js"></script>
+  <script src="../js/constants/defaultTiers.js"></script>
+  <script src="../js/constants/tierListColors.js"></script>
+  <script src="../js/tiermaker/utils/convertRGBToHex.js"></script>
+  <script src="../js/tiermaker/utils/getCurrentDateTime.js"></script>
+  <script src="../js/tiermaker/utils/downloadSaveFile.js"></script>
+  <script src="../js/tiermaker/utils/partFilterFunctions.js"></script>
+  <script src="../js/tiermaker/utils/generateSemiUniqueCode.js"></script>
+  <script src="../js/tiermaker/main.js"></script>
+  <script src="../js/tiermaker/components/genSaveDataManagementModalContent.js"></script>
+</html>
