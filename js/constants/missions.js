@@ -273,8 +273,8 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
-      name: "Escort the Weaponized Mining Ship",
-      challenge: "Complete the mission without using more than one repair kit.",
+      name: "Destroy the Weaponized Mining Ship",
+      challenge: "Complete the mission without using any repair kits.",
       chapter: 1,
       ostChipReward: null,
     },
