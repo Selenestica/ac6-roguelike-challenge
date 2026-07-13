@@ -95,7 +95,7 @@ const MISSIONS = {
     {
       name: "Attack the Refueling Base",
       challenge:
-        "Destroy all 16 fuel tanks, defeat all 6 LCs and complete the mission without resupplying.",
+        "Destroy all 16 fuel tanks, defeat all 5 LCs and complete the mission without resupplying.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -273,8 +273,8 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
-      name: "Escort the Weaponized Mining Ship",
-      challenge: "Complete the mission without using more than one repair kit.",
+      name: "Destroy the Weaponized Mining Ship",
+      challenge: "Complete the mission without using any repair kits.",
       chapter: 1,
       ostChipReward: null,
     },
@@ -576,7 +576,7 @@ const MISSIONS = {
     {
       name: "Attack the Refueling Base",
       challenge:
-        "Destroy all 16 fuel tanks, defeat all 6 LCs and complete the mission without resupplying.",
+        "Destroy all 16 fuel tanks, defeat all 5 LCs and complete the mission without resupplying.",
       chapter: 3,
       ostChipReward: null,
     },
