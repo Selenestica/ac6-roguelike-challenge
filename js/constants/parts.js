@@ -327,7 +327,7 @@ const PARTS = [
   {
     name: "IA-C01W3: AURORA Light Wave Cannon",
     img: "ia-c01w3-aurora.webp",
-    tier: "b",
+    tier: "c",
     category: "r-back",
   },
   {
@@ -387,7 +387,7 @@ const PARTS = [
   {
     name: "IA-C01W3: AURORA Light Wave Cannon",
     img: "ia-c01w3-aurora.webp",
-    tier: "b",
+    tier: "c",
     category: "l-back",
   },
   {
@@ -615,7 +615,7 @@ const PARTS = [
   {
     name: "MAJESTIC Bazooka",
     img: "majestic.webp",
-    tier: "b",
+    tier: "a",
     category: "r-arm",
   },
   {
@@ -753,7 +753,7 @@ const PARTS = [
   {
     name: "MAJESTIC Bazooka",
     img: "majestic.webp",
-    tier: "b",
+    tier: "a",
     category: "l-arm",
   },
   {
@@ -1114,7 +1114,7 @@ const PARTS = [
   {
     name: "IRIDIUM Grenade Launcher",
     img: "iridium.webp",
-    tier: "c",
+    tier: "d",
     category: "r-arm",
   },
   {
@@ -1204,7 +1204,7 @@ const PARTS = [
   {
     name: "IRIDIUM Grenade Launcher",
     img: "iridium.webp",
-    tier: "c",
+    tier: "d",
     category: "l-arm",
   },
   {
@@ -1252,7 +1252,7 @@ const PARTS = [
   {
     name: "SONGBIRDS Grenade Cannon",
     img: "songbirds.webp",
-    tier: "s",
+    tier: "a",
     category: "r-back",
   },
   {
@@ -1324,7 +1324,7 @@ const PARTS = [
   {
     name: "SONGBIRDS Grenade Cannon",
     img: "songbirds.webp",
-    tier: "s",
+    tier: "a",
     category: "l-back",
   },
   {
@@ -1488,7 +1488,7 @@ const PARTS = [
     tier: "a",
     category: "generator",
   },
-  { name: "VP-20S", img: "vp-20s.webp", tier: "s", category: "generator" },
+  { name: "VP-20S", img: "vp-20s.webp", tier: "a", category: "generator" },
   { name: "VP-20D", img: "vp-20d.webp", tier: "b", category: "generator" },
   // {
   //   name: "BST-G1/P10",
