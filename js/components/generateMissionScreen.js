@@ -67,6 +67,7 @@ const generateMissionScreen = async (ending, mission) => {
   }
   const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
   const endingName = getEndingFullName(ending);
+  const showSkip = mission <= 1;
 
   // if on the final mission of an ending, show the proper reward for the optional challenge
   let isFinalMissionInEnding = false;
@@ -82,6 +83,19 @@ const generateMissionScreen = async (ending, mission) => {
           </div>
           <div class="text-white text-center mb-4">
             <h4>${name}</h4>
+            ${
+              showSkip
+                ? `
+              <button
+                class="btn btn-sm btn-outline-warning"
+                type="button"
+                onclick="prepareSkipModal()"
+              >
+                Skip
+              </button>
+            `
+                : ""
+            }
           </div>
 
           <!-- Optional Challenge Card -->

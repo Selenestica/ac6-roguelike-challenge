@@ -549,7 +549,6 @@ const updateMissionsData = (
 
   // update the last entry in the array with the completed and optional challenge completed fields
   let latestEntry = missionsData.at(-1);
-  console.log(missionsData.at(-1));
   latestEntry.push(completed ? ts : false);
   latestEntry.push(challengeCompleted);
 
@@ -586,6 +585,10 @@ const proceedToNextMission = () => {
   currentMission++;
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
+};
+
+const prepareSkipModal = () => {
+  rollForParts(true);
 };
 
 const showEndingFinishedModal = async (optionalCompleted) => {
