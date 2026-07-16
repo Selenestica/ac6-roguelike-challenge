@@ -1168,7 +1168,7 @@ const PARTS = [
   {
     name: "Vvc-770LB Laser Blade",
     img: "vvc-770lb.webp",
-    tier: "c",
+    tier: "b",
     category: "l-arm",
   },
   {
