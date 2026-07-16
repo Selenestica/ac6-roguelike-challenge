@@ -389,9 +389,9 @@ const rollOnce = (
   });
 
   let partsInGroup;
+  let chosenGroup = null; // hoisted here
 
   if (forcedSpecificCategory) {
-    // filter to just this exact category
     partsInGroup = availableParts.filter(
       (p) => p.category === forcedSpecificCategory,
     );
@@ -417,9 +417,7 @@ const rollOnce = (
       0,
     );
     let categoryRoll = Math.random() * totalCategoryWeight;
-    const chosenGroup = categoryPool.find(
-      (c) => (categoryRoll -= c.weight) < 0,
-    );
+    chosenGroup = categoryPool.find((c) => (categoryRoll -= c.weight) < 0); // assigned here
     partsInGroup = availableParts.filter((p) =>
       chosenGroup.cats.includes(p.category),
     );
@@ -444,7 +442,7 @@ const rollOnce = (
       ? Object.entries(CATEGORY_GROUPS).find(([_, cats]) =>
           cats.includes(forcedSpecificCategory),
         )?.[0]
-      : forcedCategory,
+      : chosenGroup?.group,
   };
 };
 
@@ -480,6 +478,7 @@ const rollForParts = (optionalCompleted) => {
   } else {
     first = rollOnce(null, null, null, null, usedGroups);
   }
+  console.log("first", first.group);
 
   usedGroups.push(first.group);
   const second = rollOnce(first.index, null, null, null, usedGroups);
