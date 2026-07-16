@@ -99,11 +99,15 @@ rulesModal.addEventListener("hidden.bs.modal", async () => {
   }
 });
 
-upAndDownloadModal.addEventListener("hidden.bs.modal", () => {
+upAndDownloadModal.addEventListener("show.bs.modal", () => {
+  genSavesList();
+});
+
+const clearUploadDownloadModal = () => {
   uploadSaveFileInputElement.value = "";
   uploadSaveFileButton.disabled = true;
   uploadedSaveFile = null;
-});
+};
 
 endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
   parts = [...PARTS];
@@ -221,7 +225,7 @@ uploadSaveFileInputElement.addEventListener("change", (e) => {
     // validate json and structure here
     // if ok, enable upload button
     uploadSaveFileButton.disabled = false;
-    uploadedSaveFile = event.target.result;
+    uploadedSaveFile = JSON.parse(event.target.result);
   };
   reader.onerror = (error) => {
     console.log(error);
@@ -545,6 +549,7 @@ const updateMissionsData = (
 
   // update the last entry in the array with the completed and optional challenge completed fields
   let latestEntry = missionsData.at(-1);
+  console.log(missionsData.at(-1));
   latestEntry.push(completed ? ts : false);
   latestEntry.push(challengeCompleted);
 
@@ -626,11 +631,43 @@ const showEndingFinishedModal = async (optionalCompleted) => {
   modal.show();
 };
 
-// restarts a run. OST chips are kept as well as restarts and missionData
 const reset = async () => {
-  // first, update missionsData
   await updateMissionsData(false, false, false);
 
+  const storedSave = localStorage.getItem("ac6rlSaveData");
+  const saveFile = JSON.parse(storedSave);
+
+  // figure out the next run number
+  const runNumber = saveFile.saves.length + 1;
+
+  // mark all existing saves as not current
+  const updatedSaves = saveFile.saves.map((s) => ({
+    ...s,
+    currentSave: false,
+  }));
+
+  // create a new save slot
+  const newSave = {
+    saveName: `Run #${runNumber}`,
+    currentSave: true,
+    editedName: false,
+    ostChips, // keep OST chips
+    acquiredParts: [],
+    currentEnding,
+    currentMission: 0,
+    restarts: restarts + 1,
+    missionsData, // keep full audit trail
+    rolledParts: [],
+    badgesEarned, // keep badges
+  };
+
+  updatedSaves.push(newSave);
+  localStorage.setItem(
+    "ac6rlSaveData",
+    JSON.stringify({ saves: updatedSaves }),
+  );
+
+  // reset runtime state
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
@@ -638,12 +675,63 @@ const reset = async () => {
   restarts++;
 
   partCategoriesContainer.innerHTML = "";
-
   generatePartCategories();
   await rollInitialPart(false);
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
+};
 
+const startNewRun = async () => {
+  const storedSave = localStorage.getItem("ac6rlSaveData");
+  const saveFile = JSON.parse(storedSave);
+  const runNumber = saveFile.saves.length + 1;
+
+  const updatedSaves = saveFile.saves.map((s) => ({
+    ...s,
+    currentSave: false,
+  }));
+
+  const newSave = {
+    saveName: `Run #${runNumber}`,
+    currentSave: true,
+    editedName: false,
+    ostChips: 0,
+    acquiredParts: [],
+    currentEnding: "firesOfRavenMissions",
+    currentMission: 0,
+    restarts: 0,
+    missionsData: [],
+    rolledParts: [],
+    badgesEarned: { for: null, lor: null, aie: null },
+  };
+
+  updatedSaves.push(newSave);
+  localStorage.setItem(
+    "ac6rlSaveData",
+    JSON.stringify({ saves: updatedSaves }),
+  );
+
+  parts = [...PARTS];
+  acquiredParts = [];
+  rolledParts = [];
+  currentMission = 0;
+  currentEnding = "firesOfRavenMissions";
+  restarts = 0;
+  missionsData = [];
+  badgesEarned = { for: null, lor: null, aie: null };
+  ostChips = 0;
+  ostChipsText.innerHTML = 0;
+
+  partCategoriesContainer.innerHTML = "";
+  generatePartCategories();
+  genBadgesShelfContent(badgesEarned);
+
+  // populate the first missionsData entry before rolling the initial part
+  await updateMissionsData(true, null, null);
+
+  await rollInitialPart(false);
+  generateMissionScreen(currentEnding, currentMission);
+  genMissionCompleteModalContent(currentEnding, currentMission);
   saveProgress();
 };
 
@@ -668,79 +756,87 @@ const togglePartsAccordions = () => {
 };
 
 const saveProgress = () => {
-  const storedSave = localStorage.getItem("saveFile");
+  const storedSave = localStorage.getItem("ac6rlSaveData");
 
-  if (!storedSave) {
-    const initialSave = {
-      ostChips,
-      acquiredParts,
-      currentEnding,
-      currentMission,
-      restarts,
-      missionsData,
-      rolledParts,
-      badgesEarned,
-    };
-    localStorage.setItem("ac6rlSaveData", JSON.stringify(initialSave));
-    return;
-  }
-
-  const saveFile = JSON.parse(storedSave);
-  let updatedSaveObj = {
+  const currentSaveData = {
     ostChips,
+    acquiredParts,
     currentEnding,
     currentMission,
-    acquiredParts,
     restarts,
     missionsData,
     rolledParts,
     badgesEarned,
   };
 
-  localStorage.setItem("ac6rlSaveData", JSON.stringify(updatedSaveObj));
+  if (!storedSave) {
+    const initialSave = {
+      saves: [
+        {
+          saveName: `Run #1`,
+          currentSave: true,
+          editedName: false,
+          ...currentSaveData,
+        },
+      ],
+    };
+    localStorage.setItem("ac6rlSaveData", JSON.stringify(initialSave));
+    return;
+  }
+
+  const saveFile = JSON.parse(storedSave);
+  const updatedSaves = saveFile.saves.map((s) => {
+    if (s.currentSave) return { ...s, ...currentSaveData };
+    return s;
+  });
+
+  localStorage.setItem(
+    "ac6rlSaveData",
+    JSON.stringify({ saves: updatedSaves }),
+  );
 };
 
-const loadSavedProgress = async () => {
+const loadSavedProgress = () => {
+  migrateOldSaveData();
+
   const storedSave = localStorage.getItem("ac6rlSaveData");
 
-  // if we find save data
   if (storedSave) {
     const saveFile = JSON.parse(storedSave);
+    const currentSave = saveFile.saves.find((s) => s.currentSave);
+    if (!currentSave) return;
 
-    currentEnding = saveFile.currentEnding;
-    currentMission = saveFile.currentMission;
-    acquiredParts = saveFile.acquiredParts;
-    ostChips = saveFile.ostChips;
-    restarts = saveFile.restarts;
-    missionsData = saveFile.missionsData;
-    rolledParts = saveFile.rolledParts;
-    badgesEarned = saveFile.badgesEarned;
-
-    for (let n = 0; n < saveFile.acquiredParts.length; n++) {
-      displayPartInCategory(saveFile.acquiredParts[n]);
+    currentEnding = currentSave.currentEnding;
+    currentMission = currentSave.currentMission;
+    acquiredParts = currentSave.acquiredParts;
+    ostChips = currentSave.ostChips;
+    restarts = currentSave.restarts;
+    missionsData = currentSave.missionsData;
+    rolledParts = currentSave.rolledParts;
+    badgesEarned = currentSave.badgesEarned;
+    for (let n = 0; n < currentSave.acquiredParts.length; n++) {
+      displayPartInCategory(currentSave.acquiredParts[n]);
     }
 
-    // derive remaining pool from PARTS minus already obtained parts
     const obtainedKeys = new Set(
       acquiredParts.map((p) => p.name + "|" + p.img),
     );
-    parts = await PARTS.filter((p) => !obtainedKeys.has(p.name + "|" + p.img));
+    const rolledKeys = new Set(
+      rolledParts.map((r) => r.part.name + "|" + r.part.img),
+    );
+    parts = PARTS.filter(
+      (p) =>
+        !obtainedKeys.has(p.name + "|" + p.img) &&
+        !rolledKeys.has(p.name + "|" + p.img),
+    );
 
     ostChipsText.innerHTML = ostChips;
     genBadgesShelfContent(badgesEarned);
     generateMissionScreen(currentEnding, currentMission);
-
-    // disable mission complete and mission failed buttons and dont trigger genMissionCompleteModalContent if challenge completed
-    if (currentMission > MISSIONS[currentEnding].length - 1) {
-      disableMissionButtons();
-      return;
-    }
-
     genMissionCompleteModalContent(currentEnding, currentMission);
     return;
   }
 
-  // if no save data found
   const modal = new bootstrap.Modal(rulesModal);
   modal.show();
   ostChipsText.innerHTML = ostChips;
@@ -755,15 +851,202 @@ const disableMissionButtons = () => {
 };
 
 const uploadSaveFile = async () => {
-  // remove old save file just to be safe
-  await deleteSaveData();
-  localStorage.setItem("ac6rlSaveData", uploadedSaveFile);
+  if (!uploadedSaveFile) return;
+
+  const storedSave = localStorage.getItem("ac6rlSaveData");
+  let saveFile = storedSave ? JSON.parse(storedSave) : { saves: [] };
+
+  // handle uploaded file being either old schema or new schema
+  let saveToAdd;
+  console.log(uploadedSaveFile);
+  if (uploadedSaveFile.saves) {
+    // new schema — grab the current save from it
+    saveToAdd =
+      uploadedSaveFile.saves.find((s) => s.currentSave) ??
+      uploadedSaveFile.saves[0];
+  } else {
+    // old schema — wrap it
+    saveToAdd = {
+      saveName: `Uploaded Run`,
+      editedName: false,
+      ostChips: uploadedSaveFile.ostChips ?? 0,
+      acquiredParts: uploadedSaveFile.acquiredParts ?? [],
+      currentEnding: uploadedSaveFile.currentEnding ?? "firesOfRavenMissions",
+      currentMission: uploadedSaveFile.currentMission ?? 0,
+      restarts: uploadedSaveFile.restarts ?? 0,
+      missionsData: uploadedSaveFile.missionsData ?? [],
+      rolledParts: uploadedSaveFile.rolledParts ?? [],
+      badgesEarned: uploadedSaveFile.badgesEarned ?? {
+        for: null,
+        lor: null,
+        aie: null,
+      },
+    };
+  }
+
+  // mark all existing saves as not current
+  saveFile.saves = saveFile.saves.map((s) => ({ ...s, currentSave: false }));
+
+  // add the uploaded save as current
+  saveToAdd.currentSave = true;
+  saveFile.saves.push(saveToAdd);
+
+  localStorage.setItem("ac6rlSaveData", JSON.stringify(saveFile));
+
+  // reset UI and load
+  partCategoriesContainer.innerHTML = "";
+  generatePartCategories();
+  parts = [...PARTS];
+  acquiredParts = [];
+  rolledParts = [];
+  currentMission = 0;
+  ostChips = 0;
+  missionsData = [];
+  badgesEarned = { for: null, lor: null, aie: null };
+  ostChipsText.innerHTML = 0;
+
   loadSavedProgress();
+  clearUploadDownloadModal();
+  uploadedSaveFile = null;
 };
 
 const deleteSaveData = () => {
   localStorage.removeItem("ac6rlSaveData");
   window.location.reload();
+};
+
+const migrateOldSaveData = () => {
+  const oldSave = localStorage.getItem("ac6rlSaveData");
+  if (!oldSave) return;
+
+  const parsed = JSON.parse(oldSave);
+
+  // detect old schema — old saves have these properties directly on the object
+  if (parsed.saves) return; // already new schema, skip
+
+  // convert old save to new schema
+  const migratedSave = {
+    saves: [
+      {
+        saveName: "Run #1",
+        currentSave: true,
+        editedName: false,
+        ostChips: parsed.ostChips ?? 0,
+        acquiredParts: parsed.acquiredParts ?? [],
+        currentEnding: parsed.currentEnding ?? "firesOfRavenMissions",
+        currentMission: parsed.currentMission ?? 0,
+        restarts: parsed.restarts ?? 0,
+        missionsData: parsed.missionsData ?? [],
+        rolledParts: parsed.rolledParts ?? [],
+        badgesEarned: parsed.badgesEarned ?? {
+          for: null,
+          lor: null,
+          aie: null,
+        },
+      },
+    ],
+  };
+
+  localStorage.setItem("ac6rlSaveData", JSON.stringify(migratedSave));
+  console.log("Save data migrated to new schema successfully.");
+};
+
+const genSavesList = () => {
+  const storedSave = localStorage.getItem("ac6rlSaveData");
+  const savesListContainer = document.getElementById("savesListContainer");
+  savesListContainer.innerHTML = "";
+
+  if (!storedSave) return;
+
+  const saveFile = JSON.parse(storedSave);
+
+  saveFile.saves.forEach((save, i) => {
+    const isDisabled = save.currentSave ? "disabled" : "";
+    const currentLabel = save.currentSave ? "(Current)" : "";
+    savesListContainer.innerHTML += `
+      <div class="my-1 d-flex align-items-center gap-2">
+        <input type="radio" class="btn-check" name="saveSlotRadio" id="saveSlot${i}" autocomplete="off" ${isDisabled}>
+        <label class="btn btn-outline-primary text-white" for="saveSlot${i}">
+          ${save.saveName} ${currentLabel}
+        </label>
+        <button type="button" onclick="editSaveName(${i}, '${save.saveName}')" class="btn btn-primary btn-sm">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+        <button type="button" onclick="downloadSaveFile(${i})" class="btn btn-primary btn-sm">
+          <i class="bi bi-download"></i>
+        </button>
+      </div>
+    `;
+  });
+};
+
+const editSaveName = (index, oldName) => {
+  const savesListContainer = document.getElementById("savesListContainer");
+  savesListContainer.innerHTML = `
+    <p class="text-white mb-0">Rename save file:</p>
+    <div class="my-1 d-flex" style="width: 90%">
+      <input type="text" maxlength="50" id="newSaveNameInput" class="form-control" value="${oldName}">
+      <button type="button" onclick="saveNewName(${index})" class="mx-1 btn btn-success btn-sm">
+        <i class="bi bi-check-lg"></i>
+      </button>
+    </div>
+  `;
+};
+
+const saveNewName = async (index) => {
+  const newName = document.getElementById("newSaveNameInput").value;
+  const storedSave = localStorage.getItem("ac6rlSaveData");
+  const saveFile = JSON.parse(storedSave);
+  saveFile.saves[index].saveName = newName || "Unnamed Run";
+  saveFile.saves[index].editedName = true;
+  localStorage.setItem("ac6rlSaveData", JSON.stringify(saveFile));
+  genSavesList();
+};
+
+const switchSave = () => {
+  const radios = document.querySelectorAll('input[name="saveSlotRadio"]');
+  let selectedIndex = null;
+  radios.forEach((r, i) => {
+    if (r.checked) selectedIndex = i;
+  });
+  if (selectedIndex === null) return;
+
+  const storedSave = localStorage.getItem("ac6rlSaveData");
+  const saveFile = JSON.parse(storedSave);
+  saveFile.saves = saveFile.saves.map((s, i) => ({
+    ...s,
+    currentSave: i === selectedIndex,
+  }));
+  localStorage.setItem("ac6rlSaveData", JSON.stringify(saveFile));
+
+  // reset UI and load the switched save
+  partCategoriesContainer.innerHTML = "";
+  generatePartCategories();
+  parts = [...PARTS];
+  acquiredParts = [];
+  rolledParts = [];
+  currentMission = 0;
+  ostChips = 0;
+  missionsData = [];
+  badgesEarned = { for: null, lor: null, aie: null };
+  ostChipsText.innerHTML = 0;
+
+  loadSavedProgress();
+};
+
+const deleteSave = () => {
+  const radios = document.querySelectorAll('input[name="saveSlotRadio"]');
+  let selectedIndex = null;
+  radios.forEach((r, i) => {
+    if (r.checked) selectedIndex = i;
+  });
+  if (selectedIndex === null) return;
+
+  const storedSave = localStorage.getItem("ac6rlSaveData");
+  const saveFile = JSON.parse(storedSave);
+  saveFile.saves.splice(selectedIndex, 1);
+  localStorage.setItem("ac6rlSaveData", JSON.stringify(saveFile));
+  genSavesList();
 };
 
 loadSavedProgress();

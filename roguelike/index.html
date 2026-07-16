@@ -765,6 +765,8 @@
       tabindex="-1"
       aria-labelledby="upAndDownloadModalLabel"
       aria-hidden="true"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
     >
       <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content bg-grey">
@@ -780,85 +782,110 @@
             ></button>
           </div>
           <div class="modal-body">
-            <div class="mb-3">
-              <ul>
-                <li class="text-white">
-                  To download your current progress, press "Download". A ".json"
-                  file will be saved on your computer called
-                  "ac6-rlc-save-file.json". You can use this file to continue
-                  runs across devices, or pass along to other pilots.
-                </li>
-                <li class="text-white">
-                  You can upload save files using the input below. Once your
-                  save file is validated you can press the "Upload" button.
-                  Please note that this will overwrite your current run.
-                </li>
-              </ul>
+            <p class="text-white">
+              Switch your active save file here, delete save files, or upload
+              save files. Select an entry below and press 'Load Selected' to
+              switch to a different save file.
+            </p>
 
-              <hr class="text-white" />
-              <div class="accordion accordion-flush" id="deleteDataAccordion">
-                <div class="accordion-item bg-none">
-                  <h2 class="accordion-header">
-                    <button
-                      class="accordion-button collapsed text-danger"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#deleteAccordion"
-                      aria-expanded="false"
-                      aria-controls="deleteAccordion"
-                    >
-                      Delete Save Data
-                    </button>
-                  </h2>
-                  <div
-                    id="deleteAccordion"
-                    class="accordion-collapse collapse p-3"
-                    aria-labelledby="Delete Save Data"
-                    data-bs-parent="#deleteDataAccordion"
+            <!-- Save files list -->
+            <div
+              id="savesListContainer"
+              class="btn-group-vertical w-100 mb-3"
+            ></div>
+
+            <!-- Delete All accordion -->
+            <div
+              class="accordion accordion-flush mb-3"
+              id="deleteDataAccordion"
+            >
+              <div class="accordion-item bg-none">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed text-danger"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#deleteAccordion"
+                    aria-expanded="false"
+                    aria-controls="deleteAccordion"
                   >
-                    <button class="btn btn-danger" onclick="deleteSaveData()">
-                      DELETE SAVE DATA
-                    </button>
-                  </div>
+                    Delete All Save Data
+                  </button>
+                </h2>
+                <div
+                  id="deleteAccordion"
+                  class="accordion-collapse collapse p-3"
+                  data-bs-parent="#deleteDataAccordion"
+                >
+                  <p class="text-muted small mb-2">
+                    This will permanently delete all save files. This cannot be
+                    undone.
+                  </p>
+                  <button
+                    class="btn btn-danger"
+                    onclick="deleteSaveData()"
+                    data-bs-dismiss="modal"
+                  >
+                    DELETE ALL SAVE DATA
+                  </button>
                 </div>
               </div>
-              <hr class="text-white" />
+            </div>
 
+            <hr class="text-white" />
+
+            <!-- Upload -->
+            <div class="d-flex gap-2 align-items-center">
               <input
                 class="form-control"
                 type="file"
                 id="uploadSaveFileInput"
                 accept=".json"
               />
-            </div>
-          </div>
-          <div class="modal-footer d-flex justify-content-between">
-            <div>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-            <div>
               <button
                 disabled
                 type="button"
-                class="btn btn-warning"
+                class="btn btn-warning text-nowrap"
                 onclick="uploadSaveFile()"
-                data-bs-dismiss="modal"
                 id="uploadSaveFileButton"
+                data-bs-dismiss="modal"
               >
                 Upload
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              onclick="clearUploadDownloadModal()"
+            >
+              Close
+            </button>
+            <div class="d-flex gap-2">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="deleteSave()"
+              >
+                Delete Selected
               </button>
               <button
                 type="button"
                 class="btn btn-primary"
-                onclick="downloadSaveFile()"
+                onclick="switchSave()"
+                data-bs-dismiss="modal"
               >
-                Download
+                Load Selected
+              </button>
+              <button
+                type="button"
+                class="btn btn-warning"
+                onclick="startNewRun()"
+                data-bs-dismiss="modal"
+              >
+                New Run
               </button>
             </div>
           </div>
