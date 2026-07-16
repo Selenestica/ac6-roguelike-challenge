@@ -312,8 +312,9 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
-      name: "Eliminate the Doser Faction",
-      challenge: "Complete the mission without using repair kits.",
+      name: "Stop the Secret Data Breach",
+      challenge:
+        "Complete the mission without letting the hack progress bar go below 60% and without using more than one repair kit.",
       chapter: 2,
       ostChipReward: null,
     },
