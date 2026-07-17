@@ -917,71 +917,53 @@
             ></button>
           </div>
           <div class="modal-body">
-            <!-- <h5 class="text-white mb-2">Difficulty</h5>
-            <p
-              class="text-muted small mb-3"
-              id="difficultyLockedText"
-              style="display: none"
-            >
-              Difficulty is locked once a run has started. Restart your current
-              ending to change it.
-            </p>
-            <div
-              class="btn-group w-100 mb-3"
-              role="group"
-              id="difficultyButtonGroup"
-            >
-              <input
-                type="radio"
-                class="btn-check"
-                name="difficulty"
-                id="difficultyEasy"
-                autocomplete="off"
-              />
-              <label class="btn btn-outline-success" for="difficultyEasy"
-                >Easy</label
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="text-white mb-0">Custom Game Options</h5>
+              <small
+                class="text-muted"
+                id="customGameSettingsLockedText"
+                style="display: none"
               >
+                Locked — run in progress
+              </small>
+            </div>
 
-              <input
-                type="radio"
-                class="btn-check"
-                name="difficulty"
-                id="difficultyNormal"
-                autocomplete="off"
-                checked
-              />
-              <label class="btn btn-outline-warning" for="difficultyNormal"
-                >Normal</label
-              >
-
-              <input
-                type="radio"
-                class="btn-check"
-                name="difficulty"
-                id="difficultyHard"
-                autocomplete="off"
-              />
-              <label class="btn btn-outline-danger" for="difficultyHard"
-                >Hard</label
-              >
-            </div> -->
-
-            <!-- <div
-              class="card bg-dark border-secondary p-3"
-              id="difficultyDescriptionCard"
-            >
-              <small class="text-secondary text-uppercase fw-bold mb-2 d-block"
-                >What This Changes</small
-              >
-              <div class="d-flex justify-content-between text-white mb-2">
-                <span>Higher Tier Odds</span>
-                <span class="text-info" id="difficultyTierText">Standard</span>
+            <div class="card bg-dark border-secondary p-3">
+              <div class="form-check form-switch mb-2">
+                <input
+                  class="form-check-input customGameSetting"
+                  type="checkbox"
+                  id="resetToFiresOfRavenToggle"
+                />
+                <label
+                  class="form-check-label text-white"
+                  for="resetToFiresOfRavenToggle"
+                >
+                  Full Reset on Failure
+                </label>
+                <p class="text-muted small mb-0 mt-1">
+                  Failing a mission in Liberator of Rubicon or Alea Iacta Est
+                  resets you all the way back to Fires of Raven.
+                </p>
               </div>
-              <div class="d-flex justify-content-between text-white">
-                <span>OST Chip Rewards</span>
-                <span class="text-info" id="difficultyChipsText">Standard</span>
+              <div class="form-check form-switch mb-2">
+                <input
+                  class="form-check-input customGameSetting"
+                  type="checkbox"
+                  id="optionalOnlyRewardsToggle"
+                />
+                <label
+                  class="form-check-label text-white"
+                  for="optionalOnlyRewardsToggle"
+                >
+                  Challenges Required
+                </label>
+                <p class="text-muted small mb-0 mt-1">
+                  Part rewards are only given if the optional challenge was
+                  completed.
+                </p>
               </div>
-            </div> -->
+            </div>
             <h5 class="text-white mb-2 my-3">Parts Gallery</h5>
             <div class="accordion" id="partsGalleryAccordion"></div>
           </div>

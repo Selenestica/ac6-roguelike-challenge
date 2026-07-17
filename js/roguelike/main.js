@@ -34,6 +34,16 @@ const upAndDownloadModal = document.getElementById("upAndDownloadModal");
 const addPartToast = document.getElementById("addPartToast");
 const addPartToastBody = document.getElementById("addPartToastBody");
 
+const customGameSettingsLockedText = document.getElementById(
+  "customGameSettingsLockedText",
+);
+const resetToFiresOfRavenToggle = document.getElementById(
+  "resetToFiresOfRavenToggle",
+);
+const optionalOnlyRewardsToggle = document.getElementById(
+  "optionalOnlyRewardsToggle",
+);
+
 // defines how individual categories are grouped for rolling purposes
 // subject to change
 const CATEGORY_GROUPS = {
@@ -68,6 +78,10 @@ const CATEGORY_WEIGHTS = {
   weapons: 3,
 };
 
+let customGameSettings = {
+  resetToFiresOfRaven: false,
+  optionalOnlyRewards: false,
+};
 let currentEnding = "firesOfRavenMissions";
 let currentMission = 0;
 let acquiredParts = [];
@@ -91,6 +105,43 @@ let rolledParts = [];
 let skippedParts = [];
 let currentView = "missionViewButton";
 let isFinalEndingComplete = false;
+
+const isRunInProgress = () => missionsData.length > 1;
+
+const applyCustomGameSettingsToUI = () => {
+  const locked = isRunInProgress();
+
+  // show/hide locked text and disable toggles
+  customGameSettingsLockedText.style.display = locked ? "block" : "none";
+  document.querySelectorAll(".customGameSetting").forEach((toggle) => {
+    toggle.disabled = locked;
+  });
+
+  // apply current values
+  resetToFiresOfRavenToggle.checked = customGameSettings.resetToFiresOfRaven;
+  optionalOnlyRewardsToggle.checked = customGameSettings.optionalOnlyRewards;
+};
+
+// attach listeners to each toggle
+resetToFiresOfRavenToggle.addEventListener("change", (e) => {
+  if (isRunInProgress()) return;
+  customGameSettings.resetToFiresOfRaven = e.target.checked;
+  saveProgress();
+});
+
+optionalOnlyRewardsToggle.addEventListener("change", (e) => {
+  if (isRunInProgress()) return;
+  customGameSettings.optionalOnlyRewards = e.target.checked;
+  generateMissionScreen(currentEnding, currentMission);
+  saveProgress();
+});
+
+// call this when settings modal opens
+document
+  .getElementById("settingsModal")
+  .addEventListener("show.bs.modal", () => {
+    applyCustomGameSettingsToUI();
+  });
 
 // when the rules and info modal closes and you dont have saved data, roll for a random part
 rulesModal.addEventListener("hidden.bs.modal", async () => {
@@ -459,6 +510,16 @@ const rollForParts = (optionalCompleted) => {
     console.log("no more parts to roll!");
     return;
   }
+
+  // if optional only rewards is on and optional wasn't completed, skip rewards
+  if (customGameSettings.optionalOnlyRewards && !optionalCompleted) {
+    updateMissionsData(false, true, false);
+    earnOSTChips();
+    proceedToNextMission();
+    saveProgress();
+    return;
+  }
+
   if (rolledParts.length > 0) {
     currentParts = rolledParts;
     populateNewPartsModal(optionalCompleted);
@@ -660,41 +721,16 @@ const showEndingFinishedModal = async (optionalCompleted) => {
 const reset = async () => {
   await updateMissionsData(false, false, false);
 
-  const storedSave = localStorage.getItem("ac6rlSaveData");
-  const saveFile = JSON.parse(storedSave);
+  // if custom game settings full reset is on and we're past Fires of Raven
+  if (
+    customGameSettings.resetToFiresOfRaven &&
+    currentEnding !== "firesOfRavenMissions"
+  ) {
+    currentEnding = "firesOfRavenMissions";
+    badgesEarned = { for: null, lor: null, aie: null };
+    genBadgesShelfContent(badgesEarned);
+  }
 
-  // figure out the next run number
-  const runNumber = saveFile.saves.length + 1;
-
-  // mark all existing saves as not current
-  const updatedSaves = saveFile.saves.map((s) => ({
-    ...s,
-    currentSave: false,
-  }));
-
-  // create a new save slot
-  const newSave = {
-    saveName: `Run #${runNumber}`,
-    currentSave: true,
-    editedName: false,
-    ostChips,
-    acquiredParts: [],
-    currentEnding,
-    currentMission: 0,
-    restarts: restarts + 1,
-    missionsData,
-    rolledParts: [],
-    skippedParts: [],
-    badgesEarned,
-  };
-
-  updatedSaves.push(newSave);
-  localStorage.setItem(
-    "ac6rlSaveData",
-    JSON.stringify({ saves: updatedSaves }),
-  );
-
-  // reset runtime state
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
@@ -704,9 +740,12 @@ const reset = async () => {
 
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
+  await updateMissionsData(true, null, null);
   await rollInitialPart(false);
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
+
+  saveProgress(); // saves to the CURRENT slot, no new slot created
 };
 
 const startNewRun = async () => {
@@ -732,6 +771,10 @@ const startNewRun = async () => {
     rolledParts: [],
     skippedParts: [],
     badgesEarned: { for: null, lor: null, aie: null },
+    customGameSettings: {
+      resetToFiresOfRaven: false,
+      optionalOnlyRewards: false,
+    },
   };
 
   updatedSaves.push(newSave);
@@ -750,6 +793,10 @@ const startNewRun = async () => {
   missionsData = [];
   badgesEarned = { for: null, lor: null, aie: null };
   ostChips = 0;
+  customGameSettings = {
+    resetToFiresOfRaven: false,
+    optionalOnlyRewards: false,
+  };
   ostChipsText.innerHTML = 0;
 
   partCategoriesContainer.innerHTML = "";
@@ -798,6 +845,7 @@ const saveProgress = () => {
     rolledParts,
     skippedParts,
     badgesEarned,
+    customGameSettings,
   };
 
   if (!storedSave) {
@@ -846,6 +894,10 @@ const loadSavedProgress = () => {
     rolledParts = currentSave.rolledParts;
     skippedParts = currentSave.skippedParts ?? [];
     badgesEarned = currentSave.badgesEarned;
+    customGameSettings = currentSave.customGameSettings ?? {
+      resetToFiresOfRaven: false,
+      optionalOnlyRewards: false,
+    };
     for (let n = 0; n < currentSave.acquiredParts.length; n++) {
       displayPartInCategory(currentSave.acquiredParts[n]);
     }
