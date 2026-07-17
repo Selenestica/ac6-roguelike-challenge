@@ -631,7 +631,7 @@ const updateMissionsData = (
     return;
   }
 
-  // update the last entry in the array with the completed and optional challenge completed fields
+  // update the last entry in the array with the completed and challenge completed fields
   let latestEntry = missionsData.at(-1);
   latestEntry.push(completed ? ts : false);
   latestEntry.push(challengeCompleted);

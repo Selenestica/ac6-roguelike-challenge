@@ -9,7 +9,7 @@ ROGUELIKE
   - stats page for players to see their stats
     - missions completed
     - missions failed
-    - optional challenges completed
+    - challenges completed
     - best run (their furthest mission)
   - challenge complete screen
     - turn Mission Failed button into Reset button. modal to prompt to delete save data and start over

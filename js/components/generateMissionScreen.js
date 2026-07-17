@@ -43,7 +43,7 @@ const generateMissionScreen = async (ending, mission) => {
             <span class="text-success">${restarts}</span>
           </div>
           <div class="d-flex justify-content-between text-white mb-2">
-            <span>Optional Challenges Completed</span>
+            <span>Challenges Completed</span>
             <span class="text-success">${challengesCompleted}</span>
           </div>
           <div class="d-flex justify-content-between text-white">
@@ -70,7 +70,7 @@ const generateMissionScreen = async (ending, mission) => {
   const showSkip = mission <= 1;
   const optionalOnly = customGameSettings.optionalOnlyRewards;
 
-  // if on the final mission of an ending, show the proper reward for the optional challenge
+  // if on the final mission of an ending, show the proper reward for the challenge
   let isFinalMissionInEnding = false;
   if (mission >= MISSIONS[currentEnding].length - 1) {
     isFinalMissionInEnding = true;

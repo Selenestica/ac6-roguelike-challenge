@@ -8,7 +8,7 @@ const genMissionCompleteModalContent = (ending, mission) => {
   missionCompleteModalBody.innerHTML = "";
   missionCompleteModalBody.innerHTML = `
         <p class="text-white text-center">
-            Did you complete the optional challenge?
+            Did you complete the challenge?
         </p>
         <p class="text-white text-center">
             <b>${challenge}</b>
