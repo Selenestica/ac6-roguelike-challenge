@@ -85,8 +85,10 @@ let parts = [...PARTS];
 let ostChips = 0;
 let partCounter = 0;
 let accordionsCollapsed = true;
+let currentOptionalCompleted = false;
 let currentParts = [];
 let rolledParts = [];
+let skippedParts = [];
 let currentView = "missionViewButton";
 let isFinalEndingComplete = false;
 
@@ -113,6 +115,7 @@ endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
+  skippedParts = [];
 
   partCategoriesContainer.innerHTML = "";
 
@@ -447,6 +450,7 @@ const rollOnce = (
 };
 
 const rollForParts = (optionalCompleted) => {
+  currentOptionalCompleted = optionalCompleted;
   if (currentMission >= MISSIONS[currentEnding].length - 1) {
     showEndingFinishedModal(optionalCompleted);
     return;
@@ -478,7 +482,6 @@ const rollForParts = (optionalCompleted) => {
   } else {
     first = rollOnce(null, null, null, null, usedGroups);
   }
-  console.log("first", first.group);
 
   usedGroups.push(first.group);
   const second = rollOnce(first.index, null, null, null, usedGroups);
@@ -511,6 +514,27 @@ const acceptPart = async (chosenIndex) => {
   }
 
   await updateMissionsData(false, true, challengeCompleted);
+  await earnOSTChips();
+  await proceedToNextMission();
+
+  rolledParts = [];
+  currentParts = [];
+  saveProgress();
+};
+
+const skipPartRewards = async () => {
+  // remove rolledParts from parts pool
+  rolledParts.forEach((rp) => {
+    skippedParts.push(rp.part);
+    const partIndex = parts.findIndex(
+      (p) => p.name === rp.part.name && p.category === rp.part.category,
+    );
+    if (partIndex !== -1) {
+      parts.splice(partIndex, 1);
+    }
+  });
+
+  await updateMissionsData(false, true, currentOptionalCompleted);
   await earnOSTChips();
   await proceedToNextMission();
 
@@ -653,14 +677,15 @@ const reset = async () => {
     saveName: `Run #${runNumber}`,
     currentSave: true,
     editedName: false,
-    ostChips, // keep OST chips
+    ostChips,
     acquiredParts: [],
     currentEnding,
     currentMission: 0,
     restarts: restarts + 1,
-    missionsData, // keep full audit trail
+    missionsData,
     rolledParts: [],
-    badgesEarned, // keep badges
+    skippedParts: [],
+    badgesEarned,
   };
 
   updatedSaves.push(newSave);
@@ -673,6 +698,7 @@ const reset = async () => {
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
+  skippedParts = [];
   currentMission = 0;
   restarts++;
 
@@ -704,6 +730,7 @@ const startNewRun = async () => {
     restarts: 0,
     missionsData: [],
     rolledParts: [],
+    skippedParts: [],
     badgesEarned: { for: null, lor: null, aie: null },
   };
 
@@ -716,6 +743,7 @@ const startNewRun = async () => {
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
+  skippedParts = [];
   currentMission = 0;
   currentEnding = "firesOfRavenMissions";
   restarts = 0;
@@ -768,6 +796,7 @@ const saveProgress = () => {
     restarts,
     missionsData,
     rolledParts,
+    skippedParts,
     badgesEarned,
   };
 
@@ -815,22 +844,28 @@ const loadSavedProgress = () => {
     restarts = currentSave.restarts;
     missionsData = currentSave.missionsData;
     rolledParts = currentSave.rolledParts;
+    skippedParts = currentSave.skippedParts ?? [];
     badgesEarned = currentSave.badgesEarned;
     for (let n = 0; n < currentSave.acquiredParts.length; n++) {
       displayPartInCategory(currentSave.acquiredParts[n]);
     }
 
     const obtainedKeys = new Set(
-      acquiredParts.map((p) => p.name + "|" + p.img),
+      acquiredParts.map((p) => p.name + "|" + p.category),
     );
     const rolledKeys = new Set(
-      rolledParts.map((r) => r.part.name + "|" + r.part.img),
+      rolledParts.map((r) => r.part.name + "|" + r.part.category),
     );
-    parts = PARTS.filter(
-      (p) =>
-        !obtainedKeys.has(p.name + "|" + p.img) &&
-        !rolledKeys.has(p.name + "|" + p.img),
+    const skippedKeys = new Set(
+      skippedParts.map((p) => p.name + "|" + p.category),
     );
+
+    parts = PARTS.filter((p) => {
+      const key = p.name + "|" + p.category;
+      return (
+        !obtainedKeys.has(key) && !rolledKeys.has(key) && !skippedKeys.has(key)
+      );
+    });
 
     ostChipsText.innerHTML = ostChips;
     genBadgesShelfContent(badgesEarned);
@@ -940,6 +975,7 @@ const migrateOldSaveData = () => {
         restarts: parsed.restarts ?? 0,
         missionsData: parsed.missionsData ?? [],
         rolledParts: parsed.rolledParts ?? [],
+        skippedParts: parsed.skippedParts ?? [],
         badgesEarned: parsed.badgesEarned ?? {
           for: null,
           lor: null,

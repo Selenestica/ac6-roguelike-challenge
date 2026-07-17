@@ -20,12 +20,12 @@ const genEndingCompleteModalContent = (optionalCompleted, ending, mission) => {
     year: "numeric",
   });
   const endingName = getEndingFullName(ending);
-  let trophyIconPath = "assets/icons/for.svg";
+  let trophyIconPath = "../assets/icons/for.svg";
   if (ending === "liberatorOfRubiconMissions") {
-    trophyIconPath = "assets/icons/lor.svg";
+    trophyIconPath = "../assets/icons/lor.svg";
   }
   if (ending === "aleaIactaEstMissions") {
-    trophyIconPath = "assets/icons/aie.svg";
+    trophyIconPath = "../assets/icons/aie.svg";
   }
 
   endingCompleteHeaderText.innerHTML = `${endingName} Complete!`;

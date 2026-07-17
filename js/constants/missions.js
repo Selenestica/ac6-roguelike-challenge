@@ -53,7 +53,7 @@ const MISSIONS = {
     },
     {
       name: "Investigate BAWS Arsenal No. 2",
-      challenge: "Complete the mission without using repair kits.",
+      challenge: "Complete the mission with at least 1 repair kit remaining.",
       chapter: 1,
       ostChipReward: null,
     },
@@ -293,7 +293,7 @@ const MISSIONS = {
     },
     {
       name: "Investigate BAWS Arsenal No. 2",
-      challenge: "Complete the mission without using repair kits.",
+      challenge: "Complete the mission with at least 1 repair kit remaining.",
       chapter: 1,
       ostChipReward: null,
     },
