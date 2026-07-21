@@ -52,58 +52,6 @@ const REQUIRED_SLOTS = [
   "generator",
 ];
 
-const DEFAULT_PARTS = [
-  {
-    name: "JAILBREAK Head",
-    img: "jailbreak-head.webp",
-    tier: "d",
-    category: "head",
-    isDefault: true,
-  },
-  {
-    name: "JAILBREAK Core",
-    img: "jailbreak-core.webp",
-    tier: "d",
-    category: "core",
-    isDefault: true,
-  },
-  {
-    name: "JAILBREAK Arms",
-    img: "jailbreak-arms.webp",
-    tier: "d",
-    category: "arms",
-    isDefault: true,
-  },
-  {
-    name: "JAILBREAK Legs",
-    img: "jailbreak-legs.webp",
-    tier: "d",
-    category: "legs",
-    isDefault: true,
-  },
-  {
-    name: "BST-G1/P10",
-    img: "bst-g1-p10.webp",
-    tier: "d",
-    category: "booster",
-    isDefault: true,
-  },
-  {
-    name: "FCS-G1/P01",
-    img: "fcs-g1-p01.webp",
-    tier: "d",
-    category: "fcs",
-    isDefault: true,
-  },
-  {
-    name: "AG-J-098 JOSO",
-    img: "ag-j-098-joso.webp",
-    tier: "d",
-    category: "generator",
-    isDefault: true,
-  },
-];
-
 // State
 let coam = STARTING_COAM;
 let inventory = []; // bought parts not yet equipped
@@ -137,7 +85,7 @@ const isLoadoutValid = () => {
   return REQUIRED_SLOTS.every((slot) => {
     return (
       equippedParts.some((p) => p.category === slot) ||
-      DEFAULT_PARTS.some((p) => p.category === slot)
+      STARTER_PARTS.some((p) => p.category === slot)
     );
   });
 };
@@ -269,7 +217,7 @@ const populateShop = () => {
     shopContainer.innerHTML += `
       <div class="mb-3">
         <h6 class="text-white text-uppercase fw-bold mb-2">${category}</h6>
-        <div class="d-flex flex-wrap gap-2">
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
           ${partsInCategory.map((p) => genShopCard(p)).join("")}
         </div>
       </div>
@@ -284,7 +232,7 @@ const genInventoryCard = (part, isEquipped = false) => {
       <span class="badge text-dark bg-${part.tier}-tier" style="position: absolute; top: 4px; right: 4px;">
         ${part.tier.toUpperCase()}
       </span>
-      <img class="img-fluid mb-1" src="assets/images/${part.img}" alt="${part.name}" />
+      <img class="img-fluid mb-1" src="../assets/images/${part.img}" alt="${part.name}" />
       <p class="text-white mb-1" style="font-size: 0.65rem;">${part.name}</p>
       <small class="text-muted text-uppercase mb-1">${part.category}</small>
       <button
@@ -332,7 +280,7 @@ const populateLoadout = () => {
 
   Object.keys(SLOT_CATEGORIES).forEach((slot) => {
     const equipped = equippedParts.find((p) => p.category === slot);
-    const defaultPart = DEFAULT_PARTS.find((p) => p.category === slot);
+    const defaultPart = STARTER_PARTS.find((p) => p.category === slot);
     const partToShow = equipped || defaultPart;
 
     if (!partToShow) return;
@@ -340,7 +288,7 @@ const populateLoadout = () => {
     loadoutDisplay.innerHTML += `
       <div class="card bg-dark border-${equipped ? "success" : "secondary"} text-center p-1 mb-1" style="width: 120px;">
         <small class="text-muted text-uppercase" style="font-size: 0.6rem;">${slot}</small>
-        <img class="img-fluid" src="assets/images/${partToShow.img}" alt="${partToShow.name}" />
+        <img class="img-fluid" src="../assets/images/${partToShow.img}" alt="${partToShow.name}" />
         <p class="text-white mb-0" style="font-size: 0.6rem;">${partToShow.name}</p>
         ${equipped ? `<span class="badge bg-success">Equipped</span>` : `<span class="badge bg-secondary">Default</span>`}
       </div>

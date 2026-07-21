@@ -1,0 +1,51 @@
+const STARTER_PARTS = [
+  {
+    name: "AH-J-124/RC JAILBREAK",
+    img: "ah-j-124-rc-jailbreak.webp",
+    tier: "d",
+    category: "head",
+    isDefault: true,
+  },
+  {
+    name: "AC-J-120/RC JAILBREAK",
+    img: "ac-j-120-rc-jailbreak.webp",
+    tier: "d",
+    category: "core",
+    isDefault: true,
+  },
+  {
+    name: "AA-J-123/RC JAILBREAK",
+    img: "aa-j-123-rc-jailbreak.webp",
+    tier: "d",
+    category: "arms",
+    isDefault: true,
+  },
+  {
+    name: "AL-J-121/RC JAILBREAK",
+    img: "al-j-121-rc-jailbreak.webp",
+    tier: "d",
+    category: "legs",
+    isDefault: true,
+  },
+  {
+    name: "BST-G1/P10",
+    img: "bst-g1-p10.webp",
+    tier: "d",
+    category: "booster",
+    isDefault: true,
+  },
+  {
+    name: "FCS-G1/P01",
+    img: "fcs-g1-p01.webp",
+    tier: "d",
+    category: "fcs",
+    isDefault: true,
+  },
+  {
+    name: "AG-J-098 JOSO",
+    img: "ag-j-098-joso.webp",
+    tier: "d",
+    category: "generator",
+    isDefault: true,
+  },
+];
