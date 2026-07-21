@@ -101,7 +101,8 @@ const MISSIONS = {
     },
     {
       name: "Eliminate V.VII",
-      challenge: "Spare V.VII Swinburne and defeat Rokumonsen.",
+      challenge:
+        "Execute Swinburne with a single attack after you accept his proposal.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -293,7 +294,7 @@ const MISSIONS = {
     },
     {
       name: "Investigate BAWS Arsenal No. 2",
-      challenge: "Complete the mission with at least 1 repair kit remaining.",
+      challenge: "Complete the mission without using any repair kits.",
       chapter: 1,
       ostChipReward: null,
     },
@@ -335,8 +336,7 @@ const MISSIONS = {
     },
     {
       name: "Eliminate V.VII",
-      challenge:
-        "Execute Swinburne with a single attack during or after your negotiation with him.",
+      challenge: "Spare V.VII Swinburne and defeat Rokumonsen.",
       chapter: 3,
       ostChipReward: null,
     },

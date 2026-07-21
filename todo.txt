@@ -35,6 +35,10 @@ PAGE IDEAS
     - credits awarded for mission rank (S, A, B, C, D)
   - SPECIAL OPS equivalent
     - random loadout every few missions? 
+  - Tiered missions challenge
+    - easy missions give low tier weapons
+    - hard missions give high tier weapons
+    - goal?
 
 BUGS
   - final parts obtained count isnt cumulative across all three timelines
