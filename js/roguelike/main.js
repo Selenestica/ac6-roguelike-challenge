@@ -880,10 +880,7 @@ const genSkippedPartsAccordion = () => {
         </h5>
       </button>
     </h2>
-    <div
-      id="skippedPartsCollapse"
-      class="accordion-collapse collapse"
-    >
+    <div id="skippedPartsCollapse" class="accordion-collapse collapse">
       ${skippedParts
         .map(
           (part, i) => `
@@ -892,9 +889,9 @@ const genSkippedPartsAccordion = () => {
             <div class="d-flex col-4 accordionPartImgContainer justify-content-end">
               <img class="img-fluid" src="../assets/images/${part.img}" />
             </div>
-            <div class="d-flex col-4 text-light justify-content-start align-items-center">
+            <div class="d-flex col-4 text-light justify-content-start align-items-center gap-2">
               ${part.name}
-              <span class="badge text-dark bg-${part.tier}-tier ms-2">${part.tier.toUpperCase()}</span>
+              <span class="badge bg-secondary text-uppercase">${part.category}</span>
             </div>
             <div class="d-flex col-4 text-light justify-content-end align-items-center">
               <button
@@ -918,7 +915,6 @@ const genSkippedPartsAccordion = () => {
 
   partCategoriesContainer.appendChild(accordion);
 
-  // initialize tooltips on the new buttons
   accordion.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((el) => {
     new bootstrap.Tooltip(el);
   });
