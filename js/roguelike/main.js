@@ -595,6 +595,7 @@ const skipPartRewards = async () => {
     }
   });
 
+  genSkippedPartsAccordion();
   await updateMissionsData(false, true, currentOptionalCompleted);
   await earnOSTChips();
   await proceedToNextMission();
@@ -740,6 +741,7 @@ const reset = async () => {
 
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
+  genSkippedPartsAccordion();
   await updateMissionsData(true, null, null);
   await rollInitialPart(false);
   generateMissionScreen(currentEnding, currentMission);
@@ -801,6 +803,7 @@ const startNewRun = async () => {
 
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
+  genSkippedPartsAccordion();
   genBadgesShelfContent(badgesEarned);
 
   // populate the first missionsData entry before rolling the initial part
@@ -830,6 +833,102 @@ const togglePartsAccordions = () => {
     }
   }
   accordionsCollapsed = true;
+};
+
+const genSkippedPartsAccordion = () => {
+  const existingSkippedAccordion = document.getElementById(
+    "skippedPartsAccordion",
+  );
+  if (existingSkippedAccordion) existingSkippedAccordion.remove();
+
+  if (skippedParts.length === 0) return;
+
+  const accordion = document.createElement("div");
+  accordion.className = "accordion-item bg-none";
+  accordion.id = "skippedPartsAccordion";
+  accordion.innerHTML = `
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button collapsed text-light partCategoryAccordionButton"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#skippedPartsCollapse"
+        aria-expanded="false"
+        aria-controls="skippedPartsCollapse"
+      >
+        Skipped Parts
+        <h5 class="my-0 mx-2">
+          <span class="badge bg-secondary">${skippedParts.length}</span>
+        </h5>
+      </button>
+    </h2>
+    <div
+      id="skippedPartsCollapse"
+      class="accordion-collapse collapse"
+    >
+      ${skippedParts
+        .map(
+          (part, i) => `
+        <div class="accordion-body text-light" id="skippedPart${i}">
+          <div class="d-flex row justify-content-center align-items-center">
+            <div class="d-flex col-4 accordionPartImgContainer justify-content-end">
+              <img class="img-fluid" src="../assets/images/${part.img}" />
+            </div>
+            <div class="d-flex col-4 text-light justify-content-start align-items-center">
+              ${part.name}
+              <span class="badge text-dark bg-${part.tier}-tier ms-2">${part.tier.toUpperCase()}</span>
+            </div>
+            <div class="d-flex col-4 text-light justify-content-end align-items-center">
+              <button
+                type="button"
+                class="btn btn-success btn-sm"
+                onclick="reclaimSkippedPart('${part.name}', '${part.category}', 'skippedPart${i}')"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                title="Return to pool"
+              >
+                <i class="bi bi-arrow-counterclockwise"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `,
+        )
+        .join("")}
+    </div>
+  `;
+
+  partCategoriesContainer.appendChild(accordion);
+
+  // initialize tooltips on the new buttons
+  accordion.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((el) => {
+    new bootstrap.Tooltip(el);
+  });
+};
+
+const reclaimSkippedPart = (partName, partCategory, rowID) => {
+  // hide the tooltip before removing the element
+  const button = document.querySelector(`#${rowID} [data-bs-toggle="tooltip"]`);
+  if (button) {
+    const tooltip = bootstrap.Tooltip.getInstance(button);
+    if (tooltip) tooltip.hide();
+  }
+
+  // remove from skippedParts
+  skippedParts = skippedParts.filter(
+    (p) => !(p.name === partName && p.category === partCategory),
+  );
+
+  // add back to the rollable pool
+  const originalPart = PARTS.find(
+    (p) => p.name === partName && p.category === partCategory,
+  );
+  if (originalPart) parts.push(originalPart);
+
+  // remove the row from the UI and regenerate the accordion
+  genSkippedPartsAccordion();
+
+  saveProgress();
 };
 
 const saveProgress = () => {
@@ -901,6 +1000,7 @@ const loadSavedProgress = () => {
     for (let n = 0; n < currentSave.acquiredParts.length; n++) {
       displayPartInCategory(currentSave.acquiredParts[n]);
     }
+    genSkippedPartsAccordion();
 
     const obtainedKeys = new Set(
       acquiredParts.map((p) => p.name + "|" + p.category),
