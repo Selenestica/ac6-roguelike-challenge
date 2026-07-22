@@ -26,6 +26,7 @@ const ostChipsDiv = document.getElementById("ostChipsDiv");
 const ostChipsText = document.getElementById("ostChipsText");
 const missionButtonsDiv = document.getElementById("missionButtonsDiv");
 const inventoryScreen = document.getElementById("inventoryScreen");
+const osTuningScreen = document.getElementById("osTuningScreen");
 const newPartModal = document.getElementById("newPartModal");
 const rulesModal = document.getElementById("rulesModal");
 const initialPartModal = document.getElementById("initialPartModal");
@@ -105,6 +106,7 @@ let rolledParts = [];
 let skippedParts = [];
 let currentView = "missionViewButton";
 let isFinalEndingComplete = false;
+let osTuning = {};
 
 const isRunInProgress = () => missionsData.length > 1;
 
@@ -252,6 +254,7 @@ for (let z = 0; z < mainViewButtons.length; z++) {
         missionButtonsDiv.style.display = "flex";
         missionViewScreen.classList.toggle("d-none", false);
         inventoryScreen.classList.toggle("d-none", true);
+        osTuningScreen.classList.toggle("d-none", true);
         missionCompleteButtonDiv.classList.toggle("d-none", false);
         missionFailedButtonDiv.classList.toggle("d-none", false);
         allAccordionsToggleButtonDiv.classList.toggle("d-none", true);
@@ -261,9 +264,20 @@ for (let z = 0; z < mainViewButtons.length; z++) {
         missionButtonsDiv.style.display = "none";
         missionViewScreen.classList.toggle("d-none", true);
         inventoryScreen.classList.toggle("d-none", false);
+        osTuningScreen.classList.toggle("d-none", true);
         missionCompleteButtonDiv.classList.toggle("d-none", true);
         missionFailedButtonDiv.classList.toggle("d-none", true);
         allAccordionsToggleButtonDiv.classList.toggle("d-none", false);
+        ostChipsDiv.classList.toggle("d-none", true);
+      }
+      if (e.srcElement.id === "osTuningButton") {
+        missionButtonsDiv.style.display = "none";
+        missionViewScreen.classList.toggle("d-none", true);
+        inventoryScreen.classList.toggle("d-none", true);
+        osTuningScreen.classList.toggle("d-none", false);
+        missionCompleteButtonDiv.classList.toggle("d-none", true);
+        missionFailedButtonDiv.classList.toggle("d-none", true);
+        allAccordionsToggleButtonDiv.classList.toggle("d-none", true);
         ostChipsDiv.classList.toggle("d-none", false);
       }
     }
@@ -736,12 +750,14 @@ const reset = async () => {
   acquiredParts = [];
   rolledParts = [];
   skippedParts = [];
+  osTuning = {};
   currentMission = 0;
   restarts++;
 
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
   genSkippedPartsAccordion();
+  genOsTuningScreen();
   await updateMissionsData(true, null, null);
   await rollInitialPart(false);
   generateMissionScreen(currentEnding, currentMission);
@@ -777,6 +793,7 @@ const startNewRun = async () => {
       resetToFiresOfRaven: false,
       optionalOnlyRewards: false,
     },
+    osTuning: {},
   };
 
   updatedSaves.push(newSave);
@@ -804,6 +821,7 @@ const startNewRun = async () => {
   partCategoriesContainer.innerHTML = "";
   generatePartCategories();
   genSkippedPartsAccordion();
+  genOsTuningScreen();
   genBadgesShelfContent(badgesEarned);
 
   // populate the first missionsData entry before rolling the initial part
@@ -945,6 +963,7 @@ const saveProgress = () => {
     skippedParts,
     badgesEarned,
     customGameSettings,
+    osTuning,
   };
 
   if (!storedSave) {
@@ -997,10 +1016,12 @@ const loadSavedProgress = () => {
       resetToFiresOfRaven: false,
       optionalOnlyRewards: false,
     };
+    osTuning = currentSave.osTuning ?? {};
     for (let n = 0; n < currentSave.acquiredParts.length; n++) {
       displayPartInCategory(currentSave.acquiredParts[n]);
     }
     genSkippedPartsAccordion();
+    genOsTuningScreen();
 
     const obtainedKeys = new Set(
       acquiredParts.map((p) => p.name + "|" + p.category),

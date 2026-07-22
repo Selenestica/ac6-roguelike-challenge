@@ -160,6 +160,20 @@
                     ><i class="bi bi-wrench-adjustable"></i
                   ></span>
                 </label>
+                <input
+                  type="radio"
+                  class="btn-check mainViewButtons"
+                  name="btnradio"
+                  id="osTuningButton"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary text-white"
+                  for="osTuningButton"
+                >
+                  <span id="osTuningButtonText">Tuning</span>
+                  <span id="osTuningButtonIcon"><i class="bi bi-cpu"></i></span>
+                </label>
               </div>
             </div>
             <div
@@ -239,6 +253,11 @@
         class="mb-5 row d-flex justify-content-center"
         id="missionViewScreen"
       ></div>
+
+      <!-- OS TUNING SCREEN -->
+      <div class="mb-5 row d-none justify-content-center" id="osTuningScreen">
+        <div class="col-sm-12 col-md-10 col-lg-8" id="osTuningContainer"></div>
+      </div>
     </div>
 
     <!-- MISSION COMPLETE MODAL -->
@@ -1015,8 +1034,10 @@
   ></script>
   <script src="../js/constants/parts.js"></script>
   <script src="../js/constants/missions.js"></script>
-  <script src="../js/components/generatePartCategories.js"></script>
-  <script src="../js/components/generateMissionScreen.js"></script>
+  <script src="../js/constants/osTuning.js"></script>
+  <script src="../js/roguelike/components/generatePartCategories.js"></script>
+  <script src="../js/roguelike/components/generateMissionScreen.js"></script>
+  <script src="../js/roguelike/components/genOsTuningScreen.js"></script>
   <script src="../js/components/genMissionCompleteModalContent.js"></script>
   <script src="../js/components/genEndingCompleteModalContent.js"></script>
   <script src="../js/components/genBadgesShelfContent.js"></script>
