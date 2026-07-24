@@ -362,6 +362,7 @@ const displayPartInCategory = (part) => {
         </div>
         <div class="d-flex col-4 text-light justify-content-start align-items-center">
           ${part.name}
+          <span class="badge mx-2 text-dark bg-${part.tier}-tier">${part.tier.toUpperCase()}</span>
         </div>
         <div class="d-flex col-4 text-light justify-content-end align-items-center">
           <button
@@ -750,7 +751,6 @@ const reset = async () => {
   acquiredParts = [];
   rolledParts = [];
   skippedParts = [];
-  osTuning = {};
   currentMission = 0;
   restarts++;
 
@@ -763,7 +763,7 @@ const reset = async () => {
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
 
-  saveProgress(); // saves to the CURRENT slot, no new slot created
+  saveProgress();
 };
 
 const startNewRun = async () => {
@@ -892,6 +892,7 @@ const genSkippedPartsAccordion = () => {
             <div class="d-flex col-4 text-light justify-content-start align-items-center gap-2">
               ${part.name}
               <span class="badge bg-secondary text-uppercase">${part.category}</span>
+              <span class="badge text-dark bg-${part.tier}-tier">${part.tier.toUpperCase()}</span>
             </div>
             <div class="d-flex col-4 text-light justify-content-end align-items-center">
               <button
