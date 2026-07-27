@@ -6,6 +6,7 @@ const MISSIONS = {
       challenge: "Complete the mission without using repair kits.",
       chapter: 1,
       ostChipReward: null,
+      skip: true,
     },
     {
       name: "Grid 135 Cleanup",
@@ -13,6 +14,7 @@ const MISSIONS = {
         "Defeat the Hidden Ghost and complete the mission without using repair kits.",
       chapter: 1,
       ostChipReward: null,
+      skip: true,
     },
     {
       name: "Destroy the Transport Helicopters",
@@ -87,8 +89,7 @@ const MISSIONS = {
     // chapter 3
     {
       name: "Steal the Survey Data",
-      challenge:
-        "Defeat two Tetrapod MTs and complete the mission without resupplying.",
+      challenge: "Personally destroy 2 out of the 3 tetrapod MTs.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -152,9 +153,10 @@ const MISSIONS = {
     {
       name: "Historic Data Recovery",
       challenge:
-        "Recover all 4 optional logs and complete the mission without using repair kits.",
+        "Recover all 5 optional logs and complete the mission without using repair kits.",
       chapter: 3,
       ostChipReward: null,
+      skip: true,
     },
     {
       name: "Destroy the Ice Worm",
@@ -246,6 +248,7 @@ const MISSIONS = {
       challenge: "Complete the mission without using repair kits.",
       chapter: 1,
       ostChipReward: null,
+      skip: true,
     },
     {
       name: "Grid 135 Cleanup",
@@ -253,6 +256,7 @@ const MISSIONS = {
         "Defeat the Hidden Ghost and complete the mission without using repair kits.",
       chapter: 1,
       ostChipReward: null,
+      skip: true,
     },
     {
       name: "Destroy the Transport Helicopters",
@@ -329,8 +333,7 @@ const MISSIONS = {
     // chapter 3
     {
       name: "Steal the Survey Data",
-      challenge:
-        "Defeat two Tetrapod MTs and complete the mission without resupplying.",
+      challenge: "Personally destroy 2 out of the 3 tetrapod MTs.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -390,6 +393,7 @@ const MISSIONS = {
         "Recover all 4 optional logs and complete the mission without using repair kits.",
       chapter: 3,
       ostChipReward: null,
+      skip: true,
     },
     {
       name: "Defend the Dam Complex",
@@ -486,6 +490,7 @@ const MISSIONS = {
       challenge: "Complete the mission without using repair kits.",
       chapter: 1,
       ostChipReward: null,
+      skip: true,
     },
     {
       name: "Grid 135 Cleanup",
@@ -493,6 +498,7 @@ const MISSIONS = {
         "Defeat the Hidden Ghost and complete the mission without using repair kits.",
       chapter: 1,
       ostChipReward: null,
+      skip: true,
     },
     {
       name: "Destroy the Transport Helicopters",
@@ -569,8 +575,7 @@ const MISSIONS = {
     // chapter 3
     {
       name: "Steal the Survey Data",
-      challenge:
-        "Defeat two Tetrapod MTs and complete the mission without resupplying.",
+      challenge: "Personally destroy 2 out of the 3 tetrapod MTs.",
       chapter: 3,
       ostChipReward: null,
     },

@@ -681,7 +681,7 @@ const PARTS = [
   {
     name: "WB-0010 DOUBLE TROUBLE Chainsaw",
     img: "wb-0010-double-trouble.webp",
-    tier: "c",
+    tier: "b",
     category: "l-arm",
   },
   {
@@ -1119,7 +1119,7 @@ const PARTS = [
   },
   {
     name: "MA-T-222 KYORAI Napalm Bomb Launcher",
-    img: "ma-t-223-kyoriku.webp",
+    img: "ma-t-222-kyorai.webp",
     tier: "d",
     category: "r-arm",
   },
@@ -1506,7 +1506,7 @@ const PARTS = [
   {
     name: "MA-J-200 RANSETSU-RF Burst Rifle",
     img: "ma-j-200-ransetsu-rf.webp",
-    tier: "d",
+    tier: "b",
     category: "r-arm",
   },
   {
@@ -1548,7 +1548,7 @@ const PARTS = [
   {
     name: "MA-J-200 RANSETSU-RF Burst Rifle",
     img: "ma-j-200-ransetsu-rf.webp",
-    tier: "d",
+    tier: "b",
     category: "l-arm",
   },
   {

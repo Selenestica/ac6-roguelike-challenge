@@ -65,9 +65,9 @@ const generateMissionScreen = async (ending, mission) => {
     `;
     return;
   }
-  const { name, challenge, ostChipReward, chapter } = MISSIONS[ending][mission];
+  const { name, challenge, ostChipReward, chapter, skip } =
+    MISSIONS[ending][mission];
   const endingName = getEndingFullName(ending);
-  const showSkip = mission <= 1;
   const optionalOnly = customGameSettings.optionalOnlyRewards;
 
   // if on the final mission of an ending, show the proper reward for the challenge
@@ -85,7 +85,7 @@ const generateMissionScreen = async (ending, mission) => {
       <div class="text-white text-center mb-4 d-flex justify-content-center align-items-center gap-2">
         <h4 class="mb-0">${name}</h4>
         ${
-          showSkip
+          skip
             ? `
           <button
             class="btn btn-sm btn-outline-warning"
