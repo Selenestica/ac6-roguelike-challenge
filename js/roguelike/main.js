@@ -44,6 +44,9 @@ const resetToFiresOfRavenToggle = document.getElementById(
 const optionalOnlyRewardsToggle = document.getElementById(
   "optionalOnlyRewardsToggle",
 );
+const skipArenaOpponentsToggle = document.getElementById(
+  "skipArenaOpponentsToggle",
+);
 
 // defines how individual categories are grouped for rolling purposes
 // subject to change
@@ -82,6 +85,7 @@ const CATEGORY_WEIGHTS = {
 let customGameSettings = {
   resetToFiresOfRaven: false,
   optionalOnlyRewards: false,
+  skipArenaOpponents: false,
 };
 let currentEnding = "firesOfRavenMissions";
 let currentMission = 0;
@@ -122,6 +126,7 @@ const applyCustomGameSettingsToUI = () => {
   // apply current values
   resetToFiresOfRavenToggle.checked = customGameSettings.resetToFiresOfRaven;
   optionalOnlyRewardsToggle.checked = customGameSettings.optionalOnlyRewards;
+  skipArenaOpponentsToggle.checked = customGameSettings.skipArenaOpponents;
 };
 
 // attach listeners to each toggle
@@ -135,6 +140,12 @@ optionalOnlyRewardsToggle.addEventListener("change", (e) => {
   if (isRunInProgress()) return;
   customGameSettings.optionalOnlyRewards = e.target.checked;
   generateMissionScreen(currentEnding, currentMission);
+  saveProgress();
+});
+
+skipArenaOpponentsToggle.addEventListener("change", (e) => {
+  if (isRunInProgress()) return;
+  customGameSettings.skipArenaOpponents = e.target.checked;
   saveProgress();
 });
 
@@ -704,6 +715,12 @@ const proceedToNextMission = () => {
 
   // Regular mission progression
   currentMission++;
+  if (customGameSettings.skipArenaOpponents) {
+    const { arenaRank } = MISSIONS[currentEnding][currentMission];
+    if (arenaRank) {
+      currentMission++;
+    }
+  }
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
 };
@@ -820,6 +837,7 @@ const startNewRun = async () => {
     customGameSettings: {
       resetToFiresOfRaven: false,
       optionalOnlyRewards: false,
+      skipArenaOpponents: false,
     },
     osTuning: {},
   };
@@ -843,6 +861,7 @@ const startNewRun = async () => {
   customGameSettings = {
     resetToFiresOfRaven: false,
     optionalOnlyRewards: false,
+    skipArenaOpponents: false,
   };
   ostChipsText.innerHTML = 0;
 
@@ -1042,6 +1061,7 @@ const loadSavedProgress = () => {
     customGameSettings = currentSave.customGameSettings ?? {
       resetToFiresOfRaven: false,
       optionalOnlyRewards: false,
+      skipArenaOpponents: false,
     };
     osTuning = currentSave.osTuning ?? {};
     for (let n = 0; n < currentSave.acquiredParts.length; n++) {
