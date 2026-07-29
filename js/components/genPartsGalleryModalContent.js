@@ -14,7 +14,7 @@ const GALLERY_CATEGORIES = [
   "l-back",
 ];
 
-const TIER_ORDER = ["s", "a", "b", "c", "d"];
+const TIER_ORDER = ["s", "a", "b", "c", "d", "e"];
 
 const sortByTier = (list) => {
   return [...list].sort((a, b) => {

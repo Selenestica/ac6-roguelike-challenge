@@ -627,7 +627,7 @@ const PARTS = [
   {
     name: "MA-T-223 KYORIKU Jamming Bomb Launcher",
     img: "ma-t-223-kyoriku.webp",
-    tier: "d",
+    tier: "e",
     category: "r-arm",
   },
   {
@@ -765,7 +765,7 @@ const PARTS = [
   {
     name: "MA-T-223 KYORIKU Jamming Bomb Launcher",
     img: "ma-t-223-kyoriku.webp",
-    tier: "d",
+    tier: "e",
     category: "l-arm",
   },
   {
@@ -1057,7 +1057,7 @@ const PARTS = [
   {
     name: "BC-0400 MULE",
     img: "bc-0400-mule.webp",
-    tier: "d",
+    tier: "e",
     category: "booster",
   },
   {
@@ -1318,7 +1318,7 @@ const PARTS = [
   {
     name: "SI-29: SU-TT/C Pulse Buckler",
     img: "si-29-su-tt-c.webp",
-    tier: "d",
+    tier: "e",
     category: "l-back",
   },
   {
@@ -1493,16 +1493,16 @@ const PARTS = [
   // {
   //   name: "BST-G1/P10",
   //   img: "bst-g1-p10.webp",
-  //   tier: "d",
+  //   tier: "e",
   //   category: "booster",
   // },
   // {
   //   name: "AG-J-098 JOSO",
   //   img: "ag-j-098-joso.webp",
-  //   tier: "d",
+  //   tier: "e",
   //   category: "generator",
   // },
-  // { name: "FCS-G1/P01", img: "fcs-g1-p01.webp", tier: "d", category: "fcs" },
+  // { name: "FCS-G1/P01", img: "fcs-g1-p01.webp", tier: "e", category: "fcs" },
   {
     name: "MA-J-200 RANSETSU-RF Burst Rifle",
     img: "ma-j-200-ransetsu-rf.webp",
@@ -1596,7 +1596,7 @@ const PARTS = [
   {
     name: "SI-24: SU-Q5 Pulse Shield",
     img: "si-24-su-q5.webp",
-    tier: "d",
+    tier: "e",
     category: "l-back",
   },
   {

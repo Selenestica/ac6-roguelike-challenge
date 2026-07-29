@@ -318,13 +318,13 @@ uploadSaveFileInputElement.addEventListener("change", (e) => {
   reader.readAsText(uploadedFile);
 });
 
-// returns per-tier weights [d, c, b, a, s] for the given chapter
+// returns per-tier weights [e, d, c, b, a, s] for the given chapter
 const chapterWeights = (chapter) => {
-  if (chapter === 1) return [35, 30, 20, 10, 5];
-  if (chapter === 2) return [15, 35, 35, 10, 5];
-  if (chapter === 3) return [5, 25, 40, 20, 10];
-  if (chapter === 4) return [5, 20, 30, 30, 15];
-  if (chapter === 5) return [5, 10, 30, 30, 25];
+  if (chapter === 1) return [5, 30, 30, 20, 10, 5];
+  if (chapter === 2) return [5, 10, 35, 35, 10, 5];
+  if (chapter === 3) return [5, 0, 20, 40, 25, 10];
+  if (chapter === 4) return [5, 0, 15, 30, 30, 20];
+  if (chapter === 5) return [5, 0, 5, 30, 35, 25];
 };
 
 const getEmptyCategories = () => {
@@ -467,7 +467,7 @@ const rollOnce = (
 ) => {
   const { chapter } = MISSIONS[currentEnding][currentMission];
   const weights = chapterWeights(chapter);
-  let tiers = ["d", "c", "b", "a", "s"];
+  let tiers = ["e", "d", "c", "b", "a", "s"];
   if (initial) tiers = ["d", "c"];
 
   const availableParts = parts.filter((p, i) => {

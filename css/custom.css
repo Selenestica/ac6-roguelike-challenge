@@ -52,6 +52,10 @@ body {
   cursor: pointer;
 }
 
+.bg-e-tier {
+  background-color: #6f42c1;
+}
+
 .bg-d-tier {
   background-color: #bfff7f;
 }
