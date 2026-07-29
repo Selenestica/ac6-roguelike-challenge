@@ -1,4 +1,5 @@
 const missionViewScreen = document.getElementById("missionViewScreen");
+let arenaOpponent = null;
 
 const getEndingFullName = (ending) => {
   if (ending === "firesOfRavenMissions") return "Fires of Raven";
@@ -17,16 +18,24 @@ const getChallengeCompleteStats = (data) => {
   return { acquiredParts, challengesCompleted, ostChips, restarts };
 };
 
-const generateMissionScreen = async (ending, mission) => {
-  // check for completion screen first before anything else
-  if (ending === "aleaIactaEstMissions" && mission >= MISSIONS[ending].length) {
-    const saveData = localStorage.getItem("ac6rlSaveData");
-    if (!saveData) return;
+const getArenaOpponent = (rank) => {
+  if (arenaOpponent) {
+    return arenaOpponent;
+  }
+  const opponentList = ARENA_OPPONENTS[rank];
+  const opponentIndex = Math.floor(Math.random() * opponentList.length);
+  arenaOpponent = ARENA_OPPONENTS[rank][opponentIndex];
+  return arenaOpponent;
+};
 
-    const { acquiredParts, challengesCompleted, ostChips, restarts } =
-      getChallengeCompleteStats(JSON.parse(saveData));
+const generateEndingScreen = () => {
+  const saveData = localStorage.getItem("ac6rlSaveData");
+  if (!saveData) return;
 
-    missionViewScreen.innerHTML = `
+  const { acquiredParts, challengesCompleted, ostChips, restarts } =
+    getChallengeCompleteStats(JSON.parse(saveData));
+
+  missionViewScreen.innerHTML = `
       <div class="col-sm-12 col-md-10 col-lg-8 text-center">
 
         <!-- Title -->
@@ -63,11 +72,48 @@ const generateMissionScreen = async (ending, mission) => {
 
       </div>
     `;
+};
+
+const generateArenaMissionScreen = async (endingName, rank, chapter) => {
+  const opponent = await getArenaOpponent(rank);
+  const missionName = `Defeat ${opponent.name} in the Arena`;
+  missionViewScreen.innerHTML = `
+    <div class="col-sm-12 col-md-10 col-lg-8">
+      <!-- Header -->
+      <div class="text-white text-center mb-1">
+        <small class="text-muted">${endingName.toUpperCase()} — CHAPTER ${chapter}</small>
+      </div>
+      <div class="text-white text-center mb-4 d-flex justify-content-center align-items-center gap-2">
+        <h4 class="mb-0">${missionName}</h4>
+      </div>
+
+      <!-- Rewards Card -->
+      <div class="card bg-dark border-secondary p-3">
+        <small class="text-secondary text-uppercase fw-bold mb-2 d-block">Rewards</small>
+        <div class="d-flex justify-content-between text-white mb-2">
+          <span>Mission Complete</span>
+          <span class="text-success">+3 Rolls</span>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
+const generateMissionScreen = async (ending, mission) => {
+  // check for completion screen first before anything else
+  if (ending === "aleaIactaEstMissions" && mission >= MISSIONS[ending].length) {
+    generateEndingScreen();
     return;
   }
-  const { name, challenge, ostChipReward, chapter, skip } =
+  const { name, challenge, ostChipReward, chapter, skip, arenaRank } =
     MISSIONS[ending][mission];
   const endingName = getEndingFullName(ending);
+
+  if (arenaRank) {
+    generateArenaMissionScreen(endingName, arenaRank, chapter);
+    return;
+  }
+
   const optionalOnly = customGameSettings.optionalOnlyRewards;
 
   // if on the final mission of an ending, show the proper reward for the challenge

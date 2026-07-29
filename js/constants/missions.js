@@ -30,6 +30,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 1,
+      ostChipReward: null,
+      arenaRank: "f",
+    },
+    {
       name: "Attack the Dam Complex",
       challenge: "Defeat the Tetrapod MT and Index Dunham.",
       chapter: 1,
@@ -52,6 +59,13 @@ const MISSIONS = {
       challenge: "Collect all 8 combat logs and defeat Little Ziyi.",
       chapter: 1,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 1,
+      ostChipReward: null,
+      arenaRank: "e",
     },
     {
       name: "Investigate BAWS Arsenal No. 2",
@@ -80,6 +94,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 2,
+      ostChipReward: null,
+      arenaRank: "d",
+    },
+    {
       name: "Ocean Crossing",
       challenge: "Complete the mission without resupplying.",
       chapter: 2,
@@ -106,6 +127,13 @@ const MISSIONS = {
         "Execute Swinburne with a single attack after you accept his proposal.",
       chapter: 3,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 3,
+      ostChipReward: null,
+      arenaRank: "c",
     },
     {
       name: "Tunnel Sabotage",
@@ -145,6 +173,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 3,
+      ostChipReward: null,
+      arenaRank: "b",
+    },
+    {
       name: "Defend the Old Spaceport",
       challenge: "Complete the mission without using more than one repair kit.",
       chapter: 3,
@@ -161,7 +196,7 @@ const MISSIONS = {
     {
       name: "Destroy the Ice Worm",
       challenge:
-        "Complete the mission without firing the Stun Needle Launcher more than 4 times.",
+        "Complete the mission without firing the Stun Needle Launcher more than 5 times.",
       chapter: 3,
       ostChipReward: 6,
     },
@@ -199,6 +234,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 4,
+      ostChipReward: null,
+      arenaRank: "a",
+    },
+    {
       name: "Reach the Coral Convergence",
       challenge: "Defeat all 9 Helianthi and the 2 Weevils.",
       chapter: 4,
@@ -225,6 +267,13 @@ const MISSIONS = {
         "Defeat the hidden High-Mobility LC and complete the mission without using more than two repair kits.",
       chapter: 5,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 5,
+      ostChipReward: null,
+      arenaRank: "s",
     },
     {
       name: "Breach the Kármán Line",
@@ -272,6 +321,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 1,
+      ostChipReward: null,
+      arenaRank: "e",
+    },
+    {
       name: "Attack the Dam Complex [ALT]",
       challenge: "Accept the RLF's deal.",
       chapter: 1,
@@ -288,6 +344,13 @@ const MISSIONS = {
       challenge: "Complete the mission without resupplying.",
       chapter: 1,
       ostChipReward: 1, // reward for halfway point
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 1,
+      ostChipReward: null,
+      arenaRank: "d",
     },
     {
       name: "Prisoner Rescue",
@@ -324,6 +387,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 2,
+      ostChipReward: null,
+      arenaRank: "c",
+    },
+    {
       name: "Ocean Crossing",
       challenge: "Complete the mission without resupplying.",
       chapter: 2,
@@ -338,6 +408,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 3,
+      ostChipReward: null,
+      arenaRank: "b",
+    },
+    {
       name: "Eliminate V.VII",
       challenge: "Spare V.VII Swinburne and defeat Rokumonsen.",
       chapter: 3,
@@ -346,7 +423,7 @@ const MISSIONS = {
     {
       name: "Attack the Refueling Base",
       challenge:
-        "Destroy all 16 fuel tanks, defeat all 6 LCs and complete the mission without resupplying.",
+        "Destroy all 16 fuel tanks, defeat all 5 LCs and complete the mission without resupplying.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -396,6 +473,13 @@ const MISSIONS = {
       skip: true,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 3,
+      ostChipReward: null,
+      arenaRank: "a",
+    },
+    {
       name: "Defend the Dam Complex",
       challenge: "Defeat Chartreuse and King before reinforcements arrive.",
       chapter: 3,
@@ -404,7 +488,7 @@ const MISSIONS = {
     {
       name: "Destroy the Ice Worm",
       challenge:
-        "Complete the mission without firing the Stun Needle Launcher more than 4 times.",
+        "Complete the mission without firing the Stun Needle Launcher more than 5 times.",
       chapter: 3,
       ostChipReward: 6,
     },
@@ -434,6 +518,13 @@ const MISSIONS = {
         "Do not let Middle Flatwell be defeated and complete the mission without using more than one repair kit.",
       chapter: 4,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 4,
+      ostChipReward: null,
+      arenaRank: "s",
     },
     {
       name: "Unknown Territory Survey",
@@ -467,6 +558,13 @@ const MISSIONS = {
       challenge: "Defeat V.II Snail.",
       chapter: 5,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 5,
+      ostChipReward: null,
+      arenaRank: "analysisGamma",
     },
     {
       name: "Destroy the Drive Block",
@@ -514,6 +612,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 1,
+      ostChipReward: null,
+      arenaRank: "d",
+    },
+    {
       name: "Attack the Dam Complex [ALT]",
       challenge: "Accept the RLF's deal.",
       chapter: 1,
@@ -530,6 +635,13 @@ const MISSIONS = {
       challenge: "Complete the mission without resupplying.",
       chapter: 1,
       ostChipReward: 1, // mid chapter reward
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 1,
+      ostChipReward: null,
+      arenaRank: "c",
     },
     {
       name: "Prisoner Rescue",
@@ -566,6 +678,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 2,
+      ostChipReward: null,
+      arenaRank: "b",
+    },
+    {
       name: "Ocean Crossing",
       challenge: "Complete the mission without resupplying.",
       chapter: 2,
@@ -585,6 +704,13 @@ const MISSIONS = {
         "Destroy all 16 fuel tanks, defeat all 5 LCs and complete the mission without resupplying.",
       chapter: 3,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 3,
+      ostChipReward: null,
+      arenaRank: "a",
     },
     {
       name: "Eliminate V.VII",
@@ -630,6 +756,13 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 3,
+      ostChipReward: null,
+      arenaRank: "s",
+    },
+    {
       name: "Defend the Dam Complex",
       challenge: "Defeat Chartreuse and King before reinforcements arrive.",
       chapter: 3,
@@ -644,7 +777,7 @@ const MISSIONS = {
     {
       name: "Destroy the Ice Worm",
       challenge:
-        "Complete the mission without firing the Stun Needle Launcher more than 4 times.",
+        "Complete the mission without firing the Stun Needle Launcher more than 5 times.",
       chapter: 3,
       ostChipReward: 6,
     },
@@ -668,6 +801,13 @@ const MISSIONS = {
       challenge: "Escape from the reactor before the timer reaches 01:00.",
       chapter: 4,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 4,
+      ostChipReward: null,
+      arenaRank: "analysisGamma",
     },
     {
       name: "Eliminate V.III",
@@ -695,6 +835,13 @@ const MISSIONS = {
       challenge: "Defeat G6 Red and complete the mission without resupplying.",
       chapter: 5,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 5,
+      ostChipReward: null,
+      arenaRank: "analysisDelta",
     },
     {
       name: "Regain Control of the Xylem",

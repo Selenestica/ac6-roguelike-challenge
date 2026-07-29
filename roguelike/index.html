@@ -184,11 +184,10 @@
                 <button
                   class="btn btn-success"
                   type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#missionCompleteModal"
+                  onclick="handleMissionCompleteClick()"
                   id="missionCompleteButton"
                 >
-                  <span id="missionCompleteButtonText"> Mission Complete </span>
+                  <span id="missionCompleteButtonText">Mission Complete</span>
                   <span id="missionCompleteButtonIcon">
                     <i class="bi bi-check-lg"></i>
                   </span>
@@ -349,7 +348,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content bg-grey">
           <div class="modal-header">
-            <h5 class="modal-title text-light">Starter Part</h5>
+            <h5 class="modal-title text-light">Starter Parts</h5>
             <button
               type="button"
               class="btn-close btn-close-white"
@@ -1035,6 +1034,7 @@
   <script src="../js/constants/parts.js"></script>
   <script src="../js/constants/missions.js"></script>
   <script src="../js/constants/osTuning.js"></script>
+  <script src="../js/constants/arenaOpponents.js"></script>
   <script src="../js/roguelike/components/generatePartCategories.js"></script>
   <script src="../js/roguelike/components/generateMissionScreen.js"></script>
   <script src="../js/roguelike/components/genOsTuningScreen.js"></script>

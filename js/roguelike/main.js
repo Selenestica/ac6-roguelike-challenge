@@ -150,13 +150,27 @@ rulesModal.addEventListener("hidden.bs.modal", async () => {
   const saveData = await localStorage.getItem("ac6rlSaveData");
   if (!saveData) {
     await updateMissionsData(true, null, null);
-    rollInitialPart(true);
+    rollInitialPart(true, getInitialPartCount());
   }
 });
 
 upAndDownloadModal.addEventListener("show.bs.modal", () => {
   genSavesList();
 });
+
+const handleMissionCompleteClick = () => {
+  const currentMissionData = MISSIONS[currentEnding][currentMission];
+  if (currentMissionData.arenaRank) {
+    // arena fights skip the challenge prompt and always give 3 rolls
+    rollForParts(true);
+    return;
+  }
+  // normal missions open the modal as usual
+  const modal = new bootstrap.Modal(
+    document.getElementById("missionCompleteModal"),
+  );
+  modal.show();
+};
 
 const clearUploadDownloadModal = () => {
   uploadSaveFileInputElement.value = "";
@@ -187,7 +201,7 @@ endingCompleteModal.addEventListener("hidden.bs.modal", async () => {
     return;
   }
 
-  rollInitialPart(true);
+  rollInitialPart(true, getInitialPartCount());
 });
 
 const showAddPartToast = (partName) => {
@@ -234,12 +248,15 @@ partsGalleryAccordion.addEventListener("click", (e) => {
   addPartManually(button.dataset.partName, button.dataset.partCategory);
 });
 
-const rollInitialPart = async (needToSave = null) => {
-  const initialPart = await rollOnce(null, null, true, "weapons");
-  acquiredParts.push(initialPart.part);
-  displayPartInCategory(initialPart.part);
-  // show initial part modal here
-  await populateInitialPartModalBody(initialPart.part);
+const rollInitialPart = async (needToSave = null, count = 1) => {
+  let initialParts = [];
+  for (let i = 0; i < count; i++) {
+    const initialPart = await rollOnce(null, null, true, i);
+    acquiredParts.push(initialPart.part);
+    displayPartInCategory(initialPart.part);
+    initialParts.push(initialPart.part);
+  }
+  await populateInitialPartModalBody(initialParts);
   if (needToSave) {
     saveProgress();
   }
@@ -386,21 +403,24 @@ const displayPartInCategory = (part) => {
     </h5>`;
 };
 
-const populateInitialPartModalBody = (part) => {
+const populateInitialPartModalBody = (parts) => {
   initialPartModalBody.innerHTML = "";
-  initialPartModalBody.innerHTML += `
+  for (let i = 0; i < parts.length; i++) {
+    initialPartModalBody.innerHTML += `
       <div
         class="card bg-dark border-secondary part-choice-card"
         style="max-width: 200px;"
         data-bs-dismiss="modal"
       >
         <div class="card-body d-flex flex-column align-items-center gap-2">
-          <img class="img-fluid" src="../assets/images/${part.img}" />
-          <p class="text-white text-center mb-0">${part.name}</p>
-          <small class="text-muted text-center">${part.category.toUpperCase()}</small>
+          <img class="img-fluid" src="../assets/images/${parts[i].img}" />
+          <p class="text-white text-center mb-0">${parts[i].name}</p>
+          <small class="text-muted text-center">${parts[i].category.toUpperCase()}</small>
         </div>
       </div>
     `;
+  }
+
   const modal = new bootstrap.Modal(initialPartModal);
   modal.show();
 };
@@ -441,7 +461,7 @@ const rollOnce = (
   firstIndex = null,
   secondIndex = null,
   initial = null,
-  forcedCategory = null,
+  forcedCategory = 1,
   excludedGroups = [],
   forcedSpecificCategory = null,
 ) => {
@@ -464,9 +484,9 @@ const rollOnce = (
     partsInGroup = availableParts.filter(
       (p) => p.category === forcedSpecificCategory,
     );
-  } else if (forcedCategory) {
+  } else if (forcedCategory === 0) {
     partsInGroup = availableParts.filter((p) =>
-      CATEGORY_GROUPS[forcedCategory].includes(p.category),
+      CATEGORY_GROUPS["weapons"].includes(p.category),
     );
   } else {
     const categoryPool = Object.entries(CATEGORY_GROUPS)
@@ -595,6 +615,7 @@ const acceptPart = async (chosenIndex) => {
 
   rolledParts = [];
   currentParts = [];
+  arenaOpponent = null;
   saveProgress();
 };
 
@@ -751,6 +772,7 @@ const reset = async () => {
   acquiredParts = [];
   rolledParts = [];
   skippedParts = [];
+  arenaOpponent = null;
   currentMission = 0;
   restarts++;
 
@@ -759,11 +781,16 @@ const reset = async () => {
   genSkippedPartsAccordion();
   genOsTuningScreen();
   await updateMissionsData(true, null, null);
-  await rollInitialPart(false);
+  await rollInitialPart(false, getInitialPartCount());
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
 
   saveProgress();
+};
+
+const getInitialPartCount = () => {
+  if (currentEnding === "firesOfRavenMissions") return 1;
+  return 3;
 };
 
 const startNewRun = async () => {
@@ -788,6 +815,7 @@ const startNewRun = async () => {
     missionsData: [],
     rolledParts: [],
     skippedParts: [],
+    arenaOpponent: null,
     badgesEarned: { for: null, lor: null, aie: null },
     customGameSettings: {
       resetToFiresOfRaven: false,
@@ -827,7 +855,7 @@ const startNewRun = async () => {
   // populate the first missionsData entry before rolling the initial part
   await updateMissionsData(true, null, null);
 
-  await rollInitialPart(false);
+  await rollInitialPart(false, getInitialPartCount());
   generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
   saveProgress();
@@ -961,6 +989,7 @@ const saveProgress = () => {
     badgesEarned,
     customGameSettings,
     osTuning,
+    arenaOpponent,
   };
 
   if (!storedSave) {
@@ -1008,6 +1037,7 @@ const loadSavedProgress = () => {
     missionsData = currentSave.missionsData;
     rolledParts = currentSave.rolledParts;
     skippedParts = currentSave.skippedParts ?? [];
+    arenaOpponent = currentSave.arenaOpponent ?? null;
     badgesEarned = currentSave.badgesEarned;
     customGameSettings = currentSave.customGameSettings ?? {
       resetToFiresOfRaven: false,
@@ -1106,6 +1136,7 @@ const uploadSaveFile = async () => {
   parts = [...PARTS];
   acquiredParts = [];
   rolledParts = [];
+  arenaOpponent = null;
   currentMission = 0;
   ostChips = 0;
   missionsData = [];
