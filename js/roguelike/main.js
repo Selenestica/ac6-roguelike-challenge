@@ -281,6 +281,22 @@ const genWeightsTable = () => {
       const value = parseInt(e.target.value) || 0;
 
       customGameSettings.chapterWeights[chapter][tierIndex] = value;
+
+      // auto-fill remainder into D tier (index 1)
+      if (tierIndex !== 1) {
+        const otherTiersTotal = customGameSettings.chapterWeights[
+          chapter
+        ].reduce((sum, w, i) => (i !== 1 ? sum + w : sum), 0);
+        const remainder = Math.max(0, 100 - otherTiersTotal);
+        customGameSettings.chapterWeights[chapter][1] = remainder;
+
+        // update the D tier input to reflect the new value
+        const dTierInput = document.querySelector(
+          `.weight-input[data-tier="1"][data-chapter="${chapter}"]`,
+        );
+        if (dTierInput) dTierInput.value = remainder;
+      }
+
       updateChapterTotal(chapter);
       saveProgress();
     });
