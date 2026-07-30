@@ -82,10 +82,19 @@ const CATEGORY_WEIGHTS = {
   weapons: 3,
 };
 
+const TIER_LABELS = ["E", "D", "C", "B", "A", "S"];
+
 let customGameSettings = {
   resetToFiresOfRaven: false,
   optionalOnlyRewards: false,
   skipArenaOpponents: false,
+  chapterWeights: {
+    1: [5, 30, 30, 20, 10, 5],
+    2: [5, 10, 35, 35, 10, 5],
+    3: [5, 0, 20, 40, 25, 10],
+    4: [5, 0, 15, 30, 30, 20],
+    5: [5, 0, 5, 30, 35, 25],
+  },
 };
 let currentEnding = "firesOfRavenMissions";
 let currentMission = 0;
@@ -181,6 +190,132 @@ const handleMissionCompleteClick = () => {
     document.getElementById("missionCompleteModal"),
   );
   modal.show();
+};
+
+const genWeightsTable = () => {
+  const container = document.getElementById("weightsTableContainer");
+  if (!container) return;
+
+  const locked = isRunInProgress();
+
+  let html = `
+    <div class="table-responsive">
+      <table class="table table-dark table-bordered table-sm text-center">
+        <thead>
+          <tr>
+            <th class="text-secondary">Tier</th>
+            <th class="text-secondary">Ch. 1</th>
+            <th class="text-secondary">Ch. 2</th>
+            <th class="text-secondary">Ch. 3</th>
+            <th class="text-secondary">Ch. 4</th>
+            <th class="text-secondary">Ch. 5</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  TIER_LABELS.forEach((tier, tierIndex) => {
+    html += `<tr>`;
+    html += `<td class="text-white fw-bold">${tier}</td>`;
+    for (let chapter = 1; chapter <= 5; chapter++) {
+      const value = customGameSettings.chapterWeights[chapter][tierIndex];
+      html += `
+        <td>
+          <input
+            type="number"
+            class="form-control form-control-sm text-center weight-input bg-dark text-white border-secondary"
+            style="width: 60px; margin: auto;"
+            min="0"
+            max="100"
+            value="${value}"
+            data-tier="${tierIndex}"
+            data-chapter="${chapter}"
+            ${locked ? "disabled" : ""}
+          />
+        </td>
+      `;
+    }
+    html += `</tr>`;
+  });
+
+  // totals row
+  html += `<tr class="border-top border-secondary">`;
+  html += `<td class="text-secondary fw-bold">Total</td>`;
+  for (let chapter = 1; chapter <= 5; chapter++) {
+    const total = customGameSettings.chapterWeights[chapter].reduce(
+      (a, b) => a + b,
+      0,
+    );
+    const isValid = total === 100;
+    html += `
+      <td>
+        <span class="fw-bold text-${isValid ? "success" : "danger"}" id="weightTotal_${chapter}">
+          ${total}%
+        </span>
+      </td>
+    `;
+  }
+  html += `</tr>`;
+
+  html += `
+      </tbody>
+    </table>
+  </div>
+  `;
+
+  if (!locked) {
+    html += `
+      <button class="btn btn-sm btn-outline-secondary mt-1" onclick="resetWeightsToDefault()">
+        Reset to Default
+      </button>
+    `;
+  }
+
+  container.innerHTML = html;
+
+  // attach listeners
+  document.querySelectorAll(".weight-input").forEach((input) => {
+    input.addEventListener("input", (e) => {
+      const tierIndex = parseInt(e.target.dataset.tier);
+      const chapter = parseInt(e.target.dataset.chapter);
+      const value = parseInt(e.target.value) || 0;
+
+      customGameSettings.chapterWeights[chapter][tierIndex] = value;
+      updateChapterTotal(chapter);
+      saveProgress();
+    });
+  });
+};
+
+document
+  .getElementById("settingsModal")
+  .addEventListener("show.bs.modal", () => {
+    applyCustomGameSettingsToUI();
+    genWeightsTable();
+  });
+
+const updateChapterTotal = (chapter) => {
+  const total = customGameSettings.chapterWeights[chapter].reduce(
+    (a, b) => a + b,
+    0,
+  );
+  const totalEl = document.getElementById(`weightTotal_${chapter}`);
+  if (totalEl) {
+    totalEl.innerText = total;
+    totalEl.className = `fw-bold text-${total === 100 ? "success" : "danger"}`;
+  }
+};
+
+const resetWeightsToDefault = () => {
+  customGameSettings.chapterWeights = {
+    1: [5, 30, 30, 20, 10, 5],
+    2: [5, 10, 35, 35, 10, 5],
+    3: [5, 0, 20, 40, 25, 10],
+    4: [5, 0, 15, 30, 30, 20],
+    5: [5, 0, 5, 30, 35, 25],
+  };
+  genWeightsTable();
+  saveProgress();
 };
 
 const clearUploadDownloadModal = () => {
@@ -331,11 +466,7 @@ uploadSaveFileInputElement.addEventListener("change", (e) => {
 
 // returns per-tier weights [e, d, c, b, a, s] for the given chapter
 const chapterWeights = (chapter) => {
-  if (chapter === 1) return [5, 30, 30, 20, 10, 5];
-  if (chapter === 2) return [5, 10, 35, 35, 10, 5];
-  if (chapter === 3) return [5, 0, 20, 40, 25, 10];
-  if (chapter === 4) return [5, 0, 15, 30, 30, 20];
-  if (chapter === 5) return [5, 0, 5, 30, 35, 25];
+  return customGameSettings.chapterWeights[chapter];
 };
 
 const getEmptyCategories = () => {
@@ -838,6 +969,13 @@ const startNewRun = async () => {
       resetToFiresOfRaven: false,
       optionalOnlyRewards: false,
       skipArenaOpponents: false,
+      chapterWeights: {
+        1: [5, 30, 30, 20, 10, 5],
+        2: [5, 10, 35, 35, 10, 5],
+        3: [5, 0, 20, 40, 25, 10],
+        4: [5, 0, 15, 30, 30, 20],
+        5: [5, 0, 5, 30, 35, 25],
+      },
     },
     osTuning: {},
   };
@@ -862,6 +1000,13 @@ const startNewRun = async () => {
     resetToFiresOfRaven: false,
     optionalOnlyRewards: false,
     skipArenaOpponents: false,
+    chapterWeights: {
+      1: [5, 30, 30, 20, 10, 5],
+      2: [5, 10, 35, 35, 10, 5],
+      3: [5, 0, 20, 40, 25, 10],
+      4: [5, 0, 15, 30, 30, 20],
+      5: [5, 0, 5, 30, 35, 25],
+    },
   };
   ostChipsText.innerHTML = 0;
 
@@ -1062,7 +1207,24 @@ const loadSavedProgress = () => {
       resetToFiresOfRaven: false,
       optionalOnlyRewards: false,
       skipArenaOpponents: false,
+      chapterWeights: {
+        1: [5, 30, 30, 20, 10, 5],
+        2: [5, 10, 35, 35, 10, 5],
+        3: [5, 0, 20, 40, 25, 10],
+        4: [5, 0, 15, 30, 30, 20],
+        5: [5, 0, 5, 30, 35, 25],
+      },
     };
+    // also patch missing chapterWeights on saves that have customGameSettings but not chapterWeights
+    if (!customGameSettings.chapterWeights) {
+      customGameSettings.chapterWeights = {
+        1: [5, 30, 30, 20, 10, 5],
+        2: [5, 10, 35, 35, 10, 5],
+        3: [5, 0, 20, 40, 25, 10],
+        4: [5, 0, 15, 30, 30, 20],
+        5: [5, 0, 5, 30, 35, 25],
+      };
+    }
     osTuning = currentSave.osTuning ?? {};
     for (let n = 0; n < currentSave.acquiredParts.length; n++) {
       displayPartInCategory(currentSave.acquiredParts[n]);

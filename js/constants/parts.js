@@ -206,7 +206,7 @@ const PARTS = [
   {
     name: "CS-5000 MAIN DISH",
     img: "CS-5000 MAIN DISH.webp",
-    tier: "s",
+    tier: "b",
     category: "core",
   },
   {
@@ -218,7 +218,7 @@ const PARTS = [
   {
     name: "2S-5000 DESSERT",
     img: "2S-5000 DESSERT.webp",
-    tier: "s",
+    tier: "b",
     category: "legs",
   },
   {
@@ -473,7 +473,7 @@ const PARTS = [
   {
     name: "IA-C01C: EPHEMERA",
     img: "ia-c01c-ephemera.webp",
-    tier: "a",
+    tier: "b",
     category: "core",
   },
   {
@@ -970,7 +970,7 @@ const PARTS = [
   {
     name: "AC-J-120 BASHO",
     img: "ac-j-120-basho.webp",
-    tier: "b",
+    tier: "c",
     category: "core",
   },
   {
@@ -983,7 +983,7 @@ const PARTS = [
   {
     name: "07-061 MIND ALPHA",
     img: "07-061-mind-alpha.webp",
-    tier: "b",
+    tier: "s",
     category: "core",
   },
   {
