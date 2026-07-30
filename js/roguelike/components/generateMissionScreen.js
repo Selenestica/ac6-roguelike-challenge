@@ -92,7 +92,7 @@ const generateArenaMissionScreen = async (endingName, rank, chapter) => {
         <small class="text-secondary text-uppercase fw-bold mb-2 d-block">Rewards</small>
         <div class="d-flex justify-content-between text-white mb-2">
           <span>Mission Complete</span>
-          <span class="text-success">+3 Rolls</span>
+          <span class="text-success">+1 Roll</span>
         </div>
       </div>
     </div>

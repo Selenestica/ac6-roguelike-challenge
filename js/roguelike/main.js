@@ -173,7 +173,7 @@ const handleMissionCompleteClick = () => {
   const currentMissionData = MISSIONS[currentEnding][currentMission];
   if (currentMissionData.arenaRank) {
     // arena fights skip the challenge prompt and always give 3 rolls
-    rollForParts(true);
+    rollForParts(false);
     return;
   }
   // normal missions open the modal as usual
