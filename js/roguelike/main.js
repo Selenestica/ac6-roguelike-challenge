@@ -278,24 +278,20 @@ const genWeightsTable = () => {
     input.addEventListener("input", (e) => {
       const tierIndex = parseInt(e.target.dataset.tier);
       const chapter = parseInt(e.target.dataset.chapter);
-      const value = parseInt(e.target.value) || 0;
+      let value = parseInt(e.target.value) || 0;
+
+      // calculate total of all other tiers except this one
+      const otherTiersTotal = customGameSettings.chapterWeights[chapter].reduce(
+        (sum, w, i) => (i !== tierIndex ? sum + w : sum),
+        0,
+      );
+
+      // clamp so total never exceeds 100
+      const maxAllowed = 100 - otherTiersTotal;
+      value = Math.min(Math.max(0, value), maxAllowed);
+      e.target.value = value;
 
       customGameSettings.chapterWeights[chapter][tierIndex] = value;
-
-      // auto-fill remainder into D tier (index 1)
-      if (tierIndex !== 1) {
-        const otherTiersTotal = customGameSettings.chapterWeights[
-          chapter
-        ].reduce((sum, w, i) => (i !== 1 ? sum + w : sum), 0);
-        const remainder = Math.max(0, 100 - otherTiersTotal);
-        customGameSettings.chapterWeights[chapter][1] = remainder;
-
-        // update the D tier input to reflect the new value
-        const dTierInput = document.querySelector(
-          `.weight-input[data-tier="1"][data-chapter="${chapter}"]`,
-        );
-        if (dTierInput) dTierInput.value = remainder;
-      }
 
       updateChapterTotal(chapter);
       saveProgress();
@@ -619,14 +615,14 @@ const rollOnce = (
   firstIndex = null,
   secondIndex = null,
   initial = null,
-  forcedCategory = 1,
+  forcedCategory = null,
   excludedGroups = [],
   forcedSpecificCategory = null,
 ) => {
   const { chapter } = MISSIONS[currentEnding][currentMission];
   const weights = chapterWeights(chapter);
   let tiers = ["e", "d", "c", "b", "a", "s"];
-  if (initial) tiers = ["d", "c"];
+  if (initial) tiers = ["e", "d", "c"];
 
   const availableParts = parts.filter((p, i) => {
     if (i === firstIndex || i === secondIndex) return false;
@@ -636,15 +632,15 @@ const rollOnce = (
   });
 
   let partsInGroup;
-  let chosenGroup = null; // hoisted here
+  let chosenGroup = null;
 
   if (forcedSpecificCategory) {
     partsInGroup = availableParts.filter(
       (p) => p.category === forcedSpecificCategory,
     );
-  } else if (forcedCategory === 0) {
+  } else if (forcedCategory) {
     partsInGroup = availableParts.filter((p) =>
-      CATEGORY_GROUPS["weapons"].includes(p.category),
+      CATEGORY_GROUPS[forcedCategory].includes(p.category),
     );
   } else {
     const categoryPool = Object.entries(CATEGORY_GROUPS)
@@ -664,7 +660,7 @@ const rollOnce = (
       0,
     );
     let categoryRoll = Math.random() * totalCategoryWeight;
-    chosenGroup = categoryPool.find((c) => (categoryRoll -= c.weight) < 0); // assigned here
+    chosenGroup = categoryPool.find((c) => (categoryRoll -= c.weight) < 0);
     partsInGroup = availableParts.filter((p) =>
       chosenGroup.cats.includes(p.category),
     );
@@ -674,9 +670,17 @@ const rollOnce = (
     .map((tier, i) => ({ tier, weight: weights[i] }))
     .filter(({ tier }) => partsInGroup.some((p) => p.tier === tier));
 
-  const totalWeight = tierPool.reduce((sum, t) => sum + t.weight, 0);
-  let tierRoll = Math.random() * totalWeight;
-  const chosenTier = tierPool.find((t) => (tierRoll -= t.weight) < 0).tier;
+  // roll against 100 to allow for unaccounted probability space
+  let tierRoll = Math.random() * 100;
+  const chosenTierObj = tierPool.find((t) => (tierRoll -= t.weight) < 0);
+
+  let chosenTier;
+  if (!chosenTierObj) {
+    // roll landed in unaccounted space — pick a random tier from available ones
+    chosenTier = tierPool[Math.floor(Math.random() * tierPool.length)].tier;
+  } else {
+    chosenTier = chosenTierObj.tier;
+  }
 
   const eligibleParts = partsInGroup.filter((p) => p.tier === chosenTier);
   const chosenPart =
