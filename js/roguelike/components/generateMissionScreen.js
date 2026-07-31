@@ -143,7 +143,7 @@ const generateMissionScreen = async (ending, mission) => {
           skip
             ? `
             <button
-              class="btn btn-sm btn-outline-warning"
+              class="btn btn-sm btn-outline-success"
               type="button"
               onclick="prepareSkipModal()"
             >
