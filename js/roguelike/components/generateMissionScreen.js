@@ -19,7 +19,7 @@ const getChallengeCompleteStats = (data) => {
 };
 
 const getArenaOpponent = (rank) => {
-  if (arenaOpponent) {
+  if (arenaOpponent && arenaOpponent.arenaRank === rank) {
     return arenaOpponent;
   }
   arenaOpponent = null;
