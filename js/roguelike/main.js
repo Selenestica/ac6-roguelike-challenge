@@ -90,10 +90,10 @@ let customGameSettings = {
   skipArenaOpponents: false,
   chapterWeights: {
     1: [5, 30, 30, 20, 10, 5],
-    2: [5, 10, 35, 35, 10, 5],
-    3: [5, 0, 20, 40, 25, 10],
-    4: [5, 0, 15, 30, 30, 20],
-    5: [5, 0, 5, 30, 35, 25],
+    2: [5, 15, 35, 30, 10, 5],
+    3: [0, 10, 20, 35, 25, 10],
+    4: [0, 5, 15, 30, 30, 20],
+    5: [0, 0, 10, 30, 35, 25],
   },
 };
 let currentEnding = "firesOfRavenMissions";
@@ -321,10 +321,10 @@ const updateChapterTotal = (chapter) => {
 const resetWeightsToDefault = () => {
   customGameSettings.chapterWeights = {
     1: [5, 30, 30, 20, 10, 5],
-    2: [5, 10, 35, 35, 10, 5],
-    3: [5, 0, 20, 40, 25, 10],
-    4: [5, 0, 15, 30, 30, 20],
-    5: [5, 0, 5, 30, 35, 25],
+    2: [5, 15, 35, 30, 10, 5],
+    3: [0, 10, 20, 35, 25, 10],
+    4: [0, 5, 15, 30, 30, 20],
+    5: [0, 0, 10, 30, 35, 25],
   };
   genWeightsTable();
   saveProgress();
@@ -638,9 +638,9 @@ const rollOnce = (
     partsInGroup = availableParts.filter(
       (p) => p.category === forcedSpecificCategory,
     );
-  } else if (forcedCategory) {
+  } else if (forcedCategory === 0) {
     partsInGroup = availableParts.filter((p) =>
-      CATEGORY_GROUPS[forcedCategory].includes(p.category),
+      CATEGORY_GROUPS["weapons"].includes(p.category),
     );
   } else {
     const categoryPool = Object.entries(CATEGORY_GROUPS)
@@ -777,7 +777,6 @@ const acceptPart = async (chosenIndex) => {
 
   rolledParts = [];
   currentParts = [];
-  arenaOpponent = null;
   saveProgress();
 };
 
@@ -800,6 +799,12 @@ const skipPartRewards = async () => {
 
   rolledParts = [];
   currentParts = [];
+  saveProgress();
+};
+
+const passArenaOpponent = async () => {
+  arenaOpponent = null;
+  await proceedToNextMission();
   saveProgress();
 };
 
@@ -839,7 +844,7 @@ const updateMissionsData = (
   missionsData.push([endingID, currentMission, ts]);
 };
 
-const proceedToNextMission = () => {
+const proceedToNextMission = async () => {
   // If we're on the last mission of an ending
   if (currentMission >= MISSIONS[currentEnding].length - 1) {
     // Move to the next ending or show completion
@@ -872,7 +877,7 @@ const proceedToNextMission = () => {
       currentMission++;
     }
   }
-  generateMissionScreen(currentEnding, currentMission);
+  await generateMissionScreen(currentEnding, currentMission);
   genMissionCompleteModalContent(currentEnding, currentMission);
 };
 
@@ -991,10 +996,10 @@ const startNewRun = async () => {
       skipArenaOpponents: false,
       chapterWeights: {
         1: [5, 30, 30, 20, 10, 5],
-        2: [5, 10, 35, 35, 10, 5],
-        3: [5, 0, 20, 40, 25, 10],
-        4: [5, 0, 15, 30, 30, 20],
-        5: [5, 0, 5, 30, 35, 25],
+        2: [5, 15, 35, 30, 10, 5],
+        3: [0, 10, 20, 35, 25, 10],
+        4: [0, 5, 15, 30, 30, 20],
+        5: [0, 0, 10, 30, 35, 25],
       },
     },
     osTuning: {},
@@ -1022,10 +1027,10 @@ const startNewRun = async () => {
     skipArenaOpponents: false,
     chapterWeights: {
       1: [5, 30, 30, 20, 10, 5],
-      2: [5, 10, 35, 35, 10, 5],
-      3: [5, 0, 20, 40, 25, 10],
-      4: [5, 0, 15, 30, 30, 20],
-      5: [5, 0, 5, 30, 35, 25],
+      2: [5, 15, 35, 30, 10, 5],
+      3: [0, 10, 20, 35, 25, 10],
+      4: [0, 5, 15, 30, 30, 20],
+      5: [0, 0, 10, 30, 35, 25],
     },
   };
   ostChipsText.innerHTML = 0;
@@ -1229,20 +1234,20 @@ const loadSavedProgress = () => {
       skipArenaOpponents: false,
       chapterWeights: {
         1: [5, 30, 30, 20, 10, 5],
-        2: [5, 10, 35, 35, 10, 5],
-        3: [5, 0, 20, 40, 25, 10],
-        4: [5, 0, 15, 30, 30, 20],
-        5: [5, 0, 5, 30, 35, 25],
+        2: [5, 15, 35, 30, 10, 5],
+        3: [0, 10, 20, 35, 25, 10],
+        4: [0, 5, 15, 30, 30, 20],
+        5: [0, 0, 10, 30, 35, 25],
       },
     };
     // also patch missing chapterWeights on saves that have customGameSettings but not chapterWeights
     if (!customGameSettings.chapterWeights) {
       customGameSettings.chapterWeights = {
         1: [5, 30, 30, 20, 10, 5],
-        2: [5, 10, 35, 35, 10, 5],
-        3: [5, 0, 20, 40, 25, 10],
-        4: [5, 0, 15, 30, 30, 20],
-        5: [5, 0, 5, 30, 35, 25],
+        2: [5, 15, 35, 30, 10, 5],
+        3: [0, 10, 20, 35, 25, 10],
+        4: [0, 5, 15, 30, 30, 20],
+        5: [0, 0, 10, 30, 35, 25],
       };
     }
     osTuning = currentSave.osTuning ?? {};

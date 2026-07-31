@@ -1726,7 +1726,7 @@ const PARTS = [
   {
     name: "DF-GN-02 LING-TAI",
     img: "df-gn-02-ling-tai.webp",
-    tier: "d",
+    tier: "e",
     category: "generator",
   },
 ];

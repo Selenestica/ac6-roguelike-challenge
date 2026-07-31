@@ -3,12 +3,12 @@ const ARENA_OPPONENTS = {
   f: [
     { name: '"Invincible" Rummy', rank: 29, chips: 2, defeated: false },
     { name: "Index Dunham", rank: 28, chips: 2, defeated: false },
-    { name: "G6 Red", rank: 27, chips: 2, defeated: false },
+    { name: "Little Ziyi", rank: 24, chips: 2, defeated: false },
   ],
   e: [
     { name: "Nosaac", rank: 26, chips: 2, defeated: false },
+    { name: "G6 Red", rank: 27, chips: 2, defeated: false },
     { name: "V.VI Maeterlinck", rank: 25, chips: 2, defeated: false },
-    { name: "Little Ziyi", rank: 24, chips: 2, defeated: false },
     { name: "V.VII Swinburne", rank: 23, chips: 2, defeated: false },
   ],
   d: [

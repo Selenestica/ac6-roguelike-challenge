@@ -22,6 +22,7 @@ const getArenaOpponent = (rank) => {
   if (arenaOpponent) {
     return arenaOpponent;
   }
+  arenaOpponent = null;
   const opponentList = ARENA_OPPONENTS[rank];
   const opponentIndex = Math.floor(Math.random() * opponentList.length);
   arenaOpponent = ARENA_OPPONENTS[rank][opponentIndex];
@@ -84,7 +85,15 @@ const generateArenaMissionScreen = async (endingName, rank, chapter) => {
         <small class="text-muted">${endingName.toUpperCase()} — CHAPTER ${chapter}</small>
       </div>
       <div class="text-white text-center mb-4 d-flex justify-content-center align-items-center gap-2">
-        <h4 class="mb-0">${missionName}</h4>
+        <h4 class="mb-0">${missionName}</h4>            
+        <button
+          class="btn btn-sm btn-outline-warning"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#passArenaOpponentModal"
+        >
+          Pass
+        </button>
       </div>
 
       <!-- Rewards Card -->
@@ -133,14 +142,14 @@ const generateMissionScreen = async (ending, mission) => {
         ${
           skip
             ? `
-          <button
-            class="btn btn-sm btn-outline-warning"
-            type="button"
-            onclick="prepareSkipModal()"
-          >
-            Skip
-          </button>
-        `
+            <button
+              class="btn btn-sm btn-outline-warning"
+              type="button"
+              onclick="prepareSkipModal()"
+            >
+              Skip
+            </button>
+          `
             : ""
         }
       </div>

@@ -466,6 +466,51 @@
       </div>
     </div>
 
+    <!-- PASS ARENA OPPONENT MODAL -->
+    <div
+      class="modal fade"
+      id="passArenaOpponentModal"
+      tabindex="-1"
+      aria-labelledby="passArenaOpponentModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content bg-grey">
+          <div class="modal-header">
+            <h5 class="modal-title text-light" id="passArenaOpponentModalLabel">
+              Avoid Opponent
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-white">
+            You may skip this fight, but you won't receive any rewards. Proceed?
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              onclick="passArenaOpponent()"
+            >
+              Proceed
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- RULES AND INFO MODAL -->
     <div
       class="modal fade"
@@ -558,6 +603,12 @@
                       all of your earned parts and you will restart at the first
                       mission of your current timeline.
                     </li>
+                    <li class="text-white my-2">
+                      There are custom rules which can make your run harder or
+                      easier, and you can adjust part reward rarity. All of
+                      these options are available in the Settings menu (gear
+                      icon in the top right).
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -591,7 +642,10 @@
                   <p class="text-white">
                     Every mission has an optional objective, which you can
                     complete for an extra part roll (you can still only choose 1
-                    part, but options are good).
+                    part, but options are good). The exceptions to this are
+                    arena battles, which show up throughout the run, and are
+                    random opponents whose rank depends on which chapter you are
+                    currently in.
                   </p>
                   <p class="text-white">
                     Completing a chapter rewards you with OST Chips, with the
@@ -648,6 +702,16 @@
                     browser, simply download your save data and upload it to the
                     new platform.
                   </p>
+                  <p class="text-white">
+                    If you want to start a new run with different rules, or for
+                    whatever reason, open the Save Data menu (button in the
+                    upper right) and press "New Run". This will create a
+                    separate save file, and your old run will be saved.
+                  </p>
+                  <p class="text-white">
+                    You can rename, download, switch to, or delete individual
+                    save files in the Save Data menu as well.
+                  </p>
                 </div>
               </div>
               <div class="accordion-item bg-none">
@@ -679,6 +743,13 @@
                       </p>
                     </li>
                     <li class="text-white my-2">
+                      <b>Q: Why can't I adjust any difficulty settings?</b>
+                      <p>
+                        You probably have a run in progress. Go to the Save Data
+                        menu and press "New Run" to create a brand new save file
+                      </p>
+                    </li>
+                    <li class="text-white my-2">
                       <b>Q: What about [ALT] missions?</b>
                       <p>
                         The mission tab will tell you if you need to do the
@@ -694,7 +765,8 @@
                       >
                       <p>
                         No. You will start at the first mission of your current
-                        timeline.
+                        timeline (unless you turned on a specific hardmode
+                        setting).
                       </p>
                     </li>
                     <li class="text-white">

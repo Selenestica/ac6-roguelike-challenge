@@ -30,13 +30,6 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
-      name: "Defeat %%% in the Arena",
-      challenge: null,
-      chapter: 1,
-      ostChipReward: null,
-      arenaRank: "f",
-    },
-    {
       name: "Attack the Dam Complex",
       challenge: "Defeat the Tetrapod MT and Index Dunham.",
       chapter: 1,
@@ -47,6 +40,13 @@ const MISSIONS = {
       challenge: "Complete the mission without using repair kits.",
       chapter: 1,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 1,
+      ostChipReward: null,
+      arenaRank: "f",
     },
     {
       name: "Operation Wallclimber",
@@ -61,17 +61,17 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "Investigate BAWS Arsenal No. 2",
+      challenge: "Complete the mission with at least 1 repair kit remaining.",
+      chapter: 1,
+      ostChipReward: null,
+    },
+    {
       name: "Defeat %%% in the Arena",
       challenge: null,
       chapter: 1,
       ostChipReward: null,
       arenaRank: "e",
-    },
-    {
-      name: "Investigate BAWS Arsenal No. 2",
-      challenge: "Complete the mission with at least 1 repair kit remaining.",
-      chapter: 1,
-      ostChipReward: null,
     },
     {
       name: "Attack the Watchpoint",
@@ -321,13 +321,6 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
-      name: "Defeat %%% in the Arena",
-      challenge: null,
-      chapter: 1,
-      ostChipReward: null,
-      arenaRank: "e",
-    },
-    {
       name: "Attack the Dam Complex [ALT]",
       challenge: "Accept the RLF's deal.",
       chapter: 1,
@@ -340,17 +333,17 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
-      name: "Operation Wallclimber",
-      challenge: "Complete the mission without resupplying.",
-      chapter: 1,
-      ostChipReward: 1, // reward for halfway point
-    },
-    {
       name: "Defeat %%% in the Arena",
       challenge: null,
       chapter: 1,
       ostChipReward: null,
-      arenaRank: "d",
+      arenaRank: "e",
+    },
+    {
+      name: "Operation Wallclimber",
+      challenge: "Complete the mission without resupplying.",
+      chapter: 1,
+      ostChipReward: 1, // reward for halfway point
     },
     {
       name: "Prisoner Rescue",
@@ -364,6 +357,13 @@ const MISSIONS = {
       challenge: "Complete the mission without using any repair kits.",
       chapter: 1,
       ostChipReward: null,
+    },
+    {
+      name: "Defeat %%% in the Arena",
+      challenge: null,
+      chapter: 1,
+      ostChipReward: null,
+      arenaRank: "d",
     },
     {
       name: "Attack the Watchpoint",
