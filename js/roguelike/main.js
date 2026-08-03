@@ -813,6 +813,7 @@ const earnOSTChips = () => {
     ostChips += MISSIONS[currentEnding][currentMission].ostChipReward;
     ostChipsText.innerHTML = ostChips;
   }
+  genOsTuningScreen();
 };
 
 const updateMissionsData = (
