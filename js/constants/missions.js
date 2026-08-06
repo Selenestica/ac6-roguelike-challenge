@@ -657,8 +657,8 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
-      name: "Attack the Watchpoint",
-      challenge: "Complete the mission without resupplying.",
+      name: "Attack the Watchpoint [ALT]",
+      challenge: "Defeat Sulla before destroying the Ghost MTs.",
       chapter: 1,
       ostChipReward: 2,
     },
