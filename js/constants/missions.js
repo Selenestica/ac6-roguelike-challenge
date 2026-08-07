@@ -527,7 +527,7 @@ const MISSIONS = {
       arenaRank: "s",
     },
     {
-      name: "Unknown Territory Survey",
+      name: "Unknown Territory Survey [ALT]",
       challenge: "Complete the mission without using more than one repair kit.",
       chapter: 4,
       ostChipReward: null,
