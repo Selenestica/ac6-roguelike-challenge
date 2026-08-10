@@ -1209,7 +1209,7 @@ const PARTS = [
   },
   {
     name: "MA-T-222 KYORAI Napalm Bomb Launcher",
-    img: "ma-t-223-kyoriku.webp",
+    img: "ma-t-222-kyorai.webp",
     tier: "d",
     category: "l-arm",
   },
