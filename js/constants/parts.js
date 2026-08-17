@@ -104,7 +104,7 @@ const PARTS = [
   {
     name: "WR-0999 DELIVERY BOY Cluster Missile Launcher",
     img: "WR-0999 DELIVERY BOY Cluster Missile Launcher.webp",
-    tier: "d",
+    tier: "e",
     category: "r-back",
   },
   {
@@ -158,7 +158,7 @@ const PARTS = [
   {
     name: "WR-0999 DELIVERY BOY Cluster Missile Launcher",
     img: "WR-0999 DELIVERY BOY Cluster Missile Launcher.webp",
-    tier: "d",
+    tier: "e",
     category: "l-back",
   },
   {
@@ -188,13 +188,13 @@ const PARTS = [
   {
     name: "HC-2000/BC SHADE EYE",
     img: "hc-2000-bc-shade-eye.webp",
-    tier: "s",
+    tier: "a",
     category: "head",
   },
   {
     name: "HS-5000 APPETIZER",
     img: "HS-5000 APPETIZER.webp",
-    tier: "s",
+    tier: "a",
     category: "head",
   },
   {
@@ -212,7 +212,7 @@ const PARTS = [
   {
     name: "AS-5000 SALAD",
     img: "AS-5000 SALAD.webp",
-    tier: "s",
+    tier: "a",
     category: "arms",
   },
   {
@@ -351,7 +351,7 @@ const PARTS = [
   {
     name: "BML-G1/P29CNT Container Missile Launcher",
     img: "bml-g1-p29cnt.webp",
-    tier: "d",
+    tier: "e",
     category: "r-back",
   },
   {
@@ -411,7 +411,7 @@ const PARTS = [
   {
     name: "BML-G1/P29CNT Container Missile Launcher",
     img: "bml-g1-p29cnt.webp",
-    tier: "d",
+    tier: "e",
     category: "l-back",
   },
   {
@@ -461,7 +461,7 @@ const PARTS = [
   {
     name: "BD-012 MELANDER C3",
     img: "bd-012-melander-c3.webp",
-    tier: "a",
+    tier: "c",
     category: "core",
   },
   {
@@ -485,10 +485,10 @@ const PARTS = [
   {
     name: "AR-012 MELANDER C3",
     img: "ar-012-melander-c3.webp",
-    tier: "a",
+    tier: "c",
     category: "arms",
   },
-  { name: "VP-46D", img: "vp-46d.webp", tier: "a", category: "arms" },
+  { name: "VP-46D", img: "vp-46d.webp", tier: "b", category: "arms" },
   {
     name: "EL-PA-00 ALBA",
     img: "el-pa-00-alba.webp",
@@ -510,7 +510,7 @@ const PARTS = [
   {
     name: "LG-012 MELANDER C3",
     img: "lg-012-melander-c3.webp",
-    tier: "a",
+    tier: "c",
     category: "legs",
   },
   {
@@ -609,7 +609,7 @@ const PARTS = [
   {
     name: "MA-E-211 SAMPU Burst Handgun",
     img: "ma-e-211-sampu.webp",
-    tier: "b",
+    tier: "c",
     category: "r-arm",
   },
   {
@@ -747,7 +747,7 @@ const PARTS = [
   {
     name: "MA-E-211 SAMPU Burst Handgun",
     img: "ma-e-211-sampu.webp",
-    tier: "b",
+    tier: "c",
     category: "l-arm",
   },
   {
@@ -1002,7 +1002,7 @@ const PARTS = [
   {
     name: "AL-J-121 BASHO",
     img: "al-j-121-basho.webp",
-    tier: "b",
+    tier: "c",
     category: "legs",
   },
   { name: "VE-42A", img: "ve-42a.webp", tier: "b", category: "legs" },
@@ -1073,7 +1073,7 @@ const PARTS = [
     tier: "b",
     category: "generator",
   },
-  { name: "VP-20C", img: "vp-20c.webp", tier: "b", category: "generator" },
+  { name: "VP-20C", img: "vp-20c.webp", tier: "a", category: "generator" },
   { name: "VE-20A", img: "ve-20a.webp", tier: "b", category: "generator" },
   {
     name: "IA-C01G: AORTA",
@@ -1084,13 +1084,13 @@ const PARTS = [
   {
     name: "MA-J-201 RANSETSU-AR Burst Assault Rifle",
     img: "ma-j-201-ransetsu-ar.webp",
-    tier: "c",
+    tier: "d",
     category: "r-arm",
   },
   {
     name: "DF-GA-08 HU-BEN Gatling Gun",
     img: "df-ga-08-hu-ben.webp",
-    tier: "s",
+    tier: "a",
     category: "r-arm",
   },
   {
@@ -1174,13 +1174,13 @@ const PARTS = [
   {
     name: "MA-J-201 RANSETSU-AR Burst Assault Rifle",
     img: "ma-j-201-ransetsu-ar.webp",
-    tier: "c",
+    tier: "d",
     category: "l-arm",
   },
   {
     name: "DF-GA-08 HU-BEN Gatling Gun",
     img: "df-ga-08-hu-ben.webp",
-    tier: "s",
+    tier: "a",
     category: "l-arm",
   },
   {
@@ -1391,7 +1391,7 @@ const PARTS = [
   {
     name: "CC-3000 WRECKER",
     img: "cc-3000-wrecker.webp",
-    tier: "c",
+    tier: "d",
     category: "core",
   },
   {
@@ -1409,7 +1409,7 @@ const PARTS = [
   {
     name: "AC-3000 WRECKER",
     img: "ac-3000-wrecker.webp",
-    tier: "c",
+    tier: "d",
     category: "arms",
   },
   {
@@ -1439,10 +1439,10 @@ const PARTS = [
   {
     name: "06-041 MIND ALPHA",
     img: "06-041-mind-alpha.webp",
-    tier: "c",
+    tier: "b",
     category: "legs",
   },
-  { name: "KASUAR/42Z", img: "kasuar-42z.webp", tier: "c", category: "legs" },
+  { name: "KASUAR/42Z", img: "kasuar-42z.webp", tier: "d", category: "legs" },
   { name: "VP-424", img: "vp-424.webp", tier: "c", category: "legs" },
   {
     name: "LG-022T BORNEMISSZA",
@@ -1488,7 +1488,7 @@ const PARTS = [
     tier: "a",
     category: "generator",
   },
-  { name: "VP-20S", img: "vp-20s.webp", tier: "a", category: "generator" },
+  { name: "VP-20S", img: "vp-20s.webp", tier: "b", category: "generator" },
   { name: "VP-20D", img: "vp-20d.webp", tier: "b", category: "generator" },
   // {
   //   name: "BST-G1/P10",
@@ -1639,7 +1639,7 @@ const PARTS = [
   {
     name: "BD-011 MELANDER",
     img: "bd-011-melander.webp",
-    tier: "d",
+    tier: "c",
     category: "core",
   },
   {
@@ -1648,7 +1648,7 @@ const PARTS = [
     tier: "d",
     category: "core",
   },
-  { name: "VP-40S", img: "vp-40s.webp", tier: "d", category: "core" },
+  { name: "VP-40S", img: "vp-40s.webp", tier: "c", category: "core" },
   {
     name: "NACHTREIHER/40E",
     img: "nachtreiher-40e.webp",
@@ -1664,7 +1664,7 @@ const PARTS = [
   {
     name: "AR-011 MELANDER",
     img: "ar-011-melander.webp",
-    tier: "d",
+    tier: "c",
     category: "arms",
   },
   {
@@ -1673,7 +1673,7 @@ const PARTS = [
     tier: "d",
     category: "arms",
   },
-  { name: "VP-46S", img: "vp-46s.webp", tier: "d", category: "arms" },
+  { name: "VP-46S", img: "vp-46s.webp", tier: "b", category: "arms" },
   {
     name: "NACHTREIHER/46E",
     img: "nachtreiher-46e.webp",
@@ -1689,7 +1689,7 @@ const PARTS = [
   {
     name: "LG-011 MELANDER",
     img: "lg-011-melander.webp",
-    tier: "d",
+    tier: "c",
     category: "legs",
   },
   {
@@ -1698,7 +1698,7 @@ const PARTS = [
     tier: "d",
     category: "legs",
   },
-  { name: "VP-422", img: "vp-422.webp", tier: "d", category: "legs" },
+  { name: "VP-422", img: "vp-422.webp", tier: "c", category: "legs" },
   {
     name: "NACHTREIHER/42E",
     img: "nachtreiher-42e.webp",

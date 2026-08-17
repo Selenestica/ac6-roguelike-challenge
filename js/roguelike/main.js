@@ -782,7 +782,14 @@ const acceptPart = async (chosenIndex) => {
 
 const skipPartRewards = async () => {
   // remove rolledParts from parts pool
-  rolledParts.forEach((rp) => {
+  let partsToSkip = [...rolledParts];
+
+  // if only one part reward shown, only remove that one part from the pool
+  if (!currentOptionalCompleted) {
+    partsToSkip = [partsToSkip[0]];
+  }
+
+  partsToSkip.forEach((rp) => {
     skippedParts.push(rp.part);
     const partIndex = parts.findIndex(
       (p) => p.name === rp.part.name && p.category === rp.part.category,
@@ -918,7 +925,7 @@ const showEndingFinishedModal = async (optionalCompleted) => {
     badgesEarned = { ...badgesEarned, aie: dateEarned };
   }
   genBadgesShelfContent(badgesEarned);
-
+  genOsTuningScreen();
   await updateMissionsData(false, true, optionalCompleted);
   await genEndingCompleteModalContent(
     optionalCompleted,
