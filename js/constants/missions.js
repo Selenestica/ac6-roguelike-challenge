@@ -117,7 +117,7 @@ const MISSIONS = {
     {
       name: "Attack the Refueling Base",
       challenge:
-        "Destroy all 16 fuel tanks, defeat all 5 LCs and complete the mission without resupplying.",
+        "Destroy defeat all 5 LCs and complete the mission without resupplying.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -423,7 +423,7 @@ const MISSIONS = {
     {
       name: "Attack the Refueling Base",
       challenge:
-        "Destroy all 16 fuel tanks, defeat all 5 LCs and complete the mission without resupplying.",
+        "Destroy defeat all 5 LCs and complete the mission without resupplying.",
       chapter: 3,
       ostChipReward: null,
     },
@@ -701,7 +701,7 @@ const MISSIONS = {
     {
       name: "Attack the Refueling Base",
       challenge:
-        "Destroy all 16 fuel tanks, defeat all 5 LCs and complete the mission without resupplying.",
+        "Destroy defeat all 5 LCs and complete the mission without resupplying.",
       chapter: 3,
       ostChipReward: null,
     },
