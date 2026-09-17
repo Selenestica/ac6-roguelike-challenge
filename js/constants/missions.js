@@ -228,6 +228,14 @@ const MISSIONS = {
       ostChipReward: null,
     },
     {
+      name: "(Optional) Intercept the Redguns",
+      challenge:
+        "Defeat G1 Michigan before destroying all of the tetrapod MTs.",
+      chapter: 4,
+      ostChipReward: null,
+      pass: true,
+    },
+    {
       name: "Unknown Territory Survey",
       challenge: "Complete the mission without using more than one repair kit.",
       chapter: 4,
@@ -518,6 +526,14 @@ const MISSIONS = {
         "Do not let Middle Flatwell be defeated and complete the mission without using more than one repair kit.",
       chapter: 4,
       ostChipReward: null,
+    },
+    {
+      name: "(Optional) Intercept the Redguns",
+      challenge:
+        "Defeat G1 Michigan before destroying all of the tetrapod MTs.",
+      chapter: 4,
+      ostChipReward: null,
+      pass: true,
     },
     {
       name: "Defeat %%% in the Arena",

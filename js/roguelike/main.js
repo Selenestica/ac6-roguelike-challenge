@@ -182,7 +182,7 @@ const handleMissionCompleteClick = () => {
   const currentMissionData = MISSIONS[currentEnding][currentMission];
   if (currentMissionData.arenaRank) {
     // arena fights skip the challenge prompt and always give 3 rolls
-    rollForParts(false);
+    rollForParts(true);
     return;
   }
   // normal missions open the modal as usual
@@ -971,7 +971,7 @@ const reset = async () => {
 
 const getInitialPartCount = () => {
   if (currentEnding === "firesOfRavenMissions") return 1;
-  return 3;
+  return 5;
 };
 
 const startNewRun = async () => {

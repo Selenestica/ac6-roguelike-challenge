@@ -77,7 +77,7 @@ const generateEndingScreen = () => {
 
 const generateArenaMissionScreen = async (endingName, rank, chapter) => {
   const opponent = await getArenaOpponent(rank);
-  const missionName = `Defeat ${opponent.name} in the Arena`;
+  const missionName = `(Optional) Defeat ${opponent.name} in the Arena`;
   missionViewScreen.innerHTML = `
     <div class="col-sm-12 col-md-10 col-lg-8">
       <!-- Header -->
@@ -101,7 +101,7 @@ const generateArenaMissionScreen = async (endingName, rank, chapter) => {
         <small class="text-secondary text-uppercase fw-bold mb-2 d-block">Rewards</small>
         <div class="d-flex justify-content-between text-white mb-2">
           <span>Mission Complete</span>
-          <span class="text-success">+1 Roll</span>
+          <span class="text-success">+3 Rolls</span>
         </div>
       </div>
     </div>
@@ -114,7 +114,7 @@ const generateMissionScreen = async (ending, mission) => {
     generateEndingScreen();
     return;
   }
-  const { name, challenge, ostChipReward, chapter, skip, arenaRank } =
+  const { name, challenge, ostChipReward, chapter, skip, arenaRank, pass } =
     MISSIONS[ending][mission];
   const endingName = getEndingFullName(ending);
 
@@ -150,6 +150,19 @@ const generateMissionScreen = async (ending, mission) => {
               Skip
             </button>
           `
+            : ""
+        }
+        ${
+          pass
+            ? `
+                  <button
+          class="btn btn-sm btn-outline-warning"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#passArenaOpponentModal"
+        >
+          Pass
+        </button>`
             : ""
         }
       </div>
