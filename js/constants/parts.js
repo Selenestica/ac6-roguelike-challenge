@@ -571,7 +571,7 @@ const PARTS = [
     category: "r-arm",
   },
   {
-    name: "RD-025 SCUDDER Assault Rifle",
+    name: "RF-025 SCUDDER Assault Rifle",
     img: "rf-025-scudder.webp",
     tier: "d",
     category: "r-arm",
@@ -709,7 +709,7 @@ const PARTS = [
     category: "l-arm",
   },
   {
-    name: "RD-025 SCUDDER Assault Rifle",
+    name: "RF-025 SCUDDER Assault Rifle",
     img: "rf-025-scudder.webp",
     tier: "d",
     category: "l-arm",
